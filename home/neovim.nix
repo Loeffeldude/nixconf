@@ -76,8 +76,11 @@
         pylint
 
         # PHP
-        php82Packages.php-language-server
+        nodePackages.intelephense
+        php82Packages.phpstan # Static analysis
+        php82Packages.psalm # Another static analysis tool
         php82Packages.composer
+        php82Packages.php-cs-fixer # Code formatting
 
         # Web
         vscode-langservers-extracted
