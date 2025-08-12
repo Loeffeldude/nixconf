@@ -38,28 +38,7 @@
   # explicitly disable kde-connect
   programs.kdeconnect.enable = false;
 
-  environment.systemPackages = with pkgs; [
-    # Themes
-    libsForQt5.qtstyleplugin-kvantum
-    breeze-icons
-    breeze-qt5
-    breeze-gtk
-
-    # Applications
-    kdePackages.yakuake # Drop-down terminal
-    kdePackages.krunner
-    kdePackages.plasma-browser-integration
-    kdePackages.bismuth # Tiling window manager for KDE
-
-    # System tools
-    kdePackages.kde-gtk-config
-    kdePackages.kinfocenter
-    kdePackages.ksystemlog
-
-    # Multimedia
-    kdePackages.kmix
-    kdePackages.k3b
-  ];
+  environment.systemPackages = with pkgs; [ ];
 
   # Font configuration
   fonts.packages = with pkgs; [
