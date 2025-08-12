@@ -1,13 +1,12 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   home.username = "loeffel";
-  home.homeDirectory = "/home/loeffel/";
+  home.homeDirectory = lib.mkForce "/home/loeffel/";
 
   imports = [ ./git.nix ./terminal.nix ./shell.nix ];
 
   home.packages = with pkgs; [ ];
-
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new home Manager release introduces backwards
