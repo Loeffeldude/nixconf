@@ -14,9 +14,9 @@
 
   outputs = { self, nixpkgs, home-manager, darwin, ... }: {
     nixosConfigurations = {
-      t500 = nixpkgs.lib.nixosSystem {
+      qemu = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/t500 ./modules/basic-dev.nix ./modules/gnome.nix ];
+        modules = [ ./hosts/qemu/default.nix ./modules/basic-dev.nix ./modules/plasma.nix ./home/home.nix ];
       };
 
     };
