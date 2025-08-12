@@ -22,7 +22,6 @@
 
     programs.neovim = {
       enable = true;
-      coc.enable = false;
       withNodeJs = true;
       withPython3 = true;
       withRuby = true;
