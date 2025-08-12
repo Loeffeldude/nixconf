@@ -10,7 +10,7 @@
   boot.loader.grub.useOSProber = true;
 
   networking.hostName = "qemu";
-  networking.wireless.enable = true;
+  # networking.wireless.enable = true;
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/Berlin";
