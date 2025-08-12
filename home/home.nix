@@ -6,14 +6,7 @@
 
   imports = [ ./git.nix ./terminal.nix ./shell.nix ];
 
-  home.packages = with pkgs; [
-    neofetch
-    # nix related
-    #
-    # it provides the command `nom` works just like `nix`
-    # with more details log output
-    oh-my-zsh
-  ];
+  home.packages = with pkgs; [ ];
 
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
