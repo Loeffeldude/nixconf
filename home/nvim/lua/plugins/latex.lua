@@ -31,22 +31,4 @@ return {
       { "<leader>la", "<cmd>VimtexContextMenu<cr>", desc = "LaTeX Context Menu" },
     },
   },
-  -- Add this if you want LSP support for LaTeX via texlab
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        texlab = {
-          settings = {
-            texlab = {
-              -- Add any texlab-specific settings here
-              build = {
-                onSave = true,
-              },
-            },
-          },
-        },
-      },
-    },
-  },
 }

@@ -10,10 +10,6 @@
     };
   in {
 
-    home.file.".config/nvim" = {
-      source = ./nvim;
-      recursive = true;
-    };
     home.sessionVariables = {
       EDITOR = "nvim";
       MANPAGER = "nvim +Man!";
@@ -30,8 +26,6 @@
       withNodeJs = true;
       withPython3 = true;
       withRuby = true;
-
-      plugins = [ treesitterWithGrammars ];
 
       extraPackages = with pkgs; [
         marksman
@@ -53,12 +47,85 @@
         fd
         luarocks-nix
         imagemagick
-        ripgrep
         # latex
         zathura
         biber
         # for lazy packages
         nodejs_latest
+
+        # Rust
+        rust-analyzer
+        rustfmt
+        clippy
+
+        # Go
+        gopls
+        go
+        gofmt
+        golangci-lint
+
+        # JavaScript/TypeScript
+        nodejs_latest
+        nodePackages.typescript-language-server
+        nodePackages.eslint
+        nodePackages.prettier
+
+        # Python
+        python311Packages.python-lsp-server
+        black
+        isort
+        mypy
+        pylint
+
+        # PHP
+        php82Packages.php-language-server
+        php82Packages.composer
+
+        # Web
+        vscode-langservers-extracted
+        nodePackages.stylelint
+
+        # Markdown
+        marksman
+
+        # Nix
+        nil
+        nixpkgs-fmt
+        statix
+
+        # JSON
+        nodePackages.vscode-json-languageserver
+        jq
+
+        # Additional utilities
+        fzf
+        ripgrep
+      ];
+
+      plugins = with pkgs.vimPlugins; [
+        # LSP
+        nvim-lspconfig
+        null-ls-nvim
+        trouble-nvim
+
+        # Completion
+        nvim-cmp
+        cmp-nvim-lsp
+        cmp-buffer
+        cmp-path
+        luasnip
+        cmp_luasnip
+        # Telescope for fuzzy finding
+        telescope-nvim
+        telescope-fzf-native-nvim
+
+        # Treesitter
+        treesitterWithGrammars
+
+        # Theme and UI
+        tokyonight-nvim
+        lualine-nvim
+        nvim-web-devicons
       ];
     };
   };
