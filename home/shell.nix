@@ -6,7 +6,7 @@
     shellAliases = { ll = "ls -l"; };
   };
 
-  programs.oh-my-zsh = {
+  programs.ohMyZsh = {
     enable = true;
     plugins = [ "git" ];
     theme = "agnoster";
