@@ -25,7 +25,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            home-manager.users.loeffel = import ./home.nix;
+            home-manager.users.loeffel = import ./home/home.nix;
           }
         ];
       };
