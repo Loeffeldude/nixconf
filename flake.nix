@@ -16,10 +16,15 @@
     nixosConfigurations = {
       qemu = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/qemu/default.nix ./modules/basic-dev.nix ./modules/plasma.nix ./home/home.nix ];
+        modules = [
+          ./hosts/qemu/default.nix
+          ./modules/basic-dev.nix
+          ./modules/plasma.nix
+          ./home/home.nix
+        ];
       };
 
     };
 
   };
-};
+}
