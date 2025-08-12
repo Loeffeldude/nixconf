@@ -20,7 +20,13 @@
           ./hosts/qemu/default.nix
           ./modules/basic-dev.nix
           ./modules/plasma.nix
-          ./home/home.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.users.loeffel = import ./home.nix;
+          }
         ];
       };
 
