@@ -41,14 +41,15 @@
   environment.systemPackages = with pkgs; [ ];
 
   # Font configuration
-  fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
-    liberation_ttf
-    fira-code
-    fira-code-symbols
-  ];
+  fonts.packages = with pkgs;
+    [
+      # noto-fonts
+      # noto-fonts-cjk
+      # noto-fonts-emoji
+      # liberation_ttf
+      # fira-code
+      # fira-code-symbols
+    ];
 
   # Sound
   security.rtkit.enable = true;
