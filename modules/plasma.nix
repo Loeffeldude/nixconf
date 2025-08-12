@@ -1,36 +1,34 @@
 { config, pkgs, ... }: {
   services = {
-    xserver = {
+    xserver = { enable = true; };
+    displayManager.sddm = {
       enable = true;
-      displayManager.sddm = {
-        enable = true;
-        theme = "breeze";
-        settings = {
-          Theme = {
-            CursorTheme = "breeze_cursors";
-            Font = "Inter";
-          };
+      theme = "breeze";
+      settings = {
+        Theme = {
+          CursorTheme = "breeze_cursors";
+          Font = "Inter";
         };
       };
+    };
 
-      desktopManager.plasma6 = { enable = true; };
+    desktopManager.plasma6 = { enable = true; };
 
-      # Keyboard settings
-      xkb = {
-        layout = "de";
-        variant = "";
-        options = "caps:escape"; # I use caps as escaping edit mode in vim
-      };
+    # Keyboard settings
+    xkb = {
+      layout = "de";
+      variant = "";
+      options = "caps:escape"; # I use caps as escaping edit mode in vim
+    };
 
-      # Touchpad settings
-      libinput = {
-        enable = true;
-        touchpad = {
-          tapping = true;
-          naturalScrolling = true;
-          middleEmulation = true;
-          accelProfile = "adaptive";
-        };
+    # Touchpad settings
+    libinput = {
+      enable = true;
+      touchpad = {
+        tapping = true;
+        naturalScrolling = true;
+        middleEmulation = true;
+        accelProfile = "adaptive";
       };
     };
   };
