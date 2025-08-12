@@ -60,7 +60,6 @@
         # Go
         gopls
         go
-        gofmt
         golangci-lint
 
         # JavaScript/TypeScript
