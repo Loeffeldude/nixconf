@@ -5,7 +5,6 @@
     xz
     unzip
     p7zip
-    neovim
     # utils
     gnumake
     ripgrep # recursively searches directories for a regex pattern
