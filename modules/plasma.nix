@@ -1,6 +1,13 @@
 { config, pkgs, ... }: {
   services = {
-    xserver = { enable = true; };
+    xserver = {
+      enable = true;
+      xkb = {
+        layout = "de";
+        variant = "";
+        options = "caps:escape"; # I use caps as escaping edit mode in vim
+      };
+    };
     displayManager.sddm = {
       enable = true;
       theme = "breeze";
@@ -13,13 +20,6 @@
     };
 
     desktopManager.plasma6 = { enable = true; };
-
-    # Keyboard settings
-    xkb = {
-      layout = "de";
-      variant = "";
-      options = "caps:escape"; # I use caps as escaping edit mode in vim
-    };
 
     # Touchpad settings
     libinput = {
