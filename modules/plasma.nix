@@ -13,10 +13,7 @@
         };
       };
 
-      desktopManager.plasma6 = {
-        enable = true;
-        extraPackages = with pkgs.kdePackages; [ ];
-      };
+      desktopManager.plasma6 = { enable = true; };
 
       # Keyboard settings
       xkb = {
