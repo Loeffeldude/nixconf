@@ -14,7 +14,7 @@
 
   # Configure nix-flatpak
   services.flatpak = { enable = true; };
-  services.flatpak.update.onActivation = true;
+  # services.flatpak.update.onActivation = true;
 
   home.packages = with pkgs; [ protonvpn-gui ];
 }

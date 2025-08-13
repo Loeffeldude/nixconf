@@ -29,7 +29,7 @@
   environment.systemPackages = with pkgs; [ gnomeExtensions.appindicator ];
   programs.dconf.enable = true;
   services.udev.packages = with pkgs; [
-    gnome.gnome-settings-daemon
+    gnome-settings-daemon
     gnome.adwaita-icon-theme
   ];
   # Font configuration
