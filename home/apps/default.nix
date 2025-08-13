@@ -1,4 +1,4 @@
-{ config, pkgs, flake-inputs, ... }: {
+{ config, pkgs, flake-inputs, lib, ... }: {
   imports = [
     # Import the nix-flatpak NixOS module and install applications system wide.
     # HomeManager users should import `${nix-flatpak}/modules/home-manager.nix`
@@ -12,12 +12,8 @@
     ./social.nix
   ];
   # This prevents flatpak-install taking longer from not being able to be applied 
-  systemd.user.services."home-manager-loeffel".serviceConfig =
-    (config.systemd.user.services."home-manager-loeffel".serviceConfig or { })
-    // {
-      # 10 minutes timeout
-      TimeoutStartSec = "600";
-    };
+  systemd.user.services."home-manager-loeffel".serviceConfig.TimeoutStartSec =
+    lib.mkForce "600";
 
   # Configure nix-flatpak
   services.flatpak = {
