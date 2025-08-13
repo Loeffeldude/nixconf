@@ -6,9 +6,5 @@
     '';
   };
 
-  environment.variables = {
-    EDITOR = "vim";
-    PATH = [ "$HOME/.local/bin" ];
-  };
 }
 
