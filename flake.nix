@@ -12,7 +12,7 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, darwin, ... }: {
     nixosConfigurations = {
       qemu = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
