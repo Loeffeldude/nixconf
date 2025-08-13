@@ -30,7 +30,7 @@
   programs.dconf.enable = true;
   services.udev.packages = with pkgs; [
     gnome-settings-daemon
-    gnome.adwaita-icon-theme
+    adwaita-icon-theme
   ];
   # Font configuration
   fonts.packages = with pkgs;
