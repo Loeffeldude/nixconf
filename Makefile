@@ -4,7 +4,7 @@ switch:
 	sudo nixos-rebuild switch --flake .#${HOST}
 
 dump-hardware-config:
-	nixos-generate-config --show-hardware-config > ./hosts/${HOST}/hardware-config.nix
+	nixos-generate-config --show-hardware-config > ./hosts/${HOST}/hardware-configuration.nix
 
 update:
 	nix flake
