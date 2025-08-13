@@ -1,8 +1,5 @@
 { config, pkgs, flake-inputs, lib, ... }: {
   imports = [
-    # Import the nix-flatpak NixOS module and install applications system wide.
-    # HomeManager users should import `${nix-flatpak}/modules/home-manager.nix`
-    # where appropriate
     flake-inputs.nix-flatpak.homeManagerModules.nix-flatpak
     ./dev.nix
     ./gaming.nix
@@ -16,10 +13,8 @@
   #   lib.mkForce "600";
 
   # Configure nix-flatpak
-  services.flatpak = {
-    enable = true;
-    packages = [ "org.mozilla.firefox" ];
-  };
+  services.flatpak = { enable = true; };
+  services.flatpak.update.onActivation = true;
 
   home.packages = with pkgs; [ protonvpn-gui ];
 }
