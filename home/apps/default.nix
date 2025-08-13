@@ -11,6 +11,13 @@
     ./productivity.nix
     ./social.nix
   ];
+  # This prevents flatpak-install taking longer from not being able to be applied 
+  systemd.user.services."home-manager-loeffel".serviceConfig =
+    (config.systemd.user.services."home-manager-loeffel".serviceConfig or { })
+    // {
+      # 10 minutes timeout
+      TimeoutStartSec = "600";
+    };
 
   # Configure nix-flatpak
   services.flatpak = {
