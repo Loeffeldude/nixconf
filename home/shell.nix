@@ -1,7 +1,8 @@
 { config, pkgs, ... }: {
 
   # needed for sys package autocompletion
-  environment.pathsToLink = [ "/share/zsh" ];
+  # TODO: move this 
+  # environment.pathsToLink = [ "/share/zsh" ];
 
   home.sessionVariables = { SHELL = "zsh"; };
   programs.zsh = {
