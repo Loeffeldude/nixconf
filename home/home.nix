@@ -2,7 +2,7 @@
 
 {
   home.username = "loeffel";
-  home.homeDirectory = lib.mkForce "/home/loeffel/";
+  home.homeDirectory = lib.mkForce "/home/loeffel";
 
   imports = [ ./git.nix ./terminal.nix ./shell.nix ./neovim.nix ];
 
