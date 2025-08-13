@@ -1,4 +1,12 @@
 { config, pkgs, ... }: {
+
+  environment.variables = {
+    EDITOR = "nvim";
+    PATH = [ "$HOME/.local/bin" ];
+  };
+
+  programs.zsh.enable = true;
+
   environment.systemPackages = with pkgs; [
     # archives
     zip
@@ -7,6 +15,7 @@
     p7zip
     # utils
     gnumake
+    neovim
     ripgrep # recursively searches directories for a regex pattern
     jq # A lightweight and flexible command-line JSON processor
     yq-go # yaml processor https://github.com/mikefarah/yq
