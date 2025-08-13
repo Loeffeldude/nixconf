@@ -3,6 +3,7 @@
 
 {
   imports = [
+    # generate using make file
     ./hardware-configuration.nix
     ../common/localization.nix
     ../common/settings.nix

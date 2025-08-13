@@ -12,8 +12,8 @@
     ./social.nix
   ];
   # This prevents flatpak-install taking longer from not being able to be applied 
-  systemd.user.services."home-manager-loeffel".serviceConfig.TimeoutStartSec =
-    lib.mkForce "600";
+  # systemd.user.services."home-manager-loeffel".serviceConfig.TimeoutStartSec =
+  #   lib.mkForce "600";
 
   # Configure nix-flatpak
   services.flatpak = {
