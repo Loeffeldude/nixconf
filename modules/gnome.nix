@@ -26,49 +26,12 @@
       };
     };
   };
-
-  environment.systemPackages = with pkgs; [ ];
-  programs.dconf.profiles = {
-    # TODO: Investigate customizing gdm greeter.
-    user.databases = [{
-      settings = with lib.gvariant; {
-        "org/gnome/desktop/calendar".show-weekdate = true;
-        "org/gnome/desktop/input-sources".sources =
-          [ (mkTuple [ "xkb" "us" ]) (mkTuple [ "xkb" "lt" ]) ];
-        "org/gnome/desktop/interface".color-scheme = "prefer-dark";
-        "org/gnome/desktop/interface".show-battery-percentage = true;
-        "org/gnome/desktop/media-handling".automount = false;
-        "org/gnome/desktop/peripherals/mouse".accel-profile = "flat";
-        "org/gnome/desktop/privacy".remember-recent-files = false;
-        "org/gnome/desktop/screensaver".lock-enabled = false;
-        "org/gnome/desktop/session".idle-delay = mkUint32 0;
-        "org/gnome/desktop/wm/preferences".resize-with-right-button = true;
-        "org/gnome/mutter" = {
-          edge-tiling = true;
-          attach-modal-dialogs = true;
-          experimental-features = [ "scale-monitor-framebuffer" ];
-        };
-        "org/gnome/settings-daemon/plugins/power" = {
-          # Suspend only on battery power, not while charging.
-          sleep-inactive-ac-type = "nothing";
-          power-button-action = "interactive";
-        };
-
-        "org/gnome/nautilus/preferences".default-folder-viewer = "list-view";
-        "org/gnome/nautilus/list-view" = {
-          use-tree-view = true;
-          default-zoom-level = "small";
-        };
-
-        "org/gtk/gtk4/settings/file-chooser" = {
-          sort-directories-first = true;
-          show-hidden = true;
-          view-type = "list";
-        };
-      };
-    }];
-
-  };
+  environment.systemPackages = with pkgs; [ gnomeExtensions.appindicator ];
+  programs.dconf.enable = true;
+  services.udev.packages = with pkgs; [
+    gnome.gnome-settings-daemon
+    gnome.adwaita-icon-theme
+  ];
   # Font configuration
   fonts.packages = with pkgs;
     [
