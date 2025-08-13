@@ -65,6 +65,8 @@
           show-hidden = true;
           view-type = "list";
         };
+      };
+    }];
 
   };
   # Font configuration
