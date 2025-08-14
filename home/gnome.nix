@@ -11,6 +11,7 @@
       gtk-theme = "Adwaita-dark";
       color-scheme = "prefer-dark";
     };
+    "org/gnome/desktop/sound" = { event-sounds = false; };
   };
   home.file.".background-image".source = ../media/nix-dark.png;
 
@@ -18,7 +19,7 @@
 
   qt = {
     enable = true;
-    platformTheme = "adwaita";
+    platformTheme.name = "adwaita";
     style = {
       name = "Adwaita-dark";
       package = pkgs.adwaita-qt;

@@ -30,7 +30,18 @@
 
   environment.systemPackages = with pkgs; [
     gnomeExtensions.appindicator
-    gnomeExtensions.floating-dock-2
+    gnomeExtensions.dash-to-dock
+    gnomeExtensions.ding
+    gnomeExtensions.native-window-placement
+    gnomeExtensions.screenshot-tool
+    gnomeExtensions.window-list
+    gnomeExtensions.applications-menu
+    gnomeExtensions.gsconnect # KDE Connect implementation
+    gnomeExtensions.blur-my-shell # Adds blur effects
+    gnomeExtensions.vitals # System monitoring
+    gnomeExtensions.workspace-indicator # Shows workspace number
+    gnomeExtensions.sound-output-device-chooser # Audio output switcher
+    gnomeExtensions.clipboard-indicator # Clipboard manager
   ];
 
   services.udev.packages = with pkgs; [
