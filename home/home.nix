@@ -3,7 +3,7 @@
 {
   home.username = "loeffel";
   home.homeDirectory = lib.mkForce "/home/loeffel";
-  home-manager.backupFileExtension = "backup";
+
   imports = [
     ./git.nix
     ./terminal.nix
