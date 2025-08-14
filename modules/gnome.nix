@@ -28,7 +28,10 @@
   };
   programs.dconf.enable = true;
 
-  environment.systemPackages = with pkgs; [ gnomeExtensions.appindicator ];
+  environment.systemPackages = with pkgs; [
+    gnomeExtensions.appindicator
+    gnomeExtensions.floating-dock
+  ];
 
   services.udev.packages = with pkgs; [
     gnome-settings-daemon
