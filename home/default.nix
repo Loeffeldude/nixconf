@@ -4,6 +4,6 @@
   home-manager.useUserPackages = true;
 
   home-manager.extraSpecialArgs.flake-inputs = flake-inputs;
-  home-manager.users.loeffel = import ./home/home.nix;
+  home-manager.users.loeffel = import ./home.nix;
 
 }
