@@ -30,7 +30,7 @@
 
   environment.systemPackages = with pkgs; [
     gnomeExtensions.appindicator
-    gnomeExtensions.floating-dock
+    gnomeExtensions.floating-dock-2
   ];
 
   services.udev.packages = with pkgs; [
