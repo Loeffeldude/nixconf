@@ -1,4 +1,5 @@
 { config, pkgs, lib, ... }: {
+  dconf = { enable = true; };
   dconf.settings = {
     "org/gnome/desktop/background" = {
       "picture-uri" = "/home/loeffel/.background-image";

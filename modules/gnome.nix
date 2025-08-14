@@ -53,7 +53,14 @@
     enable = true;
     powerOnBoot = true;
   };
-
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal-gtk xdg-desktop-portal-wlr ];
+    configPackages = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-wlr
+    ];
+  };
   # Network Manager
   networking.networkmanager = {
     enable = true;
