@@ -21,10 +21,4 @@
 
   systemd.user.sessionVariables =
     config.home-manager.users.loeffel.home.sessionVariables;
-
-  qt = {
-    enable = true;
-    platformTheme = "gnome";
-    style = "adwaita-dark";
-  };
 }
