@@ -11,6 +11,9 @@
   };
   home.file.".background-image".source = ../media/nix-dark.png;
 
+  systemd.user.sessionVariables =
+    config.home-manager.users.loeffel.home.sessionVariables;
+
   gtk = {
     enable = true;
     theme = {
