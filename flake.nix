@@ -22,6 +22,7 @@
           ./modules/basic-dev.nix
           ./modules/gnome.nix
           home-manager.nixosModules.home-manager
+          import
           ./home/default.nix
         ];
       };
