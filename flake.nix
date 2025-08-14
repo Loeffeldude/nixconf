@@ -22,8 +22,14 @@
           ./modules/basic-dev.nix
           ./modules/gnome.nix
           home-manager.nixosModules.home-manager
-          import
-          ./home/default.nix
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.extraSpecialArgs.flake-inputs = inputs;
+            home-manager.users.loeffel = import ./home.nix;
+
+          }
         ];
       };
 
