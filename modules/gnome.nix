@@ -31,7 +31,6 @@
   environment.systemPackages = with pkgs; [
     gnomeExtensions.appindicator
     gnomeExtensions.dash-to-dock
-    gnomeExtensions.ding
     gnomeExtensions.native-window-placement
     gnomeExtensions.screenshot-tool
     gnomeExtensions.window-list
