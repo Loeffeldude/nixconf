@@ -10,7 +10,5 @@
     font-awesome_6
     fira-code
     fira-code-symbols
-    custom-font.dank-mono
-    # required to autoload fonts from packages installed via Home Manager
   ];
 }
