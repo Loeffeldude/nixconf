@@ -18,7 +18,4 @@
       package = pkgs.gnome.gnome-themes-extra;
     };
   };
-
-  systemd.user.sessionVariables =
-    config.home-manager.users.loeffel.home.sessionVariables;
 }
