@@ -16,18 +16,13 @@
     nixosConfigurations = {
       qemu = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { flake-inputs = inputs; };
         modules = [
           ./hosts/qemu/default.nix
           ./modules/basic-dev.nix
           ./modules/gnome.nix
           home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-
-            home-manager.extraSpecialArgs.flake-inputs = inputs;
-            home-manager.users.loeffel = import ./home/home.nix;
-          }
+          ./home/default.nix
         ];
       };
 
