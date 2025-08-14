@@ -27,7 +27,7 @@
             home-manager.useUserPackages = true;
 
             home-manager.extraSpecialArgs.flake-inputs = inputs;
-            home-manager.users.loeffel = import ./home.nix;
+            home-manager.users.loeffel = import ./home/home.nix;
 
           }
         ];
