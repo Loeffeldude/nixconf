@@ -13,10 +13,15 @@
 
   systemd.user.sessionVariables = config.home.sessionVariables;
 
+  qt = {
+    enable = true;
+    platformTheme = "gnome";
+    style = "adwaita-dark";
+  };
   gtk = {
     enable = true;
     theme = {
-      name = "Adwaita";
+      name = "adwaita-dark";
       package = pkgs.gnome-themes-extra;
     };
   };

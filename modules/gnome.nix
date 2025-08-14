@@ -8,9 +8,12 @@
         options = "caps:escape"; # I use caps as escaping edit mode in vim
       };
 
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
     };
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
+    };
+    desktopManager.gnome.enable = true;
 
     # Touchpad settings
     libinput = {
@@ -31,16 +34,6 @@
     gnome-settings-daemon
     adwaita-icon-theme
   ];
-  # Font configuration
-  fonts.packages = with pkgs;
-    [
-      # noto-fonts
-      # noto-fonts-cjk
-      # noto-fonts-emoji
-      # liberation_ttf
-      # fira-code
-      # fira-code-symbols
-    ];
 
   # Sound
   security.rtkit.enable = true;
@@ -67,6 +60,7 @@
     wifi.powersave = true;
   };
 
+  xdg.icons.enable = true;
   xdg.mime.defaultApplications = {
     "text/html" = "firefox.desktop";
     "x-scheme-handler/http" = "firefox.desktop";
@@ -83,7 +77,6 @@
     enable = true;
     drivers = [ pkgs.hplip ];
   };
-
   services.avahi = {
     enable = true;
     nssmdns4 = true;
