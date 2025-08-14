@@ -8,10 +8,7 @@
         options = "caps:escape"; # I use caps as escaping edit mode in vim
       };
 
-      # Enable GNOME Display Manager
       displayManager.gdm.enable = true;
-
-      # Enable GNOME Desktop Environment
       desktopManager.gnome.enable = true;
     };
 
@@ -26,8 +23,10 @@
       };
     };
   };
-  environment.systemPackages = with pkgs; [ gnomeExtensions.appindicator ];
   programs.dconf.enable = true;
+
+  environment.systemPackages = with pkgs; [ gnomeExtensions.appindicator ];
+
   services.udev.packages = with pkgs; [
     gnome-settings-daemon
     adwaita-icon-theme

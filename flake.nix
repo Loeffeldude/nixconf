@@ -21,6 +21,7 @@
           ./hosts/qemu/default.nix
           ./modules/basic-dev.nix
           ./modules/gnome.nix
+          ./modules/fonts.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
