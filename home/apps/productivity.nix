@@ -10,5 +10,10 @@
       "org.torproject.torbrowser-launcher"
     ];
   };
+  programs.firefox = {
+    enabled = true;
+    enableGnomeExtensions = true;
+  };
+  home.packages = with pkgs; [ bitwarden-desktop bitwarden-cli ];
 }
 
