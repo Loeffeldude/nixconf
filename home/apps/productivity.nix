@@ -11,7 +11,7 @@
     ];
   };
   programs.firefox = {
-    enabled = true;
+    enable = true;
     enableGnomeExtensions = true;
   };
   home.packages = with pkgs; [ bitwarden-desktop bitwarden-cli ];
