@@ -86,7 +86,7 @@ config.background = {
 		opacity = 1,
 	},
 }
--- config.font = wezterm.font_with_fallback({ "Jetbrains Mono NF", "Adwaita Mono" })
+config.font = wezterm.font("Jetbrains Mono NF")
 
 config.keys = {
 	{ key = "S", mods = "CTRL|SHIFT", action = wezterm.action.PaneSelect },
