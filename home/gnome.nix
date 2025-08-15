@@ -11,13 +11,8 @@
       gtk-theme = "Adwaita-dark";
       color-scheme = "prefer-dark";
     };
-    "org/gnome/shell/favorite-apps" = [
-      "org.wezfurlong.wezterm.desktop"
-      "org.mozilla.firefox.desktop"
-      "org.gnome.Nautilus.desktop"
-      "steam.desktop"
-      "com.discordapp.Discord.desktop"
-    ];
+    "org/gnome/shell/favorite-apps" =
+      "['org.wezfurlong.wezterm.desktop', 'org.mozilla.firefox.desktop', 'org.gnome.Nautilus.desktop', 'steam.desktop', 'com.discordapp.Discord.desktop']";
 
     "org/gnome/desktop/sound" = { event-sounds = false; };
   };
