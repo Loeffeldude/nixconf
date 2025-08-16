@@ -41,6 +41,7 @@
     gnomeExtensions.workspace-indicator # Shows workspace number
     gnomeExtensions.sound-output-device-chooser # Audio output switcher
     gnomeExtensions.clipboard-indicator # Clipboard manager
+    gnomeExtensions.openweather-refined
   ];
 
   services.udev.packages = with pkgs; [
