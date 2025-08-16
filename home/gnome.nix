@@ -87,17 +87,17 @@
 
   qt = {
     enable = true;
-    platformTheme.name = "adwaita";
+    platformTheme.name = "yaru-blue";
     style = {
-      name = "Adwaita-dark";
-      package = pkgs.adwaita-qt;
+      name = "Yaru-blue-dark";
+      package = pkgs.yaru-theme;
     };
   };
   gtk = {
     enable = true;
     theme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome-themes-extra;
+      name = "Yaru-blue-dark";
+      package = pkgs.yaru-theme;
     };
   };
 }
