@@ -12,24 +12,25 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, darwin, ... }: {
     nixosConfigurations = {
       qemu = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [
-          ./hosts/qemu/default.nix
-          ./modules/basic-dev.nix
-          ./modules/plasma.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-
-            home-manager.users.loeffel = import ./home/home.nix;
-          }
-        ];
+        specialArgs = { flake-inputs = inputs; };
+        modules = [ ./hosts/qemu/default.nix ];
       };
 
+      t500 = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { flake-inputs = inputs; };
+        modules = [ ./hosts/t500/default.nix ];
+      };
+
+      t15 = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { flake-inputs = inputs; };
+        modules = [ ./hosts/t15/default.nix ];
+      };
     };
 
   };

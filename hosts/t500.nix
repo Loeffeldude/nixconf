@@ -30,6 +30,7 @@
   };
 
   users.users.loeffel = {
+
     isNormalUser = true;
     description = "Nico";
     extraGroups = [ "networkmanager" "wheel" ];

@@ -3,8 +3,11 @@ HOST ?= $(shell hostname)
 switch:
 	sudo nixos-rebuild switch --flake .#${HOST}
 
+dump-hardware-config:
+	nixos-generate-config --show-hardware-config > ./hosts/${HOST}/hardware-configuration.nix
+
 update:
-	nix flake update
+	nix flake
 
 build:
 	nixos-rebuild build --flake .#${HOST}
