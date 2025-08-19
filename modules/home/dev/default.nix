@@ -21,6 +21,11 @@ in {
       type = lib.types.bool;
       default = true;
     };
+    csharp.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+    };
   };
-  imports = [ ./git.nix ./neovim.nix ./shell.nix ./terminal.nix ./ai.nix ];
+  imports =
+    [ ./git.nix ./neovim.nix ./shell.nix ./terminal.nix ./ai.nix ./csharp.nix ];
 }

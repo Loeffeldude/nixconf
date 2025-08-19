@@ -58,6 +58,11 @@ return {
         html = {},
         jsonls = {},
         marksman = {},
+        omnisharp = {
+          cmd = function()
+            return { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) }
+          end,
+        },
       },
     },
   },

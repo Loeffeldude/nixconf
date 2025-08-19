@@ -109,6 +109,10 @@ in {
         # Additional utilities
         fzf
         ripgrep
+
+        # C#
+        omnisharp-roslyn
+        csharpier
       ];
 
       plugins = with pkgs.vimPlugins; [

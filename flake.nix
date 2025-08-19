@@ -33,5 +33,12 @@
       };
     };
 
+    homeManagerConfigurations = {
+      "loeffel" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        extraSpecialArgs = { flake-inputs = inputs; };
+        modules = [ ./modules/home/default.nix ];
+      };
+    };
   };
 }
