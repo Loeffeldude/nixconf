@@ -5,8 +5,7 @@ let cfg = config.dev.csharp;
 in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      dotnet-sdk_8
-      dotnet-sdk_9
+      (with dotnetCorePackages; combinePackages [ sdk_8_0 sdk_9_0 ])
       mono
       nuget
       roslyn-ls
