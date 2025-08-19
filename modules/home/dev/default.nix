@@ -26,6 +26,18 @@ in {
       default = true;
     };
   };
-  imports =
-    [ ./git.nix ./neovim.nix ./shell.nix ./terminal.nix ./ai.nix ./csharp.nix ];
+  imports = [
+    # Tools
+    ./git.nix
+    ./neovim.nix
+    ./shell.nix
+    ./terminal.nix
+    ./ai.nix
+
+    # Langs
+    ./csharp.nix
+
+    # Other
+    ./gamedev
+  ];
 }
