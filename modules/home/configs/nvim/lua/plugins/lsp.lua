@@ -61,7 +61,7 @@ return {
         html = {},
         jsonls = {},
         marksman = {},
-        roslyn = {
+        roslyn_ls = {
           cmd = {
             "Microsoft.CodeAnalysis.LanguageServer",
             "--logLevel", -- this property is required by the server
