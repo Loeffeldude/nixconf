@@ -1,3 +1,6 @@
+local uv = vim.loop
+local fs = vim.fs
+
 return {
   {
     "folke/lazy.nvim",
@@ -59,9 +62,14 @@ return {
         jsonls = {},
         marksman = {},
         omnisharp = {
-          cmd = function()
-            return { "OmniSharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) }
-          end,
+          cmd = {
+            "Microsoft.CodeAnalysis.LanguageServer",
+            "--logLevel", -- this property is required by the server
+            "Information",
+            "--extensionLogDirectory", -- this property is required by the server
+            fs.joinpath(uv.os_tmpdir(), "roslyn_ls/logs"),
+            "--stdio",
+          },
         },
       },
     },

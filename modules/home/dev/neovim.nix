@@ -28,6 +28,11 @@ in {
         vim.opt.runtimepath:append ("${treesitter-parsers}")
       '';
 
+    xdg.configFile."nvim/lua/rysoli.lua".text = # lua
+      ''
+        vim.opt.runtimepath:append ("${treesitter-parsers}")
+      '';
+
     programs.neovim = {
       enable = true;
       withNodeJs = true;
@@ -111,7 +116,8 @@ in {
         ripgrep
 
         # C#
-        omnisharp-roslyn
+        roslyn-ls
+        dotnet-sdk_9
         csharpier
       ];
 

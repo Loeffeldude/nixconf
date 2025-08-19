@@ -4,7 +4,13 @@ let cfg = config.dev.csharp;
 
 in {
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ dotnet-sdk_8 mono nuget omnisharp-roslyn ];
+    home.packages = with pkgs; [
+      dotnet-sdk_8
+      dotnet-sdk_9
+      mono
+      nuget
+      roslyn-ls
+    ];
 
     home = {
       sessionPath = [ "$HOME/.dotnet/tools" "${pkgs.omnisharp-roslyn}" ];
