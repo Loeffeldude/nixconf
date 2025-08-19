@@ -60,7 +60,7 @@ return {
         marksman = {},
         omnisharp = {
           cmd = function()
-            return { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) }
+            return { "OmniSharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) }
           end,
         },
       },
