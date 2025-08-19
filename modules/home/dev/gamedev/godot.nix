@@ -5,6 +5,6 @@ let cfg = config.dev.gamedev;
 in {
   config = mkIf cfg.godot.enable {
     home.packages = with pkgs; [ godot-mono ];
-    dev.csharp = mkForce true;
+    dev.csharp.enable = mkForce true;
   };
 }
