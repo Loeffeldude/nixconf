@@ -117,6 +117,7 @@ in {
 
         # C#
         roslyn-ls
+        csharp-ls
         dotnet-sdk_9
         csharpier
       ];
