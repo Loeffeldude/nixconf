@@ -9,13 +9,9 @@ in {
     dconf.enable = true;
     dconf.settings = {
       "org/gnome/calendar" = { active-view = "week"; };
-<<<<<<< HEAD
-
-=======
       "org/gnome/desktop/wm/preferences" = {
         button-layout = "':minimize,maximize,close'";
       };
->>>>>>> feature/qemu-setup
       "org/gnome/desktop/background" = {
         color-shading-type = "solid";
         picture-options = "zoom";
