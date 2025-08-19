@@ -1,6 +1,8 @@
 local uv = vim.loop
 local fs = vim.fs
 
+vim.lsp.enable("roslyn_ls")
+
 return {
   {
     "folke/lazy.nvim",
@@ -22,6 +24,10 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     enabled = false,
+  },
+  {
+    "seblyng/roslyn.nvim",
+    opts = {},
   },
   {
     "neovim/nvim-lspconfig",
