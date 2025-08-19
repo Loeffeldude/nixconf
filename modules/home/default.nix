@@ -13,9 +13,8 @@
       useUserPackages = true;
       backupFileExtension = "backup";
       extraSpecialArgs.flake-inputs = flake-inputs;
-      users.loeffel = (import ./home.nix) // {
-        apps.enable = lib.mkForce config.apps.enable;
-      };
+      users.loeffel =
+        import ./home.nix { apps.enable = lib.mkForce config.apps.enable; };
     };
   };
 }
