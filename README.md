@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # My NixOS Configurations
 
 My personal NixOS and home-manager configurations.
@@ -35,3 +36,6 @@ To use a specific host configuration, you can pass the `HOST` variable to the ma
 ```bash
 make switch HOST=t15
 ```
+=======
+# My nix config
+>>>>>>> feature/qemu-setup

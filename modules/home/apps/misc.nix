@@ -14,7 +14,17 @@ in {
       ];
     };
 
+<<<<<<< HEAD
     home.packages = with pkgs; [ protonvpn-gui ];
+=======
+    home.packages = with pkgs; [ protonvpn-gui bitwarden-desktop ];
+
+    # Sets up ssh agent sock probably 
+    # TODO: should move this to its onw file 
+    home.sessionVariables = {
+      SSH_AUTH_SOCK = "/home/loeffel/.bitwarden-ssh-agent.sock";
+    };
+>>>>>>> feature/qemu-setup
   };
 }
 
