@@ -3,7 +3,7 @@ with lib;
 let cfg = config.dev.gamedev;
 
 in {
-  options.dev.ganedev = {
+  options.dev.gamedev = {
     enable = mkEnableOption "enable gamedev";
     godot.enable = lib.mkOption {
       type = lib.types.bool;
