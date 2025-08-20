@@ -12,15 +12,9 @@ in {
       bun
 
       # Node.js dev tools
-      nodePackages.typescript
       nodePackages.ts-node
       nodePackages.nodemon
       nodePackages.pm2
-
-      # Linting and formatting
-      nodePackages.eslint
-      nodePackages.typescript-language-server
-      nodePackages.vscode-langservers-extracted
 
       # Development servers and utilities
       nodePackages.serve

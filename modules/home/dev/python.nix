@@ -15,13 +15,6 @@ in {
       uv
       pdm
 
-      # Python dev tools
-      black # code formatter
-      ruff # linter and formatter
-      mypy # type checker
-      pylint # static analysis
-      isort # import sorter
-
       # Python debugging and profiling
       python311Packages.ipython
       python311Packages.ipdb
