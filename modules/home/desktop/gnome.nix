@@ -8,9 +8,16 @@ in {
   config = mkIf cfg.enable {
     dconf.enable = true;
     dconf.settings = {
+      "org/gnome/mutter" = {
+        dynamic-workspaces = false;
+      };
+      "/org/gnome/desktop/interface" = {
+        enable-hot-corners = false;
+      };
       "org/gnome/calendar" = { active-view = "week"; };
       "org/gnome/desktop/wm/preferences" = {
         button-layout = "menu:minimize,maximize,close";
+        num-workspaces = 1;
       };
       "org/gnome/desktop/background" = {
         color-shading-type = "solid";
