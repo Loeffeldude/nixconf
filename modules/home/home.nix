@@ -1,5 +1,9 @@
 { config, lib, ... }: {
-  imports = [ ./apps/default.nix ./desktop/default.nix ./dev/default.nix ];
+  imports = [
+    ./apps/default.nix
+    ./desktop/default.nix
+    ./dev/default.nix
+  ];
 
   home.username = "loeffel";
   home.homeDirectory = lib.mkForce "/home/loeffel";

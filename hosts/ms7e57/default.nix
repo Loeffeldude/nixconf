@@ -32,6 +32,7 @@
   apps.enable = true;
   desktop.gnome.enable = true;
 
+
   services.flatpak.enable = true;
   # Enable CUPS to print documents.
   services.printing.enable = true;

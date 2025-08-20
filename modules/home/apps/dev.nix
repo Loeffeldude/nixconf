@@ -11,7 +11,6 @@ in {
         "org.eclipse.Java"
         "org.thonny.Thonny"
         "org.ghidra_sre.Ghidra"
-        "org.godotengine.GodotSharp"
       ];
     };
   };
