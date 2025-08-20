@@ -1,8 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../modules/nvidia.nix
     ../../modules/home
     ../../modules/core
     ../../modules/desktop
