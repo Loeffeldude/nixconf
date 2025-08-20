@@ -31,6 +31,11 @@
         specialArgs = { flake-inputs = inputs; };
         modules = [ ./hosts/t15/default.nix ];
       };
+      ms7e57 = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { flake-inputs = inputs; };
+        modules = [ ./hosts/ms7e57/default.nix ];
+      };
     };
 
     homeManagerConfigurations = {
