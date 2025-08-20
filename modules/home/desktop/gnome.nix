@@ -11,7 +11,7 @@ in {
       "org/gnome/mutter" = {
         dynamic-workspaces = false;
       };
-      "/org/gnome/desktop/interface" = {
+      "org/gnome/desktop/interface" = {
         enable-hot-corners = false;
       };
       "org/gnome/calendar" = { active-view = "week"; };
