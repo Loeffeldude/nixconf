@@ -38,6 +38,7 @@ in {
     ./csharp.nix
     ./node.nix
     ./php.nix
+    ./python.nix
 
     # Other
     ./gamedev
