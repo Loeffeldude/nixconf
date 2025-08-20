@@ -15,6 +15,8 @@ in {
       remotePlay.openFirewall = true;
     };
 
+    programs.gamemode.enable = true;
+
     home-manager.users.loeffel = {
       apps = {
         enable = true;

@@ -10,6 +10,7 @@
     ../../modules/desktop
     ../../modules/dev
     ../../modules/gaming
+    ../../modules/virtualization
   ];
 
   # Bootloader.
