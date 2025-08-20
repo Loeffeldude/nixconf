@@ -8,8 +8,6 @@ in {
     home.packages = with pkgs; [
       # PHP runtime and versions
       php83
-      php82
-      php81
 
       # PHP package manager
       php83Packages.composer
@@ -18,9 +16,7 @@ in {
       php83Packages.phpstan
       php83Packages.psalm
       php83Packages.php-cs-fixer
-      php83Packages.phpunit
-      php83Packages.phpcbf
-      php83Packages.phpcs
+      php83Packages.php-codesniffer
 
       # PHP debugging and profiling
       php83Extensions.xdebug
@@ -40,7 +36,6 @@ in {
       php83Extensions.gd
       php83Extensions.zip
       php83Extensions.xml
-      php83Extensions.json
       php83Extensions.mbstring
       php83Extensions.openssl
     ];

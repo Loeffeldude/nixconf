@@ -19,7 +19,6 @@ in {
 
       # Linting and formatting
       nodePackages.eslint
-      nodePackages.prettier
       nodePackages.typescript-language-server
       nodePackages.vscode-langservers-extracted
 

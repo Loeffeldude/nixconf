@@ -37,6 +37,8 @@ in {
     # Langs
     ./csharp.nix
     ./node.nix
+    ./php.nix
+
     # Other
     ./gamedev
   ];
