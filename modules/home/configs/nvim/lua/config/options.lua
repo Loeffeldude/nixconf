@@ -12,5 +12,6 @@ vim.g.snacks_animate = false
 -- enabled with `:LazyExtras`
 vim.g.lazyvim_picker = "telescope"
 local opt = vim.opt
+opt.swapfile = false -- Disable swap files. They are annoying
 
 opt.mouse = "" -- Disable mouse mode
