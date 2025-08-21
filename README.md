@@ -2,7 +2,7 @@
 
 My personal NixOS and home-manager configurations.
 
-<img src="./media/screenshot.png" height="300" alt="OS Screenshot" >
+<img src="./media/screenshot.png" width="100%" alt="OS Screenshot" >
 
 ## Getting Started
 
