@@ -3,7 +3,6 @@
     ./apps/default.nix
     ./desktop/default.nix
     ./dev/default.nix
-    ./ai/default.nix
   ];
 
   home.username = "loeffel";

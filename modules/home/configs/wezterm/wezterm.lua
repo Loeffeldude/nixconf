@@ -10,8 +10,8 @@ local ai_plugin = wezterm.plugin.require(
 )
 ai_plugin.apply_to_config(config, {
 	type = "ollama",
-	ollama_path = "ollama", -- or full path like "/usr/local/bin/ollama"
-	model = "llama2", -- or any model you have installed
+	ollama_path = "ollama",
+	model = "gpt-oss:20b",
 })
 
 local theme = require("colors.abstract")

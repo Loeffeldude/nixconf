@@ -13,17 +13,13 @@ in {
       type = lib.types.bool;
       default = true;
     };
-    ollama.nvidia = libMkOption
+    ollama.nvidia = lib.mkOption
       {
         type = lib.types.bool;
         default = false;
       };
   };
   config = {
-    imports = lib.mkIf cfg.enable [
-      ./ollama.nix
-    ];
-
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;

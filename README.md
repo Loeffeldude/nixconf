@@ -2,6 +2,8 @@
 
 My personal NixOS and home-manager configurations.
 
+<img src="./media/screenshot.png" height="300" alt="OS Screenshot" >
+
 ## Getting Started
 
 Use the `Makefile` to simplify common operations. The `HOST` variable is automatically set to your system's hostname, but you can override it if needed.
