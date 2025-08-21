@@ -11,6 +11,7 @@
     ../../modules/dev
     ../../modules/gaming
     ../../modules/virtualization
+    ../../modules/ai
   ];
 
   # Bootloader.
@@ -31,7 +32,12 @@
   dev.enable = true;
   apps.enable = true;
   desktop.gnome.enable = true;
-
+  ai.enable = true;
+  ai.ollama =
+    {
+      enable = true;
+      nvidia = true;
+    };
 
   services.flatpak.enable = true;
   # Enable CUPS to print documents.

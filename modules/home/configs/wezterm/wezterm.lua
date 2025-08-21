@@ -5,6 +5,15 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
+local ai_plugin = wezterm.plugin.require(
+	"https://github.com/Michal1993r/ai-helper.wezterm?ref=199dcc4c714c5edee70f3868735c1e8ee44eb116"
+)
+ai_plugin.apply_to_config(config, {
+	type = "ollama",
+	ollama_path = "ollama", -- or full path like "/usr/local/bin/ollama"
+	model = "llama2", -- or any model you have installed
+})
+
 local theme = require("colors.abstract")
 
 local function list_projects()

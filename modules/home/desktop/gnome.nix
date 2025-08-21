@@ -110,7 +110,9 @@ in {
     home.file.".background-image-dark".source = ../../../media/nix-dark.png;
     home.file.".background-image-bright".source = ../../../media/nix-bright.png;
 
-    systemd.user.sessionVariables = config.home.sessionVariables;
+    systemd.user.sessionVariables = config.home.sessionVariables // {
+      XCURSOR_THEME = "Yaru";
+    };
 
     qt = {
       enable = true;
@@ -124,6 +126,10 @@ in {
       enable = true;
       theme = {
         name = "Yaru-blue-dark";
+        package = pkgs.yaru-theme;
+      };
+      cursorTheme = {
+        name = "Yaru";
         package = pkgs.yaru-theme;
       };
     };
