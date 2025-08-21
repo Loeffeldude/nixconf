@@ -1,4 +1,4 @@
-{ config, pkgs, flake-inputs, lib, ... }:
+{ config, pkgs, lib, ... }:
 with lib;
 let cfg = config.ai;
 
@@ -21,11 +21,6 @@ in {
   };
   config = {
     home-manager = {
-      useGlobalPkgs = true;
-      useUserPackages = true;
-      backupFileExtension = "backup";
-      extraSpecialArgs.flake-inputs = flake-inputs;
-
       users.loeffel.options.ai = {
         enable = lib.mkDefault cfg.enable;
         ollama.enable = lib.mkOption {
