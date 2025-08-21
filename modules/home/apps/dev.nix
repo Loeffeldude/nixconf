@@ -11,10 +11,12 @@ in {
         "org.thonny.Thonny"
       ];
     };
-
     home.packages = with pkgs; [
       jetbrains.rider
       ghidra
     ];
+
+
+    home.file.".ideavimrc".source = ../configs/.ideavimrc;
   };
 }
