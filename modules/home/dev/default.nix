@@ -33,13 +33,13 @@ in {
     ./shell.nix
     ./terminal.nix
     ./ai.nix
+    ./utilties.nix
 
     # Langs
     ./csharp.nix
     ./node.nix
     ./php.nix
     ./python.nix
-
     # Other
     ./gamedev
   ];

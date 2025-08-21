@@ -112,6 +112,9 @@ in {
           # JSON
           nodePackages.vscode-json-languageserver
           jq
+          yaml-language-server
+          svelte-language-server
+          vue-language-server
 
           # Additional utilities
           fzf
