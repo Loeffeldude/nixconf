@@ -14,7 +14,7 @@ in {
       ];
     };
 
-    home.packages = with pkgs; [ protonvpn-gui bitwarden-desktop ];
+    home.packages = with pkgs; [ protonvpn-gui bitwarden-desktop blender ];
 
     # Sets up ssh agent sock probably 
     # TODO: should move this to its onw file 
