@@ -1,4 +1,6 @@
-# This is my global gitignore
+# This is my global gitignore 
+# I named it .global to avoid 
+# possible confusion
 
 # AI shit
 CLAUDE.md
