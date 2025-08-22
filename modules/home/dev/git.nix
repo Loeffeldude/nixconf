@@ -5,7 +5,7 @@ let cfg = config.dev;
 in {
   config = mkIf cfg.enable {
 
-    home.file.".gitignore" = ../configs/.gitignore;
+    home.file.".gitignore".source = ../configs/.gitignore;
 
     programs.git = {
       enable = true;
