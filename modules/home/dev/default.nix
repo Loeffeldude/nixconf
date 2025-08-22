@@ -9,6 +9,14 @@ in {
       type = lib.types.bool;
       default = true;
     };
+    docker.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+    };
+    k8s.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+    };
     python.enable = lib.mkOption {
       type = lib.types.bool;
       default = true;
@@ -34,6 +42,8 @@ in {
     ./terminal.nix
     ./ai.nix
     ./utilties.nix
+    ./docker.nix
+    ./k8s.nix
 
     # Langs
     ./csharp.nix

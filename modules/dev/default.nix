@@ -3,7 +3,13 @@ with lib;
 let cfg = config.dev;
 
 in {
-  options.dev = { enable = mkEnableOption "enable dev"; };
+  options.dev = {
+    enable = mkEnableOption "enable dev";
+    docker.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+    };
+  };
   config = mkIf cfg.enable {
 
     environment.systemPackages = with pkgs; [
