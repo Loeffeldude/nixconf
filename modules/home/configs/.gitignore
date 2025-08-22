@@ -1,0 +1,10 @@
+# This is my global gitignore
+
+# AI shit
+CLAUDE.md
+AGENTS.md
+GEMINI.md
+
+# Nix stuff i want to add explicitly
+shell.nix
+

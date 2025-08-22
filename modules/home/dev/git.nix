@@ -4,6 +4,9 @@ let cfg = config.dev;
 
 in {
   config = mkIf cfg.enable {
+
+    home.file.".gitignore" = ../configs/.gitignore;
+
     programs.git = {
       enable = true;
       userName = "Loeffeldude";
@@ -12,6 +15,7 @@ in {
         column.ui = "auto";
         branch.sort = "version:refname";
         tag.sort = "version:refname";
+        core.excludesFile = "~/.gitignore";
         diff = {
           algorithm = "histogram";
           colorMoved = "plain";
