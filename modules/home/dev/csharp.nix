@@ -8,11 +8,11 @@ in {
       (with dotnetCorePackages; combinePackages [ sdk_8_0 sdk_9_0 ])
       mono
       nuget
-      roslyn-ls
+      # roslyn-ls
     ];
 
     home = {
-      sessionPath = [ "$HOME/.dotnet/tools" "${pkgs.omnisharp-roslyn}" ];
+      sessionPath = [ "$HOME/.dotnet/tools" ];
       sessionVariables = { DOTNET_ROOT = "${pkgs.dotnet-sdk_8}"; };
     };
   };

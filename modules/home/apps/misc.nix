@@ -14,8 +14,7 @@ in {
       ];
     };
 
-    home.packages = with pkgs; [ protonvpn-gui bitwarden-desktop blender yt-dlg ];
-
+    home.packages = with pkgs; [ protonvpn-gui bitwarden-desktop blender yt-dlg rustdesk ];
     # Sets up ssh agent sock probably 
     # TODO: should move this to its onw file 
     home.sessionVariables = {

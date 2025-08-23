@@ -16,6 +16,9 @@ in {
         vim = "nvim";
         yank = "xclip -selection clipboard";
       };
+      initContent = lib.mkAfter " 
+          export PATH=\"$PATH:$HOME/.local/bin\"
+        ";
 
       oh-my-zsh = {
         enable = true;
@@ -26,3 +29,6 @@ in {
 
   };
 }
+
+
+

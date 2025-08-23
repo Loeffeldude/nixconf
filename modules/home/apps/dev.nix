@@ -14,8 +14,8 @@ in {
     home.packages = with pkgs; [
       jetbrains.rider
       ghidra
+      podman-desktop
     ];
-
 
     home.file.".ideavimrc".source = ../configs/.ideavimrc;
   };

@@ -6,6 +6,7 @@
 CLAUDE.md
 AGENTS.md
 GEMINI.md
+.claude
 
 # Nix stuff i want to add explicitly
 shell.nix

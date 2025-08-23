@@ -121,7 +121,7 @@ in {
           ripgrep
 
           # C#
-          roslyn-ls
+          # roslyn-ls
           csharp-ls
           dotnet-sdk_9
           csharpier

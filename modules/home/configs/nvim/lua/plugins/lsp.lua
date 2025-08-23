@@ -26,10 +26,6 @@ return {
     enabled = false,
   },
   {
-    "seblyng/roslyn.nvim",
-    opts = {},
-  },
-  {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {

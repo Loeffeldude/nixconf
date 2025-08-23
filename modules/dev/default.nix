@@ -3,6 +3,9 @@ with lib;
 let cfg = config.dev;
 
 in {
+  imports = [
+    ./docker.nix
+  ];
   options.dev = {
     enable = mkEnableOption "enable dev";
     docker.enable = lib.mkOption {
