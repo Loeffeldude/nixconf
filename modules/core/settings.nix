@@ -5,7 +5,7 @@
       experimental-features = nix-command flakes
     '';
 
-    optimize = {
+    optimise = {
       automatic = true;
     };
     gc = {
