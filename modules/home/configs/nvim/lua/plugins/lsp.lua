@@ -64,6 +64,7 @@ return {
         jsonls = {},
         marksman = {},
         csharp_ls = {},
+        clangd = {},
         -- roslyn_ls = {
         --   cmd = {
         --     "Microsoft.CodeAnalysis.LanguageServer",

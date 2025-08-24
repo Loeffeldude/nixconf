@@ -99,6 +99,7 @@ in {
 
           # Web
           vscode-langservers-extracted
+          vtsls
           nodePackages.stylelint
 
           # Markdown
@@ -125,6 +126,7 @@ in {
           csharp-ls
           dotnet-sdk_9
           csharpier
+
         ];
 
         plugins = with pkgs.vimPlugins; [
