@@ -4,6 +4,15 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+
+    optimize = {
+      automatic = true;
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
   };
 }
 
