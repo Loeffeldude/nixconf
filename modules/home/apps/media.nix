@@ -10,6 +10,7 @@ in {
 
     };
 
-    home.packages = with pkgs; [ vlc spotify obs-studio ];
+    home.packages = with pkgs; [ vlc spotify obs-studio libreoffice-qt ];
+
   };
 }
