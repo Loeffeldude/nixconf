@@ -7,7 +7,7 @@ dump-hardware-config:
 	nixos-generate-config --show-hardware-config > ./hosts/${HOST}/hardware-configuration.nix
 
 update:
-	nix flake
+	nix flake update
 
 build:
 	nixos-rebuild build --flake .#${HOST}
