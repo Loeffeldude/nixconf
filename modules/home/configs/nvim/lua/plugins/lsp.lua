@@ -1,29 +1,14 @@
 local uv = vim.loop
 local fs = vim.fs
 
--- vim.lsp.enable("roslyn_ls")
-vim.lsp.enable("csharp_ls")
 return {
   {
-    "folke/lazy.nvim",
-    opts = {
-      performance = {
-        rtp = {
-          disabled_plugins = {
-            "mason",
-            "mason-lspconfig",
-          },
-        },
-      },
-    },
-  },
-  {
     "williamboman/mason.nvim",
-    enabled = false,
+    enabled = true,
   },
   {
     "williamboman/mason-lspconfig.nvim",
-    enabled = false,
+    enabled = true,
   },
   {
     "neovim/nvim-lspconfig",
