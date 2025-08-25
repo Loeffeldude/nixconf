@@ -1,3 +1,3 @@
 { config, pkgs, lib, ... }: {
-  home.packages = with pkgs; [ openssl ];
+  home.packages = with pkgs; [ openssl pre-commit ];
 }
