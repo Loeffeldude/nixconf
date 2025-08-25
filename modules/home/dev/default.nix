@@ -9,6 +9,10 @@ in {
       type = lib.types.bool;
       default = true;
     };
+    rust.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+    };
     docker.enable = lib.mkOption {
       type = lib.types.bool;
       default = true;
@@ -50,6 +54,7 @@ in {
     ./node.nix
     ./php.nix
     ./python.nix
+    ./rust.nix
     # Other
     ./gamedev
   ];
