@@ -30,7 +30,7 @@ in {
 
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
-        gtk-theme = "Yaru-blue-dark";
+        # gtk-theme = "Yaru-blue-dark";
         icon-theme = "Yaru-blue";
       };
 
@@ -112,6 +112,8 @@ in {
 
     systemd.user.sessionVariables = config.home.sessionVariables // {
       XCURSOR_THEME = "Yaru";
+
+GSK_RENDERER="ngl";
     };
 
     qt = {
