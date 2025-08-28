@@ -23,8 +23,11 @@ return {
         },
       },
       picker = {
-        hidden = true,
-        ignored = true,
+        enabled = false,
+      },
+      explorer = {
+        enabled = false,
+        replace_netrw = true,
       },
     },
   },

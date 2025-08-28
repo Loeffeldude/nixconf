@@ -3,17 +3,10 @@ local fs = vim.fs
 
 return {
   {
-    "williamboman/mason.nvim",
-    enabled = true,
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    enabled = true,
-  },
-  {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
+        gdscript = {},
         texlab = {
           settings = {
             texlab = {

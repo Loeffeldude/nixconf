@@ -8,7 +8,8 @@
     ../../modules/desktop
     ../../modules/dev
     ../../modules/gaming
-    ../../modules/
+  ];
+
   services.flatpak.enable = true;
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

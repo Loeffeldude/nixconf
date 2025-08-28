@@ -15,6 +15,8 @@ in {
         "org.torproject.torbrowser-launcher"
       ];
     };
+    home.packages = with pkgs; [ thunderbird ];
+
     programs.firefox = {
       enable = true;
     };

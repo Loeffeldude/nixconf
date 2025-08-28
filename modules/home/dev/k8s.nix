@@ -10,6 +10,8 @@ in {
       helm
       kubectx
       k9s
+      fluxcd
+      kubeseal
     ];
 
     home = {
