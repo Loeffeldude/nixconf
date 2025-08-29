@@ -10,6 +10,6 @@ in {
       podman-desktop
     ];
 
-    home.file.".ideavimrc".source = ../configs/.ideavimrc;
+    home.file.".ideavimrc".source = ../../configs/.ideavimrc;
   };
 }

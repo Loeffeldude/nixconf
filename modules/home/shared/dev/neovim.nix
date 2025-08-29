@@ -16,7 +16,7 @@ in {
     mkIf cfg.enable {
 
       home.file.".config/nvim" = {
-        source = ../configs/nvim;
+        source = ../../configs/nvim;
         recursive = true;
       };
 

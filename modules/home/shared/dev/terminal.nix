@@ -8,7 +8,7 @@ in {
     fonts.fontconfig.enable = true;
 
     home.file.".config/wezterm" = {
-      source = ../configs/wezterm;
+      source = ../../configs/wezterm;
       recursive = true;
     };
 
