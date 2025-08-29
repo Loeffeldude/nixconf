@@ -1,6 +1,7 @@
 { config, lib, ... }: {
   imports = [
     ../shared
+    ./apps
   ];
 
   home.username = "loeffel";

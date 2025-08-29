@@ -3,6 +3,6 @@ with lib;
 let cfg = config.apps;
 in {
   config = mkIf cfg.media.enable {
-    home.packages = with pkgs; [ spotify ];
+    home.packages = with pkgs; [ libreoffice-bin ];
   };
 }
