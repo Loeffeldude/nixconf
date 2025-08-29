@@ -42,7 +42,7 @@ in {
     # Tools
     ./git.nix
     ./neovim.nix
-    ./shell.nix
+    ./zsh.nix
     ./terminal.nix
     ./ai.nix
     ./utilties.nix
