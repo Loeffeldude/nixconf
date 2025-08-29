@@ -4,7 +4,7 @@ let cfg = config.apps;
 
 in {
   config = mkIf cfg.misc.enable {
-    home.packages = with pkgs; [ protonvpn-gui bitwarden-desktop blender yt-dlg rustdesk ];
+    home.packages = with pkgs; [ bitwarden-desktop blender yt-dlg rustdesk ];
     # Sets up ssh agent sock probably 
     # TODO: should move this to its onw file 
     home.sessionVariables = {
