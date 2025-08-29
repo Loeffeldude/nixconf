@@ -1,6 +1,6 @@
 { config, lib, flake-inputs, ... }: {
 
-  imports = [ flake-inputs.home-manager.nixosModules.home-manager ];
+  imports = [ flake-inputs.home-manager.darwinModules.home-manager ];
   options = {
     apps = {
       enable = lib.mkEnableOption "enable apps in home manager via flatpak";
