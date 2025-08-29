@@ -4,8 +4,9 @@
       pkgs.vim
     ];
 
-  imports = [ ../../modules/core/default.nix ];
+  imports = [ ../../modules/home/darwin ];
 
+  networking.hostName = "vm"; # Define your hostname.
   nix.settings.experimental-features = "nix-command flakes";
 
   # Set Git commit hash for darwin-version.
@@ -18,6 +19,7 @@
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
 }
+
 
 
 

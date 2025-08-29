@@ -14,6 +14,4 @@
     LC_TELEPHONE = "de_DE.UTF-8";
     LC_TIME = "de_DE.UTF-8";
   };
-} // lib.optionalAttrs (!pkgs.stdenv.isDarwin) {
-  console.keyMap = "de";
 }
