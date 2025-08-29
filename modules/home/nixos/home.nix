@@ -3,6 +3,7 @@
     ../shared
     ./apps
     ./desktop
+    ./dev
   ];
 
   home.username = "loeffel";

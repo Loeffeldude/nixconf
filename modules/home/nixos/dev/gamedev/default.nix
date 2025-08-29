@@ -10,5 +10,5 @@ in {
       default = true;
     };
   };
-  imports = [ ];
+  imports = [ ./godot.nix ];
 }
