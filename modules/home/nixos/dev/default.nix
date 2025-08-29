@@ -7,11 +7,4 @@ in {
     ./gamedev
     ./utilities.nix
   ];
-  config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      iotop
-    ];
-
-
-  };
 }
