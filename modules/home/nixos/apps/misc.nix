@@ -13,6 +13,8 @@ in {
         "org.raspberrypi.rpi-imager"
       ];
     };
+
+    home.packages = with pkgs; [ protonvpn-gui ];
   };
 }
 

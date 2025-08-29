@@ -20,5 +20,6 @@ in {
 
     # Configure nix-flatpak
     services.flatpak = { enable = lib.mkForce true; };
+
   };
 }

@@ -13,7 +13,5 @@ in {
     ./social.nix
   ];
 
-  config = mkIf cfg.enable {
-    home.packages = with pkgs; [ protonvpn-gui ];
-  };
+  config = mkIf cfg.enable { };
 }
