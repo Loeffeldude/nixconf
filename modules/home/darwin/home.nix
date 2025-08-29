@@ -1,9 +1,6 @@
 { config, lib, ... }: {
   imports = [
-    ./apps/default.nix
-    ./desktop/default.nix
-    ./dev/default.nix
-    ./utilties.nix
+    ../shared
   ];
 
   home.username = "loeffel";

@@ -3,7 +3,6 @@ with lib;
 let cfg = config.apps;
 
 in {
-
   imports = [
     ./options.nix
     flake-inputs.nix-flatpak.homeManagerModules.nix-flatpak
@@ -21,8 +20,5 @@ in {
 
     # Configure nix-flatpak
     services.flatpak = { enable = lib.mkForce true; };
-    # services.flatpak.update.onActivation = true;
-
-    home.packages = with pkgs; [ protonvpn-gui ];
   };
 }
