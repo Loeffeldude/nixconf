@@ -14,9 +14,6 @@
     LC_TELEPHONE = "de_DE.UTF-8";
     LC_TIME = "de_DE.UTF-8";
   };
-  console = lib.mkIf pkgs.stdenv.isLinux
-    {
-
-      keyMap = "de";
-    };
+} // lib.optionalAttrs (!pkgs.stdenv.isDarwin) {
+  console.keyMap = "de";
 }
