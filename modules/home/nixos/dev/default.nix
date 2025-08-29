@@ -6,4 +6,11 @@ in {
   imports = [
     ./gamedev
   ];
+  config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      iotop
+    ];
+
+
+  };
 }

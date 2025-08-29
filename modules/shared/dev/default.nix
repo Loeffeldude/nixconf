@@ -14,7 +14,6 @@ in {
     };
   };
   config = mkIf cfg.enable {
-
     environment.systemPackages = with pkgs; [
       # archives
       zip
@@ -47,7 +46,6 @@ in {
       gnupg
 
       htop
-      iotop # io monitoring
       iftop # network monitoring
 
       # system call monitoring
