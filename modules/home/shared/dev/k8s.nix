@@ -7,7 +7,7 @@ in {
     home.packages = with pkgs; [
       kubectl
       minikube
-      helm
+      kubernetes-helm
       kubectx
       k9s
       fluxcd
