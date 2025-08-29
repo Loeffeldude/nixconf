@@ -34,7 +34,6 @@
     gnupg
 
     htop
-    iotop # io monitoring
     iftop # network monitoring
 
     # system call monitoring
