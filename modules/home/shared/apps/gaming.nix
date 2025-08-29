@@ -6,7 +6,6 @@ in {
   config = mkIf cfg.gaming.enable {
 
     home.packages = with pkgs; [
-      gamescope # Valve's micro-compositor for gaming
       mangohud # Performance overlay
       goverlay # GUI for MangoHud configuration
       lutris # Another game launcher
