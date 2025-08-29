@@ -14,7 +14,7 @@ in {
       ];
     };
 
-    home.packages = with pkgs; [ protonvpn-gui rustdesk ];
+    home.packages = with pkgs; [ protonvpn-gui rustdesk blender ];
   };
 }
 
