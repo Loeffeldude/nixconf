@@ -13,6 +13,7 @@
       mineffect = "scale";
     };
   };
+  system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
   # Swaps Command and CTRL
   # I am not relearning my muscle memory
