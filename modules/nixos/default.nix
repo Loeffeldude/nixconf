@@ -3,6 +3,7 @@
 {
   imports = [
     ../shared
+    ./ai
     ./core
     ./desktop
     ./gaming

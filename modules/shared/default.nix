@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./ai
     ./core
     ./dev
     ./gaming
