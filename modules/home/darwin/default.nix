@@ -12,13 +12,10 @@
       username = "loeffel";
       entries = [
         {
-          path = "/Applications/Home Manager Apps/WezTerm.app";
+          path = "/Users/loeffel/Applications/Home Manager Apps/WezTerm.app";
         }
         {
-          path = "/Applications/Home Manager Apps/Firefox.app";
-        }
-        {
-          path = "/System/Library/CoreServices/Finder.app/";
+          path = "/Users/loeffel/Applications/Home Manager Apps/Firefox.app";
         }
       ];
     };
