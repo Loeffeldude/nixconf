@@ -18,7 +18,7 @@
           path = "/Applications/Home Manager Apps/Firefox.app";
         }
         {
-          path = "/Applications/Home Manager Apps/Firefox.app";
+          path = "/System/Library/CoreServices/Finder.app/";
         }
       ];
     };
