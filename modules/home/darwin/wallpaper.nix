@@ -3,7 +3,7 @@ with lib;
 let
   wallpaperScript = pkgs.writeScriptBin "set-wallpaper" ''
     #!${pkgs.stdenv.shell}
-    osascript -e 'tell application "Finder" to set desktop picture to POSIX file "'"$1"'"'
+    /usr/bin/osascript -e 'tell application "Finder" to set desktop picture to POSIX file "'"$1"'"'
   '';
   homeDir = config.home.homeDirectory;
 in
