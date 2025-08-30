@@ -8,9 +8,18 @@
   };
   config = {
     dock = {
-      enable = false;
+      enable = true;
       username = "loeffel";
       entries = [
+        {
+          path = "/Applications/Home Manager Apps/WezTerm.app";
+        }
+        {
+          path = "/Applications/Home Manager Apps/Firefox.app";
+        }
+        {
+          path = "/Applications/Home Manager Apps/Firefox.app";
+        }
       ];
     };
 
