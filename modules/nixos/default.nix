@@ -5,6 +5,7 @@
     ../shared
     ./core
     ./desktop
+    ./gaming
     ./virtualization
     ./nvidia.nix
   ];
