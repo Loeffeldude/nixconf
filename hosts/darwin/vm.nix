@@ -14,8 +14,6 @@
   ai.enable = false;
 
   services.openssh.enable = true;
-  networking.firewall.enable = false;
-
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;
