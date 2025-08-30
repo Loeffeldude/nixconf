@@ -4,11 +4,8 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/home
-    ../../modules/core
-    ../../modules/desktop
-    ../../modules/dev
-    ../../modules/gaming
+    ../../modules/home/nixos
+    ../../modules/nixos
   ];
 
   gaming.enable = true;

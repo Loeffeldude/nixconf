@@ -1,0 +1,131 @@
+{ config, pkgs, lib, ... }:
+with lib;
+let cfg = config.dev;
+
+in {
+  config =
+    let
+      nvim-treesitter = pkgs.vimPlugins.nvim-treesitter;
+      treesitterWithGrammars = nvim-treesitter.withAllGrammars;
+
+      treesitter-parsers = pkgs.symlinkJoin {
+        name = "treesitter-parsers";
+        paths = treesitterWithGrammars.dependencies;
+      };
+    in
+    mkIf cfg.enable {
+
+      home.file.".config/nvim" = {
+        source = ../../configs/nvim;
+        recursive = true;
+      };
+
+      home.sessionVariables = {
+        EDITOR = "nvim";
+        MANPAGER = "nvim +Man!";
+      };
+
+      xdg.configFile."nvim/lua/parsers.lua".text = # lua
+        ''
+          vim.opt.runtimepath:append ("${treesitter-parsers}")
+        '';
+
+      xdg.configFile."nvim/lua/rysoli.lua".text = # lua
+        ''
+          vim.opt.runtimepath:append ("${treesitter-parsers}")
+        '';
+
+      programs.neovim = {
+        enable = true;
+        withNodeJs = true;
+        withPython3 = true;
+        withRuby = true;
+
+        extraPackages = with pkgs; [
+          # I switched to Mason using nix-ld and envfs on NixOS
+          # marksman
+          # nil
+          # nixpkgs-fmt
+          # rustup
+          # lua-language-server
+          # fzf
+          # stylua
+          # taplo
+          # gnumake
+          # zig
+          # gcc
+          # clang-tools
+          # arduino-language-server
+          # arduino-cli
+          # coreutils
+          # wget
+          # fd
+          # luarocks-nix
+          # imagemagick
+          # # latex
+          # zathura
+          # biber
+          # # for lazy packages
+          # nodejs_latest
+          #
+          # # Rust
+          # rust-analyzer
+          # rustfmt
+          # clippy
+          #
+          # # Go
+          # gopls
+          # go
+          # golangci-lint
+          #
+          # # JavaScript/TypeScript
+          # nodejs_latest
+          # nodePackages.typescript-language-server
+          # nodePackages.eslint
+          # nodePackages.prettier
+          #
+          # # Python
+          # python311Packages.python-lsp-server
+          # black
+          # isort
+          # mypy
+          # pylint
+          #
+          # # PHP
+          # nodePackages.intelephense
+          # php82Packages.phpstan
+          # php82Packages.psalm
+          # php82Packages.composer
+          # php82Packages.php-cs-fixer
+          #
+          # # Web
+          # vscode-langservers-extracted
+          # vtsls
+          # nodePackages.stylelint
+          #
+          # # Markdown
+          # marksman
+          # markdownlint-cli2
+          # # Nix
+          # nil
+          # nixpkgs-fmt
+          # statix
+          #
+          # # JSON
+          # nodePackages.vscode-json-languageserver
+          # jq
+          # yaml-language-server
+          # svelte-language-server
+          # vue-language-server
+
+          # Additional utilities
+          fzf
+          ripgrep
+
+        ];
+
+        plugins = with pkgs.vimPlugins; [
+        ];
+      };
+    };
+}

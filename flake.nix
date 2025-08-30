@@ -28,7 +28,9 @@
 
       t15 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { flake-inputs = inputs; };
+        specialArgs = {
+          flake-inputs = inputs;
+        };
         modules = [ ./hosts/t15/default.nix ];
       };
       ms7e57 = nixpkgs.lib.nixosSystem {
@@ -37,13 +39,26 @@
         modules = [ ./hosts/ms7e57/default.nix ];
       };
     };
+    darwinConfigurations =
+      {
+        vm = darwin.lib.darwinSystem
+          {
+            modules = [ ./hosts/darwin/vm.nix ];
 
-    homeManagerConfigurations = {
-      "loeffel" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
-        extraSpecialArgs = { flake-inputs = inputs; };
-        modules = [ ./modules/home/default.nix ];
+            specialArgs = {
+              flake-inputs = inputs;
+              self = self;
+            };
+          };
       };
-    };
+    # TODO: add homemanger config for home-manager only systems
+
+    # homeManagerConfigurations = {
+    #   "loeffel" = home-manager.lib.homeManagerConfiguration {
+    #     pkgs = nixpkgs.legacyPackages."x86_64-linux";
+    #     extraSpecialArgs = { flake-inputs = inputs; };
+    #     modules = [ ./modules/home/default.nix ];
+    #   };
+    # };
   };
 }

@@ -4,10 +4,8 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/home
-    ../../modules/desktop
-    ../../modules/dev
-    ../../modules/gaming
+    ../../modules/home/nixos
+    ../../modules/nixos
   ];
 
   services.flatpak.enable = true;
@@ -27,6 +25,11 @@
   nixpkgs.config.allowUnfree = true;
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  gaming.enable = true;
+  dev.enable = true;
+  apps.enable = true;
+  desktop.gnome.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

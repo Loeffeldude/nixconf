@@ -4,14 +4,8 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules/nvidia.nix
-    ../../modules/home
-    ../../modules/core
-    ../../modules/desktop
-    ../../modules/dev
-    ../../modules/gaming
-    ../../modules/virtualization
-    ../../modules/ai
+    ../../modules/home/nixos
+    ../../modules/nixos
   ];
 
   # Bootloader.

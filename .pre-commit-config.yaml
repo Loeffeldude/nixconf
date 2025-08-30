@@ -1,0 +1,22 @@
+repos:
+  - repo: local
+    hooks:
+      - id: nixos-flake-check
+        name: NixOS Flake Check
+        entry: bash -c 'nix flake check'
+        language: system
+        pass_filenames: false
+        files: '.*\.nix$'
+
+      - id: nixos-eval-config
+        name: NixOS Configuration Evaluation
+        entry: bash -c './scripts/check-configs.sh'
+        language: system
+        pass_filenames: false
+        files: '.*\.nix$'
+
+      - id: nix-formatter
+        name: Nix Formatting
+        entry: nixpkgs-fmt
+        language: system
+        files: '.*\.nix$'
