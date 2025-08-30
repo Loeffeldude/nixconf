@@ -5,7 +5,7 @@
   ];
 
   home.username = "loeffel";
-  home.homeDirectory = lib.mkForce "/home/loeffel";
+  home.homeDirectory = lib.mkForce "/Users/loeffel";
 
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage

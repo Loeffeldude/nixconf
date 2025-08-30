@@ -85,7 +85,7 @@ config.audible_bell = "Disabled"
 config.background = {
 	{
 		source = {
-			File = "/home/loeffel/.config/wezterm/background.png",
+			File = "~/.config/wezterm/background.png",
 		},
 		hsb = {
 			brightness = 0.02,
