@@ -4,7 +4,6 @@ let cfg = config.apps;
 
 in {
   imports = [
-    ./options.nix
     flake-inputs.nix-flatpak.homeManagerModules.nix-flatpak
     ./dev.nix
     ./gaming.nix

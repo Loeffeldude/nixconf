@@ -10,7 +10,6 @@
     };
     gc = {
       automatic = true;
-      interval = "weekly";
       options = "--delete-older-than 30d";
     };
   };

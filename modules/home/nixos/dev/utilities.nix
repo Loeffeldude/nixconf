@@ -4,7 +4,7 @@ let cfg = config.dev;
 
 in {
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
+    home.packages = with pkgs; [
       iotop
       strace # system call monitoring
       ltrace # library call monitoring

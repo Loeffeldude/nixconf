@@ -107,13 +107,13 @@ in {
       "org/gnome/desktop/sound" = { event-sounds = false; };
     };
 
-    home.file.".background-image-dark".source = ../../../media/nix-dark.png;
-    home.file.".background-image-bright".source = ../../../media/nix-bright.png;
+    home.file.".background-image-dark".source = ../../../../media/nix-dark.png;
+    home.file.".background-image-bright".source = ../../../../media/nix-bright.png;
 
     systemd.user.sessionVariables = config.home.sessionVariables // {
       XCURSOR_THEME = "Yaru";
 
-GSK_RENDERER="ngl";
+      GSK_RENDERER = "ngl";
     };
 
     qt = {
