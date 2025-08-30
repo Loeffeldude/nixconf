@@ -7,6 +7,14 @@
     };
   };
   config = {
+
+    dock = {
+      enable = false;
+      username = "loeffel";
+      entries = [
+      ];
+    };
+
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
