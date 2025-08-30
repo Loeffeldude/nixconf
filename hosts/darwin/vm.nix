@@ -11,7 +11,6 @@
   home-manager.users.loeffel.dev.enable = true;
   gaming.enable = false;
   apps.enable = false;
-  ai.enable = false;
 
   services.openssh.enable = true;
 
