@@ -6,5 +6,6 @@ in {
   imports = [
     ./gamedev
     ./utilities.nix
+    ./neovim.nix
   ];
 }

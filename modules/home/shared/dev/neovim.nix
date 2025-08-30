@@ -121,38 +121,9 @@ in {
           fzf
           ripgrep
 
-          # C#
-          # roslyn-ls
-          csharp-ls
-          dotnet-sdk_9
-          csharpier
-
         ];
 
         plugins = with pkgs.vimPlugins; [
-          # LSP
-          nvim-lspconfig
-          null-ls-nvim
-          trouble-nvim
-
-          # Completion
-          nvim-cmp
-          cmp-nvim-lsp
-          cmp-buffer
-          cmp-path
-          luasnip
-          cmp_luasnip
-          # Telescope for fuzzy finding
-          telescope-nvim
-          telescope-fzf-native-nvim
-
-          # Treesitter
-          treesitterWithGrammars
-
-          # Theme and UI
-          tokyonight-nvim
-          lualine-nvim
-          nvim-web-devicons
         ];
       };
     };
