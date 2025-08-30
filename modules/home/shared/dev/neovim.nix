@@ -42,80 +42,81 @@ in {
         withRuby = true;
 
         extraPackages = with pkgs; [
-          marksman
-          nil
-          nixpkgs-fmt
-          rustup
-          lua-language-server
-          fzf
-          stylua
-          taplo
-          gnumake
-          zig
-          gcc
-          clang-tools
-          arduino-language-server
-          arduino-cli
-          coreutils
-          wget
-          fd
-          luarocks-nix
-          imagemagick
-          # latex
-          zathura
-          biber
-          # for lazy packages
-          nodejs_latest
-
-          # Rust
-          rust-analyzer
-          rustfmt
-          clippy
-
-          # Go
-          gopls
-          go
-          golangci-lint
-
-          # JavaScript/TypeScript
-          nodejs_latest
-          nodePackages.typescript-language-server
-          nodePackages.eslint
-          nodePackages.prettier
-
-          # Python
-          python311Packages.python-lsp-server
-          black
-          isort
-          mypy
-          pylint
-
-          # PHP
-          nodePackages.intelephense
-          php82Packages.phpstan
-          php82Packages.psalm
-          php82Packages.composer
-          php82Packages.php-cs-fixer
-
-          # Web
-          vscode-langservers-extracted
-          vtsls
-          nodePackages.stylelint
-
-          # Markdown
-          marksman
-          markdownlint-cli2
-          # Nix
-          nil
-          nixpkgs-fmt
-          statix
-
-          # JSON
-          nodePackages.vscode-json-languageserver
-          jq
-          yaml-language-server
-          svelte-language-server
-          vue-language-server
+          # I switched to Mason using nix-ld and envfs on NixOS
+          # marksman
+          # nil
+          # nixpkgs-fmt
+          # rustup
+          # lua-language-server
+          # fzf
+          # stylua
+          # taplo
+          # gnumake
+          # zig
+          # gcc
+          # clang-tools
+          # arduino-language-server
+          # arduino-cli
+          # coreutils
+          # wget
+          # fd
+          # luarocks-nix
+          # imagemagick
+          # # latex
+          # zathura
+          # biber
+          # # for lazy packages
+          # nodejs_latest
+          #
+          # # Rust
+          # rust-analyzer
+          # rustfmt
+          # clippy
+          #
+          # # Go
+          # gopls
+          # go
+          # golangci-lint
+          #
+          # # JavaScript/TypeScript
+          # nodejs_latest
+          # nodePackages.typescript-language-server
+          # nodePackages.eslint
+          # nodePackages.prettier
+          #
+          # # Python
+          # python311Packages.python-lsp-server
+          # black
+          # isort
+          # mypy
+          # pylint
+          #
+          # # PHP
+          # nodePackages.intelephense
+          # php82Packages.phpstan
+          # php82Packages.psalm
+          # php82Packages.composer
+          # php82Packages.php-cs-fixer
+          #
+          # # Web
+          # vscode-langservers-extracted
+          # vtsls
+          # nodePackages.stylelint
+          #
+          # # Markdown
+          # marksman
+          # markdownlint-cli2
+          # # Nix
+          # nil
+          # nixpkgs-fmt
+          # statix
+          #
+          # # JSON
+          # nodePackages.vscode-json-languageserver
+          # jq
+          # yaml-language-server
+          # svelte-language-server
+          # vue-language-server
 
           # Additional utilities
           fzf
