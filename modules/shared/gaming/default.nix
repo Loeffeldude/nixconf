@@ -10,11 +10,6 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ ];
 
-    programs.steam = {
-      enable = true;
-      remotePlay.openFirewall = true;
-    };
-
     home-manager.users.loeffel = {
       apps = {
         enable = true;
