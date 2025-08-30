@@ -2,6 +2,7 @@
   imports = [
     ../shared
     ./apps
+    ./wallpaper.nix
   ];
 
   home.username = "loeffel";

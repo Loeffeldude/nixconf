@@ -2,6 +2,7 @@
   home.packages = with pkgs; [
     openssl
     pre-commit
+    nixpkgs-fmt
 
     # archives
     zip
