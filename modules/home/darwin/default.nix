@@ -1,13 +1,12 @@
 { config, lib, flake-inputs, ... }: {
 
-  imports = [ flake-inputs.home-manager.darwinModules.home-manager ];
+  imports = [ ./dock.nix flake-inputs.home-manager.darwinModules.home-manager ];
   options = {
     apps = {
       enable = lib.mkEnableOption "enable apps in home manager via flatpak";
     };
   };
   config = {
-
     dock = {
       enable = false;
       username = "loeffel";

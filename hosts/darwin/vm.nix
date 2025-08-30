@@ -1,9 +1,4 @@
 { pkgs, self, ... }: {
-  environment.systemPackages =
-    [
-      pkgs.vim
-    ];
-
   imports = [ ../../modules/darwin ../../modules/home/darwin ];
 
   networking.hostName = "vm"; # Define your hostname.
