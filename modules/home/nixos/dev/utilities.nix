@@ -9,7 +9,7 @@ in {
       strace # system call monitoring
       ltrace # library call monitoring
       lsof # list open files
-
+      xclip
       # system tools
       sysstat
       lm_sensors # for `sensors` command

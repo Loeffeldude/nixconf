@@ -7,7 +7,6 @@ in {
     ./docker.nix
   ];
   options.dev = {
-    enable = mkEnableOption "enable dev";
     docker.enable = lib.mkOption {
       type = lib.types.bool;
       default = true;

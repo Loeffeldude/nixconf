@@ -4,6 +4,7 @@
   imports = [
     ../shared
     ./ai
+    ./dev
     ./core
     ./desktop
     ./gaming
