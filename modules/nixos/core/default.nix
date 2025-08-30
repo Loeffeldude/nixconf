@@ -1,3 +1,3 @@
 { config, pkgs, ... }: {
-  imports = [ ./localization.nix ./ld.nix ];
+  imports = [ ./localization.nix ./ld.nix ./user.nix ];
 }
