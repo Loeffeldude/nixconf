@@ -3,7 +3,7 @@
 
 with lib;
 let
-  cfg = config.local.dock;
+  cfg = config.dock;
   inherit (pkgs) stdenv dockutil;
 in
 {
