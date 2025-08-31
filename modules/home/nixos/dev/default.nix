@@ -7,5 +7,6 @@ in {
     ./gamedev
     ./utilities.nix
     ./neovim.nix
+    ./zsh.nix
   ];
 }
