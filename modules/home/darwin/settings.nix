@@ -28,7 +28,8 @@
 
     }
   ];
-  services.aerospace.enable = true;
+
+  services.aerospace.enable = false;
 
   # User settings
   home-manager.users.loeffel = {

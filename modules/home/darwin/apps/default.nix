@@ -6,6 +6,9 @@ in {
   imports = [
     ./media.nix
     ./social.nix
+    ./virtulaziton.nix
   ];
-  config = mkIf cfg.enable { };
+  config = mkIf cfg.enable {
+    home.packages = with pkgs; [ rectangle ];
+  };
 }
