@@ -1,8 +1,9 @@
 # My NixOS Configurations
 
-My personal NixOS and home-manager configurations.
+My personal Nix configurations.
+For MacOS, NixOS and WSL.
 
-<img src="./media/screenshot.png" width="100%" alt="OS Screenshot" >
+<img src="./media/screenshot.png" width="100%" alt="NixOS Screenshot" >
 
 ## Getting Started
 
@@ -10,30 +11,45 @@ Use the `Makefile` to simplify common operations. The `HOST` variable is automat
 
 ### Applying the Configuration
 
-To apply the configuration to the current machine, run:
+#### NixOS
 
-```bash
+```sh
 make switch
 ```
 
-This is equivalent to running `sudo nixos-rebuild switch --flake .#$(hostname)`.
+#### MacOS
+
+```sh
+make darwin-switch
+```
+
+#### WSL
+
+You can build your own WSL file.
+You need an existing Nix installation.
+
+Run to build the WSL Image:
+
+```sh
+make build-wsl
+```
+
+Your build file is under dist/nixos.wsl
+
+For an existing NixOS WSL installation:
+
+```sh
+make switch
+```
 
 ### Updating Flake Inputs
 
 To update the flake's inputs, run:
 
-```bash
+```sh
 make update
 ```
 
 ### Other Useful Commands
 
-- `make build`: Builds the NixOS configuration.
-- `make test`: Tests the NixOS configuration.
 - `make dump-hardware-config`: Dumps the hardware configuration to the appropriate host directory.
-
-To use a specific host configuration, you can pass the `HOST` variable to the make command:
-
-```bash
-make switch HOST=t15
-```

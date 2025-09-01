@@ -7,12 +7,14 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.6.0";
-    # For macOS
+
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, darwin, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, darwin, nixos-wsl, ... }: {
     nixosConfigurations = {
       qemu = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -37,6 +39,13 @@
         system = "x86_64-linux";
         specialArgs = { flake-inputs = inputs; };
         modules = [ ./hosts/ms7e57/default.nix ];
+      };
+      wsl = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { flake-inputs = inputs; };
+        modules = [
+          ./hosts/wsl
+        ];
       };
     };
     darwinConfigurations =
