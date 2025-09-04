@@ -67,17 +67,9 @@ let
     REMOTE_COMMIT=$(${pkgs.git}/bin/git rev-parse "$REMOTE_NAME/$REMOTE_BRANCH")
     
     if [ "$LOCAL_COMMIT" != "$REMOTE_COMMIT" ]; then
-        TERMINAL_CMD="${pkgs.gnome-terminal}/bin/gnome-terminal"
+        TERMINAL_CMD="${pkgs.wezterm}/bin/wezterm start --always-new-process"
         
-        # if command -v wezterm &> /dev/null; then
-        #     TERMINAL_CMD="wezterm"
-        # elif command -v alacritty &> /dev/null; then
-        #     TERMINAL_CMD="alacritty"
-        # elif command -v kitty &> /dev/null; then
-        #     TERMINAL_CMD="kitty"
-        # fi
-        
-        $TERMINAL_CMD --title "NixConf Update Available" -- bash -c "
+        $TERMINAL_CMD -- bash -c "
             echo 'NixConf Update Available!'
             echo '=================================='
             echo
