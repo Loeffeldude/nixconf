@@ -1,3 +1,3 @@
 { config, pkgs, ... }: {
-  imports = [ ./localization.nix ./ld.nix ./user.nix ./settings.nix ];
+  imports = [ ./localization.nix ./ld.nix ./user.nix ./settings.nix ./nixconf-updater.nix ];
 }
