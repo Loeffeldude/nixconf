@@ -3,6 +3,16 @@ local fs = vim.fs
 
 return {
   {
+    -- Remove phpcs linter.
+    "mfussenegger/nvim-lint",
+    optional = true,
+    opts = {
+      linters_by_ft = {
+        php = {},
+      },
+    },
+  },
+  {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {

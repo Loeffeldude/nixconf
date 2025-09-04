@@ -6,23 +6,31 @@ in {
   config = mkIf cfg.enable {
     programs.zsh = {
       enable = true;
+      cdpath = [
+        "$HOME/Documents/projects/"
+      ];
       shellAliases = {
         ll = "ls -l";
         vim = "nvim";
       };
-      initContent = lib.mkAfter " 
-          export PATH=\"$PATH:$HOME/.local/bin\"
+      initContent = lib.mkAfter "
+        export PATH=\"$PATH:$HOME/.local/bin\"
+        export PATH=\"$PATH:$HOME/.config/composer/vendor/bin\"
         ";
 
       oh-my-zsh = {
         enable = true;
-        plugins = [ "git" ];
+        plugins = [
+          "git"
+        ];
         theme = "intheloop";
       };
     };
 
   };
 }
+
+
 
 
 
