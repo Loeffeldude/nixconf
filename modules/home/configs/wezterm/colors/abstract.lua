@@ -1,19 +1,19 @@
 return {
 	foreground = "#D0D0D0", -- Soft gray
-	background = "#000000", -- True black
+	background = "#1e1e1e", -- True black
 
 	cursor_bg = "#C98B60", -- Muted warm amber
 	cursor_fg = "#000000",
 	cursor_border = "#C98B60",
 
-	selection_fg = "#000000",
-	selection_bg = "#44475a", -- Soft muted blue-gray
+	selection_fg = "#2C2F3A",
+	selection_bg = "#1e1e1e", -- Soft muted blue-gray
 
 	scrollbar_thumb = "#2C2F3A", -- Subtle contrast
 	split = "#1F222D",
 
 	ansi = {
-		"#000000", -- Black
+		"#2C2F3A", -- Black
 		"#B0756D", -- Red (desaturated warm)
 		"#5B8576", -- Green (dusty teal)
 		"#C4AA76", -- Yellow (muted gold)

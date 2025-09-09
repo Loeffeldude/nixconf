@@ -4,12 +4,12 @@ return {
     lazy = false,
     priority = 1000,
     opts = {
-      transparent = false,
+      transparent = true,
       italic_comments = true,
       underline_current_line = true,
       colors = {
         foreground = "#c5c8c6",
-        background = "#1d1f21",
+        background = "#373b41",
         selection = "#373b41",
         line = "#282a2e",
         comment = "#969896",
