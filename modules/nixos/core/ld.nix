@@ -16,6 +16,7 @@
       # Core
       glibc
       gcc.cc
+      stdenv.cc.cc.lib
       zlib
       ncurses5
       linux-pam

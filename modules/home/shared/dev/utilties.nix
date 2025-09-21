@@ -24,6 +24,7 @@
     ipcalc # it is a calculator for the IPv4/v6 addresses
 
     # misc
+    jq
     cowsay
     file
     which

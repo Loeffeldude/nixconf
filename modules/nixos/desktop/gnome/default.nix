@@ -13,9 +13,9 @@ in {
         xkb = {
           layout = "de";
           variant = "";
-          options = "caps:escape"; # I use caps as escaping edit mode in vim
+          # I use caps as escaping edit mode in vim
+          options = "caps:escape";
         };
-
       };
       displayManager.gdm = {
         enable = true;

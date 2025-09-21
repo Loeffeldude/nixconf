@@ -11,5 +11,9 @@ in {
         "org.thonny.Thonny"
       ];
     };
+
+    home.packages = with pkgs; [
+      #ventoy 
+    ];
   };
 }
