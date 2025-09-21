@@ -1,6 +1,6 @@
 return {
 	foreground = "#D0D0D0", -- Soft gray
-	background = "#1e1e1e", -- True black
+	background = "#1f1f1f", -- True black
 
 	cursor_bg = "#C98B60", -- Muted warm amber
 	cursor_fg = "#000000",

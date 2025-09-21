@@ -39,6 +39,17 @@ return {
           },
         },
         pyright = {},
+        pylsp = {
+          settings = {
+            pylsp = {
+              plugins = {
+                rope_autoimport = {
+                  enabled = true,
+                },
+              },
+            },
+          },
+        },
         nil_ls = {
           settings = {
             ["nil"] = {
