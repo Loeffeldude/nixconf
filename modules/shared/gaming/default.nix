@@ -12,8 +12,8 @@ in {
 
     home-manager.users.loeffel = {
       apps = {
-        enable = true;
-        gaming.enable = true;
+        enable = mkDefault true;
+        gaming.enable = mkDefault true;
       };
     };
   };

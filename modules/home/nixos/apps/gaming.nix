@@ -13,5 +13,9 @@ in {
         "io.github.radiolamp.mangojuice"
       ];
     };
+
+    home.packages = with pkgs; [
+      prismlauncher
+    ];
   };
 }

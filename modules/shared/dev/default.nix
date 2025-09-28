@@ -10,10 +10,10 @@ in {
   };
   config = mkIf cfg.enable {
     home-manager.users.loeffel = {
-      dev.enable = true;
+      dev.enable = mkDefault true;
       apps = {
-        enable = true;
-        dev.enable = true;
+        enable = mkDefault true;
+        dev.enable = mkDefault true;
       };
     };
   };
