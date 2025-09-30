@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, flake-inputs, ... }:
 
 {
   imports = [
@@ -10,6 +10,7 @@
     ./gaming
     ./virtualization
     ./nvidia.nix
+    # ./sops
   ];
   config = { };
 }

@@ -15,19 +15,9 @@ in {
       uv
       pdm
 
-      # Python debugging and profiling
-      python311Packages.ipython
-      python311Packages.ipdb
-      python311Packages.pytest
-      python311Packages.pytest-cov
-      python311Packages.pytest-xdist
-
       # Python virtual environment tools
       python311Packages.virtualenv
 
-      # Python REPL and notebooks
-      python311Packages.jupyter
-      python311Packages.jupyterlab
     ];
   };
 }

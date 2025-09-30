@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: {
   home.packages = with pkgs; [ yt-dlp rbw ];
-  # TODO: Pinentry is broken on ios 
+
   home.file.".config/rbw/config.json".text = ''
     {
       "email": "kraetschmerni@gmail.com",
@@ -11,7 +11,7 @@
       "notifications_url": null,
       "lock_timeout": 3600,
       "sync_interval": 3600,
-      "pinentry": "pinentry",
+      "pinentry": "${pkgs.pinentry}/bin/pinentry",
       "client_cert_path": null
     }
   '';

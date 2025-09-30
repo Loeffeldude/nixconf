@@ -2,10 +2,7 @@
 
 {
   imports = [
-    ./core
-    ./dev
-    ./gaming
-    # ./networking
+    ./hosts.nix
   ];
   config = { };
 }

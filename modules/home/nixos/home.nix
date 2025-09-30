@@ -4,6 +4,7 @@
     ./apps
     ./desktop
     ./dev
+    ./utlities.nix
   ];
 
   home.username = "loeffel";
