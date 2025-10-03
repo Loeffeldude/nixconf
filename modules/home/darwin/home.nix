@@ -4,12 +4,9 @@
     ./apps
     ./dev
     ./wallpaper.nix
+    ./utilities.nix
   ];
 
-<<<<<<< HEAD
-  home.username = "nicokratschmer";
-  home.homeDirectory = lib.mkForce "/Users/nicokratschmer";
-=======
   options = {
     primaryUser = lib.mkOption {
       type = lib.types.str;
@@ -20,7 +17,6 @@
   config = {
     home.username = "${config.primaryUser}";
     home.homeDirectory = lib.mkForce "/Users/${config.primaryUser}";
->>>>>>> f276465ad57f25e9173ccaa7aabd411376527756
 
     # This value determines the home Manager release that your
     # configuration is compatible with. This helps avoid breakage

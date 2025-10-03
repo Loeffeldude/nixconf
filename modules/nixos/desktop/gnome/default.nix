@@ -115,11 +115,7 @@ in {
       openFirewall = true;
     };
 
-<<<<<<< HEAD
-    home-manager.users.nicokratschmer = { desktop.gnome.enable = true; };
-=======
     home-manager.users.${config.primaryUser} = { desktop.gnome.enable = true; };
->>>>>>> f276465ad57f25e9173ccaa7aabd411376527756
   };
 }
 

@@ -6,14 +6,14 @@ return {
 	cursor_fg = "#D0D0D0",
 	cursor_border = "#C98B60",
 
-	selection_fg = "#D0D0D0",
+	selection_fg = "#bababa",
 	selection_bg = "#1e1e1e", -- Soft muted blue-gray
 
 	scrollbar_thumb = "#2C2F3A", -- Subtle contrast
 	split = "#1F222D",
 
 	ansi = {
-		"#ffffff", -- Black
+		"#1e1e1e", -- Black
 		"#B0756D", -- Red (desaturated warm)
 		"#5B8576", -- Green (dusty teal)
 		"#C4AA76", -- Yellow (muted gold)
@@ -23,7 +23,7 @@ return {
 		"#D0D0D0", -- White
 	},
 	brights = {
-		"#D0D0D0", -- Bright black
+		"#2C2F3A", -- Bright black
 		"#D89A84", -- Bright red
 		"#7BAA94", -- Bright green
 		"#E6C48D", -- Bright yellow

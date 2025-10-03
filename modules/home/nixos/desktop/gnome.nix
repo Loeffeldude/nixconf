@@ -22,13 +22,8 @@ in {
       "org/gnome/desktop/background" = {
         color-shading-type = "solid";
         picture-options = "zoom";
-<<<<<<< HEAD
-        picture-uri = "/home/nicokratschmer/.background-image-bright";
-        picture-uri-dark = "/home/nicokratschmer/.background-image-dark";
-=======
         picture-uri = "/home/${config.primaryUser}/.background-image-bright";
         picture-uri-dark = "/home/${config.primaryUser}/.background-image-dark";
->>>>>>> f276465ad57f25e9173ccaa7aabd411376527756
         primary-color = "#000000000000";
         secondary-color = "#000000000000";
       };
@@ -48,13 +43,8 @@ in {
       "org/gnome/desktop/screensaver" = {
         color-shading-type = "solid";
         picture-options = "zoom";
-<<<<<<< HEAD
-        picture-uri-dark = "/home/nicokratschmer/.background-image-dark";
-        picture-uri = "/home/nicokratschmer/.background-image-bright";
-=======
         picture-uri-dark = "/home/${config.primaryUser}/.background-image-dark";
         picture-uri = "/home/${config.primaryUser}/.background-image-bright";
->>>>>>> f276465ad57f25e9173ccaa7aabd411376527756
         primary-color = "#000000000000";
         secondary-color = "#000000000000";
       };

@@ -6,7 +6,7 @@
 
   # Set Git commit hash for darwin-version.
   # system.configurationRevision = self.rev or self.dirtyRev or null;
-
+  primaryUser = "nicokratschmer";
   dev.enable = true;
   home-manager.users.nicokratschmer.dev.enable = true;
   gaming.enable = false;

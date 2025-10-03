@@ -14,11 +14,7 @@ in {
   ];
   config = mkIf cfg.enable {
     # This prevents flatpak-install taking longer from not being able to be applied 
-<<<<<<< HEAD
-    systemd.user.services."home-manager-nicokratschmer".serviceConfig.TimeoutStartSec =
-=======
     systemd.user.services."home-manager-${config.primaryUser}".serviceConfig.TimeoutStartSec =
->>>>>>> f276465ad57f25e9173ccaa7aabd411376527756
       lib.mkForce "600";
 
     # Configure nix-flatpak

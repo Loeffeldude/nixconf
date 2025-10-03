@@ -40,11 +40,7 @@ in {
       wifi.powersave = true;
     };
 
-<<<<<<< HEAD
-    # home-manager.users.nicokratschmer = { desktop..enable = true; };
-=======
     # home-manager.users.${config.primaryUser} = { desktop..enable = true; };
->>>>>>> f276465ad57f25e9173ccaa7aabd411376527756
   };
 }
 
