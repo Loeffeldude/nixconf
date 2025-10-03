@@ -62,6 +62,15 @@
               self = self;
             };
           };
+        nicostartupwerk = darwin.lib.darwinSystem
+          {
+            modules = [ ./hosts/darwin/nicostartupwerk.nix ];
+
+            specialArgs = {
+              flake-inputs = inputs;
+              self = self;
+            };
+          };
       };
     # TODO: add homemanger config for home-manager only systems
 

@@ -2,7 +2,9 @@
   imports = [
     ../shared
     ./apps
+    ./dev
     ./wallpaper.nix
+    ./utilities.nix
   ];
 
   options = {

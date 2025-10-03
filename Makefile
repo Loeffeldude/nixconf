@@ -1,10 +1,19 @@
 HOST ?= $(shell hostname)
+UNAME := $(shell uname)
 
-switch:
-	sudo nixos-rebuild switch --flake .#${HOST}
+ifeq ($(UNAME),Darwin)
+    SWITCH_CMD = switch-darwin
+else
+    SWITCH_CMD = switch-nixos
+endif
+
+switch: $(SWITCH_CMD)
 
 switch-darwin:
 	sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake .#${HOST}
+
+switch-nixos:
+	sudo nixos-rebuild switch --flake .#${HOST}
 
 build-wsl:
 	sudo nix run .#nixosConfigurations.wsl.config.system.build.tarballBuilder

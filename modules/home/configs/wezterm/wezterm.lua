@@ -5,18 +5,11 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
-local ai_plugin = wezterm.plugin.require(
-	"https://github.com/Michal1993r/ai-helper.wezterm?ref=199dcc4c714c5edee70f3868735c1e8ee44eb116"
-)
-ai_plugin.apply_to_config(config, {
-	type = "http",
-	model = "llama3.1:8b",
-	api_url = "http://localhost:11434/v1/chat/completions",
-	keybinding = {
-		key = "i",
-		mods = "CTRL|ALT",
-	},
-})
+if wezterm.target_triple == "aarch64-apple-darwin" then
+	config.font = wezterm.font("JetBrains Mono")
+else
+	config.font = wezterm.font("Jetbrains Mono NF")
+end
 
 local theme = require("colors.abstract")
 
@@ -86,21 +79,7 @@ end)
 
 config.colors = theme
 config.audible_bell = "Disabled"
--- config.background = {
--- 	{
--- 		source = {
--- 			File = "~/.config/wezterm/background.png",
--- 		},
--- 		hsb = {
--- 			brightness = 0.02,
--- 			hue = 1,
--- 			saturation = 0.1,
--- 		},
--- 		opacity = 1,
--- 	},
--- }
-config.font = wezterm.font("Jetbrains Mono NF")
-
+config.keys = {}
 table.insert(config.keys, {
 	key = "S",
 	mods = "CTRL|SHIFT",
@@ -108,13 +87,13 @@ table.insert(config.keys, {
 })
 
 -- Tab switching using Alt + number keys (works well for German layout)
-for i = 1, 9 do
-	table.insert(config.keys, {
-		key = tostring(i),
-		mods = "ALT",
-		action = wezterm.action({ ActivateTab = i - 1 }),
-	})
-end
+-- for i = 1, 9 do
+-- 	table.insert(config.keys, {
+-- 		key = tostring(i),
+-- 		mods = "ALT",
+-- 		action = wezterm.action({ ActivateTab = i - 1 }),
+-- 	})
+-- end
 
 -- Next and previous tab navigation
 table.insert(config.keys, {

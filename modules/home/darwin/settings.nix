@@ -18,15 +18,15 @@
   # Swaps Command and CTRL
   # I am not relearning my muscle memory
   system.keyboard.userKeyMapping = [
-    {
-      HIDKeyboardModifierMappingSrc = 30064771296;
-      HIDKeyboardModifierMappingDst = 30064771299;
-    }
-    {
-      HIDKeyboardModifierMappingSrc = 30064771299;
-      HIDKeyboardModifierMappingDst = 30064771296;
-
-    }
+    # {
+    #   HIDKeyboardModifierMappingSrc = 30064771296;
+    #   HIDKeyboardModifierMappingDst = 30064771299;
+    # }
+    # {
+    #   HIDKeyboardModifierMappingSrc = 30064771299;
+    #   HIDKeyboardModifierMappingDst = 30064771296;
+    #
+    # }
   ];
 
   services.aerospace.enable = false;

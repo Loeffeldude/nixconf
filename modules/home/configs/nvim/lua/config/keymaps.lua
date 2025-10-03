@@ -3,10 +3,9 @@
 -- Add any additional keymaps here
 --
 
-local cmp = require("cmp")
-cmp.setup({
-  mapping = {
-    ["<Tab>"] = cmp.mapping.confirm({ select = true }),
-    ["<CR>"] = cmp.mapping.confirm({ select = false }),
-  },
-})
+vim.keymap.set("i", "<Tab>", function()
+  if require("cmp").visible() then
+    return require("cmp").confirm({ select = true })
+  end
+  return "<Tab>"
+end, { expr = true })

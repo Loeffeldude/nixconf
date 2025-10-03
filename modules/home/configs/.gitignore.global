@@ -10,4 +10,5 @@ GEMINI.md
 
 # Nix stuff i want to add explicitly
 shell.nix
-
+flake.nix
+.envrc

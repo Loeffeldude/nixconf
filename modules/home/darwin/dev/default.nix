@@ -5,5 +5,6 @@ let cfg = config.dev;
 in {
   imports = [
     ./zsh.nix
+    ./terminal.nix
   ];
 }
