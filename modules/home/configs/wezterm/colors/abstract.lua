@@ -3,17 +3,17 @@ return {
 	background = "#1f1f1f", -- True black
 
 	cursor_bg = "#C98B60", -- Muted warm amber
-	cursor_fg = "#000000",
+	cursor_fg = "#D0D0D0",
 	cursor_border = "#C98B60",
 
-	selection_fg = "#2C2F3A",
+	selection_fg = "#D0D0D0",
 	selection_bg = "#1e1e1e", -- Soft muted blue-gray
 
 	scrollbar_thumb = "#2C2F3A", -- Subtle contrast
 	split = "#1F222D",
 
 	ansi = {
-		"#2C2F3A", -- Black
+		"#ffffff", -- Black
 		"#B0756D", -- Red (desaturated warm)
 		"#5B8576", -- Green (dusty teal)
 		"#C4AA76", -- Yellow (muted gold)
@@ -23,7 +23,7 @@ return {
 		"#D0D0D0", -- White
 	},
 	brights = {
-		"#1F222D", -- Bright black
+		"#D0D0D0", -- Bright black
 		"#D89A84", -- Bright red
 		"#7BAA94", -- Bright green
 		"#E6C48D", -- Bright yellow
@@ -34,12 +34,12 @@ return {
 	},
 
 	copy_mode_active_highlight_bg = { Color = "#C98B60" },
-	copy_mode_active_highlight_fg = { Color = "#000000" },
+	copy_mode_active_highlight_fg = { Color = "#D0D0D0" },
 	copy_mode_inactive_highlight_bg = { Color = "#5B8576" },
-	copy_mode_inactive_highlight_fg = { Color = "#000000" },
+	copy_mode_inactive_highlight_fg = { Color = "#D0D0D0" },
 
 	quick_select_label_bg = { Color = "#C98B60" },
-	quick_select_label_fg = { Color = "#000000" },
+	quick_select_label_fg = { Color = "#D0D0D0" },
 	quick_select_match_bg = { Color = "#5B8576" },
-	quick_select_match_fg = { Color = "#000000" },
+	quick_select_match_fg = { Color = "#D0D0D0" },
 }

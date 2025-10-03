@@ -5,7 +5,7 @@ let cfg = config.dev.docker;
 in {
   config = mkIf cfg.enable {
     virtualisation.docker.enable = true;
-    users.users.loeffel.extraGroups = [ "docker" ];
+    users.users.nicokratschmer.extraGroups = [ "docker" ];
   };
 
 }

@@ -10,7 +10,7 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ ];
 
-    home-manager.users.loeffel = {
+    home-manager.users.nicokratschmer = {
       apps = {
         enable = mkDefault true;
         gaming.enable = mkDefault true;

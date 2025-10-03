@@ -20,7 +20,7 @@
   time.timeZone = "Europe/Berlin";
 
   services.displayManager.autoLogin.enable = false;
-  services.displayManager.autoLogin.user = "loeffel";
+  services.displayManager.autoLogin.user = "nicokratschmer";
 
   nixpkgs.config.allowUnfree = true;
   # Enable the OpenSSH daemon.

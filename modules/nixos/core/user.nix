@@ -1,5 +1,5 @@
 { config, pkgs, lib, ... }: {
-  users.users.loeffel = {
+  users.users.nicokratschmer = {
     isNormalUser = true;
     extraGroups = [ "networkmanager" "wheel" ];
   };

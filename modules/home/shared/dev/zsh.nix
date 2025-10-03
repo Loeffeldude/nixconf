@@ -16,6 +16,7 @@ in {
       initContent = lib.mkAfter "
         export PATH=\"$PATH:$HOME/.local/bin\"
         export PATH=\"$PATH:$HOME/.config/composer/vendor/bin\"
+        export PATH=\"$PATH:$HOME/go/bin\"
         ";
 
       oh-my-zsh = {
@@ -27,6 +28,8 @@ in {
       };
     };
 
+    programs.direnv.enable = true;
+    programs.direnv.enableZshIntegration = true;
   };
 }
 

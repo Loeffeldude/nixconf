@@ -40,7 +40,7 @@ in {
       wifi.powersave = true;
     };
 
-    # home-manager.users.loeffel = { desktop..enable = true; };
+    # home-manager.users.nicokratschmer = { desktop..enable = true; };
   };
 }
 

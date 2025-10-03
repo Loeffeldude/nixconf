@@ -1,7 +1,7 @@
 { pkgs, self, ... }: {
   imports = [ ../../modules/darwin ../../modules/home/darwin ];
 
-  networking.hostName = "vm"; # Define your hostname.
+  networking.hostName = "nicostartupwerk"; # Define your hostname.
   nix.settings.experimental-features = "nix-command flakes";
 
   # Set Git commit hash for darwin-version.
@@ -10,9 +10,9 @@
   dev.enable = true;
   home-manager.users.nicokratschmer.dev.enable = true;
   gaming.enable = false;
-  apps.enable = false;
+  apps.enable = true;
 
-  services.openssh.enable = true;
+  services.openssh.enable = false;
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;

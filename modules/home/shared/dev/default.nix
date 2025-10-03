@@ -9,6 +9,10 @@ in {
       type = lib.types.bool;
       default = true;
     };
+    go.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+    };
     rust.enable = lib.mkOption {
       type = lib.types.bool;
       default = true;
@@ -48,11 +52,11 @@ in {
     ./utilties.nix
     ./docker.nix
     ./k8s.nix
-
     # Langs
+    ./go.nix
     ./csharp.nix
     ./node.nix
-    ./php.nix
+    # ./php.nix
     ./python.nix
     ./rust.nix
     # Other

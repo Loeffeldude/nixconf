@@ -27,7 +27,7 @@
 
   # Disk is encrypted so we login automatically
   services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "loeffel";
+  services.displayManager.autoLogin.user = "nicokratschmer";
 
   nixpkgs.config.allowUnfree = true;
   # Enable the OpenSSH daemon.

@@ -1,6 +1,8 @@
 local uv = vim.loop
 local fs = vim.fs
 
+vim.lsp.enable("laravel_ls")
+
 return {
   {
     -- Remove phpcs linter.
@@ -39,6 +41,7 @@ return {
           },
         },
         pyright = {},
+        laravel_ls = {},
         pylsp = {
           settings = {
             pylsp = {

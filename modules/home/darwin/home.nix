@@ -2,11 +2,12 @@
   imports = [
     ../shared
     ./apps
+    ./dev
     ./wallpaper.nix
   ];
 
-  home.username = "loeffel";
-  home.homeDirectory = lib.mkForce "/Users/loeffel";
+  home.username = "nicokratschmer";
+  home.homeDirectory = lib.mkForce "/Users/nicokratschmer";
 
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage

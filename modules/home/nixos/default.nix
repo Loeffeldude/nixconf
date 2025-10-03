@@ -12,7 +12,7 @@
       useUserPackages = true;
       backupFileExtension = "backup";
       extraSpecialArgs.flake-inputs = flake-inputs;
-      users.loeffel = import ./home.nix;
+      users.nicokratschmer = import ./home.nix;
     };
   };
 }

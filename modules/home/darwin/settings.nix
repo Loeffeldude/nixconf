@@ -3,7 +3,7 @@
   #
   # TODO: I should probably split this up like I did in NixOS
   #
-  system.primaryUser = "loeffel";
+  system.primaryUser = "nicokratschmer";
 
 
   system.defaults = {
@@ -18,21 +18,21 @@
   # Swaps Command and CTRL
   # I am not relearning my muscle memory
   system.keyboard.userKeyMapping = [
-    {
-      HIDKeyboardModifierMappingSrc = 30064771296;
-      HIDKeyboardModifierMappingDst = 30064771299;
-    }
-    {
-      HIDKeyboardModifierMappingSrc = 30064771299;
-      HIDKeyboardModifierMappingDst = 30064771296;
-
-    }
+    # {
+    #   HIDKeyboardModifierMappingSrc = 30064771296;
+    #   HIDKeyboardModifierMappingDst = 30064771299;
+    # }
+    # {
+    #   HIDKeyboardModifierMappingSrc = 30064771299;
+    #   HIDKeyboardModifierMappingDst = 30064771296;
+    #
+    # }
   ];
 
   services.aerospace.enable = false;
 
   # User settings
-  home-manager.users.loeffel = {
+  home-manager.users.nicokratschmer = {
     targets.darwin.defaults = {
       "com.apple.menuextra.clock".Show24Hour = true;
       NSGlobalDomain = {

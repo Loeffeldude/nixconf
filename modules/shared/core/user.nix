@@ -1,5 +1,5 @@
 { config, pkgs, lib, ... }: {
-  users.users.loeffel = {
+  users.users.nicokratschmer = {
     description = "Nico Krätschmer";
     shell = pkgs.zsh;
   };

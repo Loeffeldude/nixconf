@@ -5,7 +5,7 @@
     ../../modules/nixos
   ];
   wsl.enable = true;
-  wsl.defaultUser = "loeffel";
+  wsl.defaultUser = "nicokratschmer";
   wsl.docker-desktop.enable = true;
 
   services.flatpak.enable = lib.mkForce false;

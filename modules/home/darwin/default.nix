@@ -9,13 +9,13 @@
   config = {
     dock = {
       enable = true;
-      username = "loeffel";
+      username = "nicokratschmer";
       entries = [
         {
-          path = "/Users/loeffel/Applications/Home Manager Apps/WezTerm.app";
+          path = "/Users/nicokratschmer/Applications/Home Manager Apps/WezTerm.app";
         }
         {
-          path = "/Users/loeffel/Applications/Home Manager Apps/Firefox.app";
+          path = "/Users/nicokratschmer/Applications/Home Manager Apps/Firefox.app";
         }
       ];
     };
@@ -25,7 +25,7 @@
       useUserPackages = true;
       backupFileExtension = "backup";
       extraSpecialArgs.flake-inputs = flake-inputs;
-      users.loeffel = import ./home.nix;
+      users.nicokratschmer = import ./home.nix;
     };
   };
 }
