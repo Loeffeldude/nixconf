@@ -1,4 +1,5 @@
 { config, upperConfig, lib, ... }: {
+
   imports = [
     ../shared
     ./apps
@@ -6,7 +7,6 @@
     ./dev
     ./utlities.nix
   ];
-
   options = {
     primaryUser = lib.mkOption {
       type = lib.types.str;
