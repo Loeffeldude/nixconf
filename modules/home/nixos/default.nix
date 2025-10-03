@@ -12,7 +12,8 @@
       useUserPackages = true;
       backupFileExtension = "backup";
       extraSpecialArgs.flake-inputs = flake-inputs;
-      users.nicokratschmer = import ./home.nix;
+      extraSpecialArgs.upperConfig = config;
+      users.${config.primaryUser} = import ./home.nix;
     };
   };
 }

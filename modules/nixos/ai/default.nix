@@ -21,7 +21,7 @@ in {
   };
   config = {
     home-manager = {
-      users.nicokratschmer.options.ai = {
+      users.${config.primaryUser}.options.ai = {
         enable = lib.mkDefault cfg.enable;
         ollama.enable = lib.mkOption {
           type = lib.types.bool;
