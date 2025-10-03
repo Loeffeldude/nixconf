@@ -4,6 +4,7 @@
     ./apps
     ./dev
     ./wallpaper.nix
+    ./karabiner.nix
     ./utilities.nix
     flake-inputs.mac-app-util.homeManagerModules.default
   ];
