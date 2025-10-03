@@ -1,5 +1,5 @@
 { config, pkgs, lib, ... }: {
-  users.users.loeffel = {
+  users.users.${config.primaryUser} = {
     isNormalUser = true;
     extraGroups = [ "networkmanager" "wheel" ];
   };

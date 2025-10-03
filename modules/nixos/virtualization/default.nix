@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   programs.virt-manager.enable = true;
   virtualisation.libvirtd = {
     enable = true;
@@ -14,7 +14,7 @@
   };
   virtualisation.spiceUSBRedirection.enable = true;
 
-  users.users.loeffel.extraGroups = [ "libvirtd" "qemu-libvirtd" ];
+  users.users.${config.primaryUser}.extraGroups = [ "libvirtd" "qemu-libvirtd" ];
 
   boot.kernel.sysctl."net.ipv4.ip_forward" =
     1; # 1. Enable IP forwarding (required for NAT)

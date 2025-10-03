@@ -22,8 +22,8 @@ in {
       "org/gnome/desktop/background" = {
         color-shading-type = "solid";
         picture-options = "zoom";
-        picture-uri = "/home/loeffel/.background-image-bright";
-        picture-uri-dark = "/home/loeffel/.background-image-dark";
+        picture-uri = "/home/${config.primaryUser}/.background-image-bright";
+        picture-uri-dark = "/home/${config.primaryUser}/.background-image-dark";
         primary-color = "#000000000000";
         secondary-color = "#000000000000";
       };
@@ -43,8 +43,8 @@ in {
       "org/gnome/desktop/screensaver" = {
         color-shading-type = "solid";
         picture-options = "zoom";
-        picture-uri-dark = "/home/loeffel/.background-image-dark";
-        picture-uri = "/home/loeffel/.background-image-bright";
+        picture-uri-dark = "/home/${config.primaryUser}/.background-image-dark";
+        picture-uri = "/home/${config.primaryUser}/.background-image-bright";
         primary-color = "#000000000000";
         secondary-color = "#000000000000";
       };

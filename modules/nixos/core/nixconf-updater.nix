@@ -8,7 +8,7 @@ let
     REPO_DIR=""
     
     # Check common locations
-    for dir in "/home/loeffel/nixconf" "/etc/nixos" "$(pwd)" "$HOME/.config/nixos" "$HOME/nixos-config"; do
+    for dir in "/home/${config.primaryUser}/nixconf" "/etc/nixos" "$(pwd)" "$HOME/.config/nixos" "$HOME/nixos-config"; do
         if [ -d "$dir/.git" ] && [ -f "$dir/flake.nix" ]; then
             # Verify this is actually the nixconf repo by checking for our modules
             if [ -d "$dir/modules/nixos/core" ]; then
@@ -113,10 +113,10 @@ in
       wantedBy = [ "graphical-session.target" ];
       serviceConfig = {
         Type = "oneshot";
-        User = "loeffel";
+        User = "${config.primaryUser}";
         Group = "users";
         ExecStart = "${updateScript}";
-        WorkingDirectory = "/home/loeffel/nixconf";
+        WorkingDirectory = "/home/${config.primaryUser}/nixconf";
         Environment = [ "DISPLAY=:0" ];
       };
     };

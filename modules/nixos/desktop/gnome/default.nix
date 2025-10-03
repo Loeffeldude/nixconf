@@ -115,7 +115,7 @@ in {
       openFirewall = true;
     };
 
-    home-manager.users.loeffel = { desktop.gnome.enable = true; };
+    home-manager.users.${config.primaryUser} = { desktop.gnome.enable = true; };
   };
 }
 

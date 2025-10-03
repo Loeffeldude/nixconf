@@ -9,7 +9,7 @@ in {
     enable = mkEnableOption "enable dev";
   };
   config = mkIf cfg.enable {
-    home-manager.users.loeffel = {
+    home-manager.users.${config.primaryUser} = {
       dev.enable = mkDefault true;
       apps = {
         enable = mkDefault true;

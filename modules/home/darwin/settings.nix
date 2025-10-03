@@ -1,9 +1,9 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   # Settings for making MacOS berable
   #
   # TODO: I should probably split this up like I did in NixOS
   #
-  system.primaryUser = "loeffel";
+  system.primaryUser = "${config.primaryUser}";
 
 
   system.defaults = {
@@ -32,7 +32,7 @@
   services.aerospace.enable = false;
 
   # User settings
-  home-manager.users.loeffel = {
+  home-manager.users.${config.primaryUser} = {
     targets.darwin.defaults = {
       "com.apple.menuextra.clock".Show24Hour = true;
       NSGlobalDomain = {

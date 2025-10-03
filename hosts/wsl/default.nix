@@ -1,11 +1,11 @@
-{ flake-inputs, pkgs, lib, ... }: {
+{ flake-inputs, pkgs, config, lib, ... }: {
   imports = [
     flake-inputs.nixos-wsl.nixosModules.default
     ../../modules/home/nixos
     ../../modules/nixos
   ];
   wsl.enable = true;
-  wsl.defaultUser = "loeffel";
+  wsl.defaultUser = "${config.primaryUser}";
   wsl.docker-desktop.enable = true;
 
   services.flatpak.enable = lib.mkForce false;

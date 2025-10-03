@@ -1,4 +1,4 @@
-{ pkgs, self, ... }: {
+{ pkgs, self, config, lib, ... }: {
   imports = [ ../../modules/darwin ../../modules/home/darwin ];
 
   networking.hostName = "vm"; # Define your hostname.
@@ -6,9 +6,9 @@
 
   # Set Git commit hash for darwin-version.
   # system.configurationRevision = self.rev or self.dirtyRev or null;
-
+  primaryUser = lib.mkForce "nicokraetschmer";
   dev.enable = true;
-  home-manager.users.loeffel.dev.enable = true;
+  home-manager.users.${config.primaryUser}.dev.enable = true;
   gaming.enable = false;
   apps.enable = false;
 
