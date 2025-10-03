@@ -4,6 +4,7 @@
   inputs = {
     # we live on the edge man
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    mac-app-util.url = "github:hraban/mac-app-util";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.6.0";

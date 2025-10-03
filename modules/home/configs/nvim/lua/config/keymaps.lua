@@ -4,8 +4,5 @@
 --
 
 vim.keymap.set("i", "<Tab>", function()
-  if require("cmp").visible() then
-    return require("cmp").confirm({ select = true })
-  end
-  return "<Tab>"
+  return vim.fn.pumvisible() == 1 and "<C-y>" or "<Tab>"
 end, { expr = true })

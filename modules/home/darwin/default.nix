@@ -25,5 +25,6 @@
       extraSpecialArgs.upperConfig = config;
       users.${config.primaryUser} = import ./home.nix;
     };
+
   };
 }

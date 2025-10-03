@@ -1,10 +1,11 @@
-{ config, lib, upperConfig, ... }: {
+{ config, lib, flake-inputs, upperConfig, ... }: {
   imports = [
     ../shared
     ./apps
     ./dev
     ./wallpaper.nix
     ./utilities.nix
+    flake-inputs.mac-app-util.homeManagerModules.default
   ];
 
   options = {
