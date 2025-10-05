@@ -86,14 +86,16 @@ table.insert(config.keys, {
 	action = wezterm.action.PaneSelect,
 })
 
--- Tab switching using Alt + number keys (works well for German layout)
--- for i = 1, 9 do
--- 	table.insert(config.keys, {
--- 		key = tostring(i),
--- 		mods = "ALT",
--- 		action = wezterm.action({ ActivateTab = i - 1 }),
--- 	})
--- end
+if wezterm.target_triple ~= "aarch64-apple-darwin" then
+	-- Tab switching using Alt + number keys (works well for German layout)
+	for i = 1, 9 do
+		table.insert(config.keys, {
+			key = tostring(i),
+			mods = "ALT",
+			action = wezterm.action({ ActivateTab = i - 1 }),
+		})
+	end
+end
 
 -- Next and previous tab navigation
 table.insert(config.keys, {

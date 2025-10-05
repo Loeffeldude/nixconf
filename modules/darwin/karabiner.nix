@@ -8,6 +8,6 @@
     })
   ];
 
-  services.karabiner-elements.enable = true;
+  services.karabiner-elements.enable = false;
 
 }

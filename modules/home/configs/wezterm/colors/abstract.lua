@@ -1,13 +1,13 @@
 return {
 	foreground = "#D0D0D0", -- Soft gray
-	background = "#1f1f1f", -- True black
+	background = "#131313", -- True black
 
 	cursor_bg = "#C98B60", -- Muted warm amber
 	cursor_fg = "#D0D0D0",
 	cursor_border = "#C98B60",
 
 	selection_fg = "#bababa",
-	selection_bg = "#1e1e1e", -- Soft muted blue-gray
+	selection_bg = "#2f2f2f", -- Soft muted blue-gray
 
 	scrollbar_thumb = "#2C2F3A", -- Subtle contrast
 	split = "#1F222D",

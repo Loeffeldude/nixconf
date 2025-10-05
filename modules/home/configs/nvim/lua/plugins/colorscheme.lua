@@ -24,8 +24,7 @@ return {
       },
     },
     config = function(_, opts)
-      require("rusty").setup(opts)
-      vim.cmd("colorscheme rusty")
+      -- require("rusty").setup(opts)
     end,
   },
   {
@@ -54,7 +53,6 @@ return {
       -- vim.cmd("colorscheme carbonfox") -- You can choose: nightfox, dayfox, dawnfox, duskfox, nordfox, terafox, carbonfox
     end,
   },
-
   {
     "rebelot/kanagawa.nvim",
     lazy = false,
