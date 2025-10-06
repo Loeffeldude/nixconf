@@ -14,6 +14,21 @@
         {
           path = "/Users/${config.primaryUser}/Applications/Home Manager Apps/WezTerm.app";
         }
+        {
+          path = "/Users/${config.primaryUser}/Applications/Home Manager Apps/Firefox.app";
+        }
+        {
+          path = "/Users/${config.primaryUser}/Applications/Home Manager Apps/Bitwarden.app";
+        }
+        {
+          path = "/Users/${config.primaryUser}/Applications/Home Manager Apps/Spotify.app";
+        }
+        {
+          path = "/Applications/Microsoft Outlook.app";
+        }
+        {
+          path = "/Applications/Microsoft Teams.app";
+        }
       ];
     };
 
