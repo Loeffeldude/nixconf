@@ -9,6 +9,6 @@ in {
     ./virtulaziton.nix
   ];
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ rectangle ];
+    home.packages = with pkgs; [ rectangle wireguard-tools ];
   };
 }

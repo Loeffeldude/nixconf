@@ -12,3 +12,8 @@ GEMINI.md
 shell.nix
 flake.nix
 .envrc
+
+#
+# PHP ls stuff
+.php-cs-fixer.cache
+.phpactor.json

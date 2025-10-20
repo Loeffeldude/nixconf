@@ -1,4 +1,4 @@
-{ pkgs, self, ... }: {
+{ pkgs, config, self, lib, ... }: {
   imports = [ ../../modules/darwin ../../modules/home/darwin ];
 
   networking.hostName = "nicostartupwerk"; # Define your hostname.
@@ -13,6 +13,11 @@
   apps.enable = true;
 
   services.openssh.enable = false;
+
+  home-manager.users.nicokratschmer.programs.git = {
+    userName = lib.mkForce "Nico Krätschmer";
+    userEmail = lib.mkForce "nico@startup-werk.de";
+  };
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;

@@ -1,7 +1,7 @@
 local uv = vim.loop
 local fs = vim.fs
 
-vim.lsp.enable("laravel_ls")
+-- vim.lsp.enable("laravel_ls")
 
 return {
   {
@@ -41,7 +41,7 @@ return {
           },
         },
         pyright = {},
-        laravel_ls = {},
+        -- laravel_ls = {},
         pylsp = {
           settings = {
             pylsp = {

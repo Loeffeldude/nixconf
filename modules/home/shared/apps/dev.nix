@@ -8,6 +8,7 @@ in {
       jetbrains.rider
       ghidra
       podman-desktop
+      dbeaver-bin
     ];
 
     home.file.".ideavimrc".source = ../../configs/.ideavimrc;

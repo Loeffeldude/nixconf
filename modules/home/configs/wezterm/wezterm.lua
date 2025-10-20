@@ -6,7 +6,7 @@ if wezterm.config_builder then
 end
 
 if wezterm.target_triple == "aarch64-apple-darwin" then
-	config.font = wezterm.font("JetBrains Mono")
+	config.font = wezterm.font("Space Mono")
 else
 	config.font = wezterm.font("Jetbrains Mono NF")
 end
@@ -40,6 +40,8 @@ local function list_projects()
 
 	return projects
 end
+
+config.freetype_load_target = "HorizontalLcd"
 
 local function open_project_in_new_tab(window, project_path)
 	local full_path = os.getenv("HOME") .. "/Documents/projects/" .. project_path .. "/"
@@ -80,6 +82,11 @@ end)
 config.colors = theme
 config.audible_bell = "Disabled"
 config.keys = {}
+
+if wezterm.target_triple == "aarch64-apple-darwin" then
+	table.insert(config.keys, { key = "/", mods = "SHIFT|ALT", action = wezterm.action({ SendString = "\\" }) })
+end
+
 table.insert(config.keys, {
 	key = "S",
 	mods = "CTRL|SHIFT",
