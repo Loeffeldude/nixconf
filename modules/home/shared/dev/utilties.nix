@@ -25,6 +25,7 @@
 
     # misc
     jq
+    yq
     cowsay
     file
     which
@@ -34,9 +35,13 @@
     gawk
     zstd
     gnupg
+    ripgrep
+    yaml2json
 
     htop
     iftop # network monitoring
 
+    posting
+    hurl
   ];
 }
