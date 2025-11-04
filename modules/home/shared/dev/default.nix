@@ -56,6 +56,7 @@ in {
     ./go.nix
     ./csharp.nix
     ./node.nix
+    ./reverse.nix
     # ./php.nix
     ./python.nix
     ./rust.nix

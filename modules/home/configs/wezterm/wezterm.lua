@@ -6,7 +6,7 @@ if wezterm.config_builder then
 end
 
 if wezterm.target_triple == "aarch64-apple-darwin" then
-	config.font = wezterm.font("Space Mono")
+	config.font = wezterm.font("Noto Mono")
 else
 	config.font = wezterm.font("Jetbrains Mono NF")
 end

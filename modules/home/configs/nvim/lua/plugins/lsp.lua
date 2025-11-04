@@ -42,17 +42,17 @@ return {
         },
         pyright = {},
         -- laravel_ls = {},
-        pylsp = {
-          settings = {
-            pylsp = {
-              plugins = {
-                rope_autoimport = {
-                  enabled = true,
-                },
-              },
-            },
-          },
-        },
+        -- pylsp = {
+        --   --   settings = {
+        --   --     pylsp = {
+        --   --       plugins = {
+        --   --         rope_autoimport = {
+        --   --           enabled = true,
+        --   --         },
+        --   --       },
+        --   --     },
+        --   --   },
+        --   -- },
         nil_ls = {
           settings = {
             ["nil"] = {
