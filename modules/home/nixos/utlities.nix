@@ -1,4 +1,4 @@
 { config, lib, pkgs, ... }: {
-  config.programs.pw-manager.pinentry = pkgs.pinentry;
+  config.programs.pw-manager.pinentry = pkgs.pinentry-curses;
 }
 

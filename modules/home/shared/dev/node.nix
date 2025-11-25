@@ -12,7 +12,6 @@ in {
       bun
 
       # Node.js dev tools
-      nodePackages.ts-node
       nodePackages.nodemon
       nodePackages.pm2
 

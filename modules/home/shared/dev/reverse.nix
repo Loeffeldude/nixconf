@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
+  home.packages = [
     (pkgs.writeShellScriptBin "reverse-tunnel" ''
       #!/usr/bin/env bash
 

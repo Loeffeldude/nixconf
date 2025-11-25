@@ -9,9 +9,9 @@ in {
 
     programs.git = {
       enable = true;
-      userName = "Loeffeldude";
-      userEmail = "kraetschmerni@gmail.com";
-      extraConfig = {
+      settings = {
+        user.name = "Loeffeldude";
+        user.email = "kraetschmerni@gmail.com";
         column.ui = "auto";
         branch.sort = "version:refname";
         tag.sort = "version:refname";
@@ -37,7 +37,8 @@ in {
           updateRefs = true;
         };
       };
-      delta.enable = true;
     };
+
+    programs.delta.enable = true;
   };
 }

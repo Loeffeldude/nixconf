@@ -14,7 +14,14 @@ in {
       ];
     };
 
-    home.packages = with pkgs; [ protonvpn-gui rustdesk blender ];
+    home.packages = with pkgs; [
+      protonvpn-gui
+      rustdesk
+      blender
+
+      wineWowPackages.stable
+      winetricks
+    ];
   };
 }
 

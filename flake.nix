@@ -55,7 +55,16 @@
           ./hosts/wsl
         ];
       };
+      live = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { flake-inputs = inputs; };
+        modules = [
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+          ./hosts/live
+        ];
+      };
     };
+
     darwinConfigurations =
       {
         vm = darwin.lib.darwinSystem
