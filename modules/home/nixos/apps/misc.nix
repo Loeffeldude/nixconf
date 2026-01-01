@@ -18,7 +18,6 @@ in {
       protonvpn-gui
       rustdesk
       blender
-
       wineWowPackages.stable
       winetricks
     ];

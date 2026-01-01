@@ -40,7 +40,6 @@ in {
       gnomeExtensions.appindicator
       gnomeExtensions.dash-to-dock
       gnomeExtensions.native-window-placement
-      gnomeExtensions.screenshot-tool
       gnomeExtensions.window-list
       gnomeExtensions.applications-menu
       gnomeExtensions.gsconnect # KDE Connect implementation

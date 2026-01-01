@@ -16,48 +16,45 @@
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
+    nix-alien.url = "github:thiagokokada/nix-alien";
+
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, darwin, nixos-wsl, ... }: {
-
-
-
     nixosConfigurations = {
-      qemu = nixpkgs.lib.nixosSystem {
+      qemu = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
-        specialArgs = { flake-inputs = inputs; };
+        specialArgs = { inherit self system; flake-inputs = inputs; };
         modules = [ ./hosts/qemu/default.nix ];
       };
 
-      t500 = nixpkgs.lib.nixosSystem {
+      t500 = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
-        specialArgs = { flake-inputs = inputs; };
+        specialArgs = { inherit self system; flake-inputs = inputs; };
         modules = [ ./hosts/t500/default.nix ];
       };
 
-      t15 = nixpkgs.lib.nixosSystem {
+      t15 = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
-        specialArgs = {
-          flake-inputs = inputs;
-        };
+        specialArgs = { inherit self system; flake-inputs = inputs; };
         modules = [ ./hosts/t15/default.nix ];
       };
-      ms7e57 = nixpkgs.lib.nixosSystem {
+      ms7e57 = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
-        specialArgs = { flake-inputs = inputs; };
+        specialArgs = { inherit self system; flake-inputs = inputs; };
         modules = [ ./hosts/ms7e57/default.nix ];
       };
-      wsl = nixpkgs.lib.nixosSystem {
+      wsl = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
-        specialArgs = { flake-inputs = inputs; };
+        specialArgs = { inherit self system; flake-inputs = inputs; };
         modules = [
           ./hosts/wsl
         ];
       };
-      live = nixpkgs.lib.nixosSystem {
+      live = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
-        specialArgs = { flake-inputs = inputs; };
+        specialArgs = { inherit self system; flake-inputs = inputs; };
         modules = [
           "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
           ./hosts/live
