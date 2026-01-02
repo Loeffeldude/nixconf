@@ -16,7 +16,7 @@ in {
 
     home.packages = with pkgs; [
       protonvpn-gui
-      rustdesk
+      # rustdesk
       blender
       wineWowPackages.stable
       winetricks

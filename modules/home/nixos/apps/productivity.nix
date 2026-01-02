@@ -7,7 +7,6 @@ in {
     services.flatpak = {
       enable = true;
       packages = [
-        "com.nextcloud.desktopclient.nextcloud"
         "md.obsidian.Obsidian"
         "net.xm1math.Texmaker"
         "com.google.Chrome"

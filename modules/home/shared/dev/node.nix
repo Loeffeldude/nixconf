@@ -10,6 +10,7 @@ in {
       yarn
       pnpm
       bun
+      deno
 
       # Node.js dev tools
       nodePackages.nodemon

@@ -26,6 +26,7 @@ in {
         ];
         theme = "intheloop";
       };
+      dotDir = config.home.homeDirectory;
     };
 
     programs.direnv.enable = true;

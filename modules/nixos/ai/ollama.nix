@@ -14,9 +14,9 @@ in {
 
     services.ollama = {
       enable = true;
-      acceleration =
-        if cfg.nvidia then "cuda" else "rocm";
-      loadModels = [ "gpt-oss:20b" "deepseek-r1:8b" ];
+      package =
+        if cfg.nvidia then pkgs.ollama-cuda else pkgs.ollama-vulkan;
     };
   };
 }
+  
