@@ -1,7 +1,7 @@
 return {
   -- Disable indent animations
   {
-    "echasnovski/mini.indentscope",
+    "nvim-mini/mini.indentscope",
     opts = {
       -- animation = false,  -- this was wrong
       draw = {
@@ -28,7 +28,7 @@ return {
 
   -- Disable animations for windows/splits
   {
-    "echasnovski/mini.animate",
+    "nvim-mini/mini.animate",
     enabled = false,
   },
 }

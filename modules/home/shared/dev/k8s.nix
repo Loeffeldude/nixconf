@@ -10,6 +10,7 @@ in {
       kubernetes-helm
       kubectx
       k9s
+      awscli2
       fluxcd
       kubeseal
     ];

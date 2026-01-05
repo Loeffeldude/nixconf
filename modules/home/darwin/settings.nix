@@ -29,7 +29,7 @@
     # }
   ];
 
-  services.aerospace.enable = true;
+  services.aerospace.enable = false;
   services.aerospace.settings =
     let
       wezterm = pkgs.wezterm;
@@ -62,16 +62,16 @@
 
         alt-shift-space = "layout floating tiling";
 
-        alt-1 = "workspace 1";
-        alt-2 = "workspace 2";
-        alt-3 = "workspace 3";
-        alt-4 = "workspace 4";
-        alt-5 = "workspace 5";
-        alt-6 = "workspace 6";
-        alt-7 = "workspace 7";
-        alt-8 = "workspace 8";
-        alt-9 = "workspace 9";
-        alt-0 = "workspace 10";
+        ctrl-1 = "workspace 1";
+        ctrl-2 = "workspace 2";
+        ctrl-3 = "workspace 3";
+        ctrl-4 = "workspace 4";
+        ctrl-5 = "workspace 5";
+        ctrl-6 = "workspace 6";
+        ctrl-7 = "workspace 7";
+        ctrl-8 = "workspace 8";
+        ctrl-9 = "workspace 9";
+        ctrl-0 = "workspace 10";
 
         alt-shift-1 = "move-node-to-workspace 1";
         alt-shift-2 = "move-node-to-workspace 2";
@@ -92,13 +92,10 @@
       workspace-to-monitor-force-assignment = {
         "1" = 1;
         "2" = 1;
-        "3" = 1;
+        "3" = 2;
         "4" = 2;
-        "5" = 2;
-        "6" = 2;
-        "7" = 3;
-        "8" = 3;
-        "9" = 3;
+        "5" = 3;
+        "6" = 3;
       };
 
       mode.resize.binding = {

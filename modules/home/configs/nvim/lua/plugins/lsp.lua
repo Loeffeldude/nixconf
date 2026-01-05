@@ -1,11 +1,8 @@
 local uv = vim.loop
 local fs = vim.fs
 
--- vim.lsp.enable("laravel_ls")
-
 return {
   {
-    -- Remove phpcs linter.
     "mfussenegger/nvim-lint",
     optional = true,
     opts = {
@@ -41,6 +38,15 @@ return {
           },
         },
         pyright = {},
+        phpactor = {
+          enabled = false,
+        },
+        intelephense = {
+          enabled = true,
+          settings = {},
+          cmd = { "intelephense", "--stdio" },
+          filetypes = { "php" },
+        },
         -- laravel_ls = {},
         -- pylsp = {
         --   --   settings = {

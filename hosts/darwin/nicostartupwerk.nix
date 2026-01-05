@@ -15,8 +15,8 @@
   services.openssh.enable = false;
 
   home-manager.users.nicokratschmer.programs.git = {
-    userName = lib.mkForce "Nico Krätschmer";
-    userEmail = lib.mkForce "nico@startup-werk.de";
+    settings.user.name = lib.mkForce "Nico Krätschmer";
+    settings.user.email = lib.mkForce "nico@startup-werk.de";
   };
 
   nixpkgs.config.allowUnfree = true;
