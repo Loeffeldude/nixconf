@@ -1,10 +1,15 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, flake-inputs, system, ... }: {
   # I see NixOS as a way to have a config i can slap on a system and have my setup exactly the way i like it
   # running binaries not packaged for nix is a pain i learned and altough i could just steam-run everything
   # this is much simpler
   #
   # Reproducibility is not my main if i have to tinker a little bit it's fine
   # having to tinker with every binary i want to run? no thank you
+
+  environment.systemPackages = with flake-inputs.nix-alien.packages.${system}; [
+    nix-alien
+  ];
+
   programs.nix-ld.enable = true;
   programs.nix-ld = {
 
@@ -107,7 +112,6 @@
 
     ];
   };
-
   services = {
     envfs = {
       enable = true;

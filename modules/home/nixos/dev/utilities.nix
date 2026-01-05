@@ -7,7 +7,6 @@ in {
     home.packages = with pkgs; [
       iotop
       strace # system call monitoring
-      ltrace # library call monitoring
       lsof # list open files
       xclip
       # system tools
