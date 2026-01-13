@@ -2,7 +2,9 @@
   "$schema": "https://opencode.ai/config.json",
   "theme": "opencode",
   "model": "anthropic/claude-sonnet-4-5",
-  "plugin": ["opencode-anthropic-auth@0.0.7"],
+  "plugin": [
+    "file://home/nicostartupwerk/.config/opencode/plugin/opencode-anthropic-auth/index.mjs",
+  ],
   "small_model": "anthropic/claude-haiku-4-5",
   "provider": {
     "ollama": {
