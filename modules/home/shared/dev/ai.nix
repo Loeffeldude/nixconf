@@ -91,8 +91,8 @@ in
       cp -f ~/.config/opencode/nixtools/* ~/.config/opencode/tool/
       chmod 600 ~/.config/opencode/tool/*
       
-      rm -f ~/config/opencode/package.json
-      cp ~/config/opencode/package.json.tmp ~/config/opencode/package.json
+      rm -f ~/.config/opencode/package.json
+      cp ~/.config/opencode/package.json.tmp ~/.config/opencode/package.json
 
       rm -rf ~/.config/opencode/plugin/opencode-anthropic-auth
       mkdir -p ~/.config/opencode/plugin/opencode-anthropic-auth

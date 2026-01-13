@@ -21,7 +21,12 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, darwin, nixos-wsl, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, darwin, nixos-wsl, ... }: 
+  let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+  in
+  {
     nixosConfigurations = {
       qemu = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
@@ -59,6 +64,22 @@
           "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
           ./hosts/live
         ];
+      };
+      docker = nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+        specialArgs = { inherit self system; flake-inputs = inputs; };
+        modules = [ ./hosts/docker/default.nix ];
+      };
+    };
+
+    packages.${system} = {
+      dockerImage = pkgs.dockerTools.buildLayeredImage {
+        name = "nixos-container";
+        tag = "latest";
+        contents = [ self.nixosConfigurations.docker.config.system.build.toplevel ];
+        config = {
+          Cmd = [ "${self.nixosConfigurations.docker.config.system.build.toplevel}/init" ];
+        };
       };
     };
 
