@@ -1,0 +1,68 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    if: github.repository == 'Loeffeldude/nixconf'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v25
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Docker image
+        run: |
+          nix build .#dockerImage
+          docker load < result
+
+      - name: Log in to Container Registry
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          registry: cr.lffl.me
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Extract metadata
+        id: meta
+        run: |
+          IMAGE_NAME="nixos-container"
+          COMMIT_SHA="${{ github.sha }}"
+          echo "image_name=${IMAGE_NAME}" >> $GITHUB_OUTPUT
+          echo "short_sha=${COMMIT_SHA:0:7}" >> $GITHUB_OUTPUT
+
+      - name: Tag and push image
+        if: github.event_name != 'pull_request'
+        run: |
+          IMAGE_NAME="${{ steps.meta.outputs.image_name }}"
+          SHORT_SHA="${{ steps.meta.outputs.short_sha }}"
+
+          docker tag ${IMAGE_NAME}:latest cr.lffl.me/${IMAGE_NAME}:latest
+          docker tag ${IMAGE_NAME}:latest cr.lffl.me/${IMAGE_NAME}:${SHORT_SHA}
+
+          docker push cr.lffl.me/${IMAGE_NAME}:latest
+          docker push cr.lffl.me/${IMAGE_NAME}:${SHORT_SHA}
+
+          echo "Pushed cr.lffl.me/${IMAGE_NAME}:latest"
+          echo "Pushed cr.lffl.me/${IMAGE_NAME}:${SHORT_SHA}"

@@ -30,7 +30,7 @@
   ai.ollama =
     {
       enable = true;
-      nvidia = false;
+      nvidia = true;
     };
 
   services.flatpak.enable = true;
