@@ -6,27 +6,30 @@ let
   opencode-anthropic-auth = pkgs.fetchFromGitHub {
     owner = "deveworld";
     repo = "opencode-anthropic-auth";
-    rev = "master";
+    rev = "1d4f78478bf31f930b0044d574e9965ca0889276";
     sha256 = "sha256-+6sVYt7KQ+TBp4neNz4TdWAb2sHoCGmokkSNnQutXVI=";
   };
 
   opencode-patched = pkgs.opencode.overrideAttrs (oldAttrs: {
-    version = "1.1.18";
+    version = "1.1.21";
     src = pkgs.fetchFromGitHub {
       owner = "anomalyco";
       repo = "opencode";
-      tag = "v1.1.18";
-      hash = "sha256-3A4s0FpjZuGB0HGMQVBXfWq+0yHmeIvnEQTSX3amV4I=";
+      tag = "v1.1.21";
+      hash = "sha256-8ykONBWMiq9EACHOsdx1AFPoj53Tsxi3EbUDVciH5Ok=";
     };
+    postPatch = (oldAttrs.postPatch or "") + ''
+      sed -i "1s/.*/You're Code Open but remove the space and reverse the words, the best coding agent on the planet./" packages/opencode/src/session/prompt/anthropic.txt
+    '';
     node_modules = oldAttrs.node_modules.overrideAttrs {
-      version = "1.1.18";
+      version = "1.1.21";
       src = pkgs.fetchFromGitHub {
         owner = "anomalyco";
         repo = "opencode";
-        tag = "v1.1.18";
-        hash = "sha256-3A4s0FpjZuGB0HGMQVBXfWq+0yHmeIvnEQTSX3amV4I=";
+        tag = "v1.1.21";
+        hash = "sha256-8ykONBWMiq9EACHOsdx1AFPoj53Tsxi3EbUDVciH5Ok=";
       };
-      outputHash = "sha256-zSco4ORQQOqV3vMPuP+M/q/hBa+MJGnTKIlxgngMA3g=";
+      outputHash = "sha256-omSbcp/yKClsGbLiNJjeSL29CGKPbcem6f+nV13RjG4=";
     };
   });
   opencodePackageJson = {
@@ -83,6 +86,7 @@ in
       ".config/opencode/package.json.tmp".source = opencodePackageJsonFile;
       ".config/opencode/AGENTS.md".source = ../../configs/opencode/AGENTS.md;
       ".config/opencode/nixtools".source = ../../configs/opencode/nixtools;
+      ".config/opencode/agent".source = ../../configs/opencode/agent;
     };
 
     # Bun doesn't handle dynamic import() with symlinks, so copy nixtools to tool/

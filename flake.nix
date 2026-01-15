@@ -10,9 +10,11 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.6.0";
 
+
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -67,7 +69,6 @@
         vm = darwin.lib.darwinSystem
           {
             modules = [ ./hosts/darwin/vm.nix ];
-
             specialArgs = {
               flake-inputs = inputs;
               self = self;
@@ -76,7 +77,6 @@
         nicostartupwerk = darwin.lib.darwinSystem
           {
             modules = [ ./hosts/darwin/nicostartupwerk.nix ];
-
             specialArgs = {
               flake-inputs = inputs;
               self = self;

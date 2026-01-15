@@ -61,6 +61,7 @@ in {
     ./python.nix
     ./rust.nix
     # Other
+    ./just.nix
     ./gamedev
   ];
 }
