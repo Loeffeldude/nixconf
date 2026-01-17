@@ -44,6 +44,9 @@ let
     model = "anthropic/claude-sonnet-4-5";
     plugin = [
       "file://${config.home.homeDirectory}/.config/opencode/plugin/opencode-anthropic-auth/index.mjs"
+      "@simonwjackson/opencode-direnv"
+      "@zenobius/opencode-background"
+      "envsitter-guard@latest"
     ];
     small_model = "anthropic/claude-haiku-4-5";
     provider = {
