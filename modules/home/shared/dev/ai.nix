@@ -98,9 +98,10 @@ in
       rm -f ~/.config/opencode/package.json
       cp ~/.config/opencode/package.json.tmp ~/.config/opencode/package.json
 
-      rm -rf ~/.config/opencode/plugin/opencode-anthropic-auth
+      rm -rf ~/.config/opencode/plugin/opencode-anthropic-auth 2>/dev/null || true
       mkdir -p ~/.config/opencode/plugin/opencode-anthropic-auth
       cp -r ${opencode-anthropic-auth}/* ~/.config/opencode/plugin/opencode-anthropic-auth/
+      chmod -R u+rwX ~/.config/opencode/plugin/opencode-anthropic-auth/
     '';
 
     home.sessionVariables = {

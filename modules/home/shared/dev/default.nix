@@ -9,6 +9,10 @@ in {
       type = lib.types.bool;
       default = true;
     };
+    elixir.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+    };
     go.enable = lib.mkOption {
       type = lib.types.bool;
       default = true;
@@ -60,6 +64,7 @@ in {
     # ./php.nix
     ./python.nix
     ./rust.nix
+    ./elixir.nix
     # Other
     ./just.nix
     ./gamedev

@@ -68,7 +68,19 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
 
+  users.users.${config.primaryUser}.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIZWr6Kg8Fpc6Tb2ynywRwkNTssOy4gMSMOXt9bVAYsH"
+  ];
+
+  services.openssh = {
+    enable = true;
+    settings = {
+      X11Forwarding = true;
+      PermitRootLogin = "no";
+      AllowUsers = [ config.primaryUser ];
+      PasswordAuthentication = false;
+    };
+  };
 
   networking.firewall.enable = false;
-
 }
