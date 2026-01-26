@@ -29,6 +29,13 @@ in {
       dotDir = config.home.homeDirectory;
     };
 
+    home.file.".config/direnv/direnv.toml".text = ''
+      [global]
+      disable_stdin = true
+      [whitelist]
+      prefix = ["${config.home.homeDirectory}/Documents/projects/loeffel","${config.home.homeDirectory}/Documents/projects/work"]
+    '';
+
     programs.direnv.enable = true;
     programs.direnv.enableZshIntegration = true;
   };

@@ -1,13 +1,17 @@
-{ flake-inputs, ... }:
+{ flake-inputs, pkgs, ... }:
 {
 
-  nixpkgs.overlays = [
-    (_: prev: {
-      # https://github.com/LnL7/nix-darwin/issues/1041
-      inherit (flake-inputs.nixpkgs-stable.legacyPackages.${prev.system}) karabiner-elements;
-    })
-  ];
+  services.karabiner-elements = {
+    enable = true;
+    package = pkgs.karabiner-elements.overrideAttrs (old: {
+      version = "14.13.0";
 
-  services.karabiner-elements.enable = false;
+      src = pkgs.fetchurl {
+        inherit (old.src) url;
+        hash = "sha256-gmJwoht/Tfm5qMecmq1N6PSAIfWOqsvuHU8VDJY8bLw=";
+      };
 
+      dontFixup = true;
+    });
+  };
 }

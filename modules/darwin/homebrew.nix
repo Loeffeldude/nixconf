@@ -17,6 +17,7 @@
       "taskbar"
       "alt-tab"
       "xquartz"
+      "font-hack-nerd-font"
     ];
   };
 }
