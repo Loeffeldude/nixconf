@@ -25,7 +25,8 @@
   gaming.enable = true;
   dev.enable = true;
   apps.enable = true;
-  desktop.gnome.enable = true;
+  desktop.gnome.enable = false;
+  desktop.hyprland.enable = true;
   ai.enable = true;
   ai.ollama =
     {

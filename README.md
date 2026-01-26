@@ -7,20 +7,18 @@ For MacOS, NixOS and WSL.
 
 ## Getting Started
 
-Use the `Makefile` to simplify common operations. The `HOST` variable is automatically set to your system's hostname, but you can override it if needed.
+Use the `justfile` to simplify common operations. The `HOST` variable is automatically set to your system's hostname.
+
+Run `just --list` to see all available recipes.
 
 ### Applying the Configuration
 
-#### NixOS
+#### NixOS or MacOS
+
+The `switch` recipe automatically detects your OS:
 
 ```sh
-make switch
-```
-
-#### MacOS
-
-```sh
-make darwin-switch
+just switch
 ```
 
 #### WSL
@@ -31,7 +29,7 @@ You need an existing Nix installation.
 Run to build the WSL Image:
 
 ```sh
-make build-wsl
+just build-wsl
 ```
 
 Your build file is under dist/nixos.wsl
@@ -39,7 +37,7 @@ Your build file is under dist/nixos.wsl
 For an existing NixOS WSL installation:
 
 ```sh
-make switch
+just switch
 ```
 
 ### Updating Flake Inputs
@@ -47,9 +45,11 @@ make switch
 To update the flake's inputs, run:
 
 ```sh
-make update
+just update
 ```
 
 ### Other Useful Commands
 
-- `make dump-hardware-config`: Dumps the hardware configuration to the appropriate host directory.
+- `just build`: Build the configuration without switching
+- `just test`: Test the configuration (temporary activation)
+- `just dump-hardware-config`: Generate hardware configuration for current host

@@ -1,1 +1,1 @@
-{ ... }: { imports = [ ./gnome/default.nix ./kde]; }
+{ ... }: { imports = [ ./gnome/default.nix ./kde ./hyprland]; }

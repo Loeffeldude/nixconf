@@ -1,0 +1,196 @@
+* {
+  font-family: "SF Pro", "Hack Nerd Font", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+}
+
+window#waybar {
+  background: rgba(19, 19, 19, 0.85);
+}
+
+#workspaces,
+#taskbar,
+#clock,
+#mpris,
+#cpu,
+#memory,
+#battery,
+#wireplumber,
+#tray {
+  background: rgba(40, 40, 40, 0.5);
+  color: #D0D0D0;
+  border: none;
+  border-radius: 6px;
+  padding: 3px 10px;
+  margin: 3px 2px;
+  transition: all 0.2s ease;
+}
+
+#workspaces {
+  padding: 2px 4px;
+  margin-left: 4px;
+}
+
+#workspaces button {
+  padding: 2px 10px;
+  border-radius: 4px;
+  background: transparent;
+  color: #909090;
+  border: none;
+  margin: 1px 2px;
+  transition: all 0.2s ease;
+  min-width: 24px;
+}
+
+#workspaces button:hover {
+  background: rgba(70, 70, 70, 0.5);
+  color: #C0C0C0;
+}
+
+#workspaces button.active {
+  background: rgba(201, 139, 96, 0.25);
+  color: #C98B60;
+  font-weight: 500;
+}
+
+#workspaces button.urgent {
+  background: rgba(176, 117, 109, 0.4);
+  color: #FF6B6B;
+}
+
+#taskbar {
+  padding: 4px 6px;
+  margin-left: 8px;
+}
+
+#taskbar button {
+  padding: 6px 12px;
+  border-radius: 10px;
+  background: rgba(60, 60, 60, 0.4);
+  color: #B0B0B0;
+  border: none;
+  margin: 2px 3px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#taskbar button:hover {
+  background: rgba(80, 80, 80, 0.6);
+  color: #D0D0D0;
+}
+
+#taskbar button.active {
+  background: rgba(201, 139, 96, 0.25);
+  color: #C98B60;
+  box-shadow: 0 0 12px rgba(201, 139, 96, 0.2);
+}
+
+#taskbar button.urgent {
+  background: rgba(176, 117, 109, 0.4);
+  color: #FF6B6B;
+}
+
+#clock {
+  color: #C98B60;
+  font-weight: 600;
+  background: linear-gradient(135deg, rgba(201, 139, 96, 0.15) 0%, rgba(181, 119, 76, 0.15) 100%);
+}
+
+#clock:hover {
+  background: linear-gradient(135deg, rgba(201, 139, 96, 0.25) 0%, rgba(181, 119, 76, 0.25) 100%);
+}
+
+#mpris {
+  color: #D0D0D0;
+  min-width: 200px;
+}
+
+#mpris:hover {
+  background: linear-gradient(135deg, rgba(60, 60, 60, 0.8) 0%, rgba(50, 50, 50, 0.8) 100%);
+}
+
+#mpris.paused {
+  color: #909090;
+}
+
+#cpu {
+  color: #5A8E99;
+}
+
+#cpu:hover {
+  background: linear-gradient(135deg, rgba(90, 142, 153, 0.15) 0%, rgba(70, 122, 133, 0.15) 100%);
+}
+
+#memory {
+  color: #5B8576;
+}
+
+#memory:hover {
+  background: linear-gradient(135deg, rgba(91, 133, 118, 0.15) 0%, rgba(71, 113, 98, 0.15) 100%);
+}
+
+#battery {
+  color: #C4AA76;
+}
+
+
+
+#battery.charging {
+  color: #5B8576;
+  background: linear-gradient(135deg, rgba(91, 133, 118, 0.15) 0%, rgba(71, 113, 98, 0.15) 100%);
+}
+
+#battery.warning:not(.charging) {
+  color: #E5C07B;
+  background: linear-gradient(135deg, rgba(229, 192, 123, 0.15) 0%, rgba(209, 172, 103, 0.15) 100%);
+}
+
+#battery.critical:not(.charging) {
+  color: #FF6B6B;
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.2) 0%, rgba(235, 87, 87, 0.2) 100%);
+}
+
+#wireplumber {
+  color: #A88BAE;
+}
+
+#wireplumber:hover {
+  background: linear-gradient(135deg, rgba(168, 139, 174, 0.15) 0%, rgba(148, 119, 154, 0.15) 100%);
+}
+
+#wireplumber.muted {
+  color: #808080;
+  background: rgba(60, 60, 60, 0.5);
+}
+
+#tray {
+  padding: 6px 12px;
+}
+
+#tray:hover {
+  background: linear-gradient(135deg, rgba(60, 60, 60, 0.8) 0%, rgba(50, 50, 50, 0.8) 100%);
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: rgba(201, 139, 96, 0.2);
+}
+
+tooltip {
+  background: rgba(30, 30, 30, 0.95);
+  border: 1px solid rgba(201, 139, 96, 0.3);
+  border-radius: 10px;
+  color: #D0D0D0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+tooltip label {
+  color: #D0D0D0;
+  padding: 6px 10px;
+}

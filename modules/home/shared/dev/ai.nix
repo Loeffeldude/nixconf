@@ -89,10 +89,11 @@ in
       ".config/opencode/package.json.tmp".source = opencodePackageJsonFile;
       ".config/opencode/AGENTS.md".source = ../../configs/opencode/AGENTS.md;
       ".config/opencode/nixtools".source = ../../configs/opencode/nixtools;
+      ".config/opencode/nixplugin".source = ../../configs/opencode/plugin;
       ".config/opencode/agent".source = ../../configs/opencode/agent;
     };
 
-    # Bun doesn't handle dynamic import() with symlinks, so copy nixtools to tool/
+    # Bun doesn't handle dynamic import() with symlinks, so copy nixtools to tool/ and nixplugin to plugin/
     home.activation.setupOpencodeTools = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       mkdir -p ~/.config/opencode/tool
       cp -f ~/.config/opencode/nixtools/* ~/.config/opencode/tool/
@@ -105,6 +106,11 @@ in
       mkdir -p ~/.config/opencode/plugin/opencode-anthropic-auth
       cp -r ${opencode-anthropic-auth}/* ~/.config/opencode/plugin/opencode-anthropic-auth/
       chmod -R u+rwX ~/.config/opencode/plugin/opencode-anthropic-auth/
+      
+      if [ -d ~/.config/opencode/nixplugin ]; then
+        cp -f ~/.config/opencode/nixplugin/* ~/.config/opencode/plugin/
+        chmod 600 ~/.config/opencode/plugin/*.ts 2>/dev/null || true
+      fi
     '';
 
     home.sessionVariables = {
