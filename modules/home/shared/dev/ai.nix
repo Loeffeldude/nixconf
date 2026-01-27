@@ -40,7 +40,7 @@ let
   };
   opencodeConfig = {
     "$schema" = "https://opencode.ai/config.json";
-    theme = "opencode";
+    theme = "rusty";
     model = "anthropic/claude-sonnet-4-5";
     plugin = [
       "file://${config.home.homeDirectory}/.config/opencode/plugin/opencode-anthropic-auth/index.mjs"
@@ -91,6 +91,7 @@ in
       ".config/opencode/nixtools".source = ../../configs/opencode/nixtools;
       ".config/opencode/nixplugin".source = ../../configs/opencode/plugin;
       ".config/opencode/agent".source = ../../configs/opencode/agent;
+      ".config/opencode/themes".source = ../../configs/opencode/themes;
     };
 
     # Bun doesn't handle dynamic import() with symlinks, so copy nixtools to tool/ and nixplugin to plugin/

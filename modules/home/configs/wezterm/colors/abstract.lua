@@ -1,19 +1,19 @@
 return {
 	foreground = "#c5c8c6",
-	background = "#1d1f21",
+	background = "#0f0f0f",
 
-	cursor_bg = "#81a2be",
-	cursor_fg = "#c5c8c6",
-	cursor_border = "#81a2be",
+	cursor_bg = "#de935f",
+	cursor_fg = "#0f0f0f",
+	cursor_border = "#de935f",
 
 	selection_fg = "#c5c8c6",
 	selection_bg = "#373b41",
 
 	scrollbar_thumb = "#4d5057",
-	split = "#282a2e",
+	split = "#1d1f21",
 
 	ansi = {
-		"#1d1f21", -- Black
+		"#0f0f0f", -- Black
 		"#cc6666", -- Red
 		"#b5bd68", -- Green
 		"#f0c674", -- Yellow
@@ -33,13 +33,13 @@ return {
 		"#ffffff", -- Bright white
 	},
 
-	copy_mode_active_highlight_bg = { Color = "#81a2be" },
-	copy_mode_active_highlight_fg = { Color = "#c5c8c6" },
+	copy_mode_active_highlight_bg = { Color = "#de935f" },
+	copy_mode_active_highlight_fg = { Color = "#0f0f0f" },
 	copy_mode_inactive_highlight_bg = { Color = "#b5bd68" },
 	copy_mode_inactive_highlight_fg = { Color = "#c5c8c6" },
 
-	quick_select_label_bg = { Color = "#81a2be" },
-	quick_select_label_fg = { Color = "#c5c8c6" },
+	quick_select_label_bg = { Color = "#de935f" },
+	quick_select_label_fg = { Color = "#0f0f0f" },
 	quick_select_match_bg = { Color = "#b5bd68" },
 	quick_select_match_fg = { Color = "#c5c8c6" },
 }

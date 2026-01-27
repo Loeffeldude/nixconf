@@ -1,9 +1,11 @@
 # Define colors from Rusty theme
-export BG="0xff1d1f21"
+export BG="0xff0f0f0f"
+export PANEL="0xff1d1f21"
 export FG="0xffc5c8c6"
-export ACCENT="0xff81a2be"
+export ACCENT="0xffde935f"
 export SELECTION="0xff373b41"
 export RED="0xffcc6666"
+export ORANGE="0xffde935f"
 export GREEN="0xffb5bd68"
 export YELLOW="0xfff0c674"
 export BLUE="0xff81a2be"
@@ -38,7 +40,7 @@ sketchybar --default icon.font="Hack Nerd Font:Bold:14.0" \
                     padding_left=5 \
                     padding_right=5 \
                     blur_radius=30 \
-                    background.color=$BG \
+                    background.color=$PANEL \
                     background.border_color=$ACCENT \
                     background.border_width=1 \
                     background.corner_radius=8 \

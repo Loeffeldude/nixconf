@@ -32,7 +32,7 @@ in {
         ];
         
         exec-once = [
-          "waybar"
+          "eww daemon && eww open bar0 && eww open bar1"
           "dunst"
           "hyprpaper"
         ];
@@ -40,14 +40,14 @@ in {
         env = [
           "XCURSOR_THEME,Yaru"
           "XCURSOR_SIZE,24"
-          "GTK_THEME,Adwaita-dark"
+          "GTK_THEME,Yaru-blue-dark"
         ];
         
         general = {
           gaps_in = 8;
           gaps_out = "8,36,8,8";
           border_size = 1;
-          "col.active_border" = "rgba(81a2beaa)";
+          "col.active_border" = "rgba(de935faa)";
           "col.inactive_border" = "rgba(4d505780)";
           layout = "dwindle";
           resize_on_border = true;
@@ -68,7 +68,7 @@ in {
             enabled = true;
             range = 4;
             render_power = 3;
-            color = "rgba(1d1f21ee)";
+            color = "rgba(0f0f0fee)";
           };
         };
         
@@ -197,10 +197,9 @@ in {
       };
     };
     
-    programs.waybar = {
+    programs.eww = {
       enable = true;
-      settings = builtins.fromJSON (builtins.readFile ../../configs/waybar/config.jsonc);
-      style = builtins.readFile ../../configs/waybar/style.css;
+      configDir = ../../configs/eww;
     };
     
     services.dunst = {
@@ -229,7 +228,7 @@ in {
           horizontal_padding = 8;
           text_icon_padding = 0;
           frame_width = 1;
-          frame_color = "#81a2be";
+          frame_color = "#de935f";
           separator_color = "frame";
           sort = true;
           
@@ -266,13 +265,13 @@ in {
         };
         
         urgency_low = {
-          background = "#1d1f21";
+          background = "#0f0f0f";
           foreground = "#c5c8c6";
           timeout = 10;
         };
         
         urgency_normal = {
-          background = "#1d1f21";
+          background = "#0f0f0f";
           foreground = "#c5c8c6";
           timeout = 10;
         };
@@ -297,7 +296,10 @@ in {
     
     home.packages = with pkgs; [
       wofi
-      eww
+      socat
+      jq
+      playerctl
+      gsettings-desktop-schemas
     ];
     
     programs.wofi = {
@@ -327,30 +329,30 @@ in {
         
         window {
           margin: 0px;
-          border: 1px solid #81a2be;
+          border: 1px solid #de935f;
           border-radius: 8px;
-          background-color: #1d1f21;
+          background-color: #0f0f0f;
         }
         
         #input {
           margin: 10px;
           padding: 8px 12px;
-          border: 1px solid #81a2be;
+          border: 1px solid #de935f;
           border-radius: 8px;
           color: #c5c8c6;
-          background-color: #282a2e;
+          background-color: #1d1f21;
         }
         
         #inner-box {
           margin: 10px;
           border: none;
-          background-color: #1d1f21;
+          background-color: #0f0f0f;
         }
         
         #outer-box {
           margin: 0px;
           border: none;
-          background-color: #1d1f21;
+          background-color: #0f0f0f;
         }
         
         #scroll {
@@ -372,13 +374,17 @@ in {
         
         #entry:selected {
           background-color: #373b41;
-          border: 1px solid #81a2be;
+          border: 1px solid #de935f;
         }
         
         #entry:selected #text {
-          color: #81a2be;
+          color: #de935f;
         }
       '';
+    };
+    
+    home.sessionVariables = {
+      GTK_THEME = "Yaru-blue-dark";
     };
     
     gtk = {
@@ -390,6 +396,19 @@ in {
       cursorTheme = {
         name = "Yaru";
         package = pkgs.yaru-theme;
+      };
+      gtk3.extraConfig = {
+        gtk-application-prefer-dark-theme = 1;
+      };
+      gtk4.extraConfig = {
+        gtk-application-prefer-dark-theme = 1;
+      };
+    };
+    
+    dconf.settings = {
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+        gtk-theme = "Yaru-blue-dark";
       };
     };
     
