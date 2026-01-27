@@ -41,20 +41,20 @@
     {
       enable-normalization-flatten-containers = true;
       enable-normalization-opposite-orientation-for-nested-containers = true;
-      
+
       accordion-padding = 30;
       default-root-container-layout = "tiles";
       default-root-container-orientation = "auto";
-      
+
       on-focused-monitor-changed = [ "move-mouse monitor-lazy-center" ];
       automatically-unhide-macos-hidden-apps = false;
-      
+
       after-startup-command = [ "exec-and-forget sketchybar" ];
-      
+
       exec-on-workspace-change = [
         "sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE"
       ];
-      
+
       gaps = {
         inner.horizontal = 10;
         inner.vertical = 10;
@@ -136,7 +136,7 @@
         r = [ "flatten-workspace-tree" "mode main" ];
         f = [ "layout floating tiling" "mode main" ];
         backspace = [ "close-all-windows-but-current" "mode main" ];
-        
+
         cmd-shift-h = [ "join-with left" "mode main" ];
         cmd-shift-j = [ "join-with down" "mode main" ];
         cmd-shift-k = [ "join-with up" "mode main" ];
@@ -146,6 +146,10 @@
 
   # User settings
   home-manager.users.${config.primaryUser} = {
+    home.packages = with pkgs; [
+      sbarlua
+    ];
+
     programs.sketchybar = {
       enable = true;
       config = {
