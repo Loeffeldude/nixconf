@@ -301,6 +301,7 @@ in {
       btop
       playerctl
       gsettings-desktop-schemas
+      pwmenu
     ];
 
     programs.wofi = {
