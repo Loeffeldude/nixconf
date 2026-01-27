@@ -5,23 +5,23 @@ let cfg = config.desktop.hyprland;
 in {
 
   options.desktop.hyprland = { enable = mkEnableOption "enable hyprland"; };
-  
+
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = true;
       systemd.enable = true;
-      
+
       settings = {
         "$mod" = "SUPER";
         "$terminal" = "wezterm start";
-        
+
         monitor = [
           "DP-1,preferred,0x0,1"
           "DP-2,preferred,1920x0,1"
           ",preferred,auto,1"
         ];
-        
+
         workspace = [
           "1, monitor:DP-1, default:true"
           "2, monitor:DP-1"
@@ -30,19 +30,19 @@ in {
           "5, monitor:DP-2"
           "6, monitor:DP-2"
         ];
-        
+
         exec-once = [
           "eww daemon && eww open bar0 && eww open bar1"
           "dunst"
           "hyprpaper"
         ];
-        
+
         env = [
           "XCURSOR_THEME,Yaru"
           "XCURSOR_SIZE,24"
           "GTK_THEME,Yaru-blue-dark"
         ];
-        
+
         general = {
           gaps_in = 8;
           gaps_out = "8,36,8,8";
@@ -52,18 +52,18 @@ in {
           layout = "dwindle";
           resize_on_border = true;
         };
-        
+
         decoration = {
           rounding = 6;
           active_opacity = 1.0;
           inactive_opacity = 0.96;
-          
+
           blur = {
             enabled = true;
             size = 3;
             passes = 2;
           };
-          
+
           shadow = {
             enabled = true;
             range = 4;
@@ -71,11 +71,11 @@ in {
             color = "rgba(0f0f0fee)";
           };
         };
-        
+
         animations = {
           enabled = true;
           bezier = "smooth, 0.25, 0.1, 0.25, 1.0";
-          
+
           animation = [
             "windows, 1, 3, smooth, slide"
             "windowsOut, 1, 3, smooth, slide"
@@ -84,32 +84,32 @@ in {
             "workspaces, 1, 4, smooth, slidevert"
           ];
         };
-        
+
         dwindle = {
           pseudotile = true;
           preserve_split = true;
           smart_split = false;
         };
-        
+
         master = {
           new_status = "master";
         };
-        
+
         input = {
           kb_layout = "de";
           kb_options = "caps:escape";
-          
+
           follow_mouse = 1;
-          
+
           touchpad = {
             natural_scroll = true;
             tap-to-click = true;
             middle_button_emulation = true;
           };
-          
+
           sensitivity = 0;
         };
-        
+
 
         misc = {
           disable_hyprland_logo = true;
@@ -118,7 +118,7 @@ in {
           key_press_enables_dpms = true;
           vrr = 0;
         };
-        
+
         bind = [
           "$mod, Return, exec, $terminal"
           "$mod, Space, exec, wofi --show drun"
@@ -131,20 +131,20 @@ in {
           "$mod, M, fullscreen, 0"
           "$mod, P, pseudo,"
           "$mod, J, togglesplit,"
-          
+
           "$mod, h, movefocus, l"
           "$mod, l, movefocus, r"
           "$mod, k, movefocus, u"
           "$mod, j, movefocus, d"
-          
+
           "$mod SHIFT, h, movewindow, l"
           "$mod SHIFT, l, movewindow, r"
           "$mod SHIFT, k, movewindow, u"
           "$mod SHIFT, j, movewindow, d"
-          
+
           "$mod CTRL, h, movecurrentworkspacetomonitor, l"
           "$mod CTRL, l, movecurrentworkspacetomonitor, r"
-          
+
           "$mod, 1, workspace, 1"
           "$mod, 2, workspace, 2"
           "$mod, 3, workspace, 3"
@@ -154,7 +154,7 @@ in {
           "$mod, 7, workspace, 7"
           "$mod, 8, workspace, 8"
           "$mod, 9, workspace, 9"
-          
+
           "$mod SHIFT, 1, movetoworkspace, 1"
           "$mod SHIFT, 2, movetoworkspace, 2"
           "$mod SHIFT, 3, movetoworkspace, 3"
@@ -164,25 +164,25 @@ in {
           "$mod SHIFT, 7, movetoworkspace, 7"
           "$mod SHIFT, 8, movetoworkspace, 8"
           "$mod SHIFT, 9, movetoworkspace, 9"
-          
+
           "$mod, Tab, workspace, previous"
-          
+
           "$mod, mouse_down, workspace, e+1"
           "$mod, mouse_up, workspace, e-1"
         ];
-        
+
         bindm = [
           "$mod, mouse:272, movewindow"
           "$mod, mouse:273, resizewindow"
         ];
-        
+
         binde = [
           "$mod CTRL, k, resizeactive, 0 -50"
           "$mod CTRL, j, resizeactive, 0 50"
           "$mod CTRL SHIFT, h, resizeactive, -50 0"
           "$mod CTRL SHIFT, l, resizeactive, 50 0"
         ];
-        
+
         windowrulev2 = [
           "float,class:^(pavucontrol)$"
           "float,class:^(nm-connection-editor)$"
@@ -196,12 +196,12 @@ in {
         ];
       };
     };
-    
+
     programs.eww = {
       enable = true;
       configDir = ../../configs/eww;
     };
-    
+
     services.dunst = {
       enable = true;
       settings = {
@@ -214,13 +214,13 @@ in {
           offset = "10x42";
           scale = 0;
           notification_limit = 3;
-          
+
           progress_bar = true;
           progress_bar_height = 10;
           progress_bar_frame_width = 1;
           progress_bar_min_width = 150;
           progress_bar_max_width = 300;
-          
+
           indicate_hidden = true;
           transparency = 10;
           separator_height = 2;
@@ -231,7 +231,7 @@ in {
           frame_color = "#de935f";
           separator_color = "frame";
           sort = true;
-          
+
           font = "SF Pro 10";
           line_height = 0;
           markup = "full";
@@ -244,38 +244,38 @@ in {
           stack_duplicates = true;
           hide_duplicate_count = false;
           show_indicators = true;
-          
+
           icon_position = "left";
           min_icon_size = 0;
           max_icon_size = 32;
-          
+
           sticky_history = true;
           history_length = 20;
-          
+
           browser = "firefox";
           always_run_script = true;
           title = "Dunst";
           class = "Dunst";
           corner_radius = 8;
           ignore_dbusclose = false;
-          
+
           mouse_left_click = "close_current";
           mouse_middle_click = "do_action, close_current";
           mouse_right_click = "close_all";
         };
-        
+
         urgency_low = {
           background = "#0f0f0f";
           foreground = "#c5c8c6";
           timeout = 10;
         };
-        
+
         urgency_normal = {
           background = "#0f0f0f";
           foreground = "#c5c8c6";
           timeout = 10;
         };
-        
+
         urgency_critical = {
           background = "#cc6666";
           foreground = "#c5c8c6";
@@ -284,24 +284,25 @@ in {
         };
       };
     };
-    
+
     home.file.".config/hypr/hyprpaper.conf".text = ''
       preload = ~/.background-image-dark
       wallpaper = ,~/.background-image-dark
       splash = false
     '';
-    
+
     home.file.".background-image-dark".source = ../../../../media/nix-dark.png;
     home.file.".background-image-bright".source = ../../../../media/nix-bright.png;
-    
+
     home.packages = with pkgs; [
       wofi
       socat
       jq
+      btop
       playerctl
       gsettings-desktop-schemas
     ];
-    
+
     programs.wofi = {
       enable = true;
       settings = {
@@ -382,11 +383,11 @@ in {
         }
       '';
     };
-    
+
     home.sessionVariables = {
       GTK_THEME = "Yaru-blue-dark";
     };
-    
+
     gtk = {
       enable = true;
       theme = {
@@ -404,14 +405,14 @@ in {
         gtk-application-prefer-dark-theme = 1;
       };
     };
-    
+
     dconf.settings = {
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
         gtk-theme = "Yaru-blue-dark";
       };
     };
-    
+
     qt = {
       enable = true;
       platformTheme.name = "yaru-blue";

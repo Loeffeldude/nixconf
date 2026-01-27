@@ -83,12 +83,12 @@
 
 (defwidget left []
   (box :orientation "h" :space-evenly false :halign "start" :spacing 8
-    (workspaces)))
-
-(defwidget center []
-  (box :orientation "h" :space-evenly false :halign "center" :spacing 8
+    (workspaces)
     (clock)
     (mpris)))
+
+(defwidget center []
+  (box :orientation "h" :space-evenly false :halign "center" :spacing 8))
 
 (defwidget right []
   (box :orientation "h" :space-evenly false :halign "end" :spacing 8

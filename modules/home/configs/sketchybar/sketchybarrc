@@ -20,31 +20,29 @@ export FONT="SF Pro"
 CONFIG_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Configure bar
-sketchybar --bar height=32 \
+sketchybar --bar height=28 \
                 position=top \
-                padding_left=10 \
-                padding_right=10 \
+                padding_left=6 \
+                padding_right=6 \
                 color=0x00000000 \
                 blur_radius=0 \
                 drawing=on
 
 # Configure default values
-sketchybar --default icon.font="Hack Nerd Font:Bold:14.0" \
+sketchybar --default icon.font="Hack Nerd Font:Bold:12.0" \
                     icon.color=$FG \
-                    icon.padding_left=8 \
-                    icon.padding_right=4 \
-                    label.font="SF Pro:Medium:14.0" \
+                    icon.padding_left=6 \
+                    icon.padding_right=3 \
+                    label.font="SF Pro:Medium:12.0" \
                     label.color=$FG \
-                    label.padding_left=4 \
-                    label.padding_right=8 \
-                    padding_left=5 \
-                    padding_right=5 \
+                    label.padding_left=3 \
+                    label.padding_right=6 \
+                    padding_left=2 \
+                    padding_right=2 \
                     blur_radius=30 \
                     background.color=$PANEL \
-                    background.border_color=$ACCENT \
-                    background.border_width=1 \
-                    background.corner_radius=8 \
-                    background.height=26 \
+                    background.corner_radius=6 \
+                    background.height=22 \
                     background.drawing=on
 
 # Apple menu
