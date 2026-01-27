@@ -38,7 +38,7 @@ sketchybar --default icon.font="Hack Nerd Font:Bold:14.0" \
                     padding_left=5 \
                     padding_right=5 \
                     blur_radius=30 \
-                    background.color=0x00000000 \
+                    background.color=$BG \
                     background.border_color=$ACCENT \
                     background.border_width=1 \
                     background.corner_radius=8 \
@@ -82,14 +82,14 @@ sketchybar --add item volume right \
           --subscribe volume volume_change
 
 # Clock item
-sketchybar --add item clock center \
+sketchybar --add item clock left \
           --set clock update_freq=10 \
                       icon="󰥔" \
                       icon.color=$ACCENT \
                       script="$CONFIG_DIR/plugins/clock.sh"
 
 # Media item (now playing)
-sketchybar --add item media center \
+sketchybar --add item media left \
           --set media script="$CONFIG_DIR/plugins/media.sh" \
                       label.max_chars=40 \
                       scroll_texts=off \
