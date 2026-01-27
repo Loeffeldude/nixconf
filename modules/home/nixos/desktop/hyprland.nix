@@ -40,15 +40,15 @@ in {
         env = [
           "XCURSOR_THEME,Yaru"
           "XCURSOR_SIZE,24"
-          "GTK_THEME,Yaru-blue-dark"
+          "GTK_THEME,Adwaita-dark"
         ];
         
         general = {
           gaps_in = 8;
           gaps_out = "8,36,8,8";
           border_size = 1;
-          "col.active_border" = "rgba(C98B60aa)";
-          "col.inactive_border" = "rgba(40404080)";
+          "col.active_border" = "rgba(81a2beaa)";
+          "col.inactive_border" = "rgba(4d505780)";
           layout = "dwindle";
           resize_on_border = true;
         };
@@ -68,7 +68,7 @@ in {
             enabled = true;
             range = 4;
             render_power = 3;
-            color = "rgba(1a1a1aee)";
+            color = "rgba(1d1f21ee)";
           };
         };
         
@@ -229,7 +229,7 @@ in {
           horizontal_padding = 8;
           text_icon_padding = 0;
           frame_width = 1;
-          frame_color = "#C98B60";
+          frame_color = "#81a2be";
           separator_color = "frame";
           sort = true;
           
@@ -266,21 +266,21 @@ in {
         };
         
         urgency_low = {
-          background = "#131313";
-          foreground = "#D0D0D0";
+          background = "#1d1f21";
+          foreground = "#c5c8c6";
           timeout = 10;
         };
         
         urgency_normal = {
-          background = "#131313";
-          foreground = "#D0D0D0";
+          background = "#1d1f21";
+          foreground = "#c5c8c6";
           timeout = 10;
         };
         
         urgency_critical = {
-          background = "#B0756D";
-          foreground = "#D0D0D0";
-          frame_color = "#B0756D";
+          background = "#cc6666";
+          foreground = "#c5c8c6";
+          frame_color = "#cc6666";
           timeout = 0;
         };
       };
@@ -297,6 +297,7 @@ in {
     
     home.packages = with pkgs; [
       wofi
+      eww
     ];
     
     programs.wofi = {
@@ -326,30 +327,30 @@ in {
         
         window {
           margin: 0px;
-          border: 1px solid #C98B60;
+          border: 1px solid #81a2be;
           border-radius: 8px;
-          background-color: #131313;
+          background-color: #1d1f21;
         }
         
         #input {
           margin: 10px;
           padding: 8px 12px;
-          border: 1px solid #C98B60;
+          border: 1px solid #81a2be;
           border-radius: 8px;
-          color: #D0D0D0;
-          background-color: #1a1a1a;
+          color: #c5c8c6;
+          background-color: #282a2e;
         }
         
         #inner-box {
           margin: 10px;
           border: none;
-          background-color: #131313;
+          background-color: #1d1f21;
         }
         
         #outer-box {
           margin: 0px;
           border: none;
-          background-color: #131313;
+          background-color: #1d1f21;
         }
         
         #scroll {
@@ -360,7 +361,7 @@ in {
         #text {
           margin: 5px;
           border: none;
-          color: #D0D0D0;
+          color: #c5c8c6;
         }
         
         #entry {
@@ -370,12 +371,12 @@ in {
         }
         
         #entry:selected {
-          background-color: #2f2f2f;
-          border: 1px solid #C98B60;
+          background-color: #373b41;
+          border: 1px solid #81a2be;
         }
         
         #entry:selected #text {
-          color: #C98B60;
+          color: #81a2be;
         }
       '';
     };

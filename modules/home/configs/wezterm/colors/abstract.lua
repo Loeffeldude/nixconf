@@ -1,45 +1,45 @@
 return {
-	foreground = "#D0D0D0", -- Soft gray
-	background = "#131313", -- True black
+	foreground = "#c5c8c6",
+	background = "#1d1f21",
 
-	cursor_bg = "#C98B60", -- Muted warm amber
-	cursor_fg = "#D0D0D0",
-	cursor_border = "#C98B60",
+	cursor_bg = "#81a2be",
+	cursor_fg = "#c5c8c6",
+	cursor_border = "#81a2be",
 
-	selection_fg = "#bababa",
-	selection_bg = "#2f2f2f", -- Soft muted blue-gray
+	selection_fg = "#c5c8c6",
+	selection_bg = "#373b41",
 
-	scrollbar_thumb = "#2C2F3A", -- Subtle contrast
-	split = "#1F222D",
+	scrollbar_thumb = "#4d5057",
+	split = "#282a2e",
 
 	ansi = {
-		"#1e1e1e", -- Black
-		"#B0756D", -- Red (desaturated warm)
-		"#5B8576", -- Green (dusty teal)
-		"#C4AA76", -- Yellow (muted gold)
-		"#5F6D89", -- Blue (slate blue)
-		"#A88BAE", -- Magenta (soft lavender-purple)
-		"#5A8E99", -- Cyan (dusty cyan)
-		"#D0D0D0", -- White
+		"#1d1f21", -- Black
+		"#cc6666", -- Red
+		"#b5bd68", -- Green
+		"#f0c674", -- Yellow
+		"#81a2be", -- Blue
+		"#b294bb", -- Magenta
+		"#8abeb7", -- Cyan
+		"#c5c8c6", -- White
 	},
 	brights = {
-		"#2C2F3A", -- Bright black
-		"#D89A84", -- Bright red
-		"#7BAA94", -- Bright green
-		"#E6C48D", -- Bright yellow
-		"#8095AD", -- Bright blue
-		"#C0A7C9", -- Bright magenta
-		"#89C1CD", -- Bright cyan
-		"#E8E8E8", -- Bright white
+		"#969896", -- Bright black (comment)
+		"#cc6666", -- Bright red
+		"#b5bd68", -- Bright green
+		"#f0c674", -- Bright yellow
+		"#81a2be", -- Bright blue
+		"#b294bb", -- Bright magenta
+		"#8abeb7", -- Bright cyan
+		"#ffffff", -- Bright white
 	},
 
-	copy_mode_active_highlight_bg = { Color = "#C98B60" },
-	copy_mode_active_highlight_fg = { Color = "#D0D0D0" },
-	copy_mode_inactive_highlight_bg = { Color = "#5B8576" },
-	copy_mode_inactive_highlight_fg = { Color = "#D0D0D0" },
+	copy_mode_active_highlight_bg = { Color = "#81a2be" },
+	copy_mode_active_highlight_fg = { Color = "#c5c8c6" },
+	copy_mode_inactive_highlight_bg = { Color = "#b5bd68" },
+	copy_mode_inactive_highlight_fg = { Color = "#c5c8c6" },
 
-	quick_select_label_bg = { Color = "#C98B60" },
-	quick_select_label_fg = { Color = "#D0D0D0" },
-	quick_select_match_bg = { Color = "#5B8576" },
-	quick_select_match_fg = { Color = "#D0D0D0" },
+	quick_select_label_bg = { Color = "#81a2be" },
+	quick_select_label_fg = { Color = "#c5c8c6" },
+	quick_select_match_bg = { Color = "#b5bd68" },
+	quick_select_match_fg = { Color = "#c5c8c6" },
 }

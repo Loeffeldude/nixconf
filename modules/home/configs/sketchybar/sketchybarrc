@@ -1,14 +1,14 @@
-# Define colors from abstract theme
-export BG="0xff131313"
-export FG="0xffD0D0D0"
-export ACCENT="0xffC98B60"
-export SELECTION="0xff2f2f2f"
-export RED="0xffB0756D"
-export GREEN="0xff5B8576"
-export YELLOW="0xffC4AA76"
-export BLUE="0xff5F6D89"
-export MAGENTA="0xffA88BAE"
-export CYAN="0xff5A8E99"
+# Define colors from Rusty theme
+export BG="0xff1d1f21"
+export FG="0xffc5c8c6"
+export ACCENT="0xff81a2be"
+export SELECTION="0xff373b41"
+export RED="0xffcc6666"
+export GREEN="0xffb5bd68"
+export YELLOW="0xfff0c674"
+export BLUE="0xff81a2be"
+export MAGENTA="0xffb294bb"
+export CYAN="0xff8abeb7"
 
 # Icons
 export APPLE=" "

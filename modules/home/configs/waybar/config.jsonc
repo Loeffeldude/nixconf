@@ -69,8 +69,8 @@
     },
     
     "clock": {
-      "format": "󰥔 {:%H:%M}",
-      "format-alt": "󰥔 {:%Y-%m-%d %H:%M}",
+      "format": "󰥔  {:%H:%M}",
+      "format-alt": "󰥔  {:%Y-%m-%d %H:%M}",
       "tooltip-format": "<tt><small>{calendar}</small></tt>",
       "calendar": {
         "mode": "year",
@@ -79,11 +79,11 @@
         "on-scroll": 1,
         "on-click-right": "mode",
         "format": {
-          "months": "<span color='#C98B60'><b>{}</b></span>",
-          "days": "<span color='#D0D0D0'><b>{}</b></span>",
-          "weeks": "<span color='#5A8E99'><b>W{}</b></span>",
-          "weekdays": "<span color='#C4AA76'><b>{}</b></span>",
-          "today": "<span color='#B0756D'><b><u>{}</u></b></span>"
+          "months": "<span color='#81a2be'><b>{}</b></span>",
+          "days": "<span color='#c5c8c6'><b>{}</b></span>",
+          "weeks": "<span color='#8abeb7'><b>W{}</b></span>",
+          "weekdays": "<span color='#f0c674'><b>{}</b></span>",
+          "today": "<span color='#cc6666'><b><u>{}</u></b></span>"
         }
       },
       "actions": {
@@ -94,16 +94,16 @@
     },
     
     "mpris": {
-      "format": "{player_icon} {dynamic}",
+      "format": "{player_icon}   {dynamic}",
       "format-paused": "{status_icon} <i>{dynamic}</i>",
       "player-icons": {
         "default": "",
-        "firefox": "",
-        "spotify": ""
+        "firefox": "",
+        "spotify": ""
       },
       "status-icons": {
-        "paused": "",
-        "playing": ""
+        "paused": "",
+        "playing": ""
       },
       "dynamic-order": ["artist", "title"],
       "dynamic-separator": " - ",
@@ -113,33 +113,21 @@
     },
     
     "cpu": {
-      "format": " {usage}%",
+      "format": "   {usage}%",
       "interval": 2,
       "on-click": "wezterm start btop"
     },
     
     "memory": {
-      "format": " {percentage}%",
+      "format": "󰍛   {percentage}%",
       "interval": 2,
       "on-click": "wezterm start btop"
     },
     
-    "battery": {
-      "states": {
-        "warning": 30,
-        "critical": 15
-      },
-      "format": "{icon} {capacity}%",
-      "format-charging": "󰂄 {capacity}%",
-      "format-plugged": "󰚥 {capacity}%",
-      "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-      "tooltip-format": "{timeTo}\n{capacity}% - {power}W"
-    },
-    
     "wireplumber": {
-      "format": "{icon} {volume}%",
-      "format-muted": "MUTE {volume}%",
-      "format-icons": ["LOW", "MED", "HIGH"],
+      "format": "{icon}   {volume}%",
+      "format-muted": "{volume}%",
+      "format-icons": ["󰕿", "󰖀", ""],
       "on-click": "pavucontrol",
       "scroll-step": 5,
       "max-volume": 150
