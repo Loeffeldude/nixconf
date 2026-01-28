@@ -77,6 +77,11 @@
     (button :onclick "pavucontrol"
       "${volume_muted == 'true' ? '' : volume > 66 ? '' : volume > 33 ? '󰖀' : '󰕿'}  ${volume}%")))
 
+(defwidget audiodevice []
+  (box :class "audiodevice" :orientation "h" :space-evenly false
+    (button :onclick "pwmenu --launcher custom --launcher-command 'wofi --dmenu'"
+      "󰓃")))
+
 (defwidget tray []
   (box :class "tray" :orientation "h" :space-evenly false
     (systray :icon-size 16 :spacing 8)))
@@ -96,6 +101,7 @@
     (memory)
     (battery)
     (volume)
+    (audiodevice)
     (tray)))
 
 (defwidget bar []

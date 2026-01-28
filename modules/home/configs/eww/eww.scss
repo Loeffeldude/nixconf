@@ -21,6 +21,7 @@ window {
 .memory,
 .battery,
 .volume,
+.audiodevice,
 .tray {
   background: rgba(29, 31, 33, 0.8);
   color: #c5c8c6;
@@ -131,6 +132,14 @@ window {
   &.muted {
     color: #808080;
     background: rgba(60, 60, 60, 0.5);
+  }
+}
+
+.audiodevice {
+  color: #81a2be;
+
+  &:hover {
+    background: linear-gradient(135deg, rgba(129, 162, 190, 0.15) 0%, rgba(109, 142, 170, 0.15) 100%);
   }
 }
 

@@ -1,101 +1,10 @@
-# Define colors from Rusty theme
-export BG="0xff0f0f0f"
-export PANEL="0xff1d1f21"
-export FG="0xffc5c8c6"
-export ACCENT="0xffde935f"
-export SELECTION="0xff373b41"
-export RED="0xffcc6666"
-export ORANGE="0xffde935f"
-export GREEN="0xffb5bd68"
-export YELLOW="0xfff0c674"
-export BLUE="0xff81a2be"
-export MAGENTA="0xffb294bb"
-export CYAN="0xff8abeb7"
+#!/usr/bin/env lua
 
-# Icons
-export APPLE=" "
-export FONT="SF Pro"
+Sbar = require("sketchybar")
 
-# Get the directory where this script is located
-CONFIG_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+Sbar.begin_config()
+require("init")
+Sbar.hotload(true)
+Sbar.end_config()
 
-# Configure bar
-sketchybar --bar height=28 \
-                position=top \
-                padding_left=6 \
-                padding_right=6 \
-                color=0x00000000 \
-                blur_radius=0 \
-                drawing=on
-
-# Configure default values
-sketchybar --default icon.font="Hack Nerd Font:Bold:12.0" \
-                    icon.color=$FG \
-                    icon.padding_left=6 \
-                    icon.padding_right=3 \
-                    label.font="SF Pro:Medium:12.0" \
-                    label.color=$FG \
-                    label.padding_left=3 \
-                    label.padding_right=6 \
-                    padding_left=2 \
-                    padding_right=2 \
-                    blur_radius=30 \
-                    background.color=$PANEL \
-                    background.corner_radius=6 \
-                    background.height=22 \
-                    background.drawing=on
-
-# Apple menu
-source "$CONFIG_DIR/plugins/apple_menu.sh"
-
-# Add aerospace events
-sketchybar --add event aerospace_workspace_change
-
-# Initialize workspaces after aerospace is ready (background process)
-"$CONFIG_DIR/plugins/init_workspaces.sh" &
-
-# CPU
-sketchybar --add item cpu right \
-          --set cpu icon="CPU" \
-                    icon.color=$CYAN \
-                    update_freq=2 \
-                    script="$CONFIG_DIR/plugins/cpu.sh"
-
-# RAM
-sketchybar --add item ram right \
-          --set ram icon="RAM" \
-                    icon.color=$GREEN \
-                    update_freq=2 \
-                    script="$CONFIG_DIR/plugins/ram.sh"
-
-# Battery item
-sketchybar --add item battery right \
-          --set battery update_freq=30 \
-                        icon.color=$YELLOW \
-                        script="$CONFIG_DIR/plugins/battery.sh" \
-          --subscribe battery system_woke power_source_change
-
-# Volume item
-sketchybar --add item volume right \
-          --set volume script="$CONFIG_DIR/plugins/volume.sh" \
-                       icon.color=$MAGENTA \
-          --subscribe volume volume_change
-
-# Clock item
-sketchybar --add item clock left \
-          --set clock update_freq=10 \
-                      icon="󰥔" \
-                      icon.color=$ACCENT \
-                      script="$CONFIG_DIR/plugins/clock.sh"
-
-# Media item (now playing)
-sketchybar --add item media left \
-          --set media script="$CONFIG_DIR/plugins/media.sh" \
-                      label.max_chars=40 \
-                      scroll_texts=off \
-                      update_freq=5 \
-                      updates=on \
-          --subscribe media media_change
-
-# Update the bar
-sketchybar --update
+Sbar.event_loop()
