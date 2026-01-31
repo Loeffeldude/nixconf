@@ -56,6 +56,7 @@ in {
     ./utilties.nix
     ./docker.nix
     ./k8s.nix
+    ./yazi.nix
     # Langs
     ./go.nix
     ./csharp.nix

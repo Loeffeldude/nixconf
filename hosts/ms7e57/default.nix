@@ -27,6 +27,7 @@
   apps.enable = true;
   desktop.gnome.enable = false;
   desktop.hyprland.enable = true;
+  desktop.kde.enable = false;
   ai.enable = true;
   ai.ollama =
     {

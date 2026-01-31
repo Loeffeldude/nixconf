@@ -17,24 +17,25 @@ in {
         "$terminal" = "wezterm start";
 
         monitor = [
-          "DP-1,preferred,0x0,1"
-          "DP-2,preferred,1920x0,1"
           ",preferred,auto,1"
         ];
 
         workspace = [
-          "1, monitor:DP-1, default:true"
-          "2, monitor:DP-1"
-          "3, monitor:DP-1"
-          "4, monitor:DP-2, default:true"
-          "5, monitor:DP-2"
-          "6, monitor:DP-2"
+          "1, monitor:0, default:true"
+          "2, monitor:0"
+          "3, monitor:0"
+          "4, monitor:1, default:true"
+          "5, monitor:1"
+          "6, monitor:1"
         ];
 
         exec-once = [
           "eww daemon && eww open bar0 && eww open bar1"
           "dunst"
           "hyprpaper"
+          "nm-applet --indicator"
+          "blueman-applet"
+          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         ];
 
         env = [
@@ -106,7 +107,8 @@ in {
             tap-to-click = true;
             middle_button_emulation = true;
           };
-
+          repeat_delay = 400;
+          repeat_rate = 60;
           sensitivity = 0;
         };
 
@@ -187,6 +189,7 @@ in {
           "float,class:^(pavucontrol)$"
           "float,class:^(nm-connection-editor)$"
           "float,class:^(blueberry.py)$"
+          "float,class:^(blueman-manager)$"
           "float,title:^(Picture-in-Picture)$"
           "pin,title:^(Picture-in-Picture)$"
           "opacity 0.0 override,class:^(xwaylandvideobridge)$"
