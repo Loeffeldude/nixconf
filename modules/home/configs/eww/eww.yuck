@@ -5,20 +5,20 @@
 (defpoll time_full :interval "1s"
   "date '+%Y-%m-%d %H:%M'")
 
-(defpoll cpu_usage :interval "2s"
-  "top -bn1 | grep 'Cpu(s)' | sed 's/.*, *\\([0-9.]*\\)%* id.*/\\1/' | awk '{print 100 - $1}'")
+(defpoll cpu_usage :interval "2s" :initial "0"
+  "sh -c \"top -bn1 | grep 'Cpu(s)' | sed 's/.*, *\\\\([0-9.]*\\\\)%* id.*/\\\\1/' | awk '{if (NF) print 100 - \\$1; else print 0}'\"")
 
-(defpoll memory_usage :interval "2s"
-  "free | grep Mem | awk '{print int($3/$2 * 100)}'")
+(defpoll memory_usage :interval "2s" :initial "0"
+  "sh -c \"free | awk '/Mem/ { if (\\$2 > 0) print int(\\$3/\\$2 * 100); else print 0 }'\"")
 
-(defpoll volume :interval "1s"
-  "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}'")
+(defpoll volume :interval "1s" :initial "0"
+  "sh -c \"wpctl get-volume @DEFAULT_AUDIO_SINK@ 2>/dev/null | awk '{if (NF >= 2) print int(\\$2 * 100); else print 0}'\"")
 
-(defpoll volume_muted :interval "1s"
+(defpoll volume_muted :interval "1s" :initial "false"
   "wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q MUTED && echo 'true' || echo 'false'")
 
-(defpoll battery_percent :interval "5s"
-  "cat /sys/class/power_supply/BAT*/capacity 2>/dev/null || echo '100'")
+(defpoll battery_percent :interval "5s" :initial "100"
+  "sh -c \"value=$(cat /sys/class/power_supply/BAT*/capacity 2>/dev/null | head -n1); if [ -z \\\"\\$value\\\" ]; then echo 100; else echo \\\"\\$value\\\"; fi\"")
 
 (defpoll battery_status :interval "5s"
   "cat /sys/class/power_supply/BAT*/status 2>/dev/null || echo 'Full'")
@@ -36,12 +36,22 @@
   "scripts/mpris.sh")
 
 ;; Widgets
+(defwidget workspace-apps [apps]
+  (box :class "workspace-apps" :orientation "h" :spacing 2 :space-evenly false
+    (for app in apps
+      (box :class "app-card ${app.count > 1 ? 'stacked' : ''}" :orientation "h" :spacing 3 :space-evenly false
+        (label :class "app-icon" :text "${app.icon} ")
+        (label :class "app-name" :text "${app.name}" :limit-width 10)
+        (label :class "app-count" :text "${app.count > 1 ? app.count : ''}" :visible {app.count > 1})))))
+
 (defwidget workspaces [workspaces_data]
-  (box :class "workspaces" :orientation "h" :spacing 4 :space-evenly false
+  (box :class "workspaces" :orientation "h" :spacing 6 :space-evenly false
     (for ws in workspaces_data
       (button :class "workspace ${ws.active ? 'active' : ''} ${ws.occupied ? 'occupied' : ''}"
               :onclick "scripts/dispatch.sh ${ws.id}"
-        (label :text "${ws.display}")))))
+        (box :orientation "h" :spacing 4 :space-evenly false
+          (label :text "${ws.id}")
+          (workspace-apps :apps {ws.apps}))))))
 
 (defwidget clock []
   (box :class "clock" :orientation "h" :space-evenly false
@@ -70,12 +80,12 @@
        :orientation "h" 
        :space-evenly false
        :visible {battery_percent != "100" || battery_status != "Full"}
-    (label :text "${battery_status == 'Charging' ? '' : battery_percent > 90 ? '' : battery_percent > 60 ? '' : battery_percent > 30 ? '' : battery_percent > 20 ? '' : ''}  ${battery_percent}%")))
+    (label :text "${battery_status == 'Charging' ? '󰂄' : battery_percent > 90 ? '󰁹' : battery_percent > 60 ? '󰂀' : battery_percent > 30 ? '󰁾' : battery_percent > 20 ? '󰁼' : '󰁺'}  ${battery_percent}%")))
 
 (defwidget volume []
   (box :class "volume ${volume_muted == 'true' ? 'muted' : ''}" :orientation "h" :space-evenly false
     (button :onclick "pavucontrol"
-      "${volume_muted == 'true' ? '' : volume > 66 ? '' : volume > 33 ? '󰖀' : '󰕿'}  ${volume}%")))
+      "${volume_muted == 'true' ? '󰖁' : volume > 66 ? '󰕾' : volume > 33 ? '󰖀' : '󰕿'}  ${volume}%")))
 
 (defwidget audiodevice []
   (box :class "audiodevice" :orientation "h" :space-evenly false
@@ -89,7 +99,6 @@
 (defwidget left [monitor]
   (box :orientation "h" :space-evenly false :halign "start" :spacing 8
     (workspaces :workspaces_data {monitor == 0 ? workspaces_monitor0 : workspaces_monitor1})
-    (clock)
     (mpris)))
 
 (defwidget center []
@@ -102,7 +111,8 @@
     (battery)
     (volume)
     (audiodevice)
-    (tray)))
+    (tray)
+    (clock)))
 
 (defwidget bar [monitor]
   (centerbox :class "bar" :orientation "h"
