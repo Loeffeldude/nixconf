@@ -31,10 +31,10 @@ get_workspaces() {
   local monitor_id="$1"
 
   # Determine workspace range based on monitor ID
-  # Monitor 0 (HDMI-A-1): workspaces 1-3
-  # Monitor 1 (DP-1): workspaces 4-6
-  local start_ws=$((monitor_id * 3 + 1))
-  local end_ws=$((start_ws + 2))
+  # Monitor 0 (HDMI-A-1): workspaces 1-4
+  # Monitor 1 (DP-1): workspaces 5-8
+  local start_ws=$((monitor_id * 4 + 1))
+  local end_ws=$((start_ws + 3))
 
   # Get all workspaces data
   local all_workspaces=$(hyprctl workspaces -j)
@@ -65,6 +65,7 @@ get_workspaces() {
       local apps_data=$(echo "$all_clients" | jq -c --argjson wsid "$ws_id" \
         'map(select(.workspace.id == $wsid)) | map({class: .class, name: .initialTitle})')
 
+      unset -v app_counts app_names
       declare -A app_counts
       declare -A app_names
       while IFS='|' read -r app_class app_name; do

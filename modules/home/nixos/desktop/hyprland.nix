@@ -26,9 +26,11 @@ in {
           "1, monitor:0, default:true"
           "2, monitor:0"
           "3, monitor:0"
-          "4, monitor:1, default:true"
-          "5, monitor:1"
+          "4, monitor:0"
+          "5, monitor:1, default:true"
           "6, monitor:1"
+          "7, monitor:1"
+          "8, monitor:1"
         ];
 
         exec-once = [
