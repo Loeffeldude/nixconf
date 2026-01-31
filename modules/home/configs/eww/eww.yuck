@@ -23,11 +23,11 @@
 (defpoll battery_status :interval "5s"
   "cat /sys/class/power_supply/BAT*/status 2>/dev/null || echo 'Full'")
 
-(deflisten workspaces :initial "[]"
-  "scripts/workspaces.sh")
+(deflisten workspaces_monitor0 :initial "[]"
+  "scripts/workspaces.sh 0")
 
-(deflisten current_workspace :initial "1"
-  "scripts/current-workspace.sh")
+(deflisten workspaces_monitor1 :initial "[]"
+  "scripts/workspaces.sh 1")
 
 (deflisten window_title :initial ""
   "scripts/window-title.sh")
@@ -36,12 +36,12 @@
   "scripts/mpris.sh")
 
 ;; Widgets
-(defwidget workspaces []
+(defwidget workspaces [workspaces_data]
   (box :class "workspaces" :orientation "h" :spacing 4 :space-evenly false
-    (for workspace in workspaces
-      (button :class "workspace ${workspace.id == current_workspace ? 'active' : ''} ${workspace.urgent ? 'urgent' : ''}"
-              :onclick "hyprctl dispatch workspace ${workspace.id}"
-        "${workspace.id}"))))
+    (for ws in workspaces_data
+      (button :class "workspace ${ws.active ? 'active' : ''} ${ws.occupied ? 'occupied' : ''}"
+              :onclick "scripts/dispatch.sh ${ws.id}"
+        (label :text "${ws.display}")))))
 
 (defwidget clock []
   (box :class "clock" :orientation "h" :space-evenly false
@@ -86,9 +86,9 @@
   (box :class "tray" :orientation "h" :space-evenly false
     (systray :icon-size 16 :spacing 8)))
 
-(defwidget left []
+(defwidget left [monitor]
   (box :orientation "h" :space-evenly false :halign "start" :spacing 8
-    (workspaces)
+    (workspaces :workspaces_data {monitor == 0 ? workspaces_monitor0 : workspaces_monitor1})
     (clock)
     (mpris)))
 
@@ -104,9 +104,9 @@
     (audiodevice)
     (tray)))
 
-(defwidget bar []
+(defwidget bar [monitor]
   (centerbox :class "bar" :orientation "h"
-    (left)
+    (left :monitor monitor)
     (center)
     (right)))
 
@@ -121,7 +121,7 @@
   :stacking "fg"
   :exclusive true
   :focusable false
-  (bar))
+  (bar :monitor 0))
 
 (defwindow bar1
   :monitor 1
@@ -133,4 +133,4 @@
   :stacking "fg"
   :exclusive true
   :focusable false
-  (bar))
+  (bar :monitor 1))

@@ -17,6 +17,8 @@ in {
         "$terminal" = "wezterm start";
 
         monitor = [
+          "DP-1,preferred,0x0,1"
+          "HDMI-A-1,preferred,1920x0,1"
           ",preferred,auto,1"
         ];
 

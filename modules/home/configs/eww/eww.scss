@@ -51,6 +51,11 @@ window {
       color: #C0C0C0;
     }
 
+    &.occupied:not(.active) {
+      color: #b5bd68;
+      background: rgba(181, 189, 104, 0.1);
+    }
+
     &.active {
       background: rgba(222, 147, 95, 0.25);
       color: #de935f;
@@ -62,6 +67,7 @@ window {
       color: #cc6666;
     }
   }
+
 }
 
 .clock {
