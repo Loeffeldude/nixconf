@@ -88,7 +88,7 @@ return {
     },
     opts = {
       defaults = {
-        file_ignore_patterns = { "node_modules/", ".git/", "__pycache__/", ".venv/", "vendor/" },
+        file_ignore_patterns = { "node_modules/", ".git/", "__pycache__/", ".venv/", "/vendor/" },
       },
     },
   },
