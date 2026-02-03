@@ -4,15 +4,34 @@ with lib;
 let cfg = config.desktop.kde;
 in {
 
-  options.desktop.kde = { enable = mkEnableOption "enable gnome"; };
+  options.desktop.kde = { enable = mkEnableOption "enable kde with i3"; };
 
   config = mkIf cfg.enable {
     services = {
+      xserver = {
+        enable = true;
+        xkb = {
+          layout = "de";
+          variant = "";
+          options = "caps:escape";
+        };
+        
+        windowManager.i3 = {
+          enable = true;
+          extraPackages = with pkgs; [
+            dmenu
+            i3status
+            i3lock
+          ];
+        };
+      };
+
       desktopManager.plasma6.enable = true;
 
-      displayManager.sddm.enable = true;
-
-      displayManager.sddm.wayland.enable = true;
+      displayManager.sddm = {
+        enable = true;
+        wayland.enable = false;
+      };
     };
 
     # Sound
@@ -40,7 +59,12 @@ in {
       wifi.powersave = true;
     };
 
-    # home-manager.users.${config.primaryUser} = { desktop..enable = true; };
+    environment.systemPackages = with pkgs; [
+      feh
+      xclip
+    ];
+
+    home-manager.users.${config.primaryUser} = { desktop.kde.enable = true; };
   };
 }
 

@@ -49,6 +49,13 @@ let
       "envsitter-guard@latest"
     ];
     small_model = "anthropic/claude-haiku-4-5";
+    mcp = {
+      shadcn = {
+        type = "local";
+        command = [ "npx" "-y" "shadcn@latest" "mcp" ];
+        enabled = true;
+      };
+    };
     provider = {
       ollama = {
         npm = "@ai-sdk/openai-compatible";

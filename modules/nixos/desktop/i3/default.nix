@@ -1,17 +1,15 @@
+# EXPERIMENTAL: Standalone i3 window manager module
+# Currently not in use - main setup uses Hyprland
+# Kept for future reference/testing
 { config, pkgs, lib, ... }:
 with lib;
 
-let cfg = config.desktop.hyprland;
+let cfg = config.desktop.i3;
 in {
 
-  options.desktop.hyprland = { enable = mkEnableOption "enable hyprland"; };
+  options.desktop.i3 = { enable = mkEnableOption "enable i3"; };
 
   config = mkIf cfg.enable {
-    programs.hyprland = {
-      enable = true;
-      xwayland.enable = true;
-    };
-
     services = {
       xserver = {
         enable = true;
@@ -20,11 +18,19 @@ in {
           variant = "";
           options = "caps:escape";
         };
+        
+        windowManager.i3 = {
+          enable = true;
+          extraPackages = with pkgs; [
+            dmenu
+            i3status
+            i3lock
+            i3blocks
+          ];
+        };
       };
-      displayManager.gdm = {
-        enable = true;
-        wayland = true;
-      };
+
+      displayManager.defaultSession = "none+i3";
 
       libinput = {
         enable = true;
@@ -37,6 +43,7 @@ in {
       };
     };
 
+    # Sound
     security.rtkit.enable = true;
     services.pipewire = {
       enable = true;
@@ -45,29 +52,31 @@ in {
       pulse.enable = true;
     };
 
+    # Power management
     services.power-profiles-daemon.enable = true;
     services.upower.enable = true;
 
+    # Bluetooth
     hardware.bluetooth = {
       enable = true;
       powerOnBoot = true;
     };
 
+    # Network Manager
+    networking.networkmanager = {
+      enable = true;
+      wifi.powersave = true;
+    };
+
+    # XDG portals for file dialogs and screen sharing
     xdg.portal = {
       enable = true;
       extraPortals = with pkgs; [
         xdg-desktop-portal-gtk
-        xdg-desktop-portal-hyprland
       ];
       configPackages = with pkgs; [
         xdg-desktop-portal-gtk
-        xdg-desktop-portal-hyprland
       ];
-    };
-
-    networking.networkmanager = {
-      enable = true;
-      wifi.powersave = true;
     };
 
     xdg.icons.enable = true;
@@ -86,26 +95,32 @@ in {
       enable = true;
       drivers = [ pkgs.hplip ];
     };
+    
     services.avahi = {
       enable = true;
       nssmdns4 = true;
       openFirewall = true;
     };
 
+    services.displayManager.sddm = {
+      enable = true;
+      theme = "breeze";
+    };
+
     environment.systemPackages = with pkgs; [
-      wl-clipboard
-      grim
-      slurp
-      hyprpaper
+      feh
+      scrot
       dunst
       libnotify
       playerctl
+      rofi
+      picom
+      arandr
       networkmanagerapplet
-      blueman
       pavucontrol
-      polkit_gnome
+      blueman
     ];
 
-    home-manager.users.${config.primaryUser} = { desktop.hyprland.enable = true; };
+    home-manager.users.${config.primaryUser} = { desktop.i3.enable = true; };
   };
 }

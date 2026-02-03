@@ -5,29 +5,29 @@
 (defpoll time_full :interval "1s"
   "date '+%Y-%m-%d %H:%M'")
 
-(defpoll cpu_usage :interval "2s"
-  "top -bn1 | grep 'Cpu(s)' | sed 's/.*, *\\([0-9.]*\\)%* id.*/\\1/' | awk '{print 100 - $1}'")
+(defpoll cpu_usage :interval "2s" :initial "0"
+  "sh -c \"read cpu user nice system idle iowait irq softirq steal guest guest_nice < /proc/stat; total=\\$((user+nice+system+idle+iowait+irq+softirq+steal)); idle_all=\\$((idle+iowait)); sleep 0.2; read cpu user2 nice2 system2 idle2 iowait2 irq2 softirq2 steal2 guest2 guest_nice2 < /proc/stat; total2=\\$((user2+nice2+system2+idle2+iowait2+irq2+softirq2+steal2)); idle_all2=\\$((idle2+iowait2)); total_delta=\\$((total2-total)); idle_delta=\\$((idle_all2-idle_all)); if [ \\\"\\$total_delta\\\" -le 0 ]; then echo 0; else echo \\$(((total_delta-idle_delta)*100/total_delta)); fi\"")
 
-(defpoll memory_usage :interval "2s"
-  "free | grep Mem | awk '{print int($3/$2 * 100)}'")
+(defpoll memory_usage :interval "2s" :initial "0"
+  "sh -c \"free | awk '/Mem/ { if (\\$2 > 0) print int(\\$3/\\$2 * 100); else print 0 }'\"")
 
-(defpoll volume :interval "1s"
-  "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}'")
+(defpoll volume :interval "1s" :initial "0"
+  "sh -c \"wpctl get-volume @DEFAULT_AUDIO_SINK@ 2>/dev/null | awk '{if (NF >= 2) print int(\\$2 * 100); else print 0}'\"")
 
-(defpoll volume_muted :interval "1s"
+(defpoll volume_muted :interval "1s" :initial "false"
   "wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q MUTED && echo 'true' || echo 'false'")
 
-(defpoll battery_percent :interval "5s"
-  "cat /sys/class/power_supply/BAT*/capacity 2>/dev/null || echo '100'")
+(defpoll battery_percent :interval "5s" :initial "100"
+  "sh -c \"value=$(cat /sys/class/power_supply/BAT*/capacity 2>/dev/null | head -n1); if [ -z \\\"\\$value\\\" ]; then echo 100; else echo \\\"\\$value\\\"; fi\"")
 
 (defpoll battery_status :interval "5s"
   "cat /sys/class/power_supply/BAT*/status 2>/dev/null || echo 'Full'")
 
-(deflisten workspaces :initial "[]"
-  "scripts/workspaces.sh")
+(deflisten workspaces_monitor0 :initial "[]"
+  "scripts/workspaces.sh 0")
 
-(deflisten current_workspace :initial "1"
-  "scripts/current-workspace.sh")
+(deflisten workspaces_monitor1 :initial "[]"
+  "scripts/workspaces.sh 1")
 
 (deflisten window_title :initial ""
   "scripts/window-title.sh")
@@ -36,46 +36,56 @@
   "scripts/mpris.sh")
 
 ;; Widgets
-(defwidget workspaces []
-  (box :class "workspaces" :orientation "h" :spacing 4 :space-evenly false
-    (for workspace in workspaces
-      (button :class "workspace ${workspace.id == current_workspace ? 'active' : ''} ${workspace.urgent ? 'urgent' : ''}"
-              :onclick "hyprctl dispatch workspace ${workspace.id}"
-        "${workspace.id}"))))
+(defwidget workspace-apps [apps]
+  (box :class "workspace-apps" :orientation "h" :spacing 2 :space-evenly false
+    (for app in apps
+      (box :class "app-card ${app.count > 1 ? 'stacked' : ''}" :orientation "h" :spacing 3 :space-evenly false
+        (label :class "app-icon" :text "${app.icon} ")
+        (label :class "app-name" :text "${app.name}" :limit-width 10)
+        (label :class "app-count" :text "${app.count > 1 ? app.count : ''}" :visible {app.count > 1})))))
+
+(defwidget workspaces [workspaces_data]
+  (box :class "workspaces" :orientation "h" :spacing 6 :space-evenly false
+    (for ws in workspaces_data
+      (button :class "workspace ${ws.active ? 'active' : ''} ${ws.occupied ? 'occupied' : ''}"
+              :onclick "scripts/dispatch.sh ${ws.id}"
+        (box :orientation "h" :spacing 4 :space-evenly false
+          (label :text "${ws.id}")
+          (workspace-apps :apps {ws.apps}))))))
 
 (defwidget clock []
   (box :class "clock" :orientation "h" :space-evenly false
-    (label :text "󰥔  ${time}")))
+    (label :text "󰥔  ${time_full}")))
 
 (defwidget mpris []
-  (box :class "mpris ${mpris_info.status == 'paused' ? 'paused' : ''}" 
+  (box :class "mpris ${mpris_info.status == 'paused' ? 'paused' : '󰏤'}" 
        :orientation "h" 
        :space-evenly false
        :visible {mpris_info.status != "stopped"}
-    (label :text "${mpris_info.status == 'playing' ? '' : ''} ${mpris_info.artist != '' ? mpris_info.artist + ' - ' : ''}${mpris_info.title}"
+    (label :text "${mpris_info.status == 'playing' ? '󰐊' : '󰏤'} ${mpris_info.artist != '' ? mpris_info.artist + ' - ' : ''}${mpris_info.title}"
            :limit-width 40)))
 
 (defwidget cpu []
   (box :class "cpu" :orientation "h" :space-evenly false
     (button :onclick "wezterm start btop"
-      "CPU ${round(cpu_usage, 0)}%")))
+      "󰻠 ${round(cpu_usage, 0)}%")))
 
 (defwidget memory []
   (box :class "memory" :orientation "h" :space-evenly false
     (button :onclick "wezterm start btop"
-      "RAM ${memory_usage}%")))
+      " ${memory_usage}%")))
 
 (defwidget battery []
   (box :class "battery ${battery_status == 'Charging' ? 'charging' : battery_percent < 20 ? 'critical' : battery_percent < 30 ? 'warning' : ''}"
        :orientation "h" 
        :space-evenly false
        :visible {battery_percent != "100" || battery_status != "Full"}
-    (label :text "${battery_status == 'Charging' ? '' : battery_percent > 90 ? '' : battery_percent > 60 ? '' : battery_percent > 30 ? '' : battery_percent > 20 ? '' : ''}  ${battery_percent}%")))
+    (label :text "${battery_status == 'Charging' ? '󰂄' : battery_percent > 90 ? '󰁹' : battery_percent > 60 ? '󰂀' : battery_percent > 30 ? '󰁾' : battery_percent > 20 ? '󰁼' : '󰁺'}  ${battery_percent}%")))
 
 (defwidget volume []
   (box :class "volume ${volume_muted == 'true' ? 'muted' : ''}" :orientation "h" :space-evenly false
     (button :onclick "pavucontrol"
-      "${volume_muted == 'true' ? '' : volume > 66 ? '' : volume > 33 ? '󰖀' : '󰕿'}  ${volume}%")))
+      "${volume_muted == 'true' ? '󰖁' : volume > 66 ? '󰕾' : volume > 33 ? '󰖀' : '󰕿'}  ${volume}%")))
 
 (defwidget audiodevice []
   (box :class "audiodevice" :orientation "h" :space-evenly false
@@ -86,10 +96,9 @@
   (box :class "tray" :orientation "h" :space-evenly false
     (systray :icon-size 16 :spacing 8)))
 
-(defwidget left []
+(defwidget left [monitor]
   (box :orientation "h" :space-evenly false :halign "start" :spacing 8
-    (workspaces)
-    (clock)
+    (workspaces :workspaces_data {monitor == 0 ? workspaces_monitor0 : workspaces_monitor1})
     (mpris)))
 
 (defwidget center []
@@ -101,12 +110,12 @@
     (memory)
     (battery)
     (volume)
-    (audiodevice)
-    (tray)))
+    (tray)
+    (clock)))
 
-(defwidget bar []
+(defwidget bar [monitor]
   (centerbox :class "bar" :orientation "h"
-    (left)
+    (left :monitor monitor)
     (center)
     (right)))
 
@@ -121,7 +130,7 @@
   :stacking "fg"
   :exclusive true
   :focusable false
-  (bar))
+  (bar :monitor 0))
 
 (defwindow bar1
   :monitor 1
@@ -133,4 +142,4 @@
   :stacking "fg"
   :exclusive true
   :focusable false
-  (bar))
+  (bar :monitor 1))

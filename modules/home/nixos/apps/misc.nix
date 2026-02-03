@@ -20,7 +20,17 @@ in {
       blender
       wineWowPackages.stable
       winetricks
+      kdePackages.dolphin
+      kdePackages.dolphin-plugins
+      kdePackages.kio-extras
     ];
+    
+    xdg.mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "inode/directory" = "org.kde.dolphin.desktop";
+      };
+    };
   };
 }
 

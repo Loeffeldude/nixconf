@@ -29,7 +29,10 @@ get_mpris_info() {
   
   status_lower=$(echo "$status" | tr '[:upper:]' '[:lower:]')
   
-  jq -n --arg status "$status_lower" \
+  artist=${artist//$'\n'/ }
+  title=${title//$'\n'/ }
+
+  jq -c -n --arg status "$status_lower" \
         --arg artist "$artist" \
         --arg title "$title" \
         --arg player "$player" \

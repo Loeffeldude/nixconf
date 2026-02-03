@@ -18,29 +18,40 @@ in {
 
         monitor = [
           "DP-1,preferred,0x0,1"
-          "DP-2,preferred,1920x0,1"
+          "HDMI-A-1,preferred,1920x0,1"
           ",preferred,auto,1"
         ];
 
         workspace = [
-          "1, monitor:DP-1, default:true"
-          "2, monitor:DP-1"
-          "3, monitor:DP-1"
-          "4, monitor:DP-2, default:true"
-          "5, monitor:DP-2"
-          "6, monitor:DP-2"
+          "1, monitor:0, default:true"
+          "2, monitor:0"
+          "3, monitor:0"
+          "4, monitor:0"
+          "5, monitor:1, default:true"
+          "6, monitor:1"
+          "7, monitor:1"
+          "8, monitor:1"
         ];
 
         exec-once = [
           "eww daemon && eww open bar0 && eww open bar1"
           "dunst"
           "hyprpaper"
+          "nm-applet --indicator"
+          "blueman-applet"
+          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
+          "wl-paste --type text --watch cliphist store &"
+          "wl-paste --type image --watch cliphist store &"
         ];
 
         env = [
           "XCURSOR_THEME,Yaru"
           "XCURSOR_SIZE,24"
           "GTK_THEME,Yaru-blue-dark"
+          "GDK_BACKEND,wayland,x11"
+          "QT_QPA_PLATFORM,wayland;xcb"
+          "SDL_VIDEODRIVER,wayland"
+          "CLUTTER_BACKEND,wayland"
         ];
 
         general = {
@@ -106,7 +117,8 @@ in {
             tap-to-click = true;
             middle_button_emulation = true;
           };
-
+          repeat_delay = 400;
+          repeat_rate = 60;
           sensitivity = 0;
         };
 
@@ -117,6 +129,7 @@ in {
           mouse_move_enables_dpms = true;
           key_press_enables_dpms = true;
           vrr = 0;
+          middle_click_paste = false;
         };
 
         bind = [
@@ -166,6 +179,7 @@ in {
           "$mod SHIFT, 9, movetoworkspace, 9"
 
           "$mod, Tab, workspace, previous"
+          "$mod, C, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
 
           "$mod, mouse_down, workspace, e+1"
           "$mod, mouse_up, workspace, e-1"
@@ -187,6 +201,7 @@ in {
           "float,class:^(pavucontrol)$"
           "float,class:^(nm-connection-editor)$"
           "float,class:^(blueberry.py)$"
+          "float,class:^(blueman-manager)$"
           "float,title:^(Picture-in-Picture)$"
           "pin,title:^(Picture-in-Picture)$"
           "opacity 0.0 override,class:^(xwaylandvideobridge)$"
@@ -302,6 +317,7 @@ in {
       playerctl
       gsettings-desktop-schemas
       pwmenu
+      cliphist
     ];
 
     programs.wofi = {
