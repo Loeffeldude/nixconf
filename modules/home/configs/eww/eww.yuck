@@ -4,6 +4,7 @@
 
 (defpoll time_full :interval "1s"
   "date '+%Y-%m-%d %H:%M'")
+
 (defpoll cpu_usage :interval "2s" :initial "0"
   "sh -c \"read cpu user nice system idle iowait irq softirq steal guest guest_nice < /proc/stat; total=\\$((user+nice+system+idle+iowait+irq+softirq+steal)); idle_all=\\$((idle+iowait)); sleep 0.2; read cpu user2 nice2 system2 idle2 iowait2 irq2 softirq2 steal2 guest2 guest_nice2 < /proc/stat; total2=\\$((user2+nice2+system2+idle2+iowait2+irq2+softirq2+steal2)); idle_all2=\\$((idle2+iowait2)); total_delta=\\$((total2-total)); idle_delta=\\$((idle_all2-idle_all)); if [ \\\"\\$total_delta\\\" -le 0 ]; then echo 0; else echo \\$(((total_delta-idle_delta)*100/total_delta)); fi\"")
 
@@ -54,25 +55,25 @@
 
 (defwidget clock []
   (box :class "clock" :orientation "h" :space-evenly false
-    (label :text "󰥔  ${time}")))
+    (label :text "󰥔  ${time_full}")))
 
 (defwidget mpris []
-  (box :class "mpris ${mpris_info.status == 'paused' ? 'paused' : ''}" 
+  (box :class "mpris ${mpris_info.status == 'paused' ? 'paused' : '󰏤'}" 
        :orientation "h" 
        :space-evenly false
        :visible {mpris_info.status != "stopped"}
-    (label :text "${mpris_info.status == 'playing' ? '' : ''} ${mpris_info.artist != '' ? mpris_info.artist + ' - ' : ''}${mpris_info.title}"
+    (label :text "${mpris_info.status == 'playing' ? '󰐊' : '󰏤'} ${mpris_info.artist != '' ? mpris_info.artist + ' - ' : ''}${mpris_info.title}"
            :limit-width 40)))
 
 (defwidget cpu []
   (box :class "cpu" :orientation "h" :space-evenly false
     (button :onclick "wezterm start btop"
-      "CPU ${round(cpu_usage, 0)}%")))
+      "󰻠 ${round(cpu_usage, 0)}%")))
 
 (defwidget memory []
   (box :class "memory" :orientation "h" :space-evenly false
     (button :onclick "wezterm start btop"
-      "RAM ${memory_usage}%")))
+      " ${memory_usage}%")))
 
 (defwidget battery []
   (box :class "battery ${battery_status == 'Charging' ? 'charging' : battery_percent < 20 ? 'critical' : battery_percent < 30 ? 'warning' : ''}"
@@ -85,11 +86,6 @@
   (box :class "volume ${volume_muted == 'true' ? 'muted' : ''}" :orientation "h" :space-evenly false
     (button :onclick "pavucontrol"
       "${volume_muted == 'true' ? '󰖁' : volume > 66 ? '󰕾' : volume > 33 ? '󰖀' : '󰕿'}  ${volume}%")))
-
-(defwidget audiodevice []
-  (box :class "audiodevice" :orientation "h" :space-evenly false
-    (button :onclick "pwmenu --launcher custom --launcher-command 'wofi --dmenu'"
-      "󰓃")))
 
 (defwidget tray []
   (box :class "tray" :orientation "h" :space-evenly false
@@ -109,7 +105,6 @@
     (memory)
     (battery)
     (volume)
-    (audiodevice)
     (tray)
     (clock)))
 

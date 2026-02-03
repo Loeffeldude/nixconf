@@ -4,6 +4,7 @@
 get_app_icon() {
   case "$1" in
   firefox* | Firefox*) echo "" ;;
+  bruno* | Bruno*) echo "󰩃" ;;
   chromium* | chrome* | Google-chrome*) echo "" ;;
   *wezterm* | kitty | alacritty | foot | wterm) echo "" ;;
   *code* | Code | VSCodium | code-oss) echo "󰨞" ;;

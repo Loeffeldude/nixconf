@@ -40,12 +40,18 @@ in {
           "nm-applet --indicator"
           "blueman-applet"
           "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
+          "wl-paste --type text --watch cliphist store &"
+          "wl-paste --type image --watch cliphist store &"
         ];
 
         env = [
           "XCURSOR_THEME,Yaru"
           "XCURSOR_SIZE,24"
           "GTK_THEME,Yaru-blue-dark"
+          "GDK_BACKEND,wayland,x11"
+          "QT_QPA_PLATFORM,wayland;xcb"
+          "SDL_VIDEODRIVER,wayland"
+          "CLUTTER_BACKEND,wayland"
         ];
 
         general = {
@@ -123,6 +129,7 @@ in {
           mouse_move_enables_dpms = true;
           key_press_enables_dpms = true;
           vrr = 0;
+          middle_click_paste = false;
         };
 
         bind = [
@@ -172,6 +179,7 @@ in {
           "$mod SHIFT, 9, movetoworkspace, 9"
 
           "$mod, Tab, workspace, previous"
+          "$mod, C, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
 
           "$mod, mouse_down, workspace, e+1"
           "$mod, mouse_up, workspace, e-1"
@@ -309,6 +317,7 @@ in {
       playerctl
       gsettings-desktop-schemas
       pwmenu
+      cliphist
     ];
 
     programs.wofi = {
