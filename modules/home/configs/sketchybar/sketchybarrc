@@ -1,6 +1,6 @@
-# Define colors from Rusty theme
-export BG="0xff0f0f0f"
-export PANEL="0xff1d1f21"
+# Define colors from Rusty theme (matching EWW)
+export BG="0xd90f0f0f"
+export PANEL="0xcc1d1f21"
 export FG="0xffc5c8c6"
 export ACCENT="0xffde935f"
 export SELECTION="0xff373b41"
@@ -19,29 +19,29 @@ export FONT="SF Pro"
 # Get the directory where this script is located
 CONFIG_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Configure bar
+# Configure bar (matching EWW background)
 sketchybar --bar height=28 \
                 position=top \
                 padding_left=6 \
                 padding_right=6 \
-                color=0x00000000 \
+                color=$BG \
                 blur_radius=0 \
                 drawing=on
 
-# Configure default values
-sketchybar --default icon.font="Hack Nerd Font:Bold:12.0" \
+# Configure default values (matching EWW styling)
+sketchybar --default icon.font="Hack Nerd Font:Bold:13.0" \
                     icon.color=$FG \
-                    icon.padding_left=6 \
+                    icon.padding_left=10 \
                     icon.padding_right=3 \
-                    label.font="SF Pro:Medium:12.0" \
+                    label.font="SF Pro:Regular:13.0" \
                     label.color=$FG \
                     label.padding_left=3 \
-                    label.padding_right=6 \
+                    label.padding_right=10 \
                     padding_left=2 \
                     padding_right=2 \
-                    blur_radius=30 \
+                    blur_radius=0 \
                     background.color=$PANEL \
-                    background.corner_radius=6 \
+                    background.corner_radius=24 \
                     background.height=22 \
                     background.drawing=on
 
@@ -54,19 +54,19 @@ sketchybar --add event aerospace_workspace_change
 # Initialize workspaces after aerospace is ready (background process)
 "$CONFIG_DIR/plugins/init_workspaces.sh" &
 
-# CPU
-sketchybar --add item cpu right \
-          --set cpu icon="CPU" \
-                    icon.color=$CYAN \
-                    update_freq=2 \
-                    script="$CONFIG_DIR/plugins/cpu.sh"
+# Right side items (added in reverse order since they stack right-to-left)
+# Clock item (rightmost)
+sketchybar --add item clock right \
+          --set clock update_freq=10 \
+                      icon="󰥔" \
+                      icon.color=$ACCENT \
+                      script="$CONFIG_DIR/plugins/clock.sh"
 
-# RAM
-sketchybar --add item ram right \
-          --set ram icon="RAM" \
-                    icon.color=$GREEN \
-                    update_freq=2 \
-                    script="$CONFIG_DIR/plugins/ram.sh"
+# Volume item
+sketchybar --add item volume right \
+          --set volume script="$CONFIG_DIR/plugins/volume.sh" \
+                       icon.color=$MAGENTA \
+          --subscribe volume volume_change
 
 # Battery item
 sketchybar --add item battery right \
@@ -75,18 +75,19 @@ sketchybar --add item battery right \
                         script="$CONFIG_DIR/plugins/battery.sh" \
           --subscribe battery system_woke power_source_change
 
-# Volume item
-sketchybar --add item volume right \
-          --set volume script="$CONFIG_DIR/plugins/volume.sh" \
-                       icon.color=$MAGENTA \
-          --subscribe volume volume_change
+# Memory (RAM)
+sketchybar --add item ram right \
+          --set ram icon="" \
+                    icon.color=$GREEN \
+                    update_freq=2 \
+                    script="$CONFIG_DIR/plugins/ram.sh"
 
-# Clock item
-sketchybar --add item clock left \
-          --set clock update_freq=10 \
-                      icon="󰥔" \
-                      icon.color=$ACCENT \
-                      script="$CONFIG_DIR/plugins/clock.sh"
+# CPU (leftmost of right side)
+sketchybar --add item cpu right \
+          --set cpu icon="󰻠" \
+                    icon.color=$CYAN \
+                    update_freq=2 \
+                    script="$CONFIG_DIR/plugins/cpu.sh"
 
 # Media item (now playing)
 sketchybar --add item media left \

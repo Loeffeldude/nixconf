@@ -6,7 +6,7 @@ get_app_icon() {
   firefox* | Firefox*) echo "" ;;
   bruno* | Bruno*) echo "󰩃" ;;
   chromium* | chrome* | Google-chrome*) echo "" ;;
-  *wezterm* | kitty | alacritty | foot | wterm) echo "" ;;
+  *wezterm* | *WeztTerm* | kitty | alacritty | foot | wterm) echo "" ;;
   *code* | Code | VSCodium | code-oss) echo "󰨞" ;;
   nvim | neovim | vim) echo "" ;;
   spotify | Spotify) echo "" ;;

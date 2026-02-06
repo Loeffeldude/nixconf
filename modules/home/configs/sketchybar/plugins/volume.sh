@@ -5,9 +5,9 @@ MUTED=$(osascript -e "output muted of (get volume settings)")
 
 if [ "$MUTED" = "true" ]; then
     ICON="󰖁"
-elif [ "$VOLUME" -gt 50 ]; then
+elif [ "$VOLUME" -gt 66 ]; then
     ICON="󰕾"
-elif [ "$VOLUME" -gt 0 ]; then
+elif [ "$VOLUME" -gt 33 ]; then
     ICON="󰖀"
 else
     ICON="󰕿"

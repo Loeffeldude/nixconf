@@ -10,11 +10,11 @@ fi
 if [ -n "$CHARGING" ]; then
     ICON="󰂄"
 else
-    if [ "$PERCENTAGE" -gt 80 ]; then
+    if [ "$PERCENTAGE" -gt 90 ]; then
         ICON="󰁹"
     elif [ "$PERCENTAGE" -gt 60 ]; then
         ICON="󰂀"
-    elif [ "$PERCENTAGE" -gt 40 ]; then
+    elif [ "$PERCENTAGE" -gt 30 ]; then
         ICON="󰁾"
     elif [ "$PERCENTAGE" -gt 20 ]; then
         ICON="󰁼"

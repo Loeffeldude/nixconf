@@ -52,14 +52,16 @@
       after-startup-command = [ "exec-and-forget sketchybar" ];
 
       exec-on-workspace-change = [
-        "sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE"
+        "/bin/bash"
+        "-c"
+        "${pkgs.sketchybar}/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE"
       ];
 
       gaps = {
         inner.horizontal = 10;
         inner.vertical = 10;
         outer.left = 10;
-        outer.bottom = 34;
+        outer.bottom = 10;
         outer.top = 42;
         outer.right = 10;
       };
@@ -183,12 +185,16 @@
         # "com.apple.desktopservices".DSDontWriteNetworkStores = false;
         "com.apple.desktopservices".DSDontWriteUSBStores = true;
 
-        # Dock
+        # Dock - completely hidden
         "com.apple.dock" = {
-          autohide = false;
+          autohide = true;
+          autohide-delay = 1000.0;
+          autohide-time-modifier = 0.0;
           orientation = "bottom";
           size-immutable = true;
-          tilesize = 36;
+          tilesize = 1;
+          show-recents = false;
+          static-only = true;
         };
         # Finder
         "com.apple.finder" = {

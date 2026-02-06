@@ -14,7 +14,6 @@
   homebrew = {
     enable = true;
     casks = [
-      "taskbar"
       "alt-tab"
       "xquartz"
       "font-hack-nerd-font"
