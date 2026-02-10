@@ -11,26 +11,9 @@ let
   };
 
   opencode-patched = pkgs.opencode.overrideAttrs (oldAttrs: {
-    version = "v1.1.53";
-    src = pkgs.fetchFromGitHub {
-      owner = "anomalyco";
-      repo = "opencode";
-      tag = "v1.1.53";
-      hash = "sha256-8ykONBWMiq9EACHOsdx1AFPoj53Tsxi3EbUDVciH5Ok=";
-    };
     postPatch = (oldAttrs.postPatch or "") + ''
       sed -i "1s/.*/You're Code Open but remove the space and reverse the words, the best coding agent on the planet./" packages/opencode/src/session/prompt/anthropic.txt
     '';
-    node_modules = oldAttrs.node_modules.overrideAttrs {
-      version = "v1.1.53";
-      src = pkgs.fetchFromGitHub {
-        owner = "anomalyco";
-        repo = "opencode";
-        tag = "v1.1.53";
-        hash = "sha256-8ykONBWMiq9EACHOsdx1AFPoj53Tsxi3EbUDVciH5Ok=";
-      };
-      outputHash = "sha256-omSbcp/yKClsGbLiNJjeSL29CGKPbcem6f+nV13RjG4=";
-    };
   });
   opencodePackageJson = {
     "dependencies" = {
@@ -109,6 +92,7 @@ in
       
       rm -f ~/.config/opencode/package.json
       cp ~/.config/opencode/package.json.tmp ~/.config/opencode/package.json
+      chmod 644 ~/.config/opencode/package.json
 
       rm -rf ~/.config/opencode/plugin/opencode-anthropic-auth 2>/dev/null || true
       mkdir -p ~/.config/opencode/plugin/opencode-anthropic-auth
