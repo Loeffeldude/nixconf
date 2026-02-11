@@ -197,17 +197,41 @@ in {
           "$mod CTRL SHIFT, l, resizeactive, 50 0"
         ];
 
-        windowrulev2 = [
-          "float,class:^(pavucontrol)$"
-          "float,class:^(nm-connection-editor)$"
-          "float,class:^(blueberry.py)$"
-          "float,class:^(blueman-manager)$"
-          "float,title:^(Picture-in-Picture)$"
-          "pin,title:^(Picture-in-Picture)$"
-          "opacity 0.0 override,class:^(xwaylandvideobridge)$"
-          "noanim,class:^(xwaylandvideobridge)$"
-          "nofocus,class:^(xwaylandvideobridge)$"
-          "noinitialfocus,class:^(xwaylandvideobridge)$"
+        windowrule = [
+          {
+            name = "windowrule-1";
+            float = "on";
+            match.class = "^(pavucontrol)$";
+          }
+          {
+            name = "windowrule-2";
+            float = "on";
+            match.class = "^(nm-connection-editor)$";
+          }
+          {
+            name = "windowrule-3";
+            float = "on";
+            match.class = "^(blueberry.py)$";
+          }
+          {
+            name = "windowrule-4";
+            float = "on";
+            match.class = "^(blueman-manager)$";
+          }
+          {
+            name = "windowrule-5";
+            float = "on";
+            pin = "on";
+            match.title = "^(Picture-in-Picture)$";
+          }
+          {
+            name = "windowrule-6";
+            opacity = "0.0 override";
+            no_anim = "on";
+            no_focus = "on";
+            no_initial_focus = "on";
+            match.class = "^(xwaylandvideobridge)$";
+          }
         ];
       };
     };
