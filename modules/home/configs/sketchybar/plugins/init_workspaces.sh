@@ -43,7 +43,7 @@ for monitor in $MONITORS; do
             label.padding_left=10 \
             label.padding_right=10 \
             label.color=$INACTIVE \
-            label.font="SF Pro:Regular:13.0" \
+            label.font="Hack Nerd Font:Bold:9.0" \
             click_script="aerospace workspace $sid" \
             update_freq=1 \
             script="$CONFIG_DIR/plugins/aerospace.sh $sid"

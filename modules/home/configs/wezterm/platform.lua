@@ -8,7 +8,7 @@ end
 
 function M.setup(config)
 	if M.is_macos() then
-		config.font = wezterm.font("Noto Mono")
+		config.font = wezterm.font("JetBrainsMono Nerd Font")
 	else
 		config.font = wezterm.font("Jetbrains Mono NF")
 	end
