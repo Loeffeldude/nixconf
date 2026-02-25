@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 # Wait for aerospace to be ready
-sleep 2
+if [ "$1" != "--no-delay" ]; then
+    sleep 2
+fi
 
 # Ensure aerospace is in PATH
 export PATH="/run/current-system/sw/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
@@ -14,6 +16,9 @@ FG="0xffc5c8c6"
 INACTIVE="0xff909090"
 # Get the directory where this script is located
 CONFIG_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)"
+
+# Remove all existing workspace items
+sketchybar --remove '/space\..*/'
 
 # Get all monitors
 MONITORS=$(/run/current-system/sw/bin/aerospace list-monitors | cut -d' ' -f1)
@@ -43,7 +48,7 @@ for monitor in $MONITORS; do
             label.padding_left=10 \
             label.padding_right=10 \
             label.color=$INACTIVE \
-            label.font="SF Pro:Regular:13.0" \
+            label.font="Hack Nerd Font:Bold:9.0" \
             click_script="aerospace workspace $sid" \
             update_freq=1 \
             script="$CONFIG_DIR/plugins/aerospace.sh $sid"
