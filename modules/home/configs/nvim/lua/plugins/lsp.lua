@@ -26,7 +26,13 @@ return {
           },
         },
         rust_analyzer = {},
-        gopls = {},
+        gopls = {
+          settings = {
+            gopls = {
+              usePlaceholders = false,
+            },
+          },
+        },
         tsserver = {
           settings = {
             typescript = {
