@@ -7,5 +7,9 @@
     ./homebrew.nix
     flake-inputs.mac-app-util.darwinModules.default
   ];
-  config = { };
+  config = {
+    environment.systemPackages = [
+      pkgs.colima
+    ];
+  };
 }
