@@ -56,7 +56,7 @@ in {
 
         general = {
           gaps_in = 8;
-          gaps_out = "8,36,8,8";
+          gaps_out = "8,8,8,8";
           border_size = 1;
           "col.active_border" = "rgba(de935faa)";
           "col.inactive_border" = "rgba(4d505780)";
@@ -110,7 +110,7 @@ in {
           kb_layout = "de";
           kb_options = "caps:escape";
 
-          follow_mouse = 1;
+          follow_mouse = 0;
 
           touchpad = {
             natural_scroll = true;
@@ -130,6 +130,7 @@ in {
           key_press_enables_dpms = true;
           vrr = 0;
           middle_click_paste = false;
+          focus_on_activate = true;
         };
 
         bind = [

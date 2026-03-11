@@ -16,7 +16,7 @@ in {
 
     home.packages = with pkgs; [
       protonvpn-gui
-      # rustdesk
+      rustdesk
       blender
       wineWowPackages.stable
       winetricks
@@ -24,7 +24,7 @@ in {
       kdePackages.dolphin-plugins
       kdePackages.kio-extras
     ];
-    
+
     xdg.mimeApps = {
       enable = true;
       defaultApplications = {
