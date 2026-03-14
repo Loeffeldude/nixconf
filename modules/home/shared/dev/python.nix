@@ -7,7 +7,7 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       # Python interpreters
-      python311
+      python313
 
       # Python package managers and build tools
       pipx
@@ -16,7 +16,7 @@ in {
       pdm
 
       # Python virtual environment tools
-      python311Packages.virtualenv
+      python313Packages.virtualenv
 
     ];
   };

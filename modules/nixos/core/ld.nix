@@ -47,23 +47,23 @@
       # Desktop
 
       ## Graphics Libraries (X11)
-      xorg.libX11
-      xorg.libxcb
-      xorg.libSM
-      xorg.libICE
-      xorg.libXt
-      xorg.libXft
-      xorg.libXrender
-      xorg.libXext
-      xorg.libXi
-      xorg.libXtst
-      xorg.libXcursor
-      xorg.libXcomposite
-      xorg.libXfixes
-      xorg.libXdamage
-      xorg.libXrandr
-      xorg.libXScrnSaver
-      xorg.libXfixes
+      libx11
+      libxcb
+      libsm
+      libice
+      libxt
+      libxft
+      libxrender
+      libxext
+      libxi
+      libxtst
+      libxcursor
+      libxcomposite
+      libxfixes
+      libxdamage
+      libxrandr
+      libxscrnsaver
+      libxfixes
       libxkbcommon
 
       ## OpenGL Libraries
@@ -118,4 +118,3 @@
     };
   };
 }
-

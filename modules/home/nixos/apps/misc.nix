@@ -18,7 +18,7 @@ in {
       protonvpn-gui
       rustdesk
       blender
-      wineWowPackages.stable
+      wineWow64Packages.stable
       winetricks
       kdePackages.dolphin
       kdePackages.dolphin-plugins
@@ -33,4 +33,3 @@ in {
     };
   };
 }
-

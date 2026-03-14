@@ -17,21 +17,21 @@ let
   });
   opencodePackageJson = {
     "dependencies" = {
-      "@opencode-ai/plugin" = "1.1.18";
+      "@opencode-ai/plugin" = "1.2.26";
       "@openauthjs/openauth" = "0.4.3";
     };
   };
   opencodeConfig = {
     "$schema" = "https://opencode.ai/config.json";
     theme = "rusty";
-    model = "anthropic/claude-sonnet-4-5";
+    model = "openapi/gpt-5.3-codex";
     plugin = [
       "file://${config.home.homeDirectory}/.config/opencode/plugin/opencode-anthropic-auth/index.mjs"
       "@simonwjackson/opencode-direnv"
       "@zenobius/opencode-background"
       "envsitter-guard@latest"
     ];
-    small_model = "anthropic/claude-haiku-4-5";
+    small_model = "openapi/gpt-5.2-codex";
     mcp = {
       shadcn = {
         type = "local";

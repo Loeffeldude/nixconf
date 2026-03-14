@@ -9,7 +9,7 @@ in {
       ghidra
       podman-desktop
       dbeaver-bin
-      flake-inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.bruno
+      flake-inputs.nixpkgs-stable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.bruno
     ];
 
     home.file.".ideavimrc".source = ../../configs/.ideavimrc;
