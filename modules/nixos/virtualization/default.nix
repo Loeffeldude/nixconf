@@ -6,6 +6,7 @@
       package = pkgs.qemu_kvm;
       runAsRoot = true;
       swtpm.enable = true;
+      vhostUserPackages = [ pkgs.virtiofsd ];
       verbatimConfig = ''
         user = "root"
         group = "root"
