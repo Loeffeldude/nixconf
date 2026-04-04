@@ -11,13 +11,6 @@ in {
       pnpm
       bun
       deno
-
-      # Node.js dev tools
-      nodePackages.nodemon
-      nodePackages.pm2
-
-      # Development servers and utilities
-      nodePackages.serve
     ];
   };
 }

@@ -7,7 +7,7 @@ let
     owner = "deveworld";
     repo = "opencode-anthropic-auth";
     rev = "1d4f78478bf31f930b0044d574e9965ca0889276";
-    sha256 = "sha256-+6sVYt7KQ+TBp4neNz4TdWAb2sHoCGmokkSNnQutXVI=";
+    sha256 = "sha256-K31UhIDcbaYnBgrmWcvnwrCbmJ5H7XYR/8ZH9uKHpfM=";
   };
 
   opencode-patched = pkgs.opencode.overrideAttrs (oldAttrs: {

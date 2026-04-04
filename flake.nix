@@ -23,95 +23,103 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, darwin, nixos-wsl, ... }: 
-  let
-    system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
-  in
-  {
-    nixosConfigurations = {
-      qemu = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        specialArgs = { inherit self system; flake-inputs = inputs; };
-        modules = [ ./hosts/qemu/default.nix ];
-      };
+  outputs = inputs@{ self, nixpkgs, home-manager, darwin, nixos-wsl, ... }:
+    let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
+    {
+      nixosConfigurations = {
+        qemu = nixpkgs.lib.nixosSystem rec {
+          system = "x86_64-linux";
+          specialArgs = { inherit self system; flake-inputs = inputs; };
+          modules = [ ./hosts/qemu/default.nix ];
+        };
 
-      t500 = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        specialArgs = { inherit self system; flake-inputs = inputs; };
-        modules = [ ./hosts/t500/default.nix ];
-      };
+        t500 = nixpkgs.lib.nixosSystem rec {
+          system = "x86_64-linux";
+          specialArgs = { inherit self system; flake-inputs = inputs; };
+          modules = [ ./hosts/t500/default.nix ];
+        };
 
-      t15 = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        specialArgs = { inherit self system; flake-inputs = inputs; };
-        modules = [ ./hosts/t15/default.nix ];
-      };
-      ms7e57 = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        specialArgs = { inherit self system; flake-inputs = inputs; };
-        modules = [ ./hosts/ms7e57/default.nix ];
-      };
-      wsl = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        specialArgs = { inherit self system; flake-inputs = inputs; };
-        modules = [
-          ./hosts/wsl
-        ];
-      };
-      live = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        specialArgs = { inherit self system; flake-inputs = inputs; };
-        modules = [
-          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-          ./hosts/live
-        ];
-      };
-      docker = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        specialArgs = { inherit self system; flake-inputs = inputs; };
-        modules = [ ./hosts/docker/default.nix ];
-      };
-    };
-
-    packages.${system} = {
-      dockerImage = pkgs.dockerTools.buildLayeredImage {
-        name = "nixos-container";
-        tag = "latest";
-        contents = [ self.nixosConfigurations.docker.config.system.build.toplevel ];
-        config = {
-          Cmd = [ "${self.nixosConfigurations.docker.config.system.build.toplevel}/init" ];
+        t15 = nixpkgs.lib.nixosSystem rec {
+          system = "x86_64-linux";
+          specialArgs = { inherit self system; flake-inputs = inputs; };
+          modules = [ ./hosts/t15/default.nix ];
+        };
+        ms7e57 = nixpkgs.lib.nixosSystem rec {
+          system = "x86_64-linux";
+          specialArgs = { inherit self system; flake-inputs = inputs; };
+          modules = [ ./hosts/ms7e57/default.nix ];
+        };
+        wsl = nixpkgs.lib.nixosSystem rec {
+          system = "x86_64-linux";
+          specialArgs = { inherit self system; flake-inputs = inputs; };
+          modules = [
+            ./hosts/wsl
+          ];
+        };
+        live = nixpkgs.lib.nixosSystem rec {
+          system = "x86_64-linux";
+          specialArgs = { inherit self system; flake-inputs = inputs; };
+          modules = [
+            "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+            ./hosts/live
+          ];
+        };
+        docker = nixpkgs.lib.nixosSystem rec {
+          system = "x86_64-linux";
+          specialArgs = { inherit self system; flake-inputs = inputs; };
+          modules = [ ./hosts/docker/default.nix ];
         };
       };
-    };
 
-    darwinConfigurations =
-      {
-        vm = darwin.lib.darwinSystem
-          {
-            modules = [ ./hosts/darwin/vm.nix ];
-            specialArgs = {
-              flake-inputs = inputs;
-              self = self;
-            };
+      packages.${system} = {
+        dockerImage = pkgs.dockerTools.buildLayeredImage {
+          name = "nixos-container";
+          tag = "latest";
+          contents = [ self.nixosConfigurations.docker.config.system.build.toplevel ];
+          config = {
+            Cmd = [ "${self.nixosConfigurations.docker.config.system.build.toplevel}/init" ];
           };
-        nicostartupwerk = darwin.lib.darwinSystem
-          {
-            modules = [ ./hosts/darwin/nicostartupwerk.nix ];
-            specialArgs = {
-              flake-inputs = inputs;
-              self = self;
-            };
-          };
+        };
       };
-    # TODO: add homemanger config for home-manager only systems
 
-    # homeManagerConfigurations = {
-    #   "${config.primaryUser}" = home-manager.lib.homeManagerConfiguration {
-    #     pkgs = nixpkgs.legacyPackages."x86_64-linux";
-    #     extraSpecialArgs = { flake-inputs = inputs; };
-    #     modules = [ ./modules/home/default.nix ];
-    #   };
-    # };
-  };
+      devShells.${system} = {
+        default = pkgs.mkShell {
+          packages = [
+            pkgs.pre-commit
+            pkgs.just
+          ];
+        };
+      };
+      darwinConfigurations =
+        {
+          vm = darwin.lib.darwinSystem
+            {
+              modules = [ ./hosts/darwin/vm.nix ];
+              specialArgs = {
+                flake-inputs = inputs;
+                self = self;
+              };
+            };
+          nicostartupwerk = darwin.lib.darwinSystem
+            {
+              modules = [ ./hosts/darwin/nicostartupwerk.nix ];
+              specialArgs = {
+                flake-inputs = inputs;
+                self = self;
+              };
+            };
+        };
+      # TODO: add homemanger config for home-manager only systems
+
+      # homeManagerConfigurations = {
+      #   "${config.primaryUser}" = home-manager.lib.homeManagerConfiguration {
+      #     pkgs = nixpkgs.legacyPackages."x86_64-linux";
+      #     extraSpecialArgs = { flake-inputs = inputs; };
+      #     modules = [ ./modules/home/default.nix ];
+      #   };
+      # };
+    };
 }

@@ -7,6 +7,9 @@ in {
 
     home.file.".gitignore".source = ../../configs/.gitignore.global;
 
+    home.packages = with pkgs; [
+      lazygit
+    ];
     programs.git = {
       enable = true;
       settings = {

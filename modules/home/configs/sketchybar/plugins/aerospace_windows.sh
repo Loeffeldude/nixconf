@@ -26,14 +26,20 @@ if [ -n "$APPS" ]; then
   for app in "${!app_count[@]}"; do
     icon=$(get_app_icon "$app")
     count=${app_count[$app]}
-    # Truncate app name to max 10 chars
-    app_name="${app:0:10}"
-    if [ "$count" -gt 1 ]; then
-      ICON_LINE="${ICON_LINE} ${icon}  ${app_name}×${count}"
+    if [ ${#app} -gt 10 ]; then
+      start="${app:0:3}"
+      end="${app: -5}"
+      app_name="${start}...${end}"
     else
-      ICON_LINE="${ICON_LINE} ${icon}  ${app_name}"
+      app_name="$app"
+    fi
+    if [ "$count" -gt 1 ]; then
+      ICON_LINE="${ICON_LINE} ${icon} ${app_name}"
+    else
+      ICON_LINE="${ICON_LINE} ${icon} ${app_name}"
     fi
   done
 fi
 
-sketchybar --set space.$WORKSPACE label="$WORKSPACE$ICON_LINE"
+sketchybar --set space.$WORKSPACE label="$WORKSPACE$ICON_LINE" \
+  label.font="Hack Nerd Font:Bold:9.0"

@@ -14,7 +14,7 @@ export CYAN="0xff8abeb7"
 
 # Icons
 export APPLE=" "
-export FONT="SF Pro"
+export FONT="Hack Nerd Font:Bold:13.0"
 
 # Get the directory where this script is located
 CONFIG_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -33,7 +33,7 @@ sketchybar --default icon.font="Hack Nerd Font:Bold:13.0" \
                     icon.color=$FG \
                     icon.padding_left=10 \
                     icon.padding_right=3 \
-                    label.font="SF Pro:Regular:13.0" \
+                    label.font="Hack Nerd Font:Bold:13.0" \
                     label.color=$FG \
                     label.padding_left=3 \
                     label.padding_right=10 \
@@ -51,8 +51,18 @@ source "$CONFIG_DIR/plugins/apple_menu.sh"
 # Add aerospace events
 sketchybar --add event aerospace_workspace_change
 
+# Add display change event and listener
+sketchybar --add event display_change
+sketchybar --add item display_listener left \
+           --set display_listener drawing=off \
+                                 script="$CONFIG_DIR/plugins/display_change.sh" \
+           --subscribe display_listener display_change
+
 # Initialize workspaces after aerospace is ready (background process)
 "$CONFIG_DIR/plugins/init_workspaces.sh" &
+
+# Start monitor watcher in background
+"$CONFIG_DIR/plugins/monitor_watcher.sh" &
 
 # Right side items (added in reverse order since they stack right-to-left)
 # Clock item (rightmost)
@@ -77,14 +87,14 @@ sketchybar --add item battery right \
 
 # Memory (RAM)
 sketchybar --add item ram right \
-          --set ram icon="" \
+          --set ram icon="" \
                     icon.color=$GREEN \
                     update_freq=2 \
                     script="$CONFIG_DIR/plugins/ram.sh"
 
 # CPU (leftmost of right side)
 sketchybar --add item cpu right \
-          --set cpu icon="󰻠" \
+          --set cpu icon="" \
                     icon.color=$CYAN \
                     update_freq=2 \
                     script="$CONFIG_DIR/plugins/cpu.sh"

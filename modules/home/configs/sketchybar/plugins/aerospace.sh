@@ -38,14 +38,17 @@ done
 if [ "$IS_VISIBLE" = "true" ]; then
     # Active workspace
     sketchybar --set $NAME label.color=$ACCENT \
+                        label.font="Hack Nerd Font:Bold:9.0" \
                         background.color=$ACCENT_BG
 elif [ "$WINDOWS" -gt 0 ]; then
     # Occupied but not active
     sketchybar --set $NAME label.color=$OCCUPIED \
+                        label.font="Hack Nerd Font:Bold:9.0" \
                         background.color=$OCCUPIED_BG
 else
     # Inactive and empty
     sketchybar --set $NAME label.color=$INACTIVE \
+                        label.font="Hack Nerd Font:Bold:9.0" \
                         background.color=$PANEL
 fi
 
