@@ -25,8 +25,8 @@
   gaming.enable = true;
   dev.enable = true;
   apps.enable = true;
-  desktop.gnome.enable = true;
-
+  desktop.gnome.enable = false;
+  desktop.hyprland.enable = true;
   services.flatpak.enable = true;
   # Enable CUPS to print documents.
   services.printing.enable = true;
