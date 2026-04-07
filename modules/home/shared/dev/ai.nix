@@ -110,7 +110,11 @@ in
     };
     home.packages = with pkgs; [
       opencode-patched
-      claude-code
+
+      # claude code currently broken
+      # claude-code
+
+      # this too the power of AI everyone
       # gemini-cli
     ];
   };
