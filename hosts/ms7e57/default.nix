@@ -21,6 +21,10 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.interfaces.enp5s0.wakeOnLan = {
+    enable = true;
+    policy = [ "magic" ];
+  };
 
   gaming.enable = true;
   dev.enable = true;
