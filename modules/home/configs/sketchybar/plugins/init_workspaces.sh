@@ -29,9 +29,6 @@ for monitor in $MONITORS; do
     WORKSPACES=$(/run/current-system/sw/bin/aerospace list-workspaces --monitor "$monitor")
     
     for sid in $WORKSPACES; do
-        # Calculate display mask for sketchybar (1-indexed)
-        DISPLAY_MASK=$((1 << (monitor - 1)))
-        
         sketchybar --add item space.$sid left \
             --subscribe space.$sid aerospace_workspace_change \
             --set space.$sid \
@@ -50,7 +47,6 @@ for monitor in $MONITORS; do
             label.color=$INACTIVE \
             label.font="Hack Nerd Font:Bold:9.0" \
             click_script="aerospace workspace $sid" \
-            update_freq=1 \
             script="$CONFIG_DIR/plugins/aerospace.sh $sid"
         
         # Initial app icon update

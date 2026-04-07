@@ -26,13 +26,19 @@ WINDOWS=$(/run/current-system/sw/bin/aerospace list-windows --workspace "$WORKSP
 
 # Find which monitor this workspace is on and check if it's visible
 IS_VISIBLE=false
-for monitor in $(/run/current-system/sw/bin/aerospace list-monitors | cut -d' ' -f1); do
-    VISIBLE_WS=$(/run/current-system/sw/bin/aerospace list-workspaces --monitor "$monitor" --visible)
-    if [ "$VISIBLE_WS" = "$WORKSPACE" ]; then
+if [ -n "$FOCUSED_WORKSPACE" ]; then
+    if [ "$FOCUSED_WORKSPACE" = "$WORKSPACE" ]; then
         IS_VISIBLE=true
-        break
     fi
-done
+else
+    for monitor in $(/run/current-system/sw/bin/aerospace list-monitors | cut -d' ' -f1); do
+        VISIBLE_WS=$(/run/current-system/sw/bin/aerospace list-workspaces --monitor "$monitor" --visible)
+        if [ "$VISIBLE_WS" = "$WORKSPACE" ]; then
+            IS_VISIBLE=true
+            break
+        fi
+    done
+fi
 
 # Update workspace highlight
 if [ "$IS_VISIBLE" = "true" ]; then

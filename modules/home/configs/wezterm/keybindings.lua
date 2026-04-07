@@ -14,19 +14,25 @@ function M.setup(config, is_macos)
 	end
 
 	table.insert(config.keys, {
+		key = "Space",
+		mods = "CTRL",
+		action = wezterm.action({ SendString = "\x00" }),
+	})
+
+	table.insert(config.keys, {
 		key = "S",
 		mods = "CTRL|SHIFT",
 		action = wezterm.action.PaneSelect,
 	})
 
-	if not is_macos then
-		for i = 1, 9 do
-			table.insert(config.keys, {
-				key = tostring(i),
-				mods = "ALT",
-				action = wezterm.action({ ActivateTab = i - 1 }),
-			})
-		end
+	local tab_number_mods = is_macos and "SUPER" or "CTRL"
+
+	for i = 1, 9 do
+		table.insert(config.keys, {
+			key = tostring(i),
+			mods = tab_number_mods,
+			action = wezterm.action({ ActivateTab = i - 1 }),
+		})
 	end
 
 	table.insert(config.keys, {
