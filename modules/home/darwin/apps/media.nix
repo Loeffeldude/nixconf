@@ -3,6 +3,8 @@ with lib;
 let cfg = config.apps;
 in {
   config = mkIf cfg.media.enable {
-    home.packages = with pkgs; [ libreoffice-bin ];
+    home.packages = with pkgs; [
+      libreoffice-bin
+    ];
   };
 }
