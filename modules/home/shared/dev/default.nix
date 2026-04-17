@@ -11,7 +11,7 @@ in {
     };
     elixir.enable = lib.mkOption {
       type = lib.types.bool;
-      default = true;
+      default = false;
     };
     go.enable = lib.mkOption {
       type = lib.types.bool;

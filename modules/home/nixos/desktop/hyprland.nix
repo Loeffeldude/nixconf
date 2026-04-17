@@ -37,6 +37,7 @@ in {
           "eww daemon && eww open bar0 && eww open bar1"
           "dunst"
           "hyprpaper"
+          "hypridle"
           "nm-applet --indicator"
           "blueman-applet"
           "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
@@ -50,7 +51,6 @@ in {
           "GTK_THEME,Yaru-blue-dark"
           "GDK_BACKEND,wayland,x11"
           "QT_QPA_PLATFORM,wayland;xcb"
-          "SDL_VIDEODRIVER,wayland"
           "CLUTTER_BACKEND,wayland"
         ];
 
@@ -137,6 +137,7 @@ in {
           "$mod, Return, exec, $terminal"
           "$mod, Space, exec, wofi --show drun"
           "$mod, Q, killactive,"
+          "$mod, L, exec, hyprlock"
           "$mod SHIFT, E, exit,"
           ", Print, exec, grim -g \"$(slurp)\" - | wl-copy && notify-send \"Screenshot\" \"Copied to clipboard\""
           "SHIFT, Print, exec, grim ~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png && notify-send \"Screenshot\" \"Saved to ~/Pictures\""
@@ -329,6 +330,25 @@ in {
       preload = ~/.background-image-dark
       wallpaper = ,~/.background-image-dark
       splash = false
+    '';
+
+    home.file.".config/hypr/hypridle.conf".text = ''
+      general {
+        lock_cmd = pidof hyprlock || hyprlock
+        before_sleep_cmd = loginctl lock-session
+        after_sleep_cmd = hyprctl dispatch dpms on
+      }
+
+      listener {
+        timeout = 300
+        on-timeout = loginctl lock-session
+      }
+
+      listener {
+        timeout = 330
+        on-timeout = hyprctl dispatch dpms off
+        on-resume = hyprctl dispatch dpms on
+      }
     '';
 
     home.file.".background-image-dark".source = ../../../../media/nix-dark.png;
