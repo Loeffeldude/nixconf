@@ -1,4 +1,8 @@
 { config, pkgs, ... }: {
+  imports = [
+    ./looking-glass.nix
+  ];
+
   programs.virt-manager.enable = true;
   virtualisation.libvirtd = {
     enable = true;
@@ -14,7 +18,8 @@
           "/dev/null", "/dev/full", "/dev/zero",
           "/dev/random", "/dev/urandom",
           "/dev/ptmx", "/dev/kvm",
-          "/dev/dri/renderD128"
+          "/dev/dri/renderD128",
+          "/dev/kvmfr0"
         ]
       '';
     };

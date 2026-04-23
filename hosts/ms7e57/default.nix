@@ -40,6 +40,23 @@
     };
 
   services.flatpak.enable = true;
+
+  boot.kernelParams = [
+    "amd_iommu=on"
+    "iommu=pt"
+    "vfio-pci.ids=10de:1c82,10de:0fb9"
+  ];
+  boot.initrd.kernelModules = [
+    "vfio"
+    "vfio_pci"
+    "vfio_iommu_type1"
+  ];
+
+  virtualisation.lookingGlass = {
+    enable = true;
+    staticSizeMB = 128;
+  };
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
   services.nixconf-updater.enable = true;
