@@ -87,6 +87,7 @@ assert_contains modules/home/configs/eww-plasma-i3/scripts/dispatch.sh 'i3-msg w
 assert_contains modules/home/configs/eww-plasma-i3/scripts/window-title.sh 'xprop -root _NET_ACTIVE_WINDOW'
 assert_contains modules/home/configs/eww-plasma-i3/scripts/window-title.sh 'if ! window_id=\$\(xprop -root _NET_ACTIVE_WINDOW'
 assert_contains modules/home/configs/eww-plasma-i3/scripts/window-title.sh 'if title=\$\(xprop -id "\$window_id" _NET_WM_NAME'
+assert_contains modules/home/configs/eww-plasma-i3/scripts/window-title.sh '_NET_WM_NAME:  not found\.'
 assert_contains modules/home/configs/eww-plasma-i3/scripts/window-title.sh 'if title=\$\(xprop -id "\$window_id" WM_NAME'
 assert_not_contains modules/home/configs/eww-plasma-i3/scripts/window-title.sh '_NET_WM_NAME WM_NAME'
 assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'i3-msg -t get_workspaces'
