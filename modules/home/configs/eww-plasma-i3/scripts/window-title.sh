@@ -20,7 +20,7 @@ current_title() {
     return
   fi
 
-  if title=$(xprop -id "$window_id" WM_NAME 2>/dev/null | sed -E 's/^[^=]+= //; s/^"//; s/"$//'); then
+  if title=$(xprop -id "$window_id" WM_NAME 2>/dev/null | sed -E 's/^[^=]+= //; s/^"//; s/"$//') && [ "$title" != 'WM_NAME:  not found.' ]; then
     printf '%s\n' "$title"
     return
   fi
