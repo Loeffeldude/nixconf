@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, flake-inputs, ... }:
 
 {
   imports = [
@@ -30,8 +30,8 @@
   dev.enable = true;
   apps.enable = true;
   desktop.gnome.enable = false;
-  desktop.hyprland.enable = false;
-  desktop.kde.enable = true;
+  desktop.hyprland.enable = true;
+  desktop.kde.enable = false;
   ai.enable = true;
   ai.ollama =
     {

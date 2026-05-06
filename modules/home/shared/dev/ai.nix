@@ -3,35 +3,18 @@
 with lib;
 let
   cfg = config.dev;
-  opencode-anthropic-auth = pkgs.fetchFromGitHub {
-    owner = "deveworld";
-    repo = "opencode-anthropic-auth";
-    rev = "1d4f78478bf31f930b0044d574e9965ca0889276";
-    sha256 = "sha256-K31UhIDcbaYnBgrmWcvnwrCbmJ5H7XYR/8ZH9uKHpfM=";
-  };
 
-  opencode-patched = pkgs.opencode.overrideAttrs (oldAttrs: {
-    postPatch = (oldAttrs.postPatch or "") + ''
-      sed -i "1s/.*/You're Code Open but remove the space and reverse the words, the best coding agent on the planet./" packages/opencode/src/session/prompt/anthropic.txt
-    '';
-  });
-  opencodePackageJson = {
-    "dependencies" = {
-      "@opencode-ai/plugin" = "1.2.26";
-      "@openauthjs/openauth" = "0.4.3";
-    };
-  };
   opencodeConfig = {
     "$schema" = "https://opencode.ai/config.json";
-    theme = "rusty";
-    model = "openapi/gpt-5.3-codex";
+    model = "openai/gpt-5.4";
     plugin = [
-      "file://${config.home.homeDirectory}/.config/opencode/plugin/opencode-anthropic-auth/index.mjs"
       "@simonwjackson/opencode-direnv"
       "@zenobius/opencode-background"
       "envsitter-guard@latest"
+      "superpowers@git+https://github.com/obra/superpowers.git#v5.0.7"
     ];
-    small_model = "openapi/gpt-5.2-codex";
+    autoupdate = false;
+    small_model = "openai/gpt-5.2-codex";
     mcp = {
       shadcn = {
         type = "local";
@@ -69,14 +52,12 @@ let
     };
   };
 
-  opencodePackageJsonFile = pkgs.writeText "package.json" (builtins.toJSON opencodePackageJson);
-  opencodeConfigFile = pkgs.writeText "opencode.jsonc" (builtins.toJSON opencodeConfig);
+  opencodeConfigFile = pkgs.writeText "opencode.json" (builtins.toJSON opencodeConfig);
 in
 {
   config = mkIf cfg.ai.enable {
     home.file = {
-      ".config/opencode/opencode.jsonc".source = opencodeConfigFile;
-      ".config/opencode/package.json.tmp".source = opencodePackageJsonFile;
+      ".config/opencode/opencode.json".source = opencodeConfigFile;
       ".config/opencode/AGENTS.md".source = ../../configs/opencode/AGENTS.md;
       ".config/opencode/nixtools".source = ../../configs/opencode/nixtools;
       ".config/opencode/nixplugin".source = ../../configs/opencode/plugin;
@@ -90,15 +71,6 @@ in
       cp -f ~/.config/opencode/nixtools/* ~/.config/opencode/tool/
       chmod 600 ~/.config/opencode/tool/*
       
-      rm -f ~/.config/opencode/package.json
-      cp ~/.config/opencode/package.json.tmp ~/.config/opencode/package.json
-      chmod 644 ~/.config/opencode/package.json
-
-      rm -rf ~/.config/opencode/plugin/opencode-anthropic-auth 2>/dev/null || true
-      mkdir -p ~/.config/opencode/plugin/opencode-anthropic-auth
-      cp -r ${opencode-anthropic-auth}/* ~/.config/opencode/plugin/opencode-anthropic-auth/
-      chmod -R u+rwX ~/.config/opencode/plugin/opencode-anthropic-auth/
-      
       if [ -d ~/.config/opencode/nixplugin ]; then
         cp -f ~/.config/opencode/nixplugin/* ~/.config/opencode/plugin/
         chmod 600 ~/.config/opencode/plugin/*.ts 2>/dev/null || true
@@ -109,7 +81,7 @@ in
       # OPENCODE_DISABLE_DEFAULT_PLUGINS = "true";
     };
     home.packages = with pkgs; [
-      opencode-patched
+      opencode
 
       # claude code currently broken
       # claude-code

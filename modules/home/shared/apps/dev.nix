@@ -1,6 +1,11 @@
 { lib, config, pkgs, flake-inputs, ... }:
 with lib;
-let cfg = config.apps;
+let
+  cfg = config.apps;
+  stablePkgs = import flake-inputs.nixpkgs-stable {
+    system = pkgs.stdenv.hostPlatform.system;
+    config.allowUnfree = true;
+  };
 
 in {
   config = mkIf cfg.dev.enable {
@@ -8,7 +13,7 @@ in {
       ghidra
       podman-desktop
       dbeaver-bin
-      flake-inputs.nixpkgs-stable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.bruno
+      stablePkgs.bruno
     ] ++ lib.optionals pkgs.stdenv.isLinux [
       jetbrains.rider
     ];

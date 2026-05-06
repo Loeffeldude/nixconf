@@ -1,6 +1,11 @@
 { config, pkgs, lib, flake-inputs, ... }:
 with lib;
-let cfg = config.dev.python;
+let
+  cfg = config.dev.python;
+  stablePkgs = import flake-inputs.nixpkgs-stable {
+    system = pkgs.system;
+    config.allowUnfree = true;
+  };
 
 in {
 
@@ -12,7 +17,8 @@ in {
       # Python package managers and build tools
       pipx
       uv
-      pdm
+      # nixos-unstable currently ships a broken pdm dependency set.
+      stablePkgs.pdm
 
       # Python virtual environment tools
       python313Packages.virtualenv
@@ -21,7 +27,7 @@ in {
       poetry
     ] ++ lib.optionals pkgs.stdenv.isDarwin [
       # Use stable nixpkgs poetry on Darwin to avoid Python 3.13 rapidfuzz build issues
-      flake-inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.poetry
+      stablePkgs.poetry
     ];
   };
 }
