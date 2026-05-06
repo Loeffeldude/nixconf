@@ -30,8 +30,8 @@
   dev.enable = true;
   apps.enable = true;
   desktop.gnome.enable = false;
-  desktop.hyprland.enable = true;
-  desktop.kde.enable = false;
+  desktop.hyprland.enable = false;
+  desktop.kde.enable = true;
   ai.enable = true;
   ai.ollama =
     {
