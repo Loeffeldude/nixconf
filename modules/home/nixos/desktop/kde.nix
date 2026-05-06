@@ -97,11 +97,43 @@ in {
             "${mod}+v" = "floating toggle";
             "${mod}+f" = "fullscreen toggle";
             "${mod}+m" = "fullscreen toggle";
+            "${mod}+h" = "focus left";
+            "${mod}+j" = "focus down";
+            "${mod}+k" = "focus up";
+            "${mod}+l" = "focus right";
+            "${mod}+Shift+h" = "move left";
+            "${mod}+Shift+j" = "move down";
+            "${mod}+Shift+k" = "move up";
+            "${mod}+Shift+l" = "move right";
+            "${mod}+Ctrl+Shift+h" = "resize shrink width 50 px or 5 ppt";
+            "${mod}+Ctrl+Shift+l" = "resize grow width 50 px or 5 ppt";
+            "${mod}+Ctrl+k" = "resize shrink height 50 px or 5 ppt";
+            "${mod}+Ctrl+j" = "resize grow height 50 px or 5 ppt";
+            "${mod}+1" = "workspace number 1";
+            "${mod}+2" = "workspace number 2";
+            "${mod}+3" = "workspace number 3";
+            "${mod}+4" = "workspace number 4";
+            "${mod}+5" = "workspace number 5";
+            "${mod}+6" = "workspace number 6";
+            "${mod}+7" = "workspace number 7";
+            "${mod}+8" = "workspace number 8";
+            "${mod}+9" = "workspace number 9";
+            "${mod}+Shift+1" = "move container to workspace number 1";
+            "${mod}+Shift+2" = "move container to workspace number 2";
+            "${mod}+Shift+3" = "move container to workspace number 3";
+            "${mod}+Shift+4" = "move container to workspace number 4";
+            "${mod}+Shift+5" = "move container to workspace number 5";
+            "${mod}+Shift+6" = "move container to workspace number 6";
+            "${mod}+Shift+7" = "move container to workspace number 7";
+            "${mod}+Shift+8" = "move container to workspace number 8";
+            "${mod}+Shift+9" = "move container to workspace number 9";
             "${mod}+Tab" = "workspace back_and_forth";
             "${mod}+c" = "exec qdbus org.kde.klipper /klipper org.kde.klipper.klipper.showKlipperPopupMenu";
             "Print" = "exec spectacle -r -c";
             "Shift+Print" = "exec spectacle -f";
             "${mod}+p" = "layout toggle split";
+            "${mod}+Shift+s" = "layout stacking";
+            "${mod}+Shift+t" = "layout tabbed";
           };
       };
 
@@ -113,6 +145,10 @@ in {
         for_window [class="krunner"] floating enable, border none
         for_window [class="Klipper"] floating enable, border none
         for_window [class="systemsettings"] floating enable
+        for_window [class="pavucontrol"] floating enable
+        for_window [class="nm-connection-editor"] floating enable
+        for_window [class="blueberry.py"] floating enable
+        for_window [class="blueman-manager"] floating enable
         for_window [title="Picture-in-Picture"] sticky enable, floating enable
         workspace 1 output DP-1
         workspace 2 output DP-1
