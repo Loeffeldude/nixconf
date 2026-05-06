@@ -37,3 +37,14 @@ assert_contains modules/home/nixos/desktop/kde.nix '"\$\{mod\}\+c" = "exec qdbus
 assert_contains modules/home/nixos/desktop/kde.nix 'picom -b'
 assert_contains modules/home/nixos/desktop/kde.nix 'eww open bar0'
 assert_contains modules/home/nixos/desktop/kde.nix 'services\.dunst\.enable = false;'
+test -f modules/home/configs/eww-plasma-i3/eww.yuck
+test -f modules/home/configs/eww-plasma-i3/eww.scss
+test -f modules/home/configs/eww-plasma-i3/scripts/workspaces.sh
+test -f modules/home/configs/eww-plasma-i3/scripts/window-title.sh
+assert_contains modules/home/configs/eww-plasma-i3/eww.yuck 'deflisten workspaces_monitor0'
+assert_contains modules/home/configs/eww-plasma-i3/eww.yuck 'deflisten window_title'
+assert_contains modules/home/configs/eww-plasma-i3/eww.yuck 'scripts/workspaces.sh 0'
+assert_contains modules/home/configs/eww-plasma-i3/eww.yuck 'scripts/workspaces.sh 1'
+assert_contains modules/home/configs/eww-plasma-i3/scripts/dispatch.sh 'i3-msg workspace number'
+assert_contains modules/home/configs/eww-plasma-i3/scripts/window-title.sh 'xprop -root _NET_ACTIVE_WINDOW'
+assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'wmctrl -lx'
