@@ -56,6 +56,7 @@ assert_contains modules/home/nixos/desktop/kde.nix '"\$\{mod\}\+Shift\+t" = "lay
 assert_contains modules/home/nixos/desktop/kde.nix 'for_window \[class="pavucontrol"\] floating enable'
 assert_contains modules/home/nixos/desktop/kde.nix 'for_window \[class="nm-connection-editor"\] floating enable'
 assert_contains modules/home/nixos/desktop/kde.nix 'for_window \[class="blueberry.py"\] floating enable'
+assert_contains modules/home/nixos/desktop/kde.nix 'workspace 9 output HDMI-A-1'
 test -f modules/home/configs/eww-plasma-i3/eww.yuck
 test -f modules/home/configs/eww-plasma-i3/eww.scss
 test -f modules/home/configs/eww-plasma-i3/scripts/workspaces.sh
@@ -67,3 +68,6 @@ assert_contains modules/home/configs/eww-plasma-i3/eww.yuck 'scripts/workspaces.
 assert_contains modules/home/configs/eww-plasma-i3/scripts/dispatch.sh 'i3-msg workspace number'
 assert_contains modules/home/configs/eww-plasma-i3/scripts/window-title.sh 'xprop -root _NET_ACTIVE_WINDOW'
 assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'wmctrl -lx'
+assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'local start_ws=\$\(\(monitor_id \* 4 \+ 1\)\)'
+assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'if \[ "\$monitor_id" = "1" \]; then'
+assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'end_ws=9'

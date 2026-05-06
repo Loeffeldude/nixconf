@@ -11,6 +11,10 @@ get_workspace_json() {
   local json_output="["
   local ws_id
 
+  if [ "$monitor_id" = "1" ]; then
+    end_ws=9
+  fi
+
   active_ws=$(i3-msg -t get_workspaces | jq -r '.[] | select(.focused == true).num')
   raw_windows=$(wmctrl -lx)
   occupied_workspaces=$(printf '%s\n' "$raw_windows" | awk '{print $2}' | sort -u)

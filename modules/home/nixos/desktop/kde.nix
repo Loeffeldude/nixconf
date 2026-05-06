@@ -158,6 +158,7 @@ in {
         workspace 6 output HDMI-A-1
         workspace 7 output HDMI-A-1
         workspace 8 output HDMI-A-1
+        workspace 9 output HDMI-A-1
         exec --no-startup-id "killall kwin_x11 2>/dev/null || true"
       '';
     };
