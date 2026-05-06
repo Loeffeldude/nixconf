@@ -3,6 +3,26 @@ with lib;
 
 let
   cfg = config.desktop.kde;
+  plasmaI3SessionScript = pkgs.writeShellScriptBin "startplasma-i3" ''
+    export PATH=${lib.makeBinPath [ pkgs.i3 ]}:$PATH
+    export KDEWM=i3
+    exec ${pkgs.kdePackages.plasma-workspace}/bin/startplasma-x11
+  '';
+  plasmaI3Session = pkgs.symlinkJoin {
+    name = "plasma-i3-session";
+    passthru.providedSessions = [ "plasma-i3" ];
+    paths = [
+      plasmaI3SessionScript
+      (pkgs.writeTextDir "share/xsessions/plasma-i3.desktop" ''
+        [Desktop Entry]
+        Type=XSession
+        Exec=${plasmaI3SessionScript}/bin/startplasma-i3
+        TryExec=${plasmaI3SessionScript}/bin/startplasma-i3
+        DesktopNames=plasma-i3
+        Name=Plasma + i3
+      '')
+    ];
+  };
 in
 {
   options.desktop.kde = {
@@ -29,7 +49,10 @@ in
       };
 
       desktopManager.plasma6.enable = true;
-      displayManager.defaultSession = "plasmax11";
+      displayManager = {
+        defaultSession = "plasma-i3";
+        sessionPackages = [ plasmaI3Session ];
+      };
 
       displayManager.sddm = {
         enable = true;

@@ -29,7 +29,10 @@ assert_not_contains() {
 assert_contains hosts/ms7e57/default.nix 'desktop\.hyprland\.enable = false;'
 assert_contains hosts/ms7e57/default.nix 'desktop\.kde\.enable = true;'
 assert_contains modules/nixos/desktop/kde/default.nix 'desktopManager\.plasma6\.enable = true;'
-assert_contains modules/nixos/desktop/kde/default.nix 'displayManager\.defaultSession = "plasmax11";'
+assert_contains modules/nixos/desktop/kde/default.nix 'defaultSession = "plasma-i3";'
+assert_contains modules/nixos/desktop/kde/default.nix 'providedSessions = \[ "plasma-i3" \];'
+assert_contains modules/nixos/desktop/kde/default.nix 'export KDEWM=i3'
+assert_contains modules/nixos/desktop/kde/default.nix 'startplasma-x11'
 assert_contains modules/nixos/desktop/kde/default.nix 'libinput = \{'
 assert_contains modules/nixos/desktop/kde/default.nix 'networkmanagerapplet'
 assert_contains modules/nixos/desktop/kde/default.nix 'blueman'
@@ -87,3 +90,17 @@ assert_not_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'wm
 assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'local start_ws=\$\(\(monitor_id \* 4 \+ 1\)\)'
 assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'if \[ "\$monitor_id" = "1" \]; then'
 assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'end_ws=9'
+
+default_session="$(nix eval .#nixosConfigurations.ms7e57.config.services.displayManager.defaultSession --raw)"
+
+if [ "$default_session" != "plasma-i3" ]; then
+  printf 'unexpected default session %s\n' "$default_session" >&2
+  exit 1
+fi
+
+session_data="$(nix eval .#nixosConfigurations.ms7e57.config.services.xserver.displayManager.session --json)"
+
+if ! nix eval .#nixosConfigurations.ms7e57.config.services.displayManager.sessionPackages --json | jq -e '.[] | select(test("plasma-i3-session"))' >/dev/null; then
+  printf 'missing evaluated plasma-i3 session package\n' >&2
+  exit 1
+fi
