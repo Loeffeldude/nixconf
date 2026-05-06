@@ -18,7 +18,7 @@ let
         Type=XSession
         Exec=${plasmaI3SessionScript}/bin/startplasma-i3
         TryExec=${plasmaI3SessionScript}/bin/startplasma-i3
-        DesktopNames=plasma-i3
+        DesktopNames=plasma-i3;KDE
         Name=Plasma + i3
       '')
     ];
@@ -96,6 +96,7 @@ in
       feh
       picom
       wmctrl
+      xrandr
       xclip
       xprop
       xwininfo

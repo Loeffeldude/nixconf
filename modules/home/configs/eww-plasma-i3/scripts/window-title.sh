@@ -15,12 +15,17 @@ current_title() {
     return
   fi
 
-  if ! title=$(xprop -id "$window_id" _NET_WM_NAME WM_NAME 2>/dev/null | sed -E 's/^[^=]+= //; s/^"//; s/"$//'); then
-    printf '\n'
+  if title=$(xprop -id "$window_id" _NET_WM_NAME 2>/dev/null | sed -E 's/^[^=]+= //; s/^"//; s/"$//'); then
+    printf '%s\n' "$title"
     return
   fi
 
-  printf '%s\n' "$title"
+  if title=$(xprop -id "$window_id" WM_NAME 2>/dev/null | sed -E 's/^[^=]+= //; s/^"//; s/"$//'); then
+    printf '%s\n' "$title"
+    return
+  fi
+
+  printf '\n'
 }
 
 current_title
