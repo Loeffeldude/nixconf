@@ -39,7 +39,10 @@ assert_contains modules/nixos/desktop/kde/default.nix 'blueman'
 assert_contains modules/nixos/desktop/kde/default.nix 'spectacle'
 assert_contains modules/nixos/desktop/kde/default.nix 'picom'
 assert_contains modules/nixos/desktop/kde/default.nix 'wmctrl'
-assert_contains modules/nixos/desktop/kde/default.nix 'xorg\.xprop'
+assert_contains modules/nixos/desktop/kde/default.nix 'xprop'
+assert_contains modules/nixos/desktop/kde/default.nix 'xwininfo'
+assert_not_contains modules/nixos/desktop/kde/default.nix 'xorg\.xprop'
+assert_not_contains modules/nixos/desktop/kde/default.nix 'xorg\.xwininfo'
 assert_contains modules/home/nixos/desktop/kde.nix 'programs\.eww = \{'
 assert_contains modules/home/nixos/desktop/kde.nix 'configDir = ../../configs/eww-plasma-i3;'
 assert_contains modules/home/nixos/desktop/kde.nix '"\$\{mod\}\+Return" = "exec wezterm start";'
@@ -70,6 +73,7 @@ assert_contains modules/home/nixos/desktop/kde.nix 'for_window \[class="pavucont
 assert_contains modules/home/nixos/desktop/kde.nix 'for_window \[class="nm-connection-editor"\] floating enable'
 assert_contains modules/home/nixos/desktop/kde.nix 'for_window \[class="blueberry.py"\] floating enable'
 assert_contains modules/home/nixos/desktop/kde.nix 'workspace 9 output HDMI-A-1'
+assert_contains modules/home/nixos/desktop/kde.nix 'exec --no-startup-id "\$\{pkgs\.procps\}/bin/pkill -x kwin_x11 2>/dev/null \|\| true"'
 test -f modules/home/configs/eww-plasma-i3/eww.yuck
 test -f modules/home/configs/eww-plasma-i3/eww.scss
 test -f modules/home/configs/eww-plasma-i3/scripts/workspaces.sh
@@ -97,8 +101,6 @@ if [ "$default_session" != "plasma-i3" ]; then
   printf 'unexpected default session %s\n' "$default_session" >&2
   exit 1
 fi
-
-session_data="$(nix eval .#nixosConfigurations.ms7e57.config.services.xserver.displayManager.session --json)"
 
 if ! nix eval .#nixosConfigurations.ms7e57.config.services.displayManager.sessionPackages --json | jq -e '.[] | select(test("plasma-i3-session"))' >/dev/null; then
   printf 'missing evaluated plasma-i3 session package\n' >&2

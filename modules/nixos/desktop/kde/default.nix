@@ -97,8 +97,8 @@ in
       picom
       wmctrl
       xclip
-      xorg.xprop
-      xorg.xwininfo
+      xprop
+      xwininfo
       networkmanagerapplet
       blueman
       pavucontrol
