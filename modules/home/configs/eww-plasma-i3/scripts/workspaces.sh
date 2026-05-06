@@ -5,19 +5,21 @@ get_workspace_json() {
   local monitor_id="$1"
   local start_ws=$((monitor_id * 4 + 1))
   local end_ws=$((start_ws + 3))
+  local target_output="DP-1"
   local active_ws
-  local raw_windows
+  local workspaces_json
   local occupied_workspaces
   local json_output="["
   local ws_id
 
   if [ "$monitor_id" = "1" ]; then
+    target_output="HDMI-A-1"
     end_ws=9
   fi
 
-  active_ws=$(i3-msg -t get_workspaces | jq -r '.[] | select(.focused == true).num')
-  raw_windows=$(wmctrl -lx)
-  occupied_workspaces=$(printf '%s\n' "$raw_windows" | awk '{print $2}' | sort -u)
+  workspaces_json=$(i3-msg -t get_workspaces)
+  active_ws=$(printf '%s\n' "$workspaces_json" | jq -r --arg target_output "$target_output" '.[] | select(.output == $target_output and .visible == true) | .num' | head -n1)
+  occupied_workspaces=$(printf '%s\n' "$workspaces_json" | jq -r --arg target_output "$target_output" '.[] | select(.output == $target_output and .num != null) | .num')
 
   for ws_id in $(seq "$start_ws" "$end_ws"); do
     local is_active="false"

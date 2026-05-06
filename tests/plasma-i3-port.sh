@@ -16,6 +16,16 @@ assert_contains() {
   fi
 }
 
+assert_not_contains() {
+  local file="$1"
+  local pattern="$2"
+
+  if rg -q "$pattern" "$file"; then
+    printf 'unexpected pattern %s in %s\n' "$pattern" "$file" >&2
+    exit 1
+  fi
+}
+
 assert_contains hosts/ms7e57/default.nix 'desktop\.hyprland\.enable = false;'
 assert_contains hosts/ms7e57/default.nix 'desktop\.kde\.enable = true;'
 assert_contains modules/nixos/desktop/kde/default.nix 'desktopManager\.plasma6\.enable = true;'
@@ -67,7 +77,13 @@ assert_contains modules/home/configs/eww-plasma-i3/eww.yuck 'scripts/workspaces.
 assert_contains modules/home/configs/eww-plasma-i3/eww.yuck 'scripts/workspaces.sh 1'
 assert_contains modules/home/configs/eww-plasma-i3/scripts/dispatch.sh 'i3-msg workspace number'
 assert_contains modules/home/configs/eww-plasma-i3/scripts/window-title.sh 'xprop -root _NET_ACTIVE_WINDOW'
-assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'wmctrl -lx'
+assert_contains modules/home/configs/eww-plasma-i3/scripts/window-title.sh 'if ! window_id=\$\(xprop -root _NET_ACTIVE_WINDOW'
+assert_contains modules/home/configs/eww-plasma-i3/scripts/window-title.sh 'if ! title=\$\(xprop -id "\$window_id" _NET_WM_NAME WM_NAME'
+assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'i3-msg -t get_workspaces'
+assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'target_output'
+assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'select\(\.output == \$target_output and \.visible == true\)'
+assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'select\(\.output == \$target_output and \.num != null\) \| \.num'
+assert_not_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'wmctrl -lx'
 assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'local start_ws=\$\(\(monitor_id \* 4 \+ 1\)\)'
 assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'if \[ "\$monitor_id" = "1" \]; then'
 assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'end_ws=9'
