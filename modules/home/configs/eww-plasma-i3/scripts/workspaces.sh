@@ -29,7 +29,11 @@ get_workspace_json() {
       ;;
   esac
 
-  workspaces_json=$(i3-msg -t get_workspaces)
+  if ! workspaces_json=$(i3-msg -t get_workspaces); then
+    printf '[]\n'
+    return
+  fi
+
   active_ws=$(printf '%s\n' "$workspaces_json" | jq -r --arg target_output "$target_output" '.[] | select(.output == $target_output and .visible == true) | .num' | head -n1)
   occupied_workspaces=$(printf '%s\n' "$workspaces_json" | jq -r --arg target_output "$target_output" '.[] | select(.output == $target_output and .num != null) | .num')
 

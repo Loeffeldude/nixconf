@@ -97,6 +97,7 @@ assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'monito
 assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'target_output'
 assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'DP-1'
 assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'HDMI-A-1'
+assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'if ! workspaces_json=\$\(i3-msg -t get_workspaces\); then'
 assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'select\(\.output == \$target_output and \.visible == true\)'
 assert_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'select\(\.output == \$target_output and \.num != null\) \| \.num'
 assert_not_contains modules/home/configs/eww-plasma-i3/scripts/workspaces.sh 'wmctrl -lx'
