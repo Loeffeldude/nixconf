@@ -1,0 +1,41 @@
+(deflisten workspaces_monitor0 :initial "[]"
+  "scripts/workspaces.sh 0")
+
+(deflisten workspaces_monitor1 :initial "[]"
+  "scripts/workspaces.sh 1")
+
+(deflisten window_title :initial ""
+  "scripts/window-title.sh")
+
+(defwidget workspaces [workspaces_data]
+  (box :class "workspaces" :orientation "h" :spacing 6
+    (for ws in workspaces_data
+      (button :class "workspace ${ws.active ? 'active' : ''} ${ws.occupied ? 'occupied' : ''}"
+              :onclick "scripts/dispatch.sh ${ws.id}"
+        (label :text "${ws.id}")))))
+
+(defwidget title []
+  (box :class "title"
+    (label :text "${window_title}" :limit-width 80)))
+
+(defwidget bar [monitor]
+  (centerbox :class "bar"
+    (workspaces :workspaces_data {monitor == 0 ? workspaces_monitor0 : workspaces_monitor1})
+    (title)
+    (box)))
+
+(defwindow bar0
+  :monitor 0
+  :geometry (geometry :x "0%" :y "0%" :width "100%" :height "28px" :anchor "top center")
+  :stacking "fg"
+  :exclusive true
+  :focusable false
+  (bar :monitor 0))
+
+(defwindow bar1
+  :monitor 1
+  :geometry (geometry :x "0%" :y "0%" :width "100%" :height "28px" :anchor "top center")
+  :stacking "fg"
+  :exclusive true
+  :focusable false
+  (bar :monitor 1))
