@@ -77,31 +77,31 @@
       };
 
       mode.main.binding = {
-        alt-enter = ''exec-and-forget ${wezterm}/bin/wezterm start'';
+        ctrl-alt-enter = ''exec-and-forget ${wezterm}/bin/wezterm start'';
 
         # Layout switching
-        alt-shift-comma = "layout tiles horizontal vertical";
-        alt-shift-period = "layout accordion horizontal vertical";
+        ctrl-alt-shift-comma = "layout tiles horizontal vertical";
+        ctrl-alt-shift-period = "layout accordion horizontal vertical";
 
         # Focus (QWERTY hjkl) - using cmd to avoid conflict with neovim
-        alt-h = "focus left";
-        alt-j = "focus down";
-        alt-k = "focus up";
-        alt-l = "focus right";
+        ctrl-alt-h = "focus left";
+        ctrl-alt-j = "focus down";
+        ctrl-alt-k = "focus up";
+        ctrl-alt-l = "focus right";
 
         # Move windows
-        alt-shift-h = "move left";
-        alt-shift-j = "move down";
-        alt-shift-k = "move up";
-        alt-shift-l = "move right";
+        ctrl-alt-shift-h = "move left";
+        ctrl-alt-shift-j = "move down";
+        ctrl-alt-shift-k = "move up";
+        ctrl-alt-shift-l = "move right";
 
         # Move windows to monitors
-        alt-ctrl-h = "move-node-to-monitor left";
-        alt-ctrl-l = "move-node-to-monitor right";
+        ctrl-alt-cmd-h = "move-node-to-monitor left";
+        ctrl-alt-cmd-l = "move-node-to-monitor right";
 
         # Resize
-        alt-ctrl-k = "resize smart -50";
-        alt-ctrl-j = "resize smart +50";
+        ctrl-alt-cmd-k = "resize smart -50";
+        ctrl-alt-cmd-j = "resize smart +50";
 
         # Workspace switching
         ctrl-cmd-1 = "workspace 1";
@@ -126,13 +126,13 @@
         ctrl-cmd-shift-9 = "move-node-to-workspace 9";
 
         # Fullscreen and other utilities
-        alt-space = "fullscreen";
-        alt-tab = "workspace-back-and-forth";
-        alt-shift-tab = "move-workspace-to-monitor --wrap-around next";
-        alt-ctrl-s = "exec-and-forget screencapture -i -c";
+        ctrl-alt-f = "fullscreen";
+        ctrl-alt-tab = "workspace-back-and-forth";
+        ctrl-alt-shift-tab = "move-workspace-to-monitor --wrap-around next";
+        ctrl-alt-shift-s = "exec-and-forget screencapture -i -c";
 
         # Enter service mode
-        alt-s = "mode service";
+        ctrl-alt-s = "mode service";
       };
 
       workspace-to-monitor-force-assignment = {
@@ -150,10 +150,10 @@
         f = [ "layout floating tiling" "mode main" ];
         backspace = [ "close-all-windows-but-current" "mode main" ];
 
-        alt-shift-h = [ "join-with left" "mode main" ];
-        alt-shift-j = [ "join-with down" "mode main" ];
-        alt-shift-k = [ "join-with up" "mode main" ];
-        alt-shift-l = [ "join-with right" "mode main" ];
+        ctrl-alt-shift-h = [ "join-with left" "mode main" ];
+        ctrl-alt-shift-j = [ "join-with down" "mode main" ];
+        ctrl-alt-shift-k = [ "join-with up" "mode main" ];
+        ctrl-alt-shift-l = [ "join-with right" "mode main" ];
       };
     };
 

@@ -1,6 +1,10 @@
 { config, pkgs, lib, ... }:
 with lib;
-let cfg = config.dev;
+let
+  cfg = config.dev;
+  direnvPackage = if pkgs.stdenv.isDarwin then pkgs.direnv.overrideAttrs (_: {
+    doCheck = false;
+  }) else pkgs.direnv;
 
 in {
   config = mkIf cfg.enable {
@@ -36,11 +40,13 @@ in {
       prefix = ["${config.home.homeDirectory}/Documents/projects/loeffel","${config.home.homeDirectory}/Documents/projects/work"]
     '';
 
-    programs.direnv.enable = true;
+    programs.direnv = {
+      enable = true;
+      package = direnvPackage;
+    };
     programs.direnv.enableZshIntegration = true;
   };
 }
-
 
 
 
