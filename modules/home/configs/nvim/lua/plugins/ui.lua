@@ -17,6 +17,12 @@ return {
   {
     "folke/noice.nvim",
     opts = {
+      lsp = {
+        progress = {
+          enabled = false,
+          -- throttle= 1000;
+        },
+      },
       presets = {
         bottom_search = false,
         command_palette = false,

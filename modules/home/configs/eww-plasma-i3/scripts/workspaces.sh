@@ -15,11 +15,11 @@ get_workspace_json() {
   target_output=$(xrandr --listmonitors 2>/dev/null | awk -v monitor_index="$monitor_index" 'NR > 1 && $1 ~ /^[0-9]+:/ { gsub(/:/, "", $1); if ($1 == monitor_index) { print $NF; exit } }')
 
   case "$target_output" in
-    DP-1)
+    DP-0)
       start_ws=1
       end_ws=4
       ;;
-    HDMI-A-1)
+    HDMI-0)
       start_ws=5
       end_ws=9
       ;;

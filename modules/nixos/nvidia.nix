@@ -1,9 +1,12 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, ... }:
+let
+  cfg = config.nvidia;
+in {
 
   options.nvidia = {
     enable = lib.mkEnableOption "enable nvida drivers";
   };
-  config = {
+  config = lib.mkIf cfg.enable {
     # Enable OpenGL
     hardware.graphics = {
       enable = true;

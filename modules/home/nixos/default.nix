@@ -10,7 +10,7 @@
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
-      backupFileExtension = "backup";
+      backupFileExtension = "hm-backup";
       extraSpecialArgs.flake-inputs = flake-inputs;
       extraSpecialArgs.upperConfig = config;
       users.${config.primaryUser} = import ./home.nix;

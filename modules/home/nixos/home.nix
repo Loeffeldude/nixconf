@@ -18,6 +18,9 @@
     home.username = "${config.primaryUser}";
     home.homeDirectory = lib.mkForce "/home/${config.primaryUser}";
 
+    xdg.configFile."mimeapps.list".force = true;
+    gtk.gtk2.force = true;
+
     # This value determines the home Manager release that your
     # configuration is compatible with. This helps avoid breakage
     # when a new home Manager release introduces backwards
@@ -29,4 +32,3 @@
     home.stateVersion = "25.05";
   };
 }
-

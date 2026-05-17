@@ -17,8 +17,8 @@ in {
         "$terminal" = "wezterm start";
 
         monitor = [
-          "DP-1,preferred,0x0,1"
-          "HDMI-A-1,preferred,1920x0,1"
+          "DP-2,1920x1080@100,0x0,1"
+          "HDMI-A-1,1920x1080@100,1920x0,1"
           ",preferred,auto,1"
         ];
 
@@ -122,6 +122,10 @@ in {
           sensitivity = 0;
         };
 
+        cursor = {
+          no_hardware_cursors = true;
+        };
+
 
         misc = {
           disable_hyprland_logo = true;
@@ -136,11 +140,20 @@ in {
         bind = [
           "$mod, Return, exec, $terminal"
           "$mod, Space, exec, wofi --show drun"
+          "$mod, A, exec, pavucontrol"
+          "$mod SHIFT, A, exec, pwmenu"
           "$mod, Q, killactive,"
-          "$mod, L, exec, hyprlock"
           "$mod SHIFT, E, exit,"
           ", Print, exec, grim -g \"$(slurp)\" - | wl-copy && notify-send \"Screenshot\" \"Copied to clipboard\""
           "SHIFT, Print, exec, grim ~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png && notify-send \"Screenshot\" \"Saved to ~/Pictures\""
+          ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
+          ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+          ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+          ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+          ", XF86AudioPlay, exec, playerctl play-pause"
+          ", XF86AudioPause, exec, playerctl pause"
+          ", XF86AudioNext, exec, playerctl next"
+          ", XF86AudioPrev, exec, playerctl previous"
           "$mod, V, togglefloating,"
           "$mod, F, fullscreen, 1"
           "$mod, M, fullscreen, 0"

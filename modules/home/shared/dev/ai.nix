@@ -11,7 +11,7 @@ let
       "@simonwjackson/opencode-direnv"
       "@zenobius/opencode-background"
       "envsitter-guard@latest"
-      "superpowers@git+https://github.com/obra/superpowers.git#v5.0.7"
+      # "superpowers@git+https://github.com/obra/superpowers.git#v5.0.7"
     ];
     autoupdate = false;
     small_model = "openai/gpt-5.2-codex";
@@ -63,6 +63,7 @@ in
       ".config/opencode/nixplugin".source = ../../configs/opencode/plugin;
       ".config/opencode/agent".source = ../../configs/opencode/agent;
       ".config/opencode/themes".source = ../../configs/opencode/themes;
+      ".config/opencode/skills".source = ../../configs/opencode/skills;
     };
 
     # Bun doesn't handle dynamic import() with symlinks, so copy nixtools to tool/ and nixplugin to plugin/

@@ -56,39 +56,100 @@ return {
     "nvim-telescope/telescope.nvim",
     -- change some options
     keys = {
-      -- enable finding hidden/dot files
       {
         "<leader><leader>",
         function()
-          require("telescope.builtin").find_files({ hidden = true, no_ignore = true })
+          require("telescope.builtin").find_files({
+            hidden = true,
+            no_ignore = true,
+            file_ignore_patterns = {
+              "node_modules/",
+              ".git/",
+              "__pycache__/",
+              ".venv/",
+              "/vendor/",
+            },
+          })
         end,
         desc = "Find files (root dir)",
       },
+
       {
         "<leader>fa",
         function()
-          require("telescope.builtin").find_files({ hidden = true, no_ignore = false, file_ignore_patterns = {} })
+          require("telescope.builtin").find_files({
+            hidden = true,
+            no_ignore = true,
+            file_ignore_patterns = {},
+          })
         end,
         desc = "Find ALL files",
       },
+
       {
         "<leader>ff",
         function()
-          require("telescope.builtin").find_files({ hidden = true, no_ignore = true })
+          require("telescope.builtin").find_files({
+            hidden = true,
+            no_ignore = true,
+            file_ignore_patterns = {
+              "node_modules/",
+              ".git/",
+              "__pycache__/",
+              ".venv/",
+              "/vendor/",
+            },
+          })
         end,
         desc = "Find files (root dir)",
       },
+
       {
         "<leader>fF",
         function()
-          require("telescope.builtin").find_files({ cwd = false, hidden = true, no_ignore = true })
+          require("telescope.builtin").find_files({
+            cwd = false,
+            hidden = true,
+            no_ignore = true,
+            file_ignore_patterns = {
+              "node_modules/",
+              ".git/",
+              "__pycache__/",
+              ".venv/",
+              "/vendor/",
+            },
+          })
         end,
         desc = "Find files (cwd)",
+      },
+      {
+        "<leader>/",
+        function()
+          require("telescope.builtin").live_grep({
+            additional_args = function()
+              return {
+                "--glob",
+                "!**/node_modules/**",
+                "--glob",
+                "!**/.git/**",
+                "--glob",
+                "!**/__pycache__/**",
+                "--glob",
+                "!**/.venv/**",
+                "--glob",
+                "!**/vendor/**",
+              }
+            end,
+          })
+        end,
+        desc = "Grep (root dir)",
       },
     },
     opts = {
       defaults = {
-        file_ignore_patterns = { "node_modules/", ".git/", "__pycache__/", ".venv/", "/vendor/" },
+        file_ignore_patterns = {
+          "__pycache__/",
+        },
       },
     },
   },

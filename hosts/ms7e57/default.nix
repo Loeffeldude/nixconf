@@ -21,7 +21,11 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-  networking.interfaces.enp5s0.wakeOnLan = {
+  systemd.network.links."10-lan0" = {
+    matchConfig.MACAddress = "34:5a:60:3c:86:7a";
+    linkConfig.Name = "lan0";
+  };
+  networking.interfaces.lan0.wakeOnLan = {
     enable = true;
     policy = [ "magic" ];
   };
@@ -30,9 +34,11 @@
   dev.enable = true;
   apps.enable = true;
   desktop.gnome.enable = false;
-  desktop.hyprland.enable = false;
-  desktop.kde.enable = true;
+  desktop.hyprland.enable = true;
+  desktop.kde.enable = false;
   ai.enable = true;
+  amd.enable = true;
+
   ai.ollama =
     {
       enable = false;
@@ -44,13 +50,29 @@
   boot.kernelParams = [
     "amd_iommu=on"
     "iommu=pt"
-    "vfio-pci.ids=10de:1c82,10de:0fb9"
+    "vfio-pci.ids=10de:1e89,10de:10f8,10de:1ad8,10de:1ad9"
   ];
   boot.initrd.kernelModules = [
     "vfio"
     "vfio_pci"
     "vfio_iommu_type1"
   ];
+
+  systemd.services.vfio-bind-nvidia-usb = {
+    description = "Bind Nvidia USB controller to vfio-pci";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "systemd-modules-load.service" ];
+    before = [ "libvirtd.service" "virtqemud.service" ];
+    serviceConfig.Type = "oneshot";
+    script = ''
+      if [ -e /sys/bus/pci/devices/0000:01:00.2/driver/unbind ]; then
+        echo 0000:01:00.2 > /sys/bus/pci/devices/0000:01:00.2/driver/unbind
+      fi
+
+      echo vfio-pci > /sys/bus/pci/devices/0000:01:00.2/driver_override
+      echo 0000:01:00.2 > /sys/bus/pci/drivers_probe
+    '';
+  };
 
   virtualisation.lookingGlass = {
     enable = true;

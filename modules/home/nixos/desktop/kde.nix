@@ -150,15 +150,15 @@ in {
         for_window [class="blueberry.py"] floating enable
         for_window [class="blueman-manager"] floating enable
         for_window [title="Picture-in-Picture"] sticky enable, floating enable
-        workspace 1 output DP-1
-        workspace 2 output DP-1
-        workspace 3 output DP-1
-        workspace 4 output DP-1
-        workspace 5 output HDMI-A-1
-        workspace 6 output HDMI-A-1
-        workspace 7 output HDMI-A-1
-        workspace 8 output HDMI-A-1
-        workspace 9 output HDMI-A-1
+        workspace 1 output DP-0
+        workspace 2 output DP-0
+        workspace 3 output DP-0
+        workspace 4 output DP-0
+        workspace 5 output HDMI-0
+        workspace 6 output HDMI-0
+        workspace 7 output HDMI-0
+        workspace 8 output HDMI-0
+        workspace 9 output HDMI-0
         exec --no-startup-id "${pkgs.procps}/bin/pkill -x kwin_x11 2>/dev/null || true"
       '';
     };
@@ -169,6 +169,40 @@ in {
     };
 
     services.dunst.enable = false;
+
+    home.activation.disablePlasmaMetaQ = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      shortcuts_file="$HOME/.config/kglobalshortcutsrc"
+
+      if [ -f "$shortcuts_file" ]; then
+        ${pkgs.gnused}/bin/sed -i 's/^manage activities=.*/manage activities=none,none,Show Activity Switcher/' "$shortcuts_file"
+        ${pkgs.gnused}/bin/sed -i 's/^activate task manager entry 1=.*/activate task manager entry 1=none,none,Activate Task Manager Entry 1/' "$shortcuts_file"
+        ${pkgs.gnused}/bin/sed -i 's/^activate task manager entry 2=.*/activate task manager entry 2=none,none,Activate Task Manager Entry 2/' "$shortcuts_file"
+        ${pkgs.gnused}/bin/sed -i 's/^activate task manager entry 3=.*/activate task manager entry 3=none,none,Activate Task Manager Entry 3/' "$shortcuts_file"
+        ${pkgs.gnused}/bin/sed -i 's/^activate task manager entry 4=.*/activate task manager entry 4=none,none,Activate Task Manager Entry 4/' "$shortcuts_file"
+        ${pkgs.gnused}/bin/sed -i 's/^activate task manager entry 5=.*/activate task manager entry 5=none,none,Activate Task Manager Entry 5/' "$shortcuts_file"
+        ${pkgs.gnused}/bin/sed -i 's/^activate task manager entry 6=.*/activate task manager entry 6=none,none,Activate Task Manager Entry 6/' "$shortcuts_file"
+        ${pkgs.gnused}/bin/sed -i 's/^activate task manager entry 7=.*/activate task manager entry 7=none,none,Activate Task Manager Entry 7/' "$shortcuts_file"
+        ${pkgs.gnused}/bin/sed -i 's/^activate task manager entry 8=.*/activate task manager entry 8=none,none,Activate Task Manager Entry 8/' "$shortcuts_file"
+        ${pkgs.gnused}/bin/sed -i 's/^activate task manager entry 9=.*/activate task manager entry 9=none,none,Activate Task Manager Entry 9/' "$shortcuts_file"
+      fi
+
+      ${pkgs.procps}/bin/pkill -x kglobalacceld 2>/dev/null || true
+    '';
+
+    systemd.user.services.plasma-kwin_x11 = {
+      Unit = {
+        Description = "i3 Window Manager";
+        After = [ "plasma-kcminit.service" ];
+        PartOf = [ "graphical-session.target" ];
+        Before = [ "plasma-workspace-x11.target" "shutdown.target" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.i3}/bin/i3";
+        Slice = "session.slice";
+        Restart = "on-failure";
+      };
+      Install.WantedBy = [ "plasma-workspace-x11.target" ];
+    };
 
     home.file.".background-image-dark".source = ../../../../media/nix-dark.png;
     home.file.".background-image-bright".source = ../../../../media/nix-bright.png;

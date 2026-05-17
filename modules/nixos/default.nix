@@ -3,6 +3,7 @@
 {
   imports = [
     ../shared
+    ./amd.nix
     ./ai
     ./dev
     ./core
