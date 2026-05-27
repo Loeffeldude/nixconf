@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, flake-inputs, ... }:
 
 {
   imports = [
@@ -47,10 +47,15 @@
 
   services.flatpak.enable = true;
 
+  boot.kernelPackages = flake-inputs.nixpkgs-stable.legacyPackages.x86_64-linux.linuxPackages;
+
   boot.kernelParams = [
     "amd_iommu=on"
     "iommu=pt"
     "vfio-pci.ids=10de:1e89,10de:10f8,10de:1ad8,10de:1ad9"
+    "pcie_aspm=off"
+    "amdgpu.aspm=0"
+    "amdgpu.runpm=0"
   ];
   boot.initrd.kernelModules = [
     "vfio"
