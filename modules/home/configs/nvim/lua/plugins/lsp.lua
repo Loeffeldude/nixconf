@@ -3,6 +3,15 @@ local fs = vim.fs
 
 return {
   {
+    "mason-org/mason.nvim",
+    opts = {
+      registries = {
+        "github:mason-org/mason-registry",
+        "github:Crashdummyy/mason-registry",
+      },
+    },
+  },
+  {
     "mfussenegger/nvim-lint",
     optional = true,
     opts = {
@@ -10,6 +19,10 @@ return {
         php = {},
       },
     },
+  },
+  {
+    "seblyng/roslyn.nvim",
+    opts = {},
   },
   {
     "neovim/nvim-lspconfig",
@@ -77,18 +90,7 @@ return {
         html = {},
         jsonls = {},
         marksman = {},
-        csharp_ls = {},
         clangd = {},
-        -- roslyn_ls = {
-        --   cmd = {
-        --     "Microsoft.CodeAnalysis.LanguageServer",
-        --     "--logLevel", -- this property is required by the server
-        --     "Information",
-        --     "--extensionLogDirectory", -- this property is required by the server
-        --     fs.joinpath(uv.os_tmpdir(), "roslyn_ls/logs"),
-        --     "--stdio",
-        --   },
-        -- },
       },
     },
   },

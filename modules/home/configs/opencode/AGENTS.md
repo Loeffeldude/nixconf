@@ -210,38 +210,6 @@ public function createOrder(CreateOrderDTO $dto): Order
 }
 ```
 
-## Line Count Does Not Matter
-
-Write clear, readable code. More lines are acceptable when they improve clarity.
-
-Bad:
-
-```php
-return $user && $user->isActive() && $user->hasPermission('admin') && $user->emailVerified() ? $this->grantAccess($user) : false;
-```
-
-Good:
-
-```php
-if (!$user) {
-    return false;
-}
-
-if (!$user->isActive()) {
-    return false;
-}
-
-if (!$user->hasPermission('admin')) {
-    return false;
-}
-
-if (!$user->emailVerified()) {
-    return false;
-}
-
-return $this->grantAccess($user);
-```
-
 ## Avoid Comments Unless Doing Something Unexpected
 
 Only comment when code behavior is non-obvious or intentionally surprising.
