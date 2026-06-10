@@ -44,5 +44,7 @@
 
     posting
     hurl
+
+    boring
   ];
 }

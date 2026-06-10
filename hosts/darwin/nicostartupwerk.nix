@@ -6,17 +6,17 @@
 
   # Set Git commit hash for darwin-version.
   # system.configurationRevision = self.rev or self.dirtyRev or null;
-  primaryUser = "nicokratschmer";
+  primaryUser = "nicokraetschmer";
   dev.enable = true;
-  home-manager.users.nicokratschmer.dev.enable = true;
+  home-manager.users.nicokraetschmer.dev.enable = true;
   gaming.enable = false;
   apps.enable = true;
 
   services.openssh.enable = false;
 
-  home-manager.users.nicokratschmer.programs.git = {
+  home-manager.users.nicokraetschmer.programs.git = {
     settings.user.name = lib.mkForce "Nico Krätschmer";
-    settings.user.email = lib.mkForce "nico@startup-werk.de";
+    settings.user.email = lib.mkForce "n.kraetschmer@linkvertise.com";
   };
 
   nixpkgs.config.allowUnfree = true;

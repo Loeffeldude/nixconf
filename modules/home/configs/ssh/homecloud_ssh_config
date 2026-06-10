@@ -1,0 +1,25 @@
+Host homeserver-proxy
+  User loeffel
+  IdentitiesOnly yes
+  IdentityAgent /tmp/rbw-ssh-agent-socket
+  IdentityFile "~/.ssh/bitwarden/Loeffel Server Key.pub"
+  Hostname 10.42.0.1
+  ForwardAgent yes
+
+Host homeserver-1-proxy
+  User loeffel
+  ProxyJump homeserver-proxy
+  IdentitiesOnly yes
+  IdentityAgent /tmp/rbw-ssh-agent-socket
+  IdentityFile "~/.ssh/bitwarden/Loeffel Server Key.pub"
+  Hostname 192.168.0.178
+  ForwardAgent yes
+
+Host homeserver-2-proxy
+  User loeffel
+  IdentitiesOnly yes
+  ProxyJump homeserver-proxy
+  IdentityAgent /tmp/rbw-ssh-agent-socket
+  IdentityFile "~/.ssh/bitwarden/Loeffel Server Key.pub"
+  Hostname 192.168.0.179
+  ForwardAgent yes

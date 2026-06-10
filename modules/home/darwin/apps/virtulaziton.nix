@@ -4,6 +4,6 @@ let cfg = config.apps;
 
 in {
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ discord ];
+    home.packages = with pkgs; [ ];
   };
 }

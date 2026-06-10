@@ -1,0 +1,7 @@
+[[tunnels]]
+name = "reverse-lffl"
+host = "loeffelmeister.de"
+local = "10.42.42.1:8690"
+remote = "127.0.0.1:80"
+reverse = true
+server_alive_interval = 60

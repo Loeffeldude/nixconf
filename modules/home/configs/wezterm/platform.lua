@@ -12,6 +12,9 @@ function M.setup(config)
 	else
 		config.font = wezterm.font("Jetbrains Mono NF")
 	end
+	config.font_size = 13.0
+	config.line_height = 1.1
+	config.cell_width = 1.02
 end
 
 return M

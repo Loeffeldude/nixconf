@@ -109,6 +109,6 @@ return {
   { "folke/tokyonight.nvim", enabled = false },
   { "catppuccin", enabled = false },
   { "LazyVim/LazyVim", opts = {
-    colorscheme = "rusty",
+    colorscheme = "kanagawa",
   } },
 }

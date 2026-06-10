@@ -96,6 +96,15 @@
           ];
         };
       };
+      # FIXME: should probably make this nicer with a func can't be asked atm
+      devShells.aarch64-darwin = {
+        default = pkgs.mkShell {
+          packages = [
+            pkgs.pre-commit
+            pkgs.just
+          ];
+        };
+      };
       darwinConfigurations =
         {
           vm = darwin.lib.darwinSystem
@@ -106,6 +115,15 @@
                 self = self;
               };
             };
+          "Nicos-MacBook-Pro" = darwin.lib.darwinSystem
+            {
+              modules = [ ./hosts/darwin/nicostartupwerk.nix ];
+              specialArgs = {
+                flake-inputs = inputs;
+                self = self;
+              };
+            };
+
           nicostartupwerk = darwin.lib.darwinSystem
             {
               modules = [ ./hosts/darwin/nicostartupwerk.nix ];

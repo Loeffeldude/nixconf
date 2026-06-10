@@ -19,7 +19,7 @@ let
       shadcn = {
         type = "local";
         command = [ "npx" "-y" "shadcn@latest" "mcp" ];
-        enabled = true;
+        enabled = false;
       };
     };
     provider = {
