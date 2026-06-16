@@ -7,6 +7,7 @@ in
 {
   config = mkIf cfg.misc.enable {
     home.packages = with pkgs; [ bitwarden-desktop yt-dlg wireguard-tools ];
+
     # Sets up ssh agent sock probably 
     # TODO: should move this to its onw file 
     home.sessionVariables = {

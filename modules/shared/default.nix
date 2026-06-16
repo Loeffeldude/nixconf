@@ -5,6 +5,7 @@
     ./core
     ./dev
     ./gaming
+    ./insecure.nix
     # ./networking
   ];
   config = { };

@@ -253,9 +253,12 @@ in {
 
     programs.eww = {
       enable = true;
-      configDir = ../../configs/eww;
     };
-
+    xdg.configFile."eww" = {
+      source = ../../configs/eww;
+      recursive = true;
+    };
+    
     services.dunst = {
       enable = true;
       settings = {
