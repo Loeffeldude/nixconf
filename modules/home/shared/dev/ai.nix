@@ -22,6 +22,18 @@ let
         enabled = false;
       };
     };
+    agent =
+      {
+        build = {
+          mode = "primary";
+          model = "openai/gpt-5.4";
+          prompt = "{file:./prompts/build.md}";
+          permission = {
+            edit = "allow";
+            bash = "allow";
+          };
+        };
+      };
     provider = {
       ollama = {
         npm = "@ai-sdk/openai-compatible";
@@ -59,6 +71,7 @@ in
     home.file = {
       ".config/opencode/opencode.json".source = opencodeConfigFile;
       ".config/opencode/AGENTS.md".source = ../../configs/opencode/AGENTS.md;
+      ".config/opencode/prompts/build.md".source = ../../configs/opencode/prompts/build.md;
       ".config/opencode/nixtools".source = ../../configs/opencode/nixtools;
       ".config/opencode/nixplugin".source = ../../configs/opencode/plugin;
       ".config/opencode/agent".source = ../../configs/opencode/agent;
