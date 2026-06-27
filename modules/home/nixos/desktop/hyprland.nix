@@ -97,7 +97,6 @@ in {
         };
 
         dwindle = {
-          pseudotile = true;
           preserve_split = true;
           smart_split = false;
         };
@@ -158,7 +157,7 @@ in {
           "$mod, F, fullscreen, 1"
           "$mod, M, fullscreen, 0"
           "$mod, P, pseudo,"
-          "$mod, J, togglesplit,"
+          "$mod, J, layoutmsg, togglesplit,"
 
           "$mod, h, movefocus, l"
           "$mod, l, movefocus, r"
