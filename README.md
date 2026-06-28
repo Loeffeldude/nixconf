@@ -48,6 +48,27 @@ To update the flake's inputs, run:
 just update
 ```
 
+### Secrets With Home Manager
+
+`sops-nix` is available in the Home Manager layer.
+
+Put encrypted files under `secrets/` and define them in a Home Manager module with `sops.secrets`.
+
+Example:
+
+```nix
+{
+  sops.defaultSopsFile = ../../../secrets/home.yaml;
+
+  sops.secrets."git-credentials" = {
+    path = "${config.home.homeDirectory}/.config/git/credentials";
+  };
+}
+```
+
+The default Age key path is `~/.config/sops/age/keys.txt`.
+See `secrets/README.md` for the expected layout and commands.
+
 ### Other Useful Commands
 
 - `just build`: Build the configuration without switching

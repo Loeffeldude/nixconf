@@ -1,4 +1,4 @@
 { config, lib, flake-inputs, ... }: {
-  imports = [ ./apps ./dev ./utilties.nix ];
+  imports = [ ./apps ./dev ./sops.nix ./utilties.nix ];
   config = { };
 }
