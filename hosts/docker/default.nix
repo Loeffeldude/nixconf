@@ -36,12 +36,13 @@
     group = "loeffel";
   };
 
-  users.groups.${config.primaryUser} = {};
+  users.groups.${config.primaryUser} = { };
 
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { 
+    sharedModules = [ flake-inputs.sops-nix.homeManagerModules.sops ];
+    extraSpecialArgs = {
       flake-inputs = flake-inputs;
       upperConfig = config;
     };
