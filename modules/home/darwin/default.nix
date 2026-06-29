@@ -23,12 +23,6 @@
         {
           path = "/Users/${config.primaryUser}/Applications/Home Manager Apps/Spotify.app";
         }
-        {
-          path = "/Applications/Microsoft Outlook.app";
-        }
-        {
-          path = "/Applications/Microsoft Teams.app";
-        }
       ];
     };
 
