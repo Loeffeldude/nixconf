@@ -46,5 +46,7 @@
     hurl
 
     boring
+
+    lazysql
   ];
 }
