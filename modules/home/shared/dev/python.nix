@@ -3,11 +3,12 @@ with lib;
 let
   cfg = config.dev.python;
   stablePkgs = import flake-inputs.nixpkgs-stable {
-    system = pkgs.system;
+    system = pkgs.stdenv.hostPlatform.system;
     config.allowUnfree = true;
   };
 
-in {
+in
+{
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [

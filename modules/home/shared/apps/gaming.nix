@@ -3,7 +3,7 @@ with lib;
 let
   cfg = config.apps;
   stablePkgs = import flake-inputs.nixpkgs-stable {
-    system = pkgs.system;
+    system = pkgs.stdenv.hostPlatform.system;
     config.allowUnfree = true;
   };
 in

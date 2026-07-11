@@ -9,6 +9,7 @@ in {
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       enable = true;
+      configType = "hyprlang";
       xwayland.enable = true;
       systemd.enable = true;
 
@@ -255,9 +256,9 @@ in {
     };
     xdg.configFile."eww" = {
       source = ../../configs/eww;
-      recursive = true;
+      force = true;
     };
-    
+
     services.dunst = {
       enable = true;
       settings = {
@@ -473,6 +474,10 @@ in {
       };
       cursorTheme = {
         name = "Yaru";
+        package = pkgs.yaru-theme;
+      };
+      gtk4.theme = {
+        name = "Yaru-blue-dark";
         package = pkgs.yaru-theme;
       };
       gtk3.extraConfig = {

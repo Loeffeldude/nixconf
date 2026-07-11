@@ -165,7 +165,10 @@ in {
 
     programs.eww = {
       enable = true;
-      configDir = ../../configs/eww-plasma-i3;
+    };
+    xdg.configFile."eww" = {
+      source = ../../configs/eww-plasma-i3;
+      force = true;
     };
 
     services.dunst.enable = false;
