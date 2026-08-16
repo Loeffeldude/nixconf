@@ -221,18 +221,18 @@ in {
     ];
 
     home.sessionVariables = {
-      GTK_THEME = "Yaru-blue-dark";
+      GTK_THEME = "adw-gtk3-dark";
     };
 
     gtk = {
       enable = true;
       theme = {
-        name = "Yaru-blue-dark";
-        package = pkgs.yaru-theme;
+        name = "adw-gtk3-dark";
+        package = pkgs.adw-gtk3;
       };
       cursorTheme = {
-        name = "Yaru";
-        package = pkgs.yaru-theme;
+        name = "Adwaita";
+        package = pkgs.adwaita-icon-theme;
       };
       gtk3.extraConfig = {
         gtk-application-prefer-dark-theme = 1;
@@ -245,16 +245,16 @@ in {
     dconf.settings = {
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
-        gtk-theme = "Yaru-blue-dark";
+        gtk-theme = "adw-gtk3-dark";
       };
     };
 
     qt = {
       enable = true;
-      platformTheme.name = "yaru-blue";
+      platformTheme.name = "gtk3";
       style = {
-        name = "Yaru-blue-dark";
-        package = pkgs.yaru-theme;
+        name = "adwaita-dark";
+        package = pkgs.adwaita-qt;
       };
     };
   };

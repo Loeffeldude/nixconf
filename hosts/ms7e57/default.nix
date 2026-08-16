@@ -47,8 +47,6 @@
 
   services.flatpak.enable = true;
 
-  boot.kernelPackages = flake-inputs.nixpkgs-stable.legacyPackages.x86_64-linux.linuxPackages;
-
   boot.kernelParams = [
     "amd_iommu=on"
     "iommu=pt"

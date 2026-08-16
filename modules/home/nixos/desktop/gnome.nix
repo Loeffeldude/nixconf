@@ -113,28 +113,28 @@ in {
     home.file.".background-image-bright".source = ../../../../media/nix-bright.png;
 
     systemd.user.sessionVariables = config.home.sessionVariables // {
-      XCURSOR_THEME = "Yaru";
+      XCURSOR_THEME = "Adwaita";
 
       GSK_RENDERER = "ngl";
     };
 
     qt = {
       enable = true;
-      platformTheme.name = "yaru-blue";
+      platformTheme.name = "gtk3";
       style = {
-        name = "Yaru-blue-dark";
-        package = pkgs.yaru-theme;
+        name = "adwaita-dark";
+        package = pkgs.adwaita-qt;
       };
     };
     gtk = {
       enable = true;
       theme = {
-        name = "Yaru-blue-dark";
-        package = pkgs.yaru-theme;
+        name = "adw-gtk3-dark";
+        package = pkgs.adw-gtk3;
       };
       cursorTheme = {
-        name = "Yaru";
-        package = pkgs.yaru-theme;
+        name = "Adwaita";
+        package = pkgs.adwaita-icon-theme;
       };
     };
   };

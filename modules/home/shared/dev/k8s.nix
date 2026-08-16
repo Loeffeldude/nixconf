@@ -3,14 +3,13 @@ with lib;
 let
   cfg = config.dev.k8s;
   stablePkgs = import flake-inputs.nixpkgs-stable {
-    system = pkgs.system;
+    system = pkgs.stdenv.hostPlatform.system;
     config.allowUnfree = true;
   };
 in
 {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      kubectl
       minikube
       # broken in unstable sha256-BASnpCLodmgiVn0M1MU2Pqyoz0aHwar/0qLkp7CjvSQ=
       stablePkgs.kubernetes-helm
@@ -22,7 +21,7 @@ in
     ];
 
     home = {
-      sessionPath = [ "${pkgs.kubectl}/bin" "${pkgs.minikube}/bin" ];
+      sessionPath = [ "${pkgs.minikube}/bin" ];
       sessionVariables = {
         KUBECONFIG = "$HOME/.kube/config";
         MINIKUBE_HOME = "$HOME/.minikube";
