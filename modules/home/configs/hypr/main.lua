@@ -117,7 +117,7 @@ hl.config({
     key_press_enables_dpms = true,
     vrr = 0,
     middle_click_paste = false,
-    focus_on_activate = true,
+    focus_on_activate = false,
   },
 })
 
@@ -152,8 +152,8 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl pause"), { locked = true })
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + F", dispatch("fullscreen 1"))
-hl.bind(mainMod .. " + M", dispatch("fullscreen 0"))
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
+hl.bind(mainMod .. " + M", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
 
