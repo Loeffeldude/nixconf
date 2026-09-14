@@ -30,8 +30,21 @@
   services.flatpak.enable = true;
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  hardware.uinput.enable = true;
+
+  users.users.${config.primaryUser}.extraGroups = [ "uinput" ];
 
   services.nixconf-updater.enable = true;
+
+  services.avahi.publish.enable = true;
+  services.avahi.publish.userServices = true;
+
+  services.sunshine = {
+    enable = true;
+    autoStart = true;
+    capSysAdmin = true;
+    openFirewall = true;
+  };
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;

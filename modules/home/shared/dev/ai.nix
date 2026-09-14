@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, flake-inputs, ... }:
 
 with lib;
 let
@@ -6,7 +6,7 @@ let
 
   opencodeConfig = {
     "$schema" = "https://opencode.ai/config.json";
-    model = "openai/gpt-5.4";
+    model = "openai/gpt-5.6-terra";
     plugin = [
       "@simonwjackson/opencode-direnv"
       "@zenobius/opencode-background"
@@ -14,7 +14,7 @@ let
       # "superpowers@git+https://github.com/obra/superpowers.git#v5.0.7"
     ];
     autoupdate = false;
-    small_model = "openai/gpt-5.2-codex";
+    small_model = "openai/gpt-5.6-luna";
     mcp = {
       shadcn = {
         type = "local";
@@ -26,12 +26,24 @@ let
       {
         build = {
           mode = "primary";
-          model = "openai/gpt-5.4";
+          model = "openai/gpt-6-astra";
           prompt = "{file:./prompts/build.md}";
           permission = {
             edit = "allow";
             bash = "allow";
           };
+        };
+        plan = {
+          mode = "primary";
+          model = "openai/gpt-5.6-sol";
+        };
+        general = {
+          mode = "subagent";
+          model = "openai/gpt-5.6-terra";
+        };
+        explore = {
+          mode = "subagent";
+          model = "openai/gpt-5.6-luna";
         };
       };
     provider = {
@@ -95,7 +107,7 @@ in
       # OPENCODE_DISABLE_DEFAULT_PLUGINS = "true";
     };
     home.packages = with pkgs; [
-      opencode
+      flake-inputs.opencode.packages.${stdenv.hostPlatform.system}.default
 
       # claude code currently broken
       # claude-code

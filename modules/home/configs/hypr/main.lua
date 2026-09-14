@@ -8,16 +8,16 @@ local function dispatch(command)
 end
 
 hl.monitor({
-  output = "DP-2",
+  output = "DP-1",
   mode = "1920x1080@100",
-  position = "0x0",
+  position = "1920x0",
   scale = 1,
 })
 
 hl.monitor({
-  output = "HDMI-A-1",
+  output = "DP-3",
   mode = "1920x1080@100",
-  position = "1920x0",
+  position = "0x0",
   scale = 1,
 })
 
