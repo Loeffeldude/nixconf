@@ -9,6 +9,16 @@
   primaryUser = "nicokraetschmer";
   dev.enable = true;
   home-manager.users.nicokraetschmer.dev.enable = true;
+  home-manager.users.nicokraetschmer.dev.ai.opencodeOverrides = {
+    model = "github-copilot/gpt-5.6-terra";
+    small_model = "github-copilot/gpt-5.6-luna";
+    agent = {
+      build.model = "github-copilot/gpt-5.6-sol";
+      plan.model = "github-copilot/gpt-5.6-sol";
+      general.model = "github-copilot/gpt-5.6-terra";
+      explore.model = "github-copilot/gpt-5.6-luna";
+    };
+  };
   gaming.enable = false;
   apps.enable = true;
 
@@ -29,7 +39,6 @@
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
 }
-
 
 
 

@@ -77,9 +77,15 @@ let
     };
   };
 
-  opencodeConfigFile = pkgs.writeText "opencode.json" (builtins.toJSON opencodeConfig);
+  opencodeConfigFile = pkgs.writeText "opencode.json" (builtins.toJSON (lib.recursiveUpdate opencodeConfig cfg.ai.opencodeOverrides));
 in
 {
+  options.dev.ai.opencodeOverrides = mkOption {
+    type = (pkgs.formats.json { }).type;
+    default = { };
+    description = "Host-specific overrides for the shared OpenCode configuration.";
+  };
+
   config = mkIf cfg.ai.enable {
     home.file = {
       ".config/opencode/opencode.json".source = opencodeConfigFile;
