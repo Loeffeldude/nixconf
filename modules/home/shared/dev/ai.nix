@@ -11,6 +11,7 @@ let
       "@simonwjackson/opencode-direnv"
       "@zenobius/opencode-background"
       "envsitter-guard@latest"
+      "@dietrichgebert/ponytail"
       # "superpowers@git+https://github.com/obra/superpowers.git#v5.0.7"
     ];
     autoupdate = false;
@@ -96,7 +97,7 @@ in
     };
     home.packages = with pkgs; [
       opencode
-
+      pi-coding-agent
       # claude code currently broken
       # claude-code
 

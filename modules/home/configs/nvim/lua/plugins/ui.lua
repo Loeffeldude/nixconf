@@ -22,6 +22,9 @@ return {
           enabled = false,
           -- throttle= 1000;
         },
+        hover = {
+          silent = true,
+        },
       },
       presets = {
         bottom_search = false,

@@ -4,3 +4,5 @@ require("config.lazy")
 
 -- tries calling nixos parsers for treesitter
 local ok, mymod = pcall(require, "parsers")
+
+vim.treesitter.language.register("angular", "htmlangular")
