@@ -4,7 +4,7 @@ let cfg = config.dev.gamedev;
 
 in {
   config = mkIf cfg.godot.enable {
-    home.packages = with pkgs; [ godotPackages_4_5.godot ];
+    home.packages = with pkgs; [ godot_4-mono ];
     dev.csharp.enable = mkForce true;
   };
 }

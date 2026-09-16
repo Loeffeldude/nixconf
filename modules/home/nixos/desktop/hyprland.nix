@@ -9,244 +9,19 @@ in {
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       enable = true;
+      configType = "lua";
       xwayland.enable = true;
       systemd.enable = true;
-
-      settings = {
-        "$mod" = "SUPER";
-        "$terminal" = "wezterm start";
-
-        monitor = [
-          "DP-2,1920x1080@100,0x0,1"
-          "HDMI-A-1,1920x1080@100,1920x0,1"
-          ",preferred,auto,1"
-        ];
-
-        workspace = [
-          "1, monitor:0, default:true"
-          "2, monitor:0"
-          "3, monitor:0"
-          "4, monitor:0"
-          "5, monitor:1, default:true"
-          "6, monitor:1"
-          "7, monitor:1"
-          "8, monitor:1"
-        ];
-
-        exec-once = [
-          "eww daemon && eww open bar0 && eww open bar1"
-          "dunst"
-          "hyprpaper"
-          "hypridle"
-          "nm-applet --indicator"
-          "blueman-applet"
-          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
-          "wl-paste --type text --watch cliphist store &"
-          "wl-paste --type image --watch cliphist store &"
-        ];
-
-        env = [
-          "XCURSOR_THEME,Yaru"
-          "XCURSOR_SIZE,24"
-          "GTK_THEME,Yaru-blue-dark"
-          "GDK_BACKEND,wayland,x11"
-          "QT_QPA_PLATFORM,wayland;xcb"
-          "CLUTTER_BACKEND,wayland"
-        ];
-
-        general = {
-          gaps_in = 8;
-          gaps_out = "8,8,8,8";
-          border_size = 1;
-          "col.active_border" = "rgba(de935faa)";
-          "col.inactive_border" = "rgba(4d505780)";
-          layout = "dwindle";
-          resize_on_border = true;
+      extraLuaFiles = {
+        vars = {
+          autoLoad = false;
+          content = ''
+            return {
+              polkit_agent = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1",
+            }
+          '';
         };
-
-        decoration = {
-          rounding = 6;
-          active_opacity = 1.0;
-          inactive_opacity = 0.96;
-
-          blur = {
-            enabled = true;
-            size = 3;
-            passes = 2;
-          };
-
-          shadow = {
-            enabled = true;
-            range = 4;
-            render_power = 3;
-            color = "rgba(0f0f0fee)";
-          };
-        };
-
-        animations = {
-          enabled = true;
-          bezier = "smooth, 0.25, 0.1, 0.25, 1.0";
-
-          animation = [
-            "windows, 1, 3, smooth, slide"
-            "windowsOut, 1, 3, smooth, slide"
-            "border, 1, 5, default"
-            "fade, 1, 3, smooth"
-            "workspaces, 1, 4, smooth, slidevert"
-          ];
-        };
-
-        dwindle = {
-          preserve_split = true;
-          smart_split = false;
-        };
-
-        master = {
-          new_status = "master";
-        };
-
-        input = {
-          kb_layout = "de";
-          kb_options = "caps:escape";
-
-          follow_mouse = 0;
-
-          touchpad = {
-            natural_scroll = true;
-            tap-to-click = true;
-            middle_button_emulation = true;
-          };
-          repeat_delay = 400;
-          repeat_rate = 60;
-          sensitivity = 0;
-        };
-
-        cursor = {
-          no_hardware_cursors = true;
-        };
-
-
-        misc = {
-          disable_hyprland_logo = true;
-          disable_splash_rendering = true;
-          mouse_move_enables_dpms = true;
-          key_press_enables_dpms = true;
-          vrr = 0;
-          middle_click_paste = false;
-          focus_on_activate = true;
-        };
-
-        bind = [
-          "$mod, Return, exec, $terminal"
-          "$mod, Space, exec, wofi --show drun"
-          "$mod, A, exec, pavucontrol"
-          "$mod SHIFT, A, exec, pwmenu"
-          "$mod, Q, killactive,"
-          "$mod SHIFT, E, exit,"
-          ", Print, exec, grim -g \"$(slurp)\" - | wl-copy && notify-send \"Screenshot\" \"Copied to clipboard\""
-          "SHIFT, Print, exec, grim ~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png && notify-send \"Screenshot\" \"Saved to ~/Pictures\""
-          ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
-          ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-          ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-          ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-          ", XF86AudioPlay, exec, playerctl play-pause"
-          ", XF86AudioPause, exec, playerctl pause"
-          ", XF86AudioNext, exec, playerctl next"
-          ", XF86AudioPrev, exec, playerctl previous"
-          "$mod, V, togglefloating,"
-          "$mod, F, fullscreen, 1"
-          "$mod, M, fullscreen, 0"
-          "$mod, P, pseudo,"
-          "$mod, J, layoutmsg, togglesplit,"
-
-          "$mod, h, movefocus, l"
-          "$mod, l, movefocus, r"
-          "$mod, k, movefocus, u"
-          "$mod, j, movefocus, d"
-
-          "$mod SHIFT, h, movewindow, l"
-          "$mod SHIFT, l, movewindow, r"
-          "$mod SHIFT, k, movewindow, u"
-          "$mod SHIFT, j, movewindow, d"
-
-          "$mod CTRL, h, movecurrentworkspacetomonitor, l"
-          "$mod CTRL, l, movecurrentworkspacetomonitor, r"
-
-          "$mod, 1, workspace, 1"
-          "$mod, 2, workspace, 2"
-          "$mod, 3, workspace, 3"
-          "$mod, 4, workspace, 4"
-          "$mod, 5, workspace, 5"
-          "$mod, 6, workspace, 6"
-          "$mod, 7, workspace, 7"
-          "$mod, 8, workspace, 8"
-          "$mod, 9, workspace, 9"
-
-          "$mod SHIFT, 1, movetoworkspace, 1"
-          "$mod SHIFT, 2, movetoworkspace, 2"
-          "$mod SHIFT, 3, movetoworkspace, 3"
-          "$mod SHIFT, 4, movetoworkspace, 4"
-          "$mod SHIFT, 5, movetoworkspace, 5"
-          "$mod SHIFT, 6, movetoworkspace, 6"
-          "$mod SHIFT, 7, movetoworkspace, 7"
-          "$mod SHIFT, 8, movetoworkspace, 8"
-          "$mod SHIFT, 9, movetoworkspace, 9"
-
-          "$mod, Tab, workspace, previous"
-          "$mod, C, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
-
-          "$mod, mouse_down, workspace, e+1"
-          "$mod, mouse_up, workspace, e-1"
-        ];
-
-        bindm = [
-          "$mod, mouse:272, movewindow"
-          "$mod, mouse:273, resizewindow"
-        ];
-
-        binde = [
-          "$mod CTRL, k, resizeactive, 0 -50"
-          "$mod CTRL, j, resizeactive, 0 50"
-          "$mod CTRL SHIFT, h, resizeactive, -50 0"
-          "$mod CTRL SHIFT, l, resizeactive, 50 0"
-        ];
-
-        windowrule = [
-          {
-            name = "windowrule-1";
-            float = "on";
-            match.class = "^(pavucontrol)$";
-          }
-          {
-            name = "windowrule-2";
-            float = "on";
-            match.class = "^(nm-connection-editor)$";
-          }
-          {
-            name = "windowrule-3";
-            float = "on";
-            match.class = "^(blueberry.py)$";
-          }
-          {
-            name = "windowrule-4";
-            float = "on";
-            match.class = "^(blueman-manager)$";
-          }
-          {
-            name = "windowrule-5";
-            float = "on";
-            pin = "on";
-            match.title = "^(Picture-in-Picture)$";
-          }
-          {
-            name = "windowrule-6";
-            opacity = "0.0 override";
-            no_anim = "on";
-            no_focus = "on";
-            no_initial_focus = "on";
-            match.class = "^(xwaylandvideobridge)$";
-          }
-        ];
+        main = ../../configs/hypr/main.lua;
       };
     };
 
@@ -255,9 +30,9 @@ in {
     };
     xdg.configFile."eww" = {
       source = ../../configs/eww;
-      recursive = true;
+      force = true;
     };
-    
+
     services.dunst = {
       enable = true;
       settings = {
@@ -462,18 +237,22 @@ in {
     };
 
     home.sessionVariables = {
-      GTK_THEME = "Yaru-blue-dark";
+      GTK_THEME = "adw-gtk3-dark";
     };
 
     gtk = {
       enable = true;
       theme = {
-        name = "Yaru-blue-dark";
-        package = pkgs.yaru-theme;
+        name = "adw-gtk3-dark";
+        package = pkgs.adw-gtk3;
       };
       cursorTheme = {
-        name = "Yaru";
-        package = pkgs.yaru-theme;
+        name = "Adwaita";
+        package = pkgs.adwaita-icon-theme;
+      };
+      gtk4.theme = {
+        name = "adw-gtk3-dark";
+        package = pkgs.adw-gtk3;
       };
       gtk3.extraConfig = {
         gtk-application-prefer-dark-theme = 1;
@@ -486,16 +265,16 @@ in {
     dconf.settings = {
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
-        gtk-theme = "Yaru-blue-dark";
+        gtk-theme = "adw-gtk3-dark";
       };
     };
 
     qt = {
       enable = true;
-      platformTheme.name = "yaru-blue";
+      platformTheme.name = "gtk3";
       style = {
-        name = "Yaru-blue-dark";
-        package = pkgs.yaru-theme;
+        name = "adwaita-dark";
+        package = pkgs.adwaita-qt;
       };
     };
   };

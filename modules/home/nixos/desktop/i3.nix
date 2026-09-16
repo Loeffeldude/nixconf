@@ -15,7 +15,7 @@ in {
       config = {
         modifier = "Mod4";
         terminal = "wezterm start";
-        
+
         fonts = {
           names = [ "SF Pro" ];
           size = 10.0;
@@ -114,74 +114,76 @@ in {
           { command = "nm-applet"; always = false; notification = false; }
         ];
 
-        keybindings = let
-          mod = "Mod4";
-        in {
-          # Terminal and launcher
-          "${mod}+Return" = "exec wezterm start";
-          "${mod}+space" = "exec rofi -show drun";
-          
-          # Window management
-          "${mod}+q" = "kill";
-          "${mod}+Shift+e" = "exec i3-msg exit";
-          "${mod}+v" = "floating toggle";
-          "${mod}+f" = "fullscreen toggle";
-          
-          # Focus
-          "${mod}+h" = "focus left";
-          "${mod}+j" = "focus down";
-          "${mod}+k" = "focus up";
-          "${mod}+l" = "focus right";
-          
-          # Move windows
-          "${mod}+Shift+h" = "move left";
-          "${mod}+Shift+j" = "move down";
-          "${mod}+Shift+k" = "move up";
-          "${mod}+Shift+l" = "move right";
-          
-          # Resize windows
-          "${mod}+Ctrl+Shift+h" = "resize shrink width 50 px or 5 ppt";
-          "${mod}+Ctrl+Shift+l" = "resize grow width 50 px or 5 ppt";
-          "${mod}+Ctrl+k" = "resize shrink height 50 px or 5 ppt";
-          "${mod}+Ctrl+j" = "resize grow height 50 px or 5 ppt";
-          
-          # Workspaces
-          "${mod}+1" = "workspace number 1";
-          "${mod}+2" = "workspace number 2";
-          "${mod}+3" = "workspace number 3";
-          "${mod}+4" = "workspace number 4";
-          "${mod}+5" = "workspace number 5";
-          "${mod}+6" = "workspace number 6";
-          "${mod}+7" = "workspace number 7";
-          "${mod}+8" = "workspace number 8";
-          "${mod}+9" = "workspace number 9";
-          
-          # Move to workspace
-          "${mod}+Shift+1" = "move container to workspace number 1";
-          "${mod}+Shift+2" = "move container to workspace number 2";
-          "${mod}+Shift+3" = "move container to workspace number 3";
-          "${mod}+Shift+4" = "move container to workspace number 4";
-          "${mod}+Shift+5" = "move container to workspace number 5";
-          "${mod}+Shift+6" = "move container to workspace number 6";
-          "${mod}+Shift+7" = "move container to workspace number 7";
-          "${mod}+Shift+8" = "move container to workspace number 8";
-          "${mod}+Shift+9" = "move container to workspace number 9";
-          
-          # Tab between workspaces
-          "${mod}+Tab" = "workspace back_and_forth";
-          
-          # Screenshots
-          "Print" = "exec scrot -s -e 'xclip -selection clipboard -t image/png -i $f && notify-send \"Screenshot\" \"Copied to clipboard\"'";
-          "Shift+Print" = "exec scrot ~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png -e 'notify-send \"Screenshot\" \"Saved to ~/Pictures\"'";
-          
-          # Layout
-          "${mod}+Shift+p" = "layout toggle split";
-          "${mod}+Shift+s" = "layout stacking";
-          "${mod}+Shift+t" = "layout tabbed";
-        };
+        keybindings =
+          let
+            mod = "Mod4";
+          in
+          {
+            # Terminal and launcher
+            "${mod}+Return" = "exec wezterm start";
+            "${mod}+space" = "exec rofi -show drun";
 
-        assigns = {};
-        
+            # Window management
+            "${mod}+q" = "kill";
+            "${mod}+Shift+e" = "exec i3-msg exit";
+            "${mod}+v" = "floating toggle";
+            "${mod}+f" = "fullscreen toggle";
+
+            # Focus
+            "${mod}+h" = "focus left";
+            "${mod}+j" = "focus down";
+            "${mod}+k" = "focus up";
+            "${mod}+l" = "focus right";
+
+            # Move windows
+            "${mod}+Shift+h" = "move left";
+            "${mod}+Shift+j" = "move down";
+            "${mod}+Shift+k" = "move up";
+            "${mod}+Shift+l" = "move right";
+
+            # Resize windows
+            "${mod}+Ctrl+Shift+h" = "resize shrink width 50 px or 5 ppt";
+            "${mod}+Ctrl+Shift+l" = "resize grow width 50 px or 5 ppt";
+            "${mod}+Ctrl+k" = "resize shrink height 50 px or 5 ppt";
+            "${mod}+Ctrl+j" = "resize grow height 50 px or 5 ppt";
+
+            # Workspaces
+            "${mod}+1" = "workspace number 1";
+            "${mod}+2" = "workspace number 2";
+            "${mod}+3" = "workspace number 3";
+            "${mod}+4" = "workspace number 4";
+            "${mod}+5" = "workspace number 5";
+            "${mod}+6" = "workspace number 6";
+            "${mod}+7" = "workspace number 7";
+            "${mod}+8" = "workspace number 8";
+            "${mod}+9" = "workspace number 9";
+
+            # Move to workspace
+            "${mod}+Shift+1" = "move container to workspace number 1";
+            "${mod}+Shift+2" = "move container to workspace number 2";
+            "${mod}+Shift+3" = "move container to workspace number 3";
+            "${mod}+Shift+4" = "move container to workspace number 4";
+            "${mod}+Shift+5" = "move container to workspace number 5";
+            "${mod}+Shift+6" = "move container to workspace number 6";
+            "${mod}+Shift+7" = "move container to workspace number 7";
+            "${mod}+Shift+8" = "move container to workspace number 8";
+            "${mod}+Shift+9" = "move container to workspace number 9";
+
+            # Tab between workspaces
+            "${mod}+Tab" = "workspace back_and_forth";
+
+            # Screenshots
+            "Print" = "exec scrot -s -e 'xclip -selection clipboard -t image/png -i $f && notify-send \"Screenshot\" \"Copied to clipboard\"'";
+            "Shift+Print" = "exec scrot ~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png -e 'notify-send \"Screenshot\" \"Saved to ~/Pictures\"'";
+
+            # Layout
+            "${mod}+Shift+p" = "layout toggle split";
+            "${mod}+Shift+s" = "layout stacking";
+            "${mod}+Shift+t" = "layout tabbed";
+          };
+
+        assigns = { };
+
         floating.criteria = [
           { class = "^pavucontrol$"; }
           { class = "^nm-connection-editor$"; }
@@ -216,27 +218,27 @@ in {
       enable = true;
       backend = "glx";
       vSync = true;
-      
+
       settings = {
         corner-radius = 6;
-        
+
         blur = {
           method = "dual_kawase";
           strength = 3;
         };
-        
+
         opacity-rule = [
           "96:class_g = 'Code'"
           "96:class_g = 'Alacritty'"
           "96:class_g = 'org.wezfurlong.wezterm'"
         ];
-        
+
         shadow = true;
         shadow-radius = 12;
         shadow-opacity = 0.75;
         shadow-offset-x = -12;
         shadow-offset-y = -12;
-        
+
         fading = true;
         fade-in-step = 0.03;
         fade-out-step = 0.03;
@@ -552,18 +554,18 @@ in {
     ];
 
     home.sessionVariables = {
-      GTK_THEME = "Yaru-blue-dark";
+      GTK_THEME = "adw-gtk3-dark";
     };
 
     gtk = {
       enable = true;
       theme = {
-        name = "Yaru-blue-dark";
-        package = pkgs.yaru-theme;
+        name = "adw-gtk3-dark";
+        package = pkgs.adw-gtk3;
       };
       cursorTheme = {
-        name = "Yaru";
-        package = pkgs.yaru-theme;
+        name = "Adwaita";
+        package = pkgs.adwaita-icon-theme;
       };
       gtk3.extraConfig = {
         gtk-application-prefer-dark-theme = 1;
@@ -576,16 +578,16 @@ in {
     dconf.settings = {
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
-        gtk-theme = "Yaru-blue-dark";
+        gtk-theme = "adw-gtk3-dark";
       };
     };
 
     qt = {
       enable = true;
-      platformTheme.name = "yaru-blue";
+      platformTheme.name = "gtk3";
       style = {
-        name = "Yaru-blue-dark";
-        package = pkgs.yaru-theme;
+        name = "adwaita-dark";
+        package = pkgs.adwaita-qt;
       };
     };
   };

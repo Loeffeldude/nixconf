@@ -1,3 +1,32 @@
+$color-transparent: transparent;
+
+$bg-window: rgba(10, 10, 10, 0.78);
+$bg-tooltip: rgba(18, 18, 18, 0.96);
+$bg-widget: rgba(28, 28, 30, 0.84);
+$bg-widget-hover: rgba(38, 38, 40, 0.92);
+$bg-workspace-hover: rgba(255, 255, 255, 0.06);
+$bg-workspace-occupied: rgba(255, 255, 255, 0.04);
+$bg-workspace-active: rgba(255, 255, 255, 0.12);
+$bg-workspace-urgent: rgba(160, 160, 160, 0.2);
+$bg-app-card: rgba(255, 255, 255, 0.04);
+$bg-app-card-hover: rgba(255, 255, 255, 0.08);
+$bg-volume-muted: rgba(255, 255, 255, 0.04);
+
+$text-primary: #d6d6d6;
+$text-muted: #8a8a8a;
+$text-muted-hover: #b4b4b4;
+$text-secondary: #b0b0b0;
+$text-active: #f2f2f2;
+$text-urgent: #ffffff;
+$text-muted-disabled: #727272;
+
+$border-subtle: rgba(255, 255, 255, 0.06);
+$border-strong: rgba(255, 255, 255, 0.12);
+
+$shadow-app-card-primary: rgba(0, 0, 0, 0.16);
+$shadow-app-card-secondary: rgba(0, 0, 0, 0.1);
+$shadow-tooltip: rgba(0, 0, 0, 0.28);
+
 * {
   all: unset;
   font-family: "SF Pro", "Hack Nerd Font", sans-serif;
@@ -6,11 +35,11 @@
 }
 
 window {
-  background: rgba(15, 15, 15, 0.85);
+  background: $bg-window;
 }
 
 .bar {
-  background: rgba(15, 15, 15, 0.85);
+  background: $bg-window;
   padding: 3px 6px;
 }
 
@@ -23,13 +52,18 @@ window {
 .volume,
 .audiodevice,
 .tray {
-  background: rgba(29, 31, 33, 0.8);
-  color: #c5c8c6;
-  border: none;
-  border-radius: 24px;
-  padding: 3px 10px;
-  margin: 0 2px;
+  background: $bg-widget;
+  color: $text-primary;
+  border: 1px solid $border-subtle;
+  border-radius: 12px;
+  padding: 4px 10px;
+  margin: 2px 2px;
   transition: all 0.2s ease;
+
+  &:hover {
+    background: $bg-widget-hover;
+    border-color: $border-strong;
+  }
 }
 
 .workspaces {
@@ -38,54 +72,53 @@ window {
 
   button {
     padding: 0px 10px;
-    border-radius: 24px;
-    background: transparent;
-    color: #909090;
+    border-radius: 10px;
+    background: $color-transparent;
+    color: $text-muted;
     border: none;
     margin: 1px 2px;
     transition: all 0.2s ease;
     min-width: 24px;
 
     &:hover {
-      background: rgba(70, 70, 70, 0.5);
-      color: #c0c0c0;
+      background: $bg-workspace-hover;
+      color: $text-muted-hover;
     }
 
     &.occupied:not(.active) {
       padding-right: 0;
-      color: #b5bd68;
-      background: rgba(181, 189, 104, 0.1);
+      color: $text-secondary;
+      background: $bg-workspace-occupied;
     }
 
     &.active {
       padding-right: 0;
-      background: rgba(222, 147, 95, 0.25);
-      color: #de935f;
+      background: $bg-workspace-active;
+      color: $text-active;
       font-weight: 500;
     }
 
     &.urgent {
-      background: rgba(204, 102, 102, 0.4);
-      color: #cc6666;
+      background: $bg-workspace-urgent;
+      color: $text-urgent;
     }
   }
 
   .app-card {
     padding: 6px 8px;
     margin: 0 2px;
-    border-radius: 16px;
-    background: rgba(40, 42, 44, 0.6);
+    border-radius: 10px;
+    background: $bg-app-card;
     transition: all 0.2s ease;
 
     &:hover {
-      background: rgba(50, 52, 54, 0.8);
-      border-color: rgba(222, 147, 95, 0.5);
+      background: $bg-app-card-hover;
     }
 
     &.stacked {
       box-shadow:
-        2px 0 0 0 rgba(40, 42, 44, 0.6),
-        4px 0 0 0 rgba(40, 42, 44, 0.4);
+        2px 0 0 0 $shadow-app-card-primary,
+        4px 0 0 0 $shadow-app-card-secondary;
       margin-right: 6px;
     }
 
@@ -93,156 +126,83 @@ window {
       font-family:
         "Hack Nerd Font", "JetBrainsMono Nerd Font", "Iosevka Nerd Font";
       font-size: 13px;
-      color: #de935f;
+      color: $text-secondary;
     }
 
     .app-name {
       font-size: 11px;
-      color: #c5c8c6;
+      color: $text-primary;
     }
   }
 }
 
 .clock {
-  color: #de935f;
+  color: $text-primary;
   font-weight: 600;
-  background: linear-gradient(
-    135deg,
-    rgba(222, 147, 95, 0.15) 0%,
-    rgba(202, 127, 75, 0.15) 100%
-  );
-
-  &:hover {
-    background: linear-gradient(
-      135deg,
-      rgba(222, 147, 95, 0.25) 0%,
-      rgba(202, 127, 75, 0.25) 100%
-    );
-  }
 }
 
 .mpris {
-  color: #c5c8c6;
+  color: $text-primary;
   min-width: 200px;
 
-  &:hover {
-    background: linear-gradient(
-      135deg,
-      rgba(60, 60, 60, 0.8) 0%,
-      rgba(50, 50, 50, 0.8) 100%
-    );
-  }
-
   &.paused {
-    color: #909090;
+    color: $text-muted;
   }
 }
 
 .cpu {
-  color: #8abeb7;
-
-  &:hover {
-    background: linear-gradient(
-      135deg,
-      rgba(138, 190, 183, 0.15) 0%,
-      rgba(118, 170, 163, 0.15) 100%
-    );
-  }
+  color: $text-secondary;
 }
 
 .memory {
-  color: #b5bd68;
-
-  &:hover {
-    background: linear-gradient(
-      135deg,
-      rgba(181, 189, 104, 0.15) 0%,
-      rgba(161, 169, 84, 0.15) 100%
-    );
-  }
+  color: $text-secondary;
 }
 
 .battery {
-  color: #f0c674;
+  color: $text-secondary;
 
   &.charging {
-    color: #b5bd68;
-    background: linear-gradient(
-      135deg,
-      rgba(181, 189, 104, 0.15) 0%,
-      rgba(161, 169, 84, 0.15) 100%
-    );
+    color: $text-primary;
+    background: $bg-workspace-occupied;
   }
 
   &.warning:not(.charging) {
-    color: #de935f;
-    background: linear-gradient(
-      135deg,
-      rgba(222, 147, 95, 0.15) 0%,
-      rgba(202, 127, 75, 0.15) 100%
-    );
+    color: $text-primary;
+    background: $bg-workspace-active;
   }
 
   &.critical:not(.charging) {
-    color: #cc6666;
-    background: linear-gradient(
-      135deg,
-      rgba(204, 102, 102, 0.2) 0%,
-      rgba(184, 82, 82, 0.2) 100%
-    );
+    color: $text-urgent;
+    background: $bg-workspace-urgent;
   }
 }
 
 .volume {
-  color: #b294bb;
-
-  &:hover {
-    background: linear-gradient(
-      135deg,
-      rgba(178, 148, 187, 0.15) 0%,
-      rgba(158, 128, 167, 0.15) 100%
-    );
-  }
+  color: $text-secondary;
 
   &.muted {
-    color: #808080;
-    background: rgba(60, 60, 60, 0.5);
+    color: $text-muted-disabled;
+    background: $bg-volume-muted;
   }
 }
 
 .audiodevice {
-  color: #81a2be;
-
-  &:hover {
-    background: linear-gradient(
-      135deg,
-      rgba(129, 162, 190, 0.15) 0%,
-      rgba(109, 142, 170, 0.15) 100%
-    );
-  }
+  color: $text-secondary;
 }
 
 .tray {
   padding: 6px 12px;
-
-  &:hover {
-    background: linear-gradient(
-      135deg,
-      rgba(60, 60, 60, 0.8) 0%,
-      rgba(50, 50, 50, 0.8) 100%
-    );
-  }
 }
 
 tooltip {
-  background: rgba(15, 15, 15, 0.95);
-  border: 1px solid rgba(222, 147, 95, 0.3);
-  border-radius: 24px;
-  color: #c5c8c6;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  background: $bg-tooltip;
+  border: 1px solid $border-strong;
+  border-radius: 12px;
+  color: $text-primary;
+  box-shadow: 0 6px 18px $shadow-tooltip;
 
   label {
-    color: #c5c8c6;
+    color: $text-primary;
     padding: 6px 10px;
   }
 }

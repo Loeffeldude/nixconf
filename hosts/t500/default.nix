@@ -25,6 +25,19 @@
   nixpkgs.config.allowUnfree = true;
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  hardware.uinput.enable = true;
+
+  users.users.${config.primaryUser}.extraGroups = [ "uinput" ];
+
+  services.avahi.publish.enable = true;
+  services.avahi.publish.userServices = true;
+
+  services.sunshine = {
+    enable = true;
+    autoStart = true;
+    capSysAdmin = true;
+    openFirewall = true;
+  };
 
   gaming.enable = true;
   dev.enable = true;
@@ -44,4 +57,3 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
 }
-

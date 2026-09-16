@@ -2,11 +2,15 @@
 with lib;
 let
   cfg = config.dev;
-  direnvPackage = if pkgs.stdenv.isDarwin then pkgs.direnv.overrideAttrs (_: {
-    doCheck = false;
-  }) else pkgs.direnv;
+  direnvPackage =
+    if pkgs.stdenv.isDarwin then
+      pkgs.direnv.overrideAttrs
+        (_: {
+          doCheck = false;
+        }) else pkgs.direnv;
 
-in {
+in
+{
   config = mkIf cfg.enable {
     programs.zsh = {
       enable = true;
@@ -16,6 +20,7 @@ in {
       shellAliases = {
         ll = "ls -l";
         vim = "nvim";
+        oc = "opencode";
       };
       initContent = lib.mkAfter "
         export PATH=\"$PATH:$HOME/.local/bin\"

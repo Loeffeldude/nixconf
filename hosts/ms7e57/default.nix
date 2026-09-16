@@ -46,8 +46,25 @@
     };
 
   services.flatpak.enable = true;
+  hardware.uinput.enable = true;
 
-  boot.kernelPackages = flake-inputs.nixpkgs-stable.legacyPackages.x86_64-linux.linuxPackages;
+  users.users.${config.primaryUser} = {
+    extraGroups = [ "uinput" ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIZWr6Kg8Fpc6Tb2ynywRwkNTssOy4gMSMOXt9bVAYsH"
+    ];
+  };
+
+  services.avahi.publish.enable = true;
+  services.avahi.publish.userServices = true;
+
+  services.sunshine = {
+    enable = true;
+    autoStart = true;
+    capSysAdmin = true;
+    openFirewall = true;
+    settings = { };
+  };
 
   boot.kernelParams = [
     "amd_iommu=on"
@@ -117,10 +134,6 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
-
-  users.users.${config.primaryUser}.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIZWr6Kg8Fpc6Tb2ynywRwkNTssOy4gMSMOXt9bVAYsH"
-  ];
 
   services.openssh = {
     enable = true;
