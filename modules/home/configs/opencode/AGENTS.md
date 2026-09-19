@@ -251,30 +251,6 @@ $results = DB::select('SELECT * FROM users WHERE data->>\'status\' = ?', ['activ
 $order->saveQuietly();
 ```
 
-## Write Tests
-
-When implementing a feature, write tests. Do not declare work done unless tests are passing.
-
-Bad:
-
-```text
-Done. I did not run tests, but it should work.
-```
-
-Good:
-
-```text
-Done. Tests passing.
-```
-
-If tests cannot be run, state that plainly.
-
-Good:
-
-```text
-Implemented. Tests not run because the test command is unavailable in this environment.
-```
-
 ## Fail Fast
 
 Avoid catching errors and exceptions prematurely unless the business logic requires it.
@@ -409,26 +385,6 @@ async function chargeCustomer(customerId: string, amount: number) {
     throw error;
   }
 }
-```
-
-## Do Not Mark Work Complete Prematurely
-
-Work is complete only when the implementation is done and relevant verification has been performed.
-
-Bad:
-
-```text
-This should be good now.
-```
-
-Good:
-
-```text
-Implemented.
-
-Verification:
-- Unit tests passing
-- Typecheck passing
 ```
 
 ## Preserve Existing Style
