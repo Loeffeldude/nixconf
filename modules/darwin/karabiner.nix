@@ -2,7 +2,7 @@
 {
 
   services.karabiner-elements = {
-    enable = true;
+    enable = false;
     package = pkgs.karabiner-elements.overrideAttrs (old: {
       version = "14.13.0";
 
