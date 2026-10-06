@@ -65,6 +65,7 @@ return {
             file_ignore_patterns = {
               "node_modules/",
               ".git/",
+              ".direnv/",
               "__pycache__/",
               ".venv/",
               "/vendor/",
@@ -80,7 +81,7 @@ return {
           require("telescope.builtin").find_files({
             hidden = true,
             no_ignore = true,
-            file_ignore_patterns = {},
+            file_ignore_patterns = { ".direnv/" },
           })
         end,
         desc = "Find ALL files",
@@ -95,6 +96,7 @@ return {
             file_ignore_patterns = {
               "node_modules/",
               ".git/",
+              ".direnv/",
               "__pycache__/",
               ".venv/",
               "/vendor/",
@@ -114,6 +116,7 @@ return {
             file_ignore_patterns = {
               "node_modules/",
               ".git/",
+              ".direnv/",
               "__pycache__/",
               ".venv/",
               "/vendor/",
@@ -133,6 +136,8 @@ return {
                 "--glob",
                 "!**/.git/**",
                 "--glob",
+                "!**/.direnv/**",
+                "--glob",
                 "!**/__pycache__/**",
                 "--glob",
                 "!**/.venv/**",
@@ -148,6 +153,7 @@ return {
     opts = {
       defaults = {
         file_ignore_patterns = {
+          ".direnv/",
           "__pycache__/",
         },
       },

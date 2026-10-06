@@ -38,10 +38,19 @@ return {
             },
           },
         },
-        rust_analyzer = {},
+        rust_analyzer = {
+          settings = {
+            ["rust-analyzer"] = {
+              files = {
+                excludeDirs = { ".direnv" },
+              },
+            },
+          },
+        },
         gopls = {
           settings = {
             gopls = {
+              directoryFilters = { "-.direnv" },
               usePlaceholders = false,
             },
           },
@@ -52,6 +61,9 @@ return {
               format = {
                 indentSize = 2,
                 convertTabsToSpaces = true,
+              },
+              tsserver = {
+                exclude = { "**/.direnv/**" },
               },
             },
           },
@@ -65,15 +77,34 @@ return {
                 },
               },
             },
+            typescript = {
+              tsserver = {
+                exclude = { "**/.direnv/**" },
+              },
+            },
           },
         },
-        pyright = {},
+        pyright = {
+          settings = {
+            python = {
+              analysis = {
+                exclude = { "**/.direnv/**" },
+              },
+            },
+          },
+        },
         phpactor = {
           enabled = false,
         },
         intelephense = {
           enabled = true,
-          settings = {},
+          settings = {
+            intelephense = {
+              files = {
+                exclude = { "**/.direnv/**" },
+              },
+            },
+          },
           cmd = { "intelephense", "--stdio" },
           filetypes = { "php" },
         },
