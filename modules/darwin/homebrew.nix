@@ -18,6 +18,7 @@
       "xquartz"
       "font-hack-nerd-font"
       "ferdium"
+      "firefox"
     ];
   };
 }
