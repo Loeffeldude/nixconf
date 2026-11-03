@@ -190,6 +190,12 @@ hl.bind(mainMod .. " + CTRL + SHIFT + h", hl.dsp.window.resize({ x = -50, y = 0,
 hl.bind(mainMod .. " + CTRL + SHIFT + l", hl.dsp.window.resize({ x = 50, y = 0, relative = true }), { repeating = true })
 
 hl.window_rule({
+  name = "looking-glass-mouse",
+  confine_pointer = true,
+  match = { class = "^(looking-glass-client)$" },
+})
+
+hl.window_rule({
   name = "windowrule-1",
   float = true,
   match = { class = "^(pavucontrol)$" },

@@ -5,6 +5,8 @@
     # we live on the edge man
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
+    ghidra-mcp.url = "github:mugiwarix/ghidra-extensions.mcp";
+    ghidra-mcp.flake = false;
     opencode.url = "github:anomalyco/opencode";
     opencode.inputs.nixpkgs.follows = "nixpkgs";
     mac-app-util.url = "github:hraban/mac-app-util";
