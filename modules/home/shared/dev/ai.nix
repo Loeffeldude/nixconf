@@ -69,7 +69,7 @@ in
       # ".config/opencode/nixplugin".source = ../../configs/opencode/plugin;
       # ".config/opencode/agent".source = ../../configs/opencode/agent;
       ".config/opencode/themes".source = ../../configs/opencode/themes;
-      # ".config/opencode/skills".source = ../../configs/opencode/skills;
+      ".config/opencode/skills".source = ../../configs/opencode/skills;
     };
 
     # Bun doesn't handle dynamic import() with symlinks, so copy nixtools to tool/ and nixplugin to plugin/
