@@ -1,69 +1,42 @@
-# eww Configuration
+# Hyprland Bar
 
-This is a conversion of your Waybar configuration to eww.
+The bar follows Hyprland's actual monitor and workspace state, not workspace ranges.
+Each connected output gets a bar, including outputs connected after startup.
 
-## Structure
+- Every occupied workspace appears on its owning monitor, including IDs above 9,
+  named workspaces, and special workspaces.
+- The active workspace remains visible even when empty. Empty inactive workspaces
+  disappear; the existing Super+number shortcuts still create/switch to them.
+- Click a workspace to switch to it; special workspaces toggle their overlay.
+- App icons are grouped by class with a count for multiple windows. Hover over a
+  workspace to see window titles.
+- Moving a workspace between monitors updates both bars via Hyprland events.
 
-- `eww.yuck` - Main configuration file with widget definitions
-- `eww.scss` - Stylesheet (converted from Waybar CSS)
-- `scripts/` - Helper scripts for dynamic data
-
-## Features
-
-- Hyprland workspace indicator with active/urgent states
-- Clock widget
-- MPRIS media player info (requires `playerctl`)
-- CPU and memory usage monitors
-- Battery indicator with charging/warning/critical states
-- Volume control (WirePlumber via `wpctl`)
-- System tray
-
-## Dependencies
-
-Make sure you have these installed:
-- `eww` (elkowar's wacky widgets)
-- `socat` (for Hyprland event monitoring)
-- `jq` (for JSON processing)
-- `playerctl` (for media control)
-- `wpctl` (WirePlumber CLI, usually comes with wireplumber)
+The charcoal palette and copper active indicator match the Hyprland border accent.
+Status widgets include media, CPU, memory, battery, volume, tray, and a clock.
 
 ## Usage
 
-Start eww:
-```bash
-eww daemon
-eww open bar
+Hyprland starts the monitor watcher automatically. To start it manually:
+
+```sh
+bash ~/.config/eww/scripts/start.sh
 ```
 
-Reload after changes:
-```bash
-eww reload
-```
+After changing styles or widgets, run `eww reload`. When migrating from the old
+`bar0`/`bar1` configuration, close the old windows with `eww close-all` first.
+Restart the watcher if you manually close its windows.
 
-## Differences from Waybar
+## Dependencies
 
-1. **Taskbar**: eww doesn't have a built-in taskbar widget like Waybar. You'd need to implement this manually with custom scripts if needed.
+Eww, Hyprland (`hyprctl`), Bash, jq, socat, util-linux (`flock`), playerctl,
+WirePlumber (`wpctl`), and a Nerd Font. Volume opens pavucontrol; CPU and memory
+open btop in WezTerm.
 
-2. **Dynamic updates**: eww uses polling (`defpoll`) and listening (`deflisten`) rather than Waybar's built-in update mechanism. The scripts handle real-time updates via Hyprland's socket.
+## Development
 
-3. **Calendar**: The calendar popup from Waybar's clock isn't implemented yet. You can add this with a separate window widget that opens on clock click.
-
-4. **Styling**: eww uses SCSS instead of CSS. The conversion maintains the same visual style.
-
-## Customization
-
-- Adjust polling intervals in `eww.yuck` (e.g., `:interval "2s"`)
-- Modify colors and styles in `eww.scss`
-- Edit widget layouts in the `defwidget` sections
-- Add or remove modules as needed
-
-## NixOS Integration
-
-To integrate with your NixOS configuration, add:
-
-```nix
-programs.eww = {
-  enable = true;
-  configDir = ./configs/eww;
-};
-```
+`bash scripts/workspaces.sh --once` prints a single JSON snapshot.
+Run `python3 scripts/test_workspaces.py` for workspace regression tests.
+`scripts/workspaces.jq` transforms monitor, workspace, and client JSON into the
+per-output widget data. JSON encoding preserves quotes and newlines in titles.
+The separate plasma/i3 configuration is not used by this bar.

@@ -38,7 +38,7 @@ hl.workspace_rule({ workspace = "7", monitor = "1" })
 hl.workspace_rule({ workspace = "8", monitor = "1" })
 
 hl.on("hyprland.start", function()
-  hl.exec_cmd("eww daemon && eww open bar0 && eww open bar1")
+  hl.exec_cmd("bash ~/.config/eww/scripts/start.sh")
   hl.exec_cmd("dunst")
   hl.exec_cmd("hyprpaper")
   hl.exec_cmd("hypridle")

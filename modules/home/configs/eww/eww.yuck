@@ -23,14 +23,8 @@
 (defpoll battery_status :interval "5s"
   "cat /sys/class/power_supply/BAT*/status 2>/dev/null || echo 'Full'")
 
-(deflisten workspaces_monitor0 :initial "[]"
-  "scripts/workspaces.sh 0")
-
-(deflisten workspaces_monitor1 :initial "[]"
-  "scripts/workspaces.sh 1")
-
-(deflisten window_title :initial ""
-  "scripts/window-title.sh")
+(deflisten workspace_data :initial "{}"
+  "bash scripts/workspaces.sh")
 
 (deflisten mpris_info :initial '{"status": "stopped", "artist": "", "title": "", "player": ""}'
   "scripts/mpris.sh")
@@ -39,31 +33,31 @@
 (defwidget workspace-apps [apps]
   (box :class "workspace-apps" :orientation "h" :spacing 2 :space-evenly false
     (for app in apps
-      (box :class "app-card ${app.count > 1 ? 'stacked' : ''}" :orientation "h" :spacing 3 :space-evenly false
-        (label :class "app-icon" :text "${app.icon} ")
-        (label :class "app-name" :text "${app.name}" :limit-width 10)
+      (box :class "app-card" :tooltip {app.name} :orientation "h" :spacing 3 :space-evenly false
+        (label :class "app-icon" :text {app.icon})
         (label :class "app-count" :text "${app.count > 1 ? app.count : ''}" :visible {app.count > 1})))))
 
 (defwidget workspaces [workspaces_data]
-  (box :class "workspaces" :orientation "h" :spacing 6 :space-evenly false
+  (box :class "workspaces" :orientation "h" :spacing 4 :space-evenly false
     (for ws in workspaces_data
-      (eventbox :class "workspace ${ws.active ? 'active' : ''} ${ws.occupied ? 'occupied' : ''}"
-                :onclick "scripts/dispatch.sh ${ws.id}"
-        (box :orientation "h" :spacing 4 :space-evenly false
-           (label :text "${ws.id}")
+      (button :class "workspace ${ws.active ? 'active' : ''} ${ws.special ? 'special' : ''}"
+                :tooltip {ws.tooltip}
+                :onclick "bash scripts/dispatch.sh ${ws.id}"
+        (box :orientation "h" :spacing 8 :space-evenly false
+           (label :class "workspace-name" :text {ws.name} :limit-width 14)
            (workspace-apps :apps {ws.apps}))))))
 
 (defwidget clock []
   (box :class "clock" :orientation "h" :space-evenly false
-    (label :text "󰥔  ${time_full}")))
+    (label :tooltip {time_full} :text time)))
 
 (defwidget mpris []
-  (box :class "mpris ${mpris_info.status == 'paused' ? 'paused' : '󰏤'}" 
+  (box :class "mpris ${mpris_info.status == 'paused' ? 'paused' : ''}"
        :orientation "h" 
        :space-evenly false
        :visible {mpris_info.status != "stopped"}
     (label :text "${mpris_info.status == 'playing' ? '󰐊' : '󰏤'} ${mpris_info.artist != '' ? mpris_info.artist + ' - ' : ''}${mpris_info.title}"
-           :limit-width 40)))
+           :limit-width 24)))
 
 (defwidget cpu []
   (box :class "cpu" :orientation "h" :space-evenly false
@@ -98,16 +92,17 @@
 
 (defwidget left [monitor]
   (box :orientation "h" :space-evenly false :halign "start" :spacing 8
-    (workspaces :workspaces_data {monitor == 0 ? workspaces_monitor0 : workspaces_monitor1})
-    (mpris)))
+    (workspaces :workspaces_data {workspace_data[monitor] ?: []})))
 
 (defwidget center []
-  (box :orientation "h" :space-evenly false :halign "center" :spacing 8))
+  (box :orientation "h" :space-evenly false :halign "center" :spacing 8
+    (mpris)))
 
 (defwidget right []
-  (box :orientation "h" :space-evenly false :halign "end" :spacing 8
-    (cpu)
-    (memory)
+  (box :orientation "h" :space-evenly false :halign "end" :spacing 6
+    (box :class "system" :space-evenly false :spacing 12
+      (cpu)
+      (memory))
     (battery)
     (volume)
     (tray)
@@ -120,26 +115,14 @@
     (right)))
 
 ;; Windows
-(defwindow bar0
-  :monitor 0
+(defwindow bar [monitor]
+  :monitor monitor
   :geometry (geometry :x "0%"
                       :y "0%"
                       :width "100%"
-                      :height "28px"
+                      :height "40px"
                       :anchor "top center")
   :stacking "fg"
   :exclusive true
   :focusable "none"
-  (bar :monitor 0))
-
-(defwindow bar1
-  :monitor 1
-  :geometry (geometry :x "0%"
-                      :y "0%"
-                      :width "100%"
-                      :height "28px"
-                      :anchor "top center")
-  :stacking "fg"
-  :exclusive true
-  :focusable "none"
-  (bar :monitor 1))
+  (bar :monitor monitor))
