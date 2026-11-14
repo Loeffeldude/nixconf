@@ -13,6 +13,10 @@ switch-darwin:
 switch-nixos:
     sudo nixos-rebuild switch --flake .#{{HOST}}
 
+# Activate Home Manager config only (package changes still need switch)
+switch-home:
+    activation=$(nix build --no-link --print-out-paths ".#nixosConfigurations.{{HOST}}.config.home-manager.users.$USER.home.activationPackage") && "$activation/activate"
+
 # Build WSL tarball
 build-wsl:
     sudo nix run .#nixosConfigurations.wsl.config.system.build.tarballBuilder
