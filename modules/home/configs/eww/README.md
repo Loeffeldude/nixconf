@@ -14,23 +14,43 @@ Each connected output gets a bar, including outputs connected after startup.
 
 The charcoal palette and copper active indicator match the Hyprland border accent.
 Status widgets include media, CPU, memory, battery, volume, tray, and a clock.
+Click the date/time to toggle a calendar beneath the bar on that monitor. Use the
+calendar's arrows to browse months. Click outside the calendar or its close
+button to dismiss it. Reopening starts at the current date. This is a date browser, not an agenda
+or event integration.
+
+Click the volume indicator for master volume, per-application playback stream
+sliders/mute buttons, and an output-device picker. Paused streams remain listed;
+applications without an audio stream do not appear. Selecting an output sets the
+default and moves existing playback streams to it. Sliders support 0-150%; values
+above 100% amplify audio. Controls track external changes. Click outside the
+panel or its close button to dismiss it.
 
 ## Usage
 
-Hyprland starts the monitor watcher automatically. To start it manually:
+Home Manager manages the bar as a systemd user service tied to the Hyprland
+session. The daemon and monitor watcher restart together and their child
+processes are stopped as a group. After rebuilding with `just`, use:
 
 ```sh
-bash ~/.config/eww/scripts/start.sh
+systemctl --user restart eww-bar
 ```
 
-After changing styles or widgets, run `eww reload`. When migrating from the old
-`bar0`/`bar1` configuration, close the old windows with `eww close-all` first.
-Restart the watcher if you manually close its windows.
+The service definition embeds the configuration store path, so Home Manager can
+restart it when the configuration changes. `eww reload` alone cannot apply
+repository edits to an immutable Nix-store configuration. Do not launch
+`scripts/start.sh` separately; it is the service's supervisor.
+
+When migrating from the old manually started watcher, stop that watcher and its
+Eww daemon once before starting the service. Diagnose failures with
+`journalctl --user -u eww-bar -n 50`.
 
 ## Dependencies
 
-Eww, Hyprland (`hyprctl`), Bash, jq, socat, util-linux (`flock`), playerctl,
-WirePlumber (`wpctl`), and a Nerd Font. Volume opens pavucontrol; CPU and memory
+Eww, Hyprland (`hyprctl`), Bash, jq, socat, playerctl, PulseAudio tools (`pactl`,
+connecting to PipeWire's existing PulseAudio server), WirePlumber (`wpctl`),
+and a Nerd Font. The Home Manager module supplies the audio tools and service
+command paths. CPU and memory
 open btop in WezTerm.
 
 ## Development

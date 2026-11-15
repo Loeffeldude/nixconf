@@ -1,7 +1,7 @@
-$background: #141619;
-$surface: #202328;
-$text: #d8dce3;
-$muted: #878e99;
+$background: #101010;
+$surface: #202020;
+$text: #ece7e1;
+$muted: #96918b;
 $accent: #de935f;
 
 * {
@@ -15,9 +15,9 @@ window {
 }
 
 .bar {
-  background: rgba($background, 0.96);
+  background: $background;
   color: $text;
-  border-bottom: 1px solid rgba($text, 0.08);
+  border-bottom: 1px solid #292725;
   padding: 5px 12px;
 }
 
@@ -27,7 +27,7 @@ window {
 
 .workspace {
   border-radius: 7px;
-  background: $surface;
+  background: transparent;
   border: 1px solid transparent;
   padding: 4px 10px;
   min-width: 18px;
@@ -35,13 +35,14 @@ window {
   transition: background 150ms ease, color 150ms ease;
 
   &:hover {
-    background: #30343b;
+    background: #303030;
     color: $text;
   }
 
   &.active {
-    background: rgba($accent, 0.16);
-    border-color: rgba($accent, 0.45);
+    background: #302319;
+    border-color: transparent;
+    box-shadow: inset 0 -2px $accent;
     color: $accent;
   }
 
@@ -89,11 +90,16 @@ window {
 
 .volume,
 .tray {
-  background: $surface;
+  background: transparent;
+}
+
+.tray {
+  border-left: 1px solid #302e2b;
+  border-radius: 0;
 }
 
 .volume:hover {
-  background: #30343b;
+  background: #303030;
 }
 
 .muted,
@@ -110,7 +116,131 @@ window {
   font-weight: 600;
   font-size: 14px;
   color: $text;
-  padding-right: 2px;
+
+  &:hover {
+    background: $surface;
+  }
+}
+
+.clock-date {
+  color: $muted;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.popup-position {
+  margin: 6px 12px 0 0;
+}
+
+.popup-panel {
+  background: $background;
+  color: $text;
+  border: 1px solid #292725;
+  border-top: 1px solid rgba($accent, 0.55);
+  border-radius: 0;
+  padding: 22px;
+}
+
+.calendar-panel {
+  min-width: 320px;
+}
+
+.volume-panel {
+  min-width: 752px;
+}
+
+.popup-header {
+  padding-bottom: 12px;
+  border-bottom: 1px solid #292725;
+}
+
+.popup-content {
+  padding: 4px 0;
+}
+
+.popup-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.popup-subtitle,
+.volume-subtitle,
+.volume-range {
+  color: $muted;
+}
+
+.popup-close,
+.volume-mute {
+  background: transparent;
+  color: $muted;
+  border-radius: 0;
+  padding: 3px 9px;
+
+  &:hover {
+    background: $surface;
+    color: $accent;
+  }
+}
+
+.volume-mute.muted {
+  background: transparent;
+  box-shadow: inset 0 -1px $accent;
+  color: $accent;
+}
+
+.volume-value {
+  font-weight: 600;
+}
+
+.volume-slider {
+  padding: 8px;
+
+  trough {
+    min-height: 4px;
+    background: #383634;
+    border-radius: 0;
+  }
+
+  highlight {
+    background: $accent;
+    border-radius: 0;
+  }
+
+  slider {
+    min-width: 12px;
+    min-height: 12px;
+    margin: -4px 0;
+    border-radius: 6px;
+    background: $text;
+  }
+}
+
+.calendar-panel calendar {
+  padding: 4px;
+
+  &.header {
+    color: $accent;
+    font-weight: 600;
+  }
+
+  &.button {
+    color: $accent;
+  }
+
+  &.highlight {
+    color: $muted;
+  }
+
+  &:selected {
+    background: #302319;
+    color: $accent;
+    box-shadow: inset 0 -2px $accent;
+    border-radius: 0;
+  }
+
+  &:indeterminate {
+    color: #595652;
+  }
 }
 
 .battery.charging {
@@ -129,10 +259,49 @@ window {
 tooltip {
   background: $background;
   color: $text;
-  border: 1px solid #34383f;
+  border: 1px solid #383634;
   border-radius: 8px;
 
   label {
     padding: 8px 12px;
   }
+}
+
+.audio-section {
+  color: $muted;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding-top: 8px;
+}
+
+.audio-output,
+.audio-app {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #292725;
+  border-radius: 0;
+  padding: 12px 8px;
+}
+
+.audio-output {
+  &:hover {
+    background: $surface;
+  }
+
+  &.selected {
+    color: $accent;
+    box-shadow: inset 2px 0 $accent;
+  }
+}
+
+.audio-app-name {
+  font-weight: 600;
+}
+
+scrollbar slider {
+  background: #494541;
+  border-radius: 3px;
+  min-width: 4px;
+  min-height: 24px;
 }

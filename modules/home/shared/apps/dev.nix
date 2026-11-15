@@ -23,7 +23,7 @@ in
       podman-desktop
       dbeaver-bin
       stablePkgs.bruno
-    ] ++ lib.optionals pkgs.stdenv.isLinux [
+    ] ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
       jetbrains.rider
     ];
 

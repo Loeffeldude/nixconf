@@ -3,7 +3,7 @@ with lib;
 let
   cfg = config.dev;
   direnvPackage =
-    if pkgs.stdenv.isDarwin then
+    if pkgs.stdenv.hostPlatform.isDarwin then
       pkgs.direnv.overrideAttrs
         (_: {
           doCheck = false;
@@ -52,7 +52,6 @@ in
     programs.direnv.enableZshIntegration = true;
   };
 }
-
 
 
 
