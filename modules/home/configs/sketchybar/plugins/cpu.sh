@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-CORE_COUNT=$(sysctl -n machdep.cpu.thread_count)
+CORE_COUNT=$(sysctl -n hw.logicalcpu)
 CPU_INFO=$(ps -eo pcpu,user)
 CPU_SYS=$(echo "$CPU_INFO" | grep -v $(whoami) | sed "s/[^ 0-9\.]//g" | awk "{sum+=\$1} END {print sum/(100.0 * $CORE_COUNT)}")
 CPU_USER=$(echo "$CPU_INFO" | grep $(whoami) | sed "s/[^ 0-9\.]//g" | awk "{sum+=\$1} END {print sum/(100.0 * $CORE_COUNT)}")

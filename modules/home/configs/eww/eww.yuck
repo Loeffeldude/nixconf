@@ -5,6 +5,9 @@
 (defpoll time_full :interval "1s"
   "date '+%Y-%m-%d %H:%M'")
 
+(defpoll date_label :interval "30s"
+  "date '+%a, %d %b'")
+
 (defpoll cpu_usage :interval "2s" :initial "0"
   "sh -c \"read cpu user nice system idle iowait irq softirq steal guest guest_nice < /proc/stat; total=\\$((user+nice+system+idle+iowait+irq+softirq+steal)); idle_all=\\$((idle+iowait)); sleep 0.2; read cpu user2 nice2 system2 idle2 iowait2 irq2 softirq2 steal2 guest2 guest_nice2 < /proc/stat; total2=\\$((user2+nice2+system2+idle2+iowait2+irq2+softirq2+steal2)); idle_all2=\\$((idle2+iowait2)); total_delta=\\$((total2-total)); idle_delta=\\$((idle_all2-idle_all)); if [ \\\"\\$total_delta\\\" -le 0 ]; then echo 0; else echo \\$(((total_delta-idle_delta)*100/total_delta)); fi\"")
 
@@ -17,20 +20,17 @@
 (defpoll volume_muted :interval "1s" :initial "false"
   "wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q MUTED && echo 'true' || echo 'false'")
 
+(defpoll audio :interval "2s" :initial '{"outputs": [], "apps": []}'
+  "bash scripts/audio.sh snapshot")
+
 (defpoll battery_percent :interval "5s" :initial "100"
   "sh -c \"value=$(cat /sys/class/power_supply/BAT*/capacity 2>/dev/null | head -n1); if [ -z \\\"\\$value\\\" ]; then echo 100; else echo \\\"\\$value\\\"; fi\"")
 
 (defpoll battery_status :interval "5s"
   "cat /sys/class/power_supply/BAT*/status 2>/dev/null || echo 'Full'")
 
-(deflisten workspaces_monitor0 :initial "[]"
-  "scripts/workspaces.sh 0")
-
-(deflisten workspaces_monitor1 :initial "[]"
-  "scripts/workspaces.sh 1")
-
-(deflisten window_title :initial ""
-  "scripts/window-title.sh")
+(deflisten workspace_data :initial "{}"
+  "bash scripts/workspaces.sh")
 
 (deflisten mpris_info :initial '{"status": "stopped", "artist": "", "title": "", "player": ""}'
   "scripts/mpris.sh")
@@ -39,31 +39,50 @@
 (defwidget workspace-apps [apps]
   (box :class "workspace-apps" :orientation "h" :spacing 2 :space-evenly false
     (for app in apps
-      (box :class "app-card ${app.count > 1 ? 'stacked' : ''}" :orientation "h" :spacing 3 :space-evenly false
-        (label :class "app-icon" :text "${app.icon} ")
-        (label :class "app-name" :text "${app.name}" :limit-width 10)
+      (box :class "app-card" :tooltip {app.name} :orientation "h" :spacing 3 :space-evenly false
+        (label :class "app-icon" :text {app.icon})
         (label :class "app-count" :text "${app.count > 1 ? app.count : ''}" :visible {app.count > 1})))))
 
 (defwidget workspaces [workspaces_data]
-  (box :class "workspaces" :orientation "h" :spacing 6 :space-evenly false
+  (box :class "workspaces" :orientation "h" :spacing 4 :space-evenly false
     (for ws in workspaces_data
-      (eventbox :class "workspace ${ws.active ? 'active' : ''} ${ws.occupied ? 'occupied' : ''}"
-                :onclick "scripts/dispatch.sh ${ws.id}"
-        (box :orientation "h" :spacing 4 :space-evenly false
-           (label :text "${ws.id}")
+      (button :class "workspace ${ws.active ? 'active' : ''} ${ws.special ? 'special' : ''}"
+                :tooltip {ws.tooltip}
+                :onclick "bash scripts/dispatch.sh ${ws.id}"
+        (box :orientation "h" :spacing 8 :space-evenly false
+           (label :class "workspace-name" :text {ws.name} :limit-width 14)
            (workspace-apps :apps {ws.apps}))))))
 
-(defwidget clock []
-  (box :class "clock" :orientation "h" :space-evenly false
-    (label :text "󰥔  ${time_full}")))
+(defwidget clock [monitor]
+  (button :class "clock" :tooltip "${time_full} - Toggle calendar"
+          :onclick "eww -c . open calendar-popup --toggle --id calendar-${monitor} --arg monitor=${monitor}"
+    (box :orientation "h" :space-evenly false :spacing 10
+      (label :class "clock-date" :text date_label)
+      (label :text time))))
+
+(defwidget popup-header [title subtitle popup_id]
+  (box :class "popup-header" :orientation "h" :space-evenly false :spacing 16
+    (box :orientation "v" :space-evenly false :spacing 5 :hexpand true
+      (label :class "popup-title" :text title :halign "start")
+      (label :class "popup-subtitle" :text subtitle :halign "start"))
+    (button :class "popup-close" :valign "start" :tooltip "Close ${title}"
+            :onclick "eww -c . close ${popup_id}"
+      "x")))
+
+(defwidget calendar-panel [monitor]
+  (box :class "popup-panel calendar-panel" :orientation "v" :space-evenly false :spacing 18
+    (popup-header :title "Calendar" :subtitle date_label :popup_id "calendar-${monitor}")
+    (box :class "popup-content" :orientation "v" :space-evenly false
+      (calendar :show-heading true :show-day-names true
+                :show-week-numbers false :show-details false))))
 
 (defwidget mpris []
-  (box :class "mpris ${mpris_info.status == 'paused' ? 'paused' : '󰏤'}" 
+  (box :class "mpris ${mpris_info.status == 'paused' ? 'paused' : ''}"
        :orientation "h" 
        :space-evenly false
        :visible {mpris_info.status != "stopped"}
     (label :text "${mpris_info.status == 'playing' ? '󰐊' : '󰏤'} ${mpris_info.artist != '' ? mpris_info.artist + ' - ' : ''}${mpris_info.title}"
-           :limit-width 40)))
+           :limit-width 24)))
 
 (defwidget cpu []
   (box :class "cpu" :orientation "h" :space-evenly false
@@ -82,10 +101,59 @@
        :visible {battery_percent != "100" || battery_status != "Full"}
     (label :text "${battery_status == 'Charging' ? '󰂄' : battery_percent > 90 ? '󰁹' : battery_percent > 60 ? '󰂀' : battery_percent > 30 ? '󰁾' : battery_percent > 20 ? '󰁼' : '󰁺'}  ${battery_percent}%")))
 
-(defwidget volume []
-  (box :class "volume ${volume_muted == 'true' ? 'muted' : ''}" :orientation "h" :space-evenly false
-    (eventbox :onclick "pavucontrol"
-      "${volume_muted == 'true' ? '󰖁' : volume > 66 ? '󰕾' : volume > 33 ? '󰖀' : '󰕿'}  ${volume}%")))
+(defwidget volume [monitor]
+  (button :class "volume ${volume_muted == 'true' ? 'muted' : ''}"
+          :tooltip "Output volume - Click for controls"
+          :onclick "eww -c . open volume-popup --toggle --id volume-${monitor} --arg monitor=${monitor}"
+    "${volume_muted == 'true' ? '󰖁' : volume > 66 ? '󰕾' : volume > 33 ? '󰖀' : '󰕿'}  ${volume}%"))
+
+(defwidget volume-panel [monitor]
+  (box :class "popup-panel volume-panel" :orientation "v" :space-evenly false :spacing 18
+    (popup-header :title "Sound" :subtitle "Playback and output devices" :popup_id "volume-${monitor}")
+    (box :class "popup-content" :orientation "v" :space-evenly false :spacing 12
+    (box :orientation "h" :space-evenly false :spacing 12
+      (button :class "volume-mute ${volume_muted == 'true' ? 'muted' : ''}"
+              :tooltip {volume_muted == 'true' ? 'Unmute output' : 'Mute output'}
+              :onclick "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && eww -c . poll volume_muted"
+        "${volume_muted == 'true' ? 'Unmute' : 'Mute'}")
+      (label :class "volume-value" :hexpand true :halign "end"
+             :text "${volume}%${volume_muted == 'true' ? ' - Muted' : ''}"))
+    (scale :class "volume-slider" :orientation "h" :hexpand true
+           :min 0 :max 150 :value volume :round-digits 0
+           :onchange "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ {}%")
+    (box :class "volume-range" :orientation "h" :space-evenly false
+      (label :text "0%" :halign "start" :hexpand true)
+      (label :text "150% (amplified)" :halign "end")))
+    (label :class "audio-section" :text "OUTPUT DEVICES" :halign "start")
+    (scroll :height 120 :vscroll true :hscroll false
+      (box :orientation "v" :space-evenly false :spacing 6
+        (for output in {audio.outputs}
+          (button :class "audio-output ${output.selected ? 'selected' : ''}"
+                  :timeout "2s" :tooltip {output.name}
+                  :onclick "bash scripts/audio.sh output ${output.id} && eww -c . poll audio"
+            (box :orientation "h" :space-evenly false :spacing 10
+              (label :text {output.name} :limit-width 80 :hexpand true :xalign 0)
+              (label :text "${output.selected ? 'Active' : 'Use'}"))))))
+    (label :class "audio-section" :text "APPLICATIONS" :halign "start")
+    (label :class "volume-subtitle" :visible {arraylength(audio.apps) == 0}
+           :text "No applications are playing audio")
+    (scroll :height 220 :vscroll true :hscroll false :visible {arraylength(audio.apps) > 0}
+      (box :orientation "v" :space-evenly false :spacing 8
+        (for app in {audio.apps}
+          (box :class "audio-app" :orientation "v" :space-evenly false :spacing 6
+            (box :orientation "h" :space-evenly false :spacing 10
+              (box :orientation "v" :space-evenly false :hexpand true :spacing 3
+                (label :class "audio-app-name" :text {app.name} :halign "start" :limit-width 68)
+                (label :class "volume-subtitle" :text "${app.paused ? 'Paused - ' : ''}${app.title}"
+                       :halign "start" :limit-width 72 :tooltip {app.title}))
+              (button :class "volume-mute ${app.muted ? 'muted' : ''}"
+                      :onclick "bash scripts/audio.sh app-mute ${app.id} && eww -c . poll audio"
+                "${app.muted ? 'Unmute' : 'Mute'}"))
+            (box :orientation "h" :space-evenly false :spacing 8
+              (scale :class "volume-slider" :orientation "h" :hexpand true
+                     :min 0 :max 150 :value {app.volume} :round-digits 0
+                     :onchange "bash scripts/audio.sh app-volume ${app.id} {}")
+              (label :text "${app.volume}%" :width 42))))))))
 
 (defwidget audiodevice []
   (box :class "audiodevice" :orientation "h" :space-evenly false
@@ -98,48 +166,73 @@
 
 (defwidget left [monitor]
   (box :orientation "h" :space-evenly false :halign "start" :spacing 8
-    (workspaces :workspaces_data {monitor == 0 ? workspaces_monitor0 : workspaces_monitor1})
-    (mpris)))
+    (workspaces :workspaces_data {workspace_data[monitor] ?: []})))
 
 (defwidget center []
-  (box :orientation "h" :space-evenly false :halign "center" :spacing 8))
+  (box :orientation "h" :space-evenly false :halign "center" :spacing 8
+    (mpris)))
 
-(defwidget right []
-  (box :orientation "h" :space-evenly false :halign "end" :spacing 8
-    (cpu)
-    (memory)
+(defwidget right [monitor]
+  (box :orientation "h" :space-evenly false :halign "end" :spacing 6
+    (box :class "system" :space-evenly false :spacing 12
+      (cpu)
+      (memory))
     (battery)
-    (volume)
+    (volume :monitor monitor)
     (tray)
-    (clock)))
+    (clock :monitor monitor)))
 
 (defwidget bar [monitor]
   (centerbox :class "bar" :orientation "h"
     (left :monitor monitor)
     (center)
-    (right)))
+    (right :monitor monitor)))
 
 ;; Windows
-(defwindow bar0
-  :monitor 0
+(defwindow bar [monitor]
+  :monitor monitor
   :geometry (geometry :x "0%"
                       :y "0%"
                       :width "100%"
-                      :height "28px"
+                      :height "40px"
                       :anchor "top center")
   :stacking "fg"
   :exclusive true
   :focusable "none"
-  (bar :monitor 0))
+  (bar :monitor monitor))
 
-(defwindow bar1
-  :monitor 1
-  :geometry (geometry :x "0%"
-                      :y "0%"
+(defwindow calendar-popup [monitor]
+  :monitor monitor
+  :geometry (geometry :x "0px"
+                      :y "0px"
                       :width "100%"
-                      :height "28px"
-                      :anchor "top center")
-  :stacking "fg"
-  :exclusive true
-  :focusable "none"
-  (bar :monitor 1))
+                      :height "100%"
+                      :anchor "top right")
+  :stacking "overlay"
+  :exclusive false
+  :focusable "ondemand"
+  (overlay
+    (eventbox :hexpand true :vexpand true
+              :onclick "eww -c . close calendar-${monitor}"
+      (box :hexpand true :vexpand true))
+    (box :class "popup-position" :halign "end" :valign "start"
+         :space-evenly false
+      (calendar-panel :monitor monitor))))
+
+(defwindow volume-popup [monitor]
+  :monitor monitor
+  :geometry (geometry :x "0px"
+                      :y "0px"
+                      :width "100%"
+                      :height "100%"
+                      :anchor "top right")
+  :stacking "overlay"
+  :exclusive false
+  :focusable "ondemand"
+  (overlay
+    (eventbox :hexpand true :vexpand true
+              :onclick "eww -c . close volume-${monitor}"
+      (box :hexpand true :vexpand true))
+    (box :class "popup-position" :halign "end" :valign "start"
+         :space-evenly false
+      (volume-panel :monitor monitor))))

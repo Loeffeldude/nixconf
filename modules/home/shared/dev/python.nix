@@ -24,9 +24,9 @@ in
       # Python virtual environment tools
       python313Packages.virtualenv
 
-    ] ++ lib.optionals pkgs.stdenv.isLinux [
+    ] ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
       poetry
-    ] ++ lib.optionals pkgs.stdenv.isDarwin [
+    ] ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
       # Use stable nixpkgs poetry on Darwin to avoid Python 3.13 rapidfuzz build issues
       stablePkgs.poetry
     ];

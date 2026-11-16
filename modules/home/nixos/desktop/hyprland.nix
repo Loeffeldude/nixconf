@@ -1,8 +1,11 @@
 { config, pkgs, lib, ... }:
 
 with lib;
-let cfg = config.desktop.hyprland;
-in {
+let
+  cfg = config.desktop.hyprland;
+  ewwConfig = ../../configs/eww;
+in
+{
 
   options.desktop.hyprland = { enable = mkEnableOption "enable hyprland"; };
 
@@ -29,8 +32,27 @@ in {
       enable = true;
     };
     xdg.configFile."eww" = {
-      source = ../../configs/eww;
+      source = ewwConfig;
       force = true;
+    };
+
+    systemd.user.services.eww-bar = {
+      Unit = {
+        Description = "Eww bar and monitor watcher";
+        PartOf = [ "hyprland-session.target" ];
+        After = [ "hyprland-session.target" "pipewire-pulse.service" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.bash}/bin/bash ${config.xdg.configFile."eww".source}/scripts/start.sh";
+        Restart = "on-failure";
+        RestartSec = 2;
+        KillMode = "control-group";
+        TimeoutStopSec = 5;
+        Environment = [
+          "PATH=${lib.makeBinPath [ config.programs.eww.package pkgs.bash pkgs.jq pkgs.socat pkgs.pulseaudio pkgs.wireplumber pkgs.playerctl pkgs.coreutils pkgs.gawk pkgs.gnugrep pkgs.procps ]}:/etc/profiles/per-user/${config.home.username}/bin:/run/current-system/sw/bin"
+        ];
+      };
+      Install.WantedBy = [ "hyprland-session.target" ];
     };
 
     services.dunst = {
@@ -150,6 +172,7 @@ in {
       jq
       btop
       playerctl
+      pulseaudio
       gsettings-desktop-schemas
       pwmenu
       cliphist

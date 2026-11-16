@@ -5,6 +5,8 @@
     # we live on the edge man
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
+    ghidra-mcp.url = "github:mugiwarix/ghidra-extensions.mcp";
+    ghidra-mcp.flake = false;
     opencode.url = "github:anomalyco/opencode/?ref=v1.18.34";
     opencode.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";

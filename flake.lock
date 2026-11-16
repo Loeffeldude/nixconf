@@ -144,6 +144,22 @@
         "type": "indirect"
       }
     },
+    "ghidra-mcp": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1775053001,
+        "narHash": "sha256-G+nW0nm+4uRoCbeaL8PNO9l5xTsn3YwsIZmYQM+8cs0=",
+        "owner": "mugiwarix",
+        "repo": "ghidra-extensions.mcp",
+        "rev": "aad4aa9576c34a864125f2b918fc5d30423d0800",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mugiwarix",
+        "repo": "ghidra-extensions.mcp",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -435,6 +451,7 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "ghidra-mcp": "ghidra-mcp",
         "home-manager": "home-manager",
         "mac-app-util": "mac-app-util",
         "nix-alien": "nix-alien",

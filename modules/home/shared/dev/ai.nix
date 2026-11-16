@@ -17,6 +17,11 @@ let
     autoupdate = false;
     small_model = "openai/gpt-5.6-luna";
     mcp = {
+      ghidra = {
+        type = "local";
+        command = [ "bridge_mcp_ghidra" "--ghidra-server" "http://127.0.0.1:8082/" ];
+        enabled = false;
+      };
       shadcn = {
         type = "local";
         command = [ "npx" "-y" "shadcn@latest" "mcp" ];

@@ -6,8 +6,7 @@ if [ -n "$INFO" ]; then
     
     if [ "$STATE" = "playing" ]; then
         MEDIA="$(echo "$INFO" | jq -r '.title + " - " + .artist')"
-        sketchybar --set $NAME icon.background.image=media.artwork \
-                            icon.background.image.drawing=on \
+        sketchybar --set "$NAME" icon.background.image.drawing=off \
                             label="$MEDIA" \
                             drawing=on
     else
