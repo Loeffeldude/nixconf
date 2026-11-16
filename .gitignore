@@ -1,3 +1,4 @@
 *.wsl
 dist/
 .direnv/
+**/__pycache__

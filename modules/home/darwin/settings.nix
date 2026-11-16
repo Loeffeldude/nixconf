@@ -113,15 +113,15 @@
         ctrl-cmd-9 = "workspace 9";
 
         # Move to workspace
-        ctrl-cmd-shift-1 = "move-node-to-workspace 1";
-        ctrl-cmd-shift-2 = "move-node-to-workspace 2";
-        ctrl-cmd-shift-3 = "move-node-to-workspace 3";
-        ctrl-cmd-shift-4 = "move-node-to-workspace 4";
-        ctrl-cmd-shift-5 = "move-node-to-workspace 5";
-        ctrl-cmd-shift-6 = "move-node-to-workspace 6";
-        ctrl-cmd-shift-7 = "move-node-to-workspace 7";
-        ctrl-cmd-shift-8 = "move-node-to-workspace 8";
-        ctrl-cmd-shift-9 = "move-node-to-workspace 9";
+        ctrl-cmd-shift-1 = [ "move-node-to-workspace 1" "workspace 1" ];
+        ctrl-cmd-shift-2 = [ "move-node-to-workspace 2" "workspace 2" ];
+        ctrl-cmd-shift-3 = [ "move-node-to-workspace 3" "workspace 3" ];
+        ctrl-cmd-shift-4 = [ "move-node-to-workspace 4" "workspace 4" ];
+        ctrl-cmd-shift-5 = [ "move-node-to-workspace 5" "workspace 5" ];
+        ctrl-cmd-shift-6 = [ "move-node-to-workspace 6" "workspace 6" ];
+        ctrl-cmd-shift-7 = [ "move-node-to-workspace 7" "workspace 7" ];
+        ctrl-cmd-shift-8 = [ "move-node-to-workspace 8" "workspace 8" ];
+        ctrl-cmd-shift-9 = [ "move-node-to-workspace 9" "workspace 9" ];
 
         # Fullscreen and other utilities
         ctrl-alt-f = "fullscreen";
@@ -156,7 +156,7 @@
     };
 
   # User settings
-  home-manager.users.${config.primaryUser} = { config, ... }: {
+  home-manager.users.${config.primaryUser} = {
     home.packages = with pkgs; [
       sbarlua
     ];
@@ -170,12 +170,6 @@
         recursive = true;
       };
     };
-
-    launchd.agents.sketchybar.config.ProgramArguments = [
-      "${config.programs.sketchybar.finalPackage}/bin/sketchybar"
-      "--config"
-      "${../configs/sketchybar}/sketchybarrc"
-    ];
 
     targets.darwin.defaults = {
       "com.apple.menuextra.clock".Show24Hour = true;
