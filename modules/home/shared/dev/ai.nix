@@ -8,9 +8,10 @@ let
     "$schema" = "https://opencode.ai/config.json";
     model = "openai/gpt-5.6-terra";
     plugin = [
-      "@simonwjackson/opencode-direnv"
-      "@zenobius/opencode-background"
+      # "@simonwjackson/opencode-direnv"
+      # "@zenobius/opencode-background"
       "envsitter-guard@latest"
+      # "@dietrichgebert/ponytail"
       # "superpowers@git+https://github.com/obra/superpowers.git#v5.0.7"
     ];
     autoupdate = false;
@@ -51,56 +52,36 @@ let
           model = "openai/gpt-5.6-luna";
         };
       };
-    provider = {
-      ollama = {
-        npm = "@ai-sdk/openai-compatible";
-        options = {
-          baseURL = "http://localhost:11434/v1";
-        };
-        models = {
-          "gpt-oss:20b" = {
-            name = "gpt-oss:20b";
-            tool_call = false;
-            reasoning = true;
-            options = { num_ctx = 128000; };
-          };
-          "qwen3:8b" = {
-            name = "qwen3:8b";
-            tool_call = true;
-            reasoning = true;
-            options = { num_ctx = 40000; };
-          };
-          "qwen3:4b" = {
-            name = "qwen3:4b";
-            tool_call = true;
-            reasoning = true;
-            options = { num_ctx = 40000; };
-          };
-        };
-      };
-    };
+    provider = { };
   };
 
-  opencodeConfigFile = pkgs.writeText "opencode.json" (builtins.toJSON opencodeConfig);
+  opencodeConfigFile = pkgs.writeText "opencode.json" (builtins.toJSON (lib.recursiveUpdate opencodeConfig cfg.ai.opencodeOverrides));
+  opencode = flake-inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default;
 in
 {
+  options.dev.ai.opencodeOverrides = mkOption {
+    type = (pkgs.formats.json { }).type;
+    default = { };
+    description = "Host-specific overrides for the shared OpenCode configuration.";
+  };
+
   config = mkIf cfg.ai.enable {
     home.file = {
       ".config/opencode/opencode.json".source = opencodeConfigFile;
       ".config/opencode/AGENTS.md".source = ../../configs/opencode/AGENTS.md;
       ".config/opencode/prompts/build.md".source = ../../configs/opencode/prompts/build.md;
-      ".config/opencode/nixtools".source = ../../configs/opencode/nixtools;
-      ".config/opencode/nixplugin".source = ../../configs/opencode/plugin;
-      ".config/opencode/agent".source = ../../configs/opencode/agent;
+      # ".config/opencode/nixtools".source = ../../configs/opencode/nixtools;
+      # ".config/opencode/nixplugin".source = ../../configs/opencode/plugin;
+      # ".config/opencode/agent".source = ../../configs/opencode/agent;
       ".config/opencode/themes".source = ../../configs/opencode/themes;
-      ".config/opencode/skills".source = ../../configs/opencode/skills;
+      # ".config/opencode/skills".source = ../../configs/opencode/skills;
     };
 
     # Bun doesn't handle dynamic import() with symlinks, so copy nixtools to tool/ and nixplugin to plugin/
     home.activation.setupOpencodeTools = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       mkdir -p ~/.config/opencode/tool
-      cp -f ~/.config/opencode/nixtools/* ~/.config/opencode/tool/
-      chmod 600 ~/.config/opencode/tool/*
+      # cp -f ~/.config/opencode/nixtools/* ~/.config/opencode/tool/
+      # chmod 600 ~/.config/opencode/tool/*
       
       if [ -d ~/.config/opencode/nixplugin ]; then
         cp -f ~/.config/opencode/nixplugin/* ~/.config/opencode/plugin/
@@ -112,7 +93,12 @@ in
       # OPENCODE_DISABLE_DEFAULT_PLUGINS = "true";
     };
     home.packages = with pkgs; [
-      flake-inputs.opencode.packages.${stdenv.hostPlatform.system}.default
+      pi-coding-agent
+      pkgs.opencode
+      # broken atm wating for flake to include codesign util 
+      # (opencode.override {
+      #   node_modules = opencode.node_modules.override { hash = "sha256-9JDPylBvKDqH0qn+iTJZ5GF3CXtj0vgyRewzLMIE/nw="; };
+      # })
 
       # claude code currently broken
       # claude-code

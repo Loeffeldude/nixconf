@@ -15,7 +15,7 @@
           path = "/Users/${config.primaryUser}/Applications/Home Manager Apps/WezTerm.app";
         }
         {
-          path = "/Users/${config.primaryUser}/Applications/Home Manager Apps/Firefox.app";
+          path = "/Applications/Firefox.app";
         }
         {
           path = "/Users/${config.primaryUser}/Applications/Home Manager Apps/Bitwarden.app";

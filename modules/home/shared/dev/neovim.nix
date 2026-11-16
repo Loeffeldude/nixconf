@@ -119,8 +119,13 @@ in {
           # vue-language-server
 
           # Additional utilities
+          fish
           fzf
+          markdown-toc
+          markdownlint-cli2
+          prettier
           ripgrep
+          sqlfluff
 
         ];
 

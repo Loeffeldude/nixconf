@@ -56,6 +56,17 @@ return {
             },
           },
         },
+        vtsls = {
+          settings = {
+            vtsls = {
+              experimental = {
+                completion = {
+                  enableServerSideFuzzyMatch = true,
+                },
+              },
+            },
+          },
+        },
         pyright = {},
         phpactor = {
           enabled = false,
