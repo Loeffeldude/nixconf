@@ -59,8 +59,6 @@
       on-focused-monitor-changed = [ "move-mouse monitor-lazy-center" ];
       automatically-unhide-macos-hidden-apps = false;
 
-      after-startup-command = [ "exec-and-forget sketchybar" ];
-
       exec-on-workspace-change = [
         "/bin/bash"
         "-c"
@@ -158,18 +156,26 @@
     };
 
   # User settings
-  home-manager.users.${config.primaryUser} = {
+  home-manager.users.${config.primaryUser} = { config, ... }: {
     home.packages = with pkgs; [
       sbarlua
     ];
 
     programs.sketchybar = {
       enable = true;
+      service.enable = true;
+      extraPackages = with pkgs; [ python3 jq bash aerospace switchaudio-osx ];
       config = {
         source = ../configs/sketchybar;
         recursive = true;
       };
     };
+
+    launchd.agents.sketchybar.config.ProgramArguments = [
+      "${config.programs.sketchybar.finalPackage}/bin/sketchybar"
+      "--config"
+      "${../configs/sketchybar}/sketchybarrc"
+    ];
 
     targets.darwin.defaults = {
       "com.apple.menuextra.clock".Show24Hour = true;

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 POPUP_OFF="sketchybar --set apple.logo popup.drawing=off"
-POPUP_CLICK_SCRIPT="sketchybar --set \$NAME popup.drawing=toggle"
+POPUP_CLICK_SCRIPT="sketchybar --set clock popup.drawing=off --set volume popup.drawing=off --set \$NAME popup.drawing=toggle"
 
 # Menu item defaults
 MENU_ITEM_DEFAULTS=(
@@ -21,24 +21,26 @@ MENU_ITEM_DEFAULTS=(
 apple_logo=(
   icon.drawing=off
   label="Menu"
-  label.font="Hack Nerd Font:Bold:14.0"
+   label.font="SF Pro:Regular:12.0"
   label.color=$FG
-  blur_radius=30
+   blur_radius=0
   background.color=0x00000000
   background.border_color=$ACCENT
-  background.border_width=1
-  background.corner_radius=8
+   background.border_width=0
+   background.corner_radius=0
   background.height=26
-  background.drawing=on
+   background.drawing=off
   padding_left=5
   padding_right=5
   label.padding_left=12
   label.padding_right=12
   click_script="$POPUP_CLICK_SCRIPT"
   popup.background.border_width=1
-  popup.background.corner_radius=8
-  popup.background.border_color=$ACCENT
-  popup.background.color=$BG
+   popup.background.corner_radius=0
+   popup.background.border_color=0xff292725
+   popup.background.color=$BG
+   popup.height=32
+   popup.y_offset=6
 )
 
 apple_prefs=(
