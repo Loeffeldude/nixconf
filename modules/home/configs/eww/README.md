@@ -3,11 +3,13 @@
 The bar follows Hyprland's actual monitor and workspace state, not workspace ranges.
 Each connected output gets a bar, including outputs connected after startup.
 
-- Every occupied workspace appears on its owning monitor, including IDs above 9,
-  named workspaces, and special workspaces.
+- Every bar shows all monitors as separate labeled workspace groups, ordered by
+  screen position. Every occupied workspace appears in its owning monitor's
+  group, including IDs above 9, named workspaces, and special workspaces.
 - The active workspace remains visible even when empty. Empty inactive workspaces
   disappear; the existing Super+number shortcuts still create/switch to them.
-- Click a workspace to switch to it; special workspaces toggle their overlay.
+- Click a workspace in any group to switch to it on its owning monitor; special
+  workspaces focus their owning monitor before toggling their overlay.
 - App icons are grouped by class with a count for multiple windows. Hover over a
   workspace to see window titles.
 - Moving a workspace between monitors updates both bars via Hyprland events.

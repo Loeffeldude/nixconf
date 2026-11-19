@@ -7,10 +7,16 @@ same compact typography and colors. The macOS system menu is retained.
 
 ## Workspaces
 
+Every bar shows all monitors as separate `Screen 1`, `Screen 2`, etc. groups,
+with separators between them. Groups are ordered physically left to right using
+AeroSpace's `monitor-id`; AppKit screen indices remain the group identities and
+labels, so moving a screen changes its position rather than its label. Each group's
+visible workspace is highlighted independently. Clicking a workspace switches
+to it on its owning monitor.
+
 Occupied AeroSpace workspaces and every monitor's visible workspace are shown.
-There is no numeric range limit. Named workspaces work, app icons are grouped
-with counts, and display association uses AeroSpace's AppKit screen index rather
-than assuming AeroSpace and SketchyBar number monitors identically.
+There is no numeric range limit. Named workspaces work and app icons are grouped
+with counts.
 
 Workspace/window/display events update the list. A two-second SketchyBar update
 also catches moved windows and monitor hotplug events without a separate watcher

@@ -29,7 +29,7 @@
 (defpoll battery_status :interval "5s"
   "cat /sys/class/power_supply/BAT*/status 2>/dev/null || echo 'Full'")
 
-(deflisten workspace_data :initial "{}"
+(deflisten workspace_data :initial "[]"
   "bash scripts/workspaces.sh")
 
 (deflisten mpris_info :initial '{"status": "stopped", "artist": "", "title": "", "player": ""}'
@@ -164,9 +164,12 @@
   (box :class "tray" :orientation "h" :space-evenly false
     (systray :icon-size 16 :spacing 8)))
 
-(defwidget left [monitor]
+(defwidget left []
   (box :orientation "h" :space-evenly false :halign "start" :spacing 8
-    (workspaces :workspaces_data {workspace_data[monitor] ?: []})))
+    (for screen in workspace_data
+      (box :class "monitor-group" :orientation "h" :space-evenly false :spacing 6
+        (label :class "monitor-name" :text {screen.name} :tooltip {screen.name} :limit-width 12)
+        (workspaces :workspaces_data {screen.workspaces})))))
 
 (defwidget center []
   (box :orientation "h" :space-evenly false :halign "center" :spacing 8
@@ -184,7 +187,7 @@
 
 (defwidget bar [monitor]
   (centerbox :class "bar" :orientation "h"
-    (left :monitor monitor)
+    (left)
     (center)
     (right :monitor monitor)))
 

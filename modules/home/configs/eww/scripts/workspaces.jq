@@ -12,9 +12,9 @@ def app_icon:
   elif test("steam") then "󰓓"
   else "󰣆" end;
 
-$monitors | map(. as $monitor | {
-  key: .name,
-  value: [$workspaces[] | select(.monitor == $monitor.name) | . as $ws |
+$monitors | sort_by(.x, .y, .name) | map(. as $monitor | {
+  name: .name,
+  workspaces: [$workspaces[] | select(.monitor == $monitor.name) | . as $ws |
     [$clients[] | select(.workspace.id == $ws.id)] as $windows |
     {
       id: .id,
@@ -29,4 +29,4 @@ $monitors | map(. as $monitor | {
         count: length
       }))
     } | select(.occupied or .active)] | sort_by(.special, .id)
-}) | from_entries
+})

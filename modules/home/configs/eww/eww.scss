@@ -25,6 +25,22 @@ window {
   padding: 0;
 }
 
+.monitor-group {
+  border-left: 1px solid #292725;
+  padding-left: 10px;
+
+  &:first-child {
+    border-left: none;
+    padding-left: 0;
+  }
+}
+
+.monitor-name {
+  color: $muted;
+  font-size: 10px;
+  font-weight: 600;
+}
+
 .workspace {
   border-radius: 7px;
   background: transparent;

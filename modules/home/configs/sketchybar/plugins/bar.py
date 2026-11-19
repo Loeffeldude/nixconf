@@ -58,25 +58,40 @@ def workspace_items(workspaces, windows):
                           for app, count in sorted(apps.items()))
         result.append({"id": "space." + name.encode().hex(), "name": name,
                        "display": ws["monitor-appkit-nsscreen-screens-id"],
+                       "monitor_order": int(ws["monitor-id"]),
                        "active": visible, "icons": icons})
-    return sorted(result, key=lambda ws: (not ws["name"].isdigit(),
+    return sorted(result, key=lambda ws: (ws["monitor_order"], not ws["name"].isdigit(),
                                          int(ws["name"]) if ws["name"].isdigit() else ws["name"]))
 
 
 def workspaces():
     spaces = json.loads(run("aerospace", "list-workspaces", "--all", "--json", "--format",
-                           "%{workspace} %{workspace-is-visible} %{monitor-appkit-nsscreen-screens-id}"))
+                           "%{workspace} %{workspace-is-visible} %{monitor-id} %{monitor-appkit-nsscreen-screens-id}"))
     windows = json.loads(run("aerospace", "list-windows", "--all", "--json", "--format",
                             "%{workspace} %{app-name}"))
     desired = workspace_items(spaces, windows)
+    displays = sorted({int(ws["display"]) for ws in desired})
+    group_names = {f"workspace.monitor.{display}" for display in displays}
     existing = {name for name in json.loads(sbar("--query", "bar"))["items"]
-                if name.startswith("space.")}
-    for name in existing - {ws["id"] for ws in desired}:
+                if name.startswith(("space.", "workspace.monitor."))}
+    for name in existing - ({ws["id"] for ws in desired} | group_names):
         sbar("--remove", name)
+    current_display = None
     for ws in desired:
+        display = int(ws["display"])
+        if display != current_display:
+            group = f"workspace.monitor.{display}"
+            if group not in existing:
+                item(group, "left")
+            separator = "" if current_display is None else "|  "
+            sbar("--set", group, "display=0", "icon.drawing=off",
+                 f"label={separator}Screen {display}", f"label.color={MUTED}",
+                 "label.font=SF Pro:Semibold:10.0", "background.drawing=off",
+                 "--move", group, "before", "workspace.anchor")
+            current_display = display
         if ws["id"] not in existing:
             item(ws["id"], "left")
-        sbar("--set", ws["id"], f"display={ws['display']}",
+        sbar("--set", ws["id"], "display=0",
              f"icon={ws['name']}", f"label={ws['icons']}",
              f"icon.color={ACCENT if ws['active'] else MUTED}",
              f"label.color={ACCENT if ws['active'] else MUTED}",

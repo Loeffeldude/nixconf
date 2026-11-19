@@ -6,11 +6,12 @@ import unittest
 
 
 class WorkspaceTests(unittest.TestCase):
-    def snapshot(self, workspaces, clients, active=1):
-        monitors = [
-            {"name": "DP-2", "activeWorkspace": {"id": active}, "specialWorkspace": {"id": 0}},
-            {"name": "HDMI-A-1", "activeWorkspace": {"id": 9}, "specialWorkspace": {"id": 0}},
-        ]
+    def snapshot(self, workspaces, clients, active=1, monitors=None):
+        if monitors is None:
+            monitors = [
+                {"name": "DP-2", "x": 0, "y": 0, "activeWorkspace": {"id": active}, "specialWorkspace": {"id": 0}},
+                {"name": "HDMI-A-1", "x": 1920, "y": 0, "activeWorkspace": {"id": 9}, "specialWorkspace": {"id": 0}},
+            ]
         result = subprocess.run(
             ["jq", "-cn", "--argjson", "monitors", json.dumps(monitors),
              "--argjson", "workspaces", json.dumps(workspaces),
@@ -23,18 +24,34 @@ class WorkspaceTests(unittest.TestCase):
     def test_high_numbered_workspace_follows_its_monitor(self):
         workspace = {"id": 42, "name": "42", "monitor": "DP-2"}
         clients = [{"workspace": {"id": 42}, "class": "firefox", "title": "Browser"}]
-        self.assertEqual([ws["id"] for ws in self.snapshot([workspace], clients)["DP-2"]], [42])
+        self.assertEqual([ws["id"] for ws in self.snapshot([workspace], clients)[0]["workspaces"]], [42])
         workspace["monitor"] = "HDMI-A-1"
         result = self.snapshot([workspace], clients)
-        self.assertEqual(result["DP-2"], [])
-        self.assertEqual([ws["id"] for ws in result["HDMI-A-1"]], [42])
+        self.assertEqual(result[0]["name"], "DP-2")
+        self.assertEqual(result[0]["workspaces"], [])
+        self.assertEqual(result[1]["name"], "HDMI-A-1")
+        self.assertEqual([ws["id"] for ws in result[1]["workspaces"]], [42])
 
     def test_only_active_empty_workspace_stays_visible(self):
         workspaces = [{"id": i, "name": str(i), "monitor": "DP-2"} for i in [1, 2]]
         result = self.snapshot(workspaces, [])
-        self.assertEqual([ws["id"] for ws in result["DP-2"]], [1])
-        self.assertTrue(result["DP-2"][0]["active"])
-        self.assertFalse(result["DP-2"][0]["occupied"])
+        self.assertEqual([ws["id"] for ws in result[0]["workspaces"]], [1])
+        self.assertTrue(result[0]["workspaces"][0]["active"])
+        self.assertFalse(result[0]["workspaces"][0]["occupied"])
+
+    def test_all_monitor_groups_are_ordered_by_position_with_independent_active_workspaces(self):
+        monitors = [
+            {"name": "HDMI-A-1", "x": 1920, "y": 0, "activeWorkspace": {"id": 9}, "specialWorkspace": {"id": 0}},
+            {"name": "DP-2", "x": 0, "y": 0, "activeWorkspace": {"id": 1}, "specialWorkspace": {"id": 0}},
+        ]
+        workspaces = [{"id": 9, "name": "9", "monitor": "HDMI-A-1"},
+                      {"id": 1, "name": "1", "monitor": "DP-2"}]
+        result = self.snapshot(workspaces, [], monitors=monitors)
+        self.assertEqual([group["name"] for group in result], ["DP-2", "HDMI-A-1"])
+        self.assertEqual([[ws["id"] for ws in group["workspaces"] if ws["active"]] for group in result],
+                         [[1], [9]])
+        result = self.snapshot(workspaces, [], monitors=monitors[1:])
+        self.assertEqual([group["name"] for group in result], ["DP-2"])
 
     def test_named_and_special_workspaces_are_reachable(self):
         workspaces = [
@@ -43,7 +60,7 @@ class WorkspaceTests(unittest.TestCase):
         ]
         clients = [{"workspace": {"id": ws["id"]}, "class": "kitty", "title": "Terminal"}
                    for ws in workspaces]
-        result = self.snapshot(workspaces, clients)["DP-2"]
+        result = self.snapshot(workspaces, clients)[0]["workspaces"]
         self.assertEqual([(ws["name"], ws["special"]) for ws in result],
                          [("build", False), ("scratch", True)])
 
@@ -51,7 +68,7 @@ class WorkspaceTests(unittest.TestCase):
         title = 'A "quoted" title\nwith a newline | and backslash \\'
         workspace = {"id": 12, "name": "12", "monitor": "DP-2"}
         client = {"workspace": {"id": 12}, "class": "firefox", "title": title}
-        result = self.snapshot([workspace], [client, client])["DP-2"][0]
+        result = self.snapshot([workspace], [client, client])[0]["workspaces"][0]
         self.assertIn(title, result["tooltip"])
         self.assertEqual(len(result["apps"]), 1)
         self.assertEqual(result["apps"][0]["count"], 2)
@@ -60,10 +77,10 @@ class WorkspaceTests(unittest.TestCase):
         for workspace_id, name, expected in [
             (42, "42", "workspace\n42\n"),
             (-1337, "build", "workspace\nname:build\n"),
-            (-99, "special:scratch", "togglespecialworkspace\nscratch\n"),
+            (-99, "special:scratch", "focusmonitor\nHDMI-A-1\ntogglespecialworkspace\nscratch\n"),
         ]:
             with self.subTest(name=name):
-                result = self.dispatch(str(workspace_id), [{"id": workspace_id, "name": name}])
+                result = self.dispatch(str(workspace_id), [{"id": workspace_id, "name": name, "monitor": "HDMI-A-1"}])
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assertEqual(result.stdout, expected)
 
